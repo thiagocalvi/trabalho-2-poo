@@ -6,30 +6,51 @@ package Modelo;
 
 
 import java.time.LocalDate;
+import javax.persistence.*;
 
 /**
  *
  * @author MatheusConsoni
  */
+
+@Entity
+@Table(name = "paciente")
 public class Paciente{
-    //Atributos
-    private int id; //gerar id
-    private int dadosMedicosId = 0; //0 indica que o paciente não tem nenhum dado medico cadastrado
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    
+    @OneToOne
+    @JoinColumn(name = "dados_medicos_id")
+    //private int dadosMedicosId = 0; //0 indica que o paciente não tem nenhum dado medico cadastrado
+    private DadosMedicos dadosMedicos; 
+    
+    @Column(name = "nome")
     private String nome;
+    
+    @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
+    
+    @Column(name = "telefone")
     private String telefone;
+    
+    @Column(name = "email")
     private String email;
+    
+    @Column(name = "endereco")
     private String endereco;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_convenio")
     private tipoConvenio tipoConvenio;
     
-    //tipoConvenio
+    //Tipo convenio do paciente
     public enum tipoConvenio{
         PARTICULAR,
         PLANOSAUDE
     };
-    
-    //Construtor
-
+ 
     public Paciente(){
 
     }
@@ -43,8 +64,12 @@ public class Paciente{
         this.tipoConvenio = tipoConvenio;
     }
 
-    public void setDadosMedicosId(){
-        this.dadosMedicosId = 0;
+    public void setDadosMedicos(DadosMedicos dadosMedicos){
+        this.dadosMedicos = dadosMedicos;
+    }
+    
+    public DadosMedicos getDadosMedicos() {
+        return this.dadosMedicos;
     }
     
     public int getId() {
@@ -54,15 +79,7 @@ public class Paciente{
     public void setId(int id){
         this.id = id;
     }
-
-    public int getDadosMedicosId() {
-        return dadosMedicosId;
-    }
     
-    public void setDadosMedicosId(DadosMedicos dadosMedicos) {
-        this.dadosMedicosId = dadosMedicos.getId();
-    }
-
     public String getNome() {
         return nome;
     }

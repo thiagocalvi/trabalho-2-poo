@@ -6,19 +6,39 @@ package Modelo;
 
 
 import java.util.List;
+import javax.persistence.*;
 /**
  *
  * @author MatheusConsoni
  */
+
+@Entity
+@Table(name = "dados_medico")
 public class DadosMedicos {
-    //Atributos
-    private int id; //gerar id
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    
+    @Column(name = "fuma")
     private boolean fuma;
+    
+    @Column(name = "bebe")
     private boolean bebe;
+    
+    @Column(name = "nivel_colesterol")
     private String colesterol;
+    
+    @Column(name = "diabete")
     private boolean diabete;
+    
+    @Column(name = "doenca_cardiaca")
     private boolean doencaCardiaca;
+    
+    @ElementCollection
     private List<String> cirurgias;
+    
+    @ElementCollection
     private List<String> alergias;
 
     //Construtor

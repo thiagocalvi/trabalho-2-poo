@@ -1,7 +1,8 @@
 /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Gerenciador;
 import Modelo.Secretaria;
 import Modelo.Paciente;
@@ -24,7 +25,7 @@ import java.util.Random;
 /**
  *
  * @author jeanm
- */
+
 public class GerenciadorSecretarias {
     
     private ColecaoConsultas colecaoConsultas;
@@ -715,3 +716,4 @@ public class GerenciadorSecretarias {
         
     }
 }
+*/

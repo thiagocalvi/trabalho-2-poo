@@ -6,16 +6,30 @@ package Modelo;
 
 import java.time.LocalDate;
 
+import javax.persistence.*;
+
 /**
  *
  * @author thiago
  */
+
+@MappedSuperclass
 public class Funcionario {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @Column(name = "nome")
     private String nome;
+    
+    @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
+    
+    @Column(name = "telefone")
     private String telefone;
+    
+    @Column(name = "email")
     private String email;
 
     

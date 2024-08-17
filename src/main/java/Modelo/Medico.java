@@ -7,14 +7,25 @@ package Modelo;
 
 import java.time.LocalDate;
 
+import javax.persistence.*;
+
 /**
  *
  * @author MatheusConsoni
  */
+
+@Entity
+@Table(name = "medico")
 public class Medico extends Funcionario{
+    @Column(name = "especialidade")
     private String especialidade;
+    
+    @Column(name = "crm")
     private int crm;
-    private int secretariaId = 0; // 0 indica que o medico não tem nenhuma secretaria (cada medico terá somente uma secretaria)
+    
+    @OneToOne
+    @JoinColumn(name = "secretaria_id")
+    private Secretaria secretaria;
 
     public Medico(String nome, LocalDate dataNascimento, String telefone, String email, String especialidade, int crm) {
         super(nome, dataNascimento, telefone, email);
@@ -38,16 +49,52 @@ public class Medico extends Funcionario{
         this.crm = crm;
     }
     
-    public int getSecretariaId(){
-        return secretariaId;
+    public Secretaria getSecretaria(){
+        return this.secretaria;
     }
     
-    public void setSecretariaId(Secretaria secretaria){
-        this.secretariaId = secretaria.getId();
+    public void setSecretaria(Secretaria secretaria){
+        this.secretaria = secretaria;
     }
         
     //********************************************************//
     public void cadastrarProntuario(){
-        
+        //Cadastra um protuario para o paciente da consulta atual
+    }
+    
+    public void atualizarProntuario(){
+        //Atualiza um prontuario
+    }
+    
+    public void removerProntuario() {
+        //Deleta um prontuario
+    }
+    
+    public void cadastrarDados(){
+        //Cadastra dados medico de um paciente
+    }
+    
+    public void  atualizarDados(){
+        //Atualiza os dados medico de um paciente
+    }
+    
+    public void removerDados(){
+        //Deleta o dados medico de um paciente
+    }
+    
+    public void receitaMedica(){
+        //Emite um receita medica
+    }
+    
+    public void atestadoMedico(){
+        //Emite um atestado medico
+    }
+    
+    public void declaracaoAcompanhamento(){
+        //Emite uma declaração de aconpanhamento
+    }
+    
+    public void relatorioMensal(){
+        //Emite um relatoria mensal sobre as consultas atendidas no mês
     }
 }

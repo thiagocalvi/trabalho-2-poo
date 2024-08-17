@@ -1,7 +1,7 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+ 
 package Main;
 
 import Gerenciador.GerenciadorSecretarias;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 /**
  *
  * @author jeanm
- */
+ 
 public class MenuSecretaria {
     
     private ColecaoPacientes colecaoPacientes;
@@ -324,3 +324,4 @@ public class MenuSecretaria {
         return option; 
     } 
 }
+*/

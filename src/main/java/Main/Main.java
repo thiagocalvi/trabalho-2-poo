@@ -34,14 +34,21 @@ public class Main {
     public static void main(String[] args){
         // Inicializa a conexão com o banco de dados
         
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("trabalho-2-poo_jar");
+        try {
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Derby Driver not found");
+            e.printStackTrace();
+        }
+        
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("segundo-trabalho-poo");
         EntityManager em = emf.createEntityManager();
         
         
 //**************************************************************************************************//
         
         
-        
+        /*
         
         //Inicializando as coleções
         ColecaoConsultas colecaoConsultas = new ColecaoConsultas();
@@ -132,7 +139,7 @@ public class Main {
             }
         } while (option != 4);
          
-         
+         */
          //**********************************************************************
          em.close();
          emf.close();

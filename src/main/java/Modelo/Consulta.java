@@ -4,30 +4,52 @@
  */
 package Modelo;
 
-
 import java.time.LocalDate;
 import java.time.LocalTime;
+
+import javax.persistence.*;
+
 /**
  *
  * @author MatheusConsoni
  */
+
+@Entity
+@Table(name = "consulta")
 public class Consulta {
     private enum Tipo{
         NORMAL,
         RETORNO
     };
     
-    //Atributos
-    private int id; //gerar id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "data_consulta")
     private LocalDate data;
+
+    @Column(name = "horario_consulta")
     private LocalTime horario;
-    private int medicoId;
-    private int pacienteId;
+
+    @Enumerated(EnumType.STRING)
     private Tipo tipo;
-    private int protuarioId = 0;
-    private boolean consutaFinalizada;
-    
-     public Consulta(){}
+
+    @ManyToOne
+    @JoinColumn(name = "medico_id")
+    private Medico medico;
+
+    @ManyToOne
+    @JoinColumn(name = "paciente_id")
+    private Paciente paciente;
+
+    @OneToOne
+    @JoinColumn(name = "prontuario_id")
+    private Prontuario prontuario;
+
+    @Column(name = "consulta_finalizada")
+    private boolean consultaFinalizada;
+    public Consulta(){}
     
     //Construtor
     public Consulta(LocalDate data, LocalTime horario) {
@@ -36,51 +58,22 @@ public class Consulta {
     }
     
     //Gets e Sets
+    public boolean getConsultaFinalizada() {
+        return consultaFinalizada;
+    }
 
-    public boolean getConsutaFinalizada() {
-        return consutaFinalizada;
+    public void setConsultaFinalizada(boolean consultaFinalizada) {
+        this.consultaFinalizada = consultaFinalizada;
     }
-    
-    public void setConsutaFinalizada(boolean status){
-        this.consutaFinalizada = status;
-    }
-    
-    public int getProtuarioId() {
-        return protuarioId;
-    }
-    
-    public void setProtuarioId(Prontuario prontuario){
-        this.protuarioId = prontuario.getId();
-    }
-    
-    public void setProtuarioId(){
-        this.protuarioId = 0;
-    }
-    
+
     public int getId() {
         return id;
     }
-    
-    public void setId(int id){
+
+    public void setId(int id) {
         this.id = id;
     }
 
-    public void setMedicoId(Medico medico){
-        this.medicoId = medico.getId();
-    }
-    
-    public int getMedicoId(){
-        return medicoId;
-    }
-
-    public void setPacienteId(Paciente paciente){
-        this.pacienteId = paciente.getId();
-    }
-    
-    public int getPacienteId(){
-        return pacienteId;
-    }
-    
     public LocalDate getData() {
         return data;
     }
@@ -101,12 +94,31 @@ public class Consulta {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
-        if (tipo == Tipo.NORMAL.name()){
-            this.tipo = Tipo.NORMAL;
-        } else {
-            this.tipo = Tipo.RETORNO;
-        }
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
     }
-   
+
+    public Medico getMedico() {
+        return medico;
+    }
+
+    public void setMedico(Medico medico) {
+        this.medico = medico;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
+    public Prontuario getProntuario() {
+        return prontuario;
+    }
+
+    public void setProntuario(Prontuario prontuario) {
+        this.prontuario = prontuario;
+    }   
 }

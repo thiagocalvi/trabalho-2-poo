@@ -6,20 +6,35 @@ package Modelo;
 
 
 import java.time.LocalDate;
+
+import javax.persistence.*;
 /**
  *
  * @author MatheusConsoni
  */
+@Entity
+@Table(name = "prontuario")
 public class Prontuario {
-    //Atributos
-    private int id; // gerar id
-    private int pacienteId;
-    private LocalDate dataConsulta;
-    private String sintomas;
-    private String diagnostico;
-    private String tratamento;
     
-    //Construtor
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    
+    @OneToOne
+    @JoinColumn(name = "paciente_id")
+    private Paciente paciente;
+    
+    @Column(name = "data_consulta")
+    private LocalDate dataConsulta;
+    
+    @Column(name = "sintoma")
+    private String sintomas;
+    
+    @Column(name = "diagnostico")
+    private String diagnostico;
+    
+    @Column(name = "tratamento")
+    private String tratamento;
 
     public Prontuario(){
 
@@ -41,12 +56,12 @@ public class Prontuario {
         this.id = id;
     }
 
-    public int getPacienteId() {
-        return pacienteId;
+    public Paciente getPaciente() {
+        return this.paciente;
     }
 
     public void setPacienteId(Paciente paciente){
-        this.pacienteId = paciente.getId();
+        this.paciente = paciente;
     }
     
     public LocalDate getDataConsulta() {

@@ -1,7 +1,7 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Gerenciador;
 
 import Colecao.ColecaoMedicos;
@@ -19,7 +19,7 @@ import java.util.Random;
 /**
  *
  * @author thiago
- */
+ 
 
 // Gerenciador de uso exclusivo do Administrador
 // CRUD dos objetos Secretaria e Médico
@@ -474,3 +474,4 @@ public class GerenciadorAdm {
         System.out.println("\n");
     }
 }
+*/
