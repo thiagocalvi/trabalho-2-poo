@@ -7,8 +7,10 @@ package Main;
 import Colecao.*;
 import java.util.Scanner;
 
-
-
+    
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -32,8 +34,8 @@ public class Main {
     public static void main(String[] args){
         // Inicializa a conexão com o banco de dados
         
-        
-        
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("trabalho-2-poo_jar");
+        EntityManager em = emf.createEntityManager();
         
         
 //**************************************************************************************************//
@@ -129,5 +131,10 @@ public class Main {
                     break;
             }
         } while (option != 4);
+         
+         
+         //**********************************************************************
+         em.close();
+         emf.close();
     }      
 }  
