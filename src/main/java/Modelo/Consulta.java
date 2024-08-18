@@ -17,7 +17,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "consulta")
 public class Consulta {
-    private enum Tipo{
+    public enum Tipo{
         NORMAL,
         RETORNO
     };
@@ -48,7 +48,9 @@ public class Consulta {
     private Prontuario prontuario;
 
     @Column(name = "consulta_finalizada")
-    private boolean consultaFinalizada;
+    private boolean consultaFinalizada = false;
+    
+    
     public Consulta(){}
     
     //Construtor
