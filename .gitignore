@@ -24,6 +24,8 @@ hs_err_pid*
 replay_pid*
 
 # Maven
+# Não ignore o pom.xml
+!pom.xml
 target/
 pom.xml.tag
 pom.xml.releaseBackup
