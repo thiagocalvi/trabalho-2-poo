@@ -23,7 +23,22 @@ public class Main {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("segundo-trabalho-poo");
         EntityManager em = emf.createEntityManager();
         System.out.println("TESTE");
-
+        
+        em.getTransaction().begin();
+        Secretaria secretaria = new Secretaria("Teste", LocalDate.of(1990, 5, 15), "123123", "teste@gmail.com");
+        secretaria.setEm(em);
+        em.persist(secretaria);
+        em.getTransaction().commit();
+        
+        secretaria.cadastrarPaciente("Teste01", LocalDate.of(1990, 5, 15), "12322222", "teste@@", "fdsfdsf", "PARTICULAR", 20, "Maculino");
+        
+        em.close();
+        emf.close();
+        
+        
+        
+        /*
+        
         try {
             // Iniciando uma transação
             em.getTransaction().begin();
@@ -64,7 +79,7 @@ public class Main {
             emf.close();
         }
     
-    
+    */
     }
 }
  

@@ -35,6 +35,9 @@ public class DadosMedicos {
     @Column(name = "doenca_cardiaca")
     private boolean doencaCardiaca;
     
+    @Column(name = "peso")
+    private float peso;
+    
     @ElementCollection
     private List<String> cirurgias;
     
@@ -61,6 +64,14 @@ public class DadosMedicos {
     
     public void setId(int id){
         this.id = id;
+    }
+    
+    public float getPeso(){
+        return this.peso;
+    }
+    
+    public void setPeso(float peso){
+        this.peso = peso;
     }
     
     public boolean isFuma() {

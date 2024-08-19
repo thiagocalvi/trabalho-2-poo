@@ -45,6 +45,12 @@ public class Paciente{
     @Column(name = "tipo_convenio")
     private tipoConvenio tipoConvenio;
     
+    @Column(name = "sexo")
+    private String sexo;
+    
+    @Column(name = "idade")
+    private int idade;
+    
     //Tipo convenio do paciente
     public enum tipoConvenio{
         PARTICULAR,
@@ -64,6 +70,23 @@ public class Paciente{
         this.tipoConvenio = tipoConvenio;
     }
 
+    
+    public void setIdade(int idade){
+        this.idade = idade;
+    }
+    
+    public int getIdade(){
+        return this.idade;
+    }
+    
+    public void setSexo(String sexo){
+        this.sexo = sexo;
+    }
+    
+    public String getSexo(){
+        return this.sexo;
+    }
+    
     public void setDadosMedicos(DadosMedicos dadosMedicos){
         this.dadosMedicos = dadosMedicos;
     }

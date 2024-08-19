@@ -20,14 +20,23 @@ public class Secretaria extends Funcionario{
 
     @OneToMany(mappedBy = "secretaria")
     private List<Medico> medicos;
+
+    @Transient
+    private EntityManager em;
     
     public Secretaria(String nome, LocalDate dataNascimento, String telefone, String email) {
         super(nome, dataNascimento, telefone, email);
         
     }
     
+    public void setEm(EntityManager em){
+        this.em = em;
+    }
+    
     //*************************************************************//
-    public Consulta cadastrarConsulta(Paciente paciente, Medico medico, LocalDate dataConsulta, LocalTime horarioConsulta, String tipoConsulta){
+    //Nas funcções de cadastro e atualizar, as entidades usadas na operação são recebidas como objeto por parametro
+    //Seria mais adequado receber somente o id dessas entidades e dentro da função fazer uma busca no banco pelo id e recuperar esses objetos?
+    public String cadastrarConsulta(Paciente paciente, Medico medico, LocalDate dataConsulta, LocalTime horarioConsulta, String tipoConsulta){
         //Cadastra uma consulta para os medico que gerencia
         
         Consulta consulta = new Consulta();
@@ -46,11 +55,15 @@ public class Secretaria extends Funcionario{
             return null; // ou lance uma exceção, ou outro tratamento adequado
         }
         
-        return consulta;
+        this.em.getTransaction().begin();
+        this.em.persist(consulta);
+        this.em.getTransaction().commit();
+        
+        return "Consulta cadastrada!";
         
     }
     
-    public Consulta atualizarConsulta(Consulta consulta, Paciente paciente, Medico medico, LocalDate dataConsulta, LocalTime horarioConsulta, String tipoConsulta){
+    public String atualizarConsulta(Consulta consulta, Paciente paciente, Medico medico, LocalDate dataConsulta, LocalTime horarioConsulta, String tipoConsulta){
         //Atualiza uma consulta que ainda não foi finalizada
         if(!consulta.getConsultaFinalizada()){
             consulta.setPaciente(paciente);
@@ -67,15 +80,32 @@ public class Secretaria extends Funcionario{
                 return null; // ou lance uma exceção, ou outro tratamento adequado
             }
         }
+        
+        this.em.getTransaction().begin();
+        this.em.merge(consulta);
+        this.em.getTransaction().commit();
                     
-        return consulta;
+        return "Consulta atualizada!";
     }
     
-    public void removerConsulta(){
+    public String removerConsulta(int consultaId){
         //Remove uma consulta
+        try{
+            this.em.getTransaction().begin();
+            Consulta consulta = em.find(Consulta.class, consultaId);
+            if(consulta != null){
+                em.remove(consulta);
+                return "Consulta removida!";
+            }else{
+                return "Consulta não encontrada";
+            }
+        }catch(Exception e){
+             e.printStackTrace();
+        }
+        return "Erro";
     }
     
-    public Paciente cadastrarPaciente(String nome, LocalDate dataNascimento, String telefone, String email, String endereco, String tipoConvenio){
+    public String cadastrarPaciente(String nome, LocalDate dataNascimento, String telefone, String email, String endereco, String tipoConvenio, int idade, String sexo){
         //Cadastra um paciente
         Paciente paciente = new Paciente();
         paciente.setNome(nome);
@@ -83,6 +113,8 @@ public class Secretaria extends Funcionario{
         paciente.setTelefone(telefone);
         paciente.setEmail(email);
         paciente.setEndereco(endereco);
+        paciente.setIdade(idade);
+        paciente.setSexo(sexo);
         
         try{
             Paciente.tipoConvenio tipo = Paciente.tipoConvenio.valueOf(tipoConvenio.toUpperCase());
@@ -92,16 +124,22 @@ public class Secretaria extends Funcionario{
             return null; // ou lance uma exceção, ou outro tratamento adequado
         }
         
-        return paciente;
+        this.em.getTransaction().begin();
+        this.em.persist(paciente);
+        this.em.getTransaction().commit();
+        
+        return "Paciente cadastrado!";
     }
     
-    public Paciente atualizarPaciente(Paciente paciente, String nome, LocalDate dataNascimento, String telefone, String email, String endereco, String tipoConvenio){
+    public String atualizarPaciente(Paciente paciente, String nome, LocalDate dataNascimento, String telefone, String email, String endereco, String tipoConvenio, int idade, String sexo){
         //Atualiza um paciente
         paciente.setNome(nome);
         paciente.setDataNascimento(dataNascimento);
         paciente.setTelefone(telefone);
         paciente.setEmail(email);
         paciente.setEndereco(endereco);
+        paciente.setIdade(idade);
+        paciente.setSexo(sexo);
         
         try{
             Paciente.tipoConvenio tipo = Paciente.tipoConvenio.valueOf(tipoConvenio.toUpperCase());
@@ -111,11 +149,28 @@ public class Secretaria extends Funcionario{
             return null; // ou lance uma exceção, ou outro tratamento adequado
         }
         
-        return paciente;
+        this.em.getTransaction().begin();
+        this.em.merge(paciente);
+        this.em.getTransaction().commit();
+        
+        return "Paciente atualizado!";
     }
     
-    public void removerPaciente(){
+    public String removerPaciente(int pacienteId){
         //Remove um paciente
+        try{
+            this.em.getTransaction().begin();
+            Paciente paciente = em.find(Paciente.class, pacienteId);
+            if(paciente != null){
+                em.remove(paciente);
+                return "Paciente removida!";
+            }else{
+                return "Paciente não encontrada";
+            }
+        }catch(Exception e){
+             e.printStackTrace();
+        }
+        return "Erro";
     }
     
     public void listarMedicos(){
