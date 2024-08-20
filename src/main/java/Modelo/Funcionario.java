@@ -26,16 +26,19 @@ public class Funcionario {
     @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
     
+    @Column(name = "genero")
+    private String genero;
+    
     @Column(name = "telefone")
     private String telefone;
     
     @Column(name = "email")
     private String email;
-
     
-    public Funcionario(String nome, LocalDate dataNascimento, String telefone, String email) {
+    public Funcionario(String nome, LocalDate dataNascimento, String telefone, String email, String genero) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
+        this.genero = genero;
         this.telefone = telefone;
         this.email = email;
     }
@@ -63,6 +66,14 @@ public class Funcionario {
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
+    
+    public void setGenero(String genero){
+        this.genero = genero;
+    }
+    
+    public String getGenero(){
+        return this.genero;
+    }
 
     public String getTelefone() {
         return telefone;
@@ -80,6 +91,4 @@ public class Funcionario {
         this.email = email;
     }
     
-    
-
 }

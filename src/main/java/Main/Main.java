@@ -25,7 +25,7 @@ public class Main {
         System.out.println("TESTE");
         
         em.getTransaction().begin();
-        Secretaria secretaria = new Secretaria("Teste", LocalDate.of(1990, 5, 15), "123123", "teste@gmail.com");
+        Secretaria secretaria = new Secretaria("Teste", LocalDate.of(1990, 5, 15), "123123", "teste@gmail.com", "Feminino");
         secretaria.setEm(em);
         em.persist(secretaria);
         em.getTransaction().commit();

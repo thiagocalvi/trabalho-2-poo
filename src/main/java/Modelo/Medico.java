@@ -27,11 +27,21 @@ public class Medico extends Funcionario{
     @JoinColumn(name = "secretaria_id")
     private Secretaria secretaria;
 
-    public Medico(String nome, LocalDate dataNascimento, String telefone, String email, String especialidade, int crm) {
-        super(nome, dataNascimento, telefone, email);
+    
+    @Transient
+    private EntityManager em;
+    
+    
+    public Medico(String nome, LocalDate dataNascimento, String telefone, String email, String especialidade, int crm, String genero) {
+        super(nome, dataNascimento, telefone, email, genero);
         this.especialidade = especialidade;
         this.crm = crm;
     }
+    
+    public void setEm(EntityManager em){
+        this.em = em;
+    }
+    
     
     public String getEspecialidade() {
         return especialidade;

@@ -24,8 +24,8 @@ public class Secretaria extends Funcionario{
     @Transient
     private EntityManager em;
     
-    public Secretaria(String nome, LocalDate dataNascimento, String telefone, String email) {
-        super(nome, dataNascimento, telefone, email);
+    public Secretaria(String nome, LocalDate dataNascimento, String telefone, String email, String genero) {
+        super(nome, dataNascimento, telefone, email, genero);
         
     }
     
