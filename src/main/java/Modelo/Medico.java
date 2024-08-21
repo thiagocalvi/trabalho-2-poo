@@ -31,6 +31,9 @@ public class Medico extends Funcionario{
     @Transient
     private EntityManager em;
     
+    public Medico(){
+        
+    }
     
     public Medico(String nome, LocalDate dataNascimento, String telefone, String email, String especialidade, int crm, String genero) {
         super(nome, dataNascimento, telefone, email, genero);

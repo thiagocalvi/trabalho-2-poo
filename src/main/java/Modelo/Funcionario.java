@@ -35,6 +35,8 @@ public class Funcionario {
     @Column(name = "email")
     private String email;
     
+    public Funcionario(){}
+    
     public Funcionario(String nome, LocalDate dataNascimento, String telefone, String email, String genero) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;

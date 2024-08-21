@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import Gerenciador.GerenciadorAdm;
+
 import java.util.List;
 import Modelo.*;
 import java.time.LocalDate;
@@ -22,15 +24,15 @@ public class Main {
         // Criando a EntityManagerFactory e o EntityManager
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("segundo-trabalho-poo");
         EntityManager em = emf.createEntityManager();
-        System.out.println("TESTE");
         
-        em.getTransaction().begin();
-        Secretaria secretaria = new Secretaria("Teste", LocalDate.of(1990, 5, 15), "123123", "teste@gmail.com", "Feminino");
-        secretaria.setEm(em);
-        em.persist(secretaria);
-        em.getTransaction().commit();
+        GerenciadorAdm gerenciadorAdm = new GerenciadorAdm();
+        gerenciadorAdm.setEm(em);
         
-        secretaria.cadastrarPaciente("Teste01", LocalDate.of(1990, 5, 15), "12322222", "teste@@", "fdsfdsf", "PARTICULAR", 20, "Maculino");
+        //gerenciadorAdm.cadastarSecretaria("Maria Aparecida", LocalDate.of(1990, 5, 15), "123123", "maAp@gmail.com", "Feminino");
+        
+        gerenciadorAdm.removerSecretaria(2);
+        
+        //secretaria.cadastrarPaciente("Teste01", LocalDate.of(1990, 5, 15), "12322222", "teste@@", "fdsfdsf", "PARTICULAR", 20, "Maculino");
         
         em.close();
         emf.close();

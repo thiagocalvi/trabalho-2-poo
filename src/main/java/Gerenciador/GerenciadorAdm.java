@@ -12,9 +12,6 @@ import Modelo.Secretaria;
 
 
 import java.time.LocalDate;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.Random;
 
  
  // @author thiago
@@ -26,7 +23,6 @@ import java.util.Random;
 public class GerenciadorAdm {
     
     private EntityManager em;
-    
     
     public void setEm(EntityManager em){
         this.em = em;
@@ -79,6 +75,7 @@ public class GerenciadorAdm {
             Secretaria secretatia = em.find(Secretaria.class, secretariaId);
             if(secretatia != null){
                 em.remove(secretatia);
+                em.getTransaction().commit();
                 return "Secretatia removida!";
             }else{
                 return "Secretatia não encontrada";
@@ -147,6 +144,7 @@ public class GerenciadorAdm {
             Medico medico = em.find(Medico.class, medicoId);
             if(medico != null){
                 em.remove(medico);
+                em.getTransaction().commit();
                 return "Medico removida!";
             }else{
                 return "Meidco não encontrada";
