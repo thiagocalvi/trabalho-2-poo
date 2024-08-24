@@ -10,6 +10,8 @@ import javax.persistence.Persistence;
 
 import Gerenciador.GerenciadorAdm;
 
+import InterfacesGraficas.*;
+
 import java.util.List;
 import Modelo.*;
 import java.time.LocalDate;
@@ -20,7 +22,24 @@ import java.time.LocalDate;
  */
 public class Main {    
     public static void main(String[] args){
+        
+        //IDEIA BEM INICIAL E PREMATURA DE COMO FAZER A NAVEGAÇÃO ENTRE AS TELAS
     
+        //Criar todas as instancias das telas aqui
+        MenuMedicosAdm menuMedicosAdm = new MenuMedicosAdm();
+        MenuSecretariasAdm menuSecretariasAdm = new MenuSecretariasAdm();
+        MenuPrincipalAdm menuPrincipalAdm = new MenuPrincipalAdm();
+        
+        
+        //Sets das telas
+        menuMedicosAdm.setMenuPrincipalAdm(menuPrincipalAdm);
+        menuSecretariasAdm.setMenuPrincipalAdm(menuPrincipalAdm);
+        menuPrincipalAdm.setMenuMedicosAdm(menuMedicosAdm);
+        menuPrincipalAdm.setMenuSecretariasAdm(menuSecretariasAdm);
+
+        
+        
+        
         // Criando a EntityManagerFactory e o EntityManager
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("segundo-trabalho-poo");
         EntityManager em = emf.createEntityManager();
@@ -33,6 +52,8 @@ public class Main {
         gerenciadorAdm.removerSecretaria(2);
         
         //secretaria.cadastrarPaciente("Teste01", LocalDate.of(1990, 5, 15), "12322222", "teste@@", "fdsfdsf", "PARTICULAR", 20, "Maculino");
+        
+        menuPrincipalAdm.setVisible(true);
         
         em.close();
         emf.close();

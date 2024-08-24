@@ -8,27 +8,20 @@ package InterfacesGraficas;
  *
  * @author thiago
  */
-public class MenuPrincipalAdm extends javax.swing.JFrame {
-
-    private MenuMedicosAdm menuMedicosAdm;
-    private MenuSecretariasAdm menuSecretariasAdm;
+public class MenuSecretariasAdm extends javax.swing.JFrame {
     
+    private MenuPrincipalAdm menuPrincipalAdm;
     /**
-     * Creates new form MenuPrincipalAdm
+     * Creates new form MenuMedicosAdm
      */
-    public MenuPrincipalAdm() {
+    public MenuSecretariasAdm() {
         initComponents();
     }
+    
+    public void setMenuPrincipalAdm(MenuPrincipalAdm menuPrincipalAdm){
+        this.menuPrincipalAdm = menuPrincipalAdm;
+    }
 
-    public void setMenuMedicosAdm(MenuMedicosAdm menuMedicosAdm){
-        this.menuMedicosAdm = menuMedicosAdm;
-    }
-    
-    public void setMenuSecretariasAdm(MenuSecretariasAdm menuSecretariasAdm){
-        this.menuSecretariasAdm = menuSecretariasAdm;
-    }
-    
-  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,30 +32,30 @@ public class MenuPrincipalAdm extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        label1 = new java.awt.Label();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Menu ADM");
-        setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(800, 600));
+        setTitle("Médicos");
         setMinimumSize(new java.awt.Dimension(800, 600));
         setResizable(false);
-        setSize(new java.awt.Dimension(0, 0));
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
-
-        jButton2.setText("Médicos");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                go_medicosAdm(evt);
-            }
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
         });
+        jScrollPane1.setViewportView(jList1);
 
-        jButton1.setText("Secretarias");
+        label1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        label1.setText("Secretarias");
+
+        jButton1.setText("Voltar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                go_secretariasAdm(evt);
+                back_menuPrincipalAdm(evt);
             }
         });
 
@@ -70,21 +63,27 @@ public class MenuPrincipalAdm extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(288, 288, 288)
+            .addComponent(jScrollPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(272, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(289, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(320, 320, 320))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(19, 19, 19))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(333, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 312, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -101,23 +100,19 @@ public class MenuPrincipalAdm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void go_medicosAdm(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_medicosAdm
-        // TODO add your handling code here:
-       this.setVisible(false);
-       this.menuMedicosAdm.setVisible(true);
-    }//GEN-LAST:event_go_medicosAdm
-
-    private void go_secretariasAdm(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_secretariasAdm
+    private void back_menuPrincipalAdm(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_menuPrincipalAdm
         // TODO add your handling code here:
         this.setVisible(false);
-        this.menuSecretariasAdm.setVisible(true);
+        this.menuPrincipalAdm.setVisible(true);
         
-    }//GEN-LAST:event_go_secretariasAdm
+    }//GEN-LAST:event_back_menuPrincipalAdm
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private java.awt.Label label1;
     // End of variables declaration//GEN-END:variables
 }
