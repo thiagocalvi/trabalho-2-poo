@@ -23,6 +23,8 @@ import java.time.LocalDate;
 public class Main {    
     public static void main(String[] args){
         
+        GerenciadorAdm gerenciadorAdm = new GerenciadorAdm();
+        
         //IDEIA BEM INICIAL E PREMATURA DE COMO FAZER A NAVEGAÇÃO ENTRE AS TELAS
     
         //Criar todas as instancias das telas aqui
@@ -30,22 +32,23 @@ public class Main {
         MenuSecretariasAdm menuSecretariasAdm = new MenuSecretariasAdm();
         MenuPrincipalAdm menuPrincipalAdm = new MenuPrincipalAdm();
         
+        // Criando a EntityManagerFactory e o EntityManager
+        
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("segundo-trabalho-poo");
+        EntityManager em = emf.createEntityManager();
+        
         
         //Sets das telas
         menuMedicosAdm.setMenuPrincipalAdm(menuPrincipalAdm);
         menuSecretariasAdm.setMenuPrincipalAdm(menuPrincipalAdm);
         menuPrincipalAdm.setMenuMedicosAdm(menuMedicosAdm);
         menuPrincipalAdm.setMenuSecretariasAdm(menuSecretariasAdm);
-
         
-        
-        
-        // Criando a EntityManagerFactory e o EntityManager
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("segundo-trabalho-poo");
-        EntityManager em = emf.createEntityManager();
-        
-        GerenciadorAdm gerenciadorAdm = new GerenciadorAdm();
         gerenciadorAdm.setEm(em);
+        
+        menuMedicosAdm.setGerenciadorAdm(gerenciadorAdm);
+        
+        
         
         //gerenciadorAdm.cadastarSecretaria("Maria Aparecida", LocalDate.of(1990, 5, 15), "123123", "maAp@gmail.com", "Feminino");
         

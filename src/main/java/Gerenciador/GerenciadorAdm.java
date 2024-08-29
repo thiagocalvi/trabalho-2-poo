@@ -10,6 +10,8 @@ import javax.persistence.*;
 import Modelo.Medico;
 import Modelo.Secretaria;
 
+import java.util.List;
+
 
 import java.time.LocalDate;
 
@@ -155,7 +157,17 @@ public class GerenciadorAdm {
         
     }
     
-    
+    public List<Medico> getAllMedicos(){
+        TypedQuery<Medico> query = em.createQuery("SELECT p FROM Medico p", Medico.class);
+        
+        em.getTransaction().begin();
+        
+        List<Medico> medicos = query.getResultList();
+        
+        em.getTransaction().commit();
+        
+        return medicos;
+    }
     
     //Dataset
     //Médicos
