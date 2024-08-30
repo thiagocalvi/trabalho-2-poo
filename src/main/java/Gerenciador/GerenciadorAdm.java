@@ -26,148 +26,193 @@ public class GerenciadorAdm {
     
     private EntityManager em;
     
-    public void setEm(EntityManager em){
+    
+    public GerenciadorAdm(EntityManager em){
         this.em = em;
     }
     
-    //Cadastrar secretaria
-    public String cadastarSecretaria(String nome, LocalDate dataNascimento, String telefone, String email, String genero){
-        Secretaria secretaria = new Secretaria(nome,dataNascimento, telefone, email, genero);
-        
-        try{
-            em.getTransaction().begin();
+     public String cadastrarSecretaria(String nome, LocalDate dataNascimento, String telefone, String email, String genero) {
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            Secretaria secretaria = new Secretaria(nome, dataNascimento, telefone, email, genero);
             em.persist(secretaria);
-            em.getTransaction().commit();
-
-        }catch(Exception e){
-            return "Erro:" + e;
+            transaction.commit();
+            return "Secretaria cadastrada!";
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            return "Erro: " + e.getMessage();
         }
-        
-        return "Secretaria cadastrada!";
     }
-    
-    //Atualizar secretaria
-    public String atualizarSecretaria(int secretariaId, String nome, LocalDate dataNascimento, String telefone, String email, String genero){
-        try{
-            em.getTransaction().begin();
+
+    public String atualizarSecretaria(int secretariaId, String nome, LocalDate dataNascimento, String telefone, String email, String genero) {
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
             Secretaria secretaria = em.find(Secretaria.class, secretariaId);
-            
-            if(secretaria != null){
+            if (secretaria != null) {
                 secretaria.setNome(nome);
                 secretaria.setDataNascimento(dataNascimento);
                 secretaria.setTelefone(telefone);
                 secretaria.setEmail(email);
                 secretaria.setGenero(genero);
+                em.merge(secretaria);
+                transaction.commit();
+                return "Secretaria atualizada!";
+            } else {
+                transaction.commit();
+                return "Secretaria não encontrada";
             }
-            
-            em.merge(secretaria);
-            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            return "Erro: " + e.getMessage();
+        }
+    }
 
-        }catch(Exception e){
-            return "Erro:" + e;
-        }
-        
-        return "Secetaria atualizada!";
-    }
-    
-    //Remover secretaria
-    public String removerSecretaria(int secretariaId){
-        try{
-            this.em.getTransaction().begin();
-            Secretaria secretatia = em.find(Secretaria.class, secretariaId);
-            if(secretatia != null){
-                em.remove(secretatia);
-                em.getTransaction().commit();
-                return "Secretatia removida!";
-            }else{
-                return "Secretatia não encontrada";
+    public String removerSecretaria(int secretariaId) {
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            Secretaria secretaria = em.find(Secretaria.class, secretariaId);
+            if (secretaria != null) {
+                em.remove(secretaria);
+                transaction.commit();
+                return "Secretaria removida!";
+            } else {
+                transaction.commit();
+                return "Secretaria não encontrada";
             }
-        }catch(Exception e){
-             return "Erro" + e;
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            return "Erro: " + e.getMessage();
         }
-        
     }
-        
-    
-    //Cadastrar médico
-    public String cadastarMedico(String nome, LocalDate dataNascimento, String telefone, String email, String especialidade, int crm, String genero){
-       Medico medico = new Medico(nome, dataNascimento, telefone, email, especialidade, crm, genero);
-       
-       try{
-            em.getTransaction().begin();
+
+    public String cadastrarMedico(String nome, LocalDate dataNascimento, String telefone, String email, String especialidade, int crm, String genero) {
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            Medico medico = new Medico(nome, dataNascimento, telefone, email, especialidade, crm, genero);
             em.persist(medico);
-            em.getTransaction().commit();
-
-        }catch(Exception e){
-            return "Erro:" + e;
+            transaction.commit();
+            return "Médico cadastrado!";
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            return "Erro: " + e.getMessage();
         }
-        
-        return "Médico cadastrado!";
     }
-    
-    //Atualizar médico
-    public String atualizarMedico(int medicoId, int secretariaId, String nome, LocalDate dataNascimento, String telefone, String email, String especialidade, int crm, String genero){
-        try{
-            em.getTransaction().begin();
+
+    public String atualizarMedico(int medicoId, int secretariaId, String nome, LocalDate dataNascimento, String telefone, String email, String especialidade, int crm, String genero) {
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
             Medico medico = em.find(Medico.class, medicoId);
-            
-            if(medico != null){
+            if (medico != null) {
                 medico.setNome(nome);
                 medico.setDataNascimento(dataNascimento);
                 medico.setTelefone(telefone);
                 medico.setEmail(email);
                 medico.setEspecialidade(especialidade);
-                medico.setEspecialidade(especialidade);
                 medico.setCrm(crm);
                 medico.setGenero(genero);
-            }
-            
-            if(secretariaId != 0){
-                Secretaria secretaria = em.find(Secretaria.class, secretariaId);
-                if(secretaria != null){
-                    medico.setSecretaria(secretaria);
-                }
-            }
-            
-            em.merge(medico);
-            em.getTransaction().commit();
 
-        }catch(Exception e){
-            return "Erro:" + e;
-        }
-        
-        return "Médico atualizada!";
-    }
-    
-    //Remover médico
-    public String removerMedico(int medicoId){
-        try{
-            this.em.getTransaction().begin();
-            Medico medico = em.find(Medico.class, medicoId);
-            if(medico != null){
-                em.remove(medico);
-                em.getTransaction().commit();
-                return "Medico removida!";
-            }else{
-                return "Meidco não encontrada";
+                if (secretariaId != 0) {
+                    Secretaria secretaria = em.find(Secretaria.class, secretariaId);
+                    if (secretaria != null) {
+                        medico.setSecretaria(secretaria);
+                    }
+                }
+                em.merge(medico);
+                transaction.commit();
+                return "Médico atualizado!";
+            } else {
+                transaction.commit();
+                return "Médico não encontrado";
             }
-        }catch(Exception e){
-             return "Erro" + e;
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            return "Erro: " + e.getMessage();
         }
-        
+    }
+
+    public String removerMedico(int medicoId) {
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            Medico medico = em.find(Medico.class, medicoId);
+            if (medico != null) {
+                em.remove(medico);
+                transaction.commit();
+                return "Médico removido!";
+            } else {
+                transaction.commit();
+                return "Médico não encontrado";
+            }
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            return "Erro: " + e.getMessage();
+        }
+    }
+
+    public List<Medico> getAllMedicos() {
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            TypedQuery<Medico> query = em.createQuery("SELECT m FROM Medico m", Medico.class);
+            List<Medico> medicos = query.getResultList();
+            transaction.commit();
+            return medicos;
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw new RuntimeException("Erro ao listar médicos: " + e.getMessage(), e);
+        }
     }
     
-    public List<Medico> getAllMedicos(){
-        TypedQuery<Medico> query = em.createQuery("SELECT p FROM Medico p", Medico.class);
-        
-        em.getTransaction().begin();
-        
-        List<Medico> medicos = query.getResultList();
-        
-        em.getTransaction().commit();
-        
-        return medicos;
+    public List<Secretaria> getAllSecretarias() {
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            TypedQuery<Secretaria> query = em.createQuery("SELECT m FROM Secretaria m", Secretaria.class);
+            List<Secretaria> secretarias = query.getResultList();
+            transaction.commit();
+            return secretarias;
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw new RuntimeException("Erro ao listar médicos: " + e.getMessage(), e);
+        }
     }
+    
+    
+    public List<Medico> buscarMedicos(String texto) {
+        // Prepara o texto para a busca, adicionando '%' para correspondência parcial
+        String searchText = "%" + texto + "%";
+        
+        // Cria a consulta HQL com correspondência parcial
+        String hql = "SELECT m FROM Medico m WHERE m.nome LIKE :texto OR m.crm LIKE :texto OR m.especialidade LIKE :texto";
+        TypedQuery<Medico> query = em.createQuery(hql, Medico.class);
+        query.setParameter("texto", searchText);
+        
+        // Executa a consulta e retorna a lista de médicos encontrados
+        return query.getResultList();
+    }
+    
+    
     
     //Dataset
     //Médicos

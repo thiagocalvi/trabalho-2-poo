@@ -52,7 +52,7 @@ public class MenuPrincipalAdm extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(0, 0));
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
         jButton2.setText("Médicos");
         jButton2.addActionListener(new java.awt.event.ActionListener() {

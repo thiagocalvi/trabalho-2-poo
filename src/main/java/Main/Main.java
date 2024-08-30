@@ -20,15 +20,43 @@ import java.time.LocalDate;
  *
  * @author thiago
  */
-public class Main {    
+public class Main {       
     public static void main(String[] args){
-        
-        GerenciadorAdm gerenciadorAdm = new GerenciadorAdm();
-        
+        // Criar todas as instâncias das telas aqui
+        MenuPrincipalAdm menuPrincipalAdm = new MenuPrincipalAdm();
+
+        // Criar a EntityManagerFactory e o EntityManager
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("segundo-trabalho-poo");
+        EntityManager em = emf.createEntityManager();
+
+        GerenciadorAdm gerenciadorAdm = new GerenciadorAdm(em);
+
+        // Configurar as telas
+        MenuMedicosAdm menuMedicosAdm = new MenuMedicosAdm(gerenciadorAdm);
+        MenuSecretariasAdm menuSecretariasAdm = new MenuSecretariasAdm(gerenciadorAdm);
+
+        menuMedicosAdm.setMenuPrincipalAdm(menuPrincipalAdm);
+        menuSecretariasAdm.setMenuPrincipalAdm(menuPrincipalAdm);
+        menuPrincipalAdm.setMenuMedicosAdm(menuMedicosAdm);
+        menuPrincipalAdm.setMenuSecretariasAdm(menuSecretariasAdm);
+
+        // Mostrar a interface gráfica
+        menuPrincipalAdm.setVisible(true);
+
+        // Adicionar um listener para garantir que o EntityManager e EntityManagerFactory sejam fechados ao encerrar a aplicação
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            em.close();
+            emf.close();
+        }));
+    }
+}
+
+    /*
+    public static void main(String[] args){
         //IDEIA BEM INICIAL E PREMATURA DE COMO FAZER A NAVEGAÇÃO ENTRE AS TELAS
     
         //Criar todas as instancias das telas aqui
-        MenuMedicosAdm menuMedicosAdm = new MenuMedicosAdm();
+       
         MenuSecretariasAdm menuSecretariasAdm = new MenuSecretariasAdm();
         MenuPrincipalAdm menuPrincipalAdm = new MenuPrincipalAdm();
         
@@ -37,22 +65,31 @@ public class Main {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("segundo-trabalho-poo");
         EntityManager em = emf.createEntityManager();
         
+        GerenciadorAdm gerenciadorAdm = new GerenciadorAdm(em);
         
-        //Sets das telas
+        //gerenciadorAdm.cadastrarMedico("Dr. João Silva", LocalDate.of(1980, 5, 15), "1234-5678", "joao.silva@example.com", "Cardiologia", 12345, "Masculino");
+        //gerenciadorAdm.cadastrarMedico("Dra. Maria Oliveira", LocalDate.of(1975, 11, 20), "2345-6789", "maria.oliveira@example.com", "Neurologia", 23456, "Feminino");
+        //gerenciadorAdm.cadastrarMedico("Dr. Pedro Santos", LocalDate.of(1988, 2, 10), "3456-7890", "pedro.santos@example.com", "Pediatria", 34567, "Masculino");
+
+
+
+
+//Sets das telas
+        MenuMedicosAdm menuMedicosAdm = new MenuMedicosAdm(gerenciadorAdm);
+        //menuMedicosAdm.setGerenciadorAdm(gerenciadorAdm);
         menuMedicosAdm.setMenuPrincipalAdm(menuPrincipalAdm);
         menuSecretariasAdm.setMenuPrincipalAdm(menuPrincipalAdm);
         menuPrincipalAdm.setMenuMedicosAdm(menuMedicosAdm);
         menuPrincipalAdm.setMenuSecretariasAdm(menuSecretariasAdm);
         
-        gerenciadorAdm.setEm(em);
+               
         
-        menuMedicosAdm.setGerenciadorAdm(gerenciadorAdm);
         
         
         
         //gerenciadorAdm.cadastarSecretaria("Maria Aparecida", LocalDate.of(1990, 5, 15), "123123", "maAp@gmail.com", "Feminino");
         
-        gerenciadorAdm.removerSecretaria(2);
+        //gerenciadorAdm.removerSecretaria(2);
         
         //secretaria.cadastrarPaciente("Teste01", LocalDate.of(1990, 5, 15), "12322222", "teste@@", "fdsfdsf", "PARTICULAR", 20, "Maculino");
         
@@ -63,7 +100,7 @@ public class Main {
         
         
         
-        /*
+       
         
         try {
             // Iniciando uma transação
@@ -104,8 +141,8 @@ public class Main {
             em.close();
             emf.close();
         }
-    
-    */
+ 
     }
 }
- 
+    
+    */

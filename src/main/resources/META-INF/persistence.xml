@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
-                        http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
-    <persistence-unit name="segundo-trabalho-poo" transaction-type="RESOURCE_LOCAL">
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <!-- Adicione suas classes de entidade aqui -->
-        <class>Modelo.Consulta</class>
-        <class>Modelo.Paciente</class>
-        <class>Modelo.Medico</class>
-        <class>Modelo.Secretaria</class>
-        <class>Modelo.DadosMedicos</class>
-        <class>Modelo.Prontuario</class>
-        <properties>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyTenSevenDialect"/>
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/segundo-trabalho-poo; create=true"/>
-            <property name="javax.persistence.jdbc.user" value="ADM"/>
-            <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
-            <property name="javax.persistence.jdbc.password" value="admin"/>
-            <property name="javax.persistence.schema-generation.database.action" value="update"/>
-        </properties>
-    </persistence-unit>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence                         http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+  <persistence-unit name="segundo-trabalho-poo" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <!-- Adicione suas classes de entidade aqui -->
+    <class>Modelo.Consulta</class>
+    <class>Modelo.Paciente</class>
+    <class>Modelo.Medico</class>
+    <class>Modelo.Secretaria</class>
+    <class>Modelo.DadosMedicos</class>
+    <class>Modelo.Prontuario</class>
+    <properties>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyTenSevenDialect"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/segundo-trabalho-poo; create=true"/>
+      <property name="javax.persistence.jdbc.user" value="ADM"/>
+      <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
+      <property name="javax.persistence.jdbc.password" value="admin"/>
+    </properties>
+  </persistence-unit>
 </persistence>
