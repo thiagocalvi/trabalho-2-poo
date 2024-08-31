@@ -23,6 +23,11 @@ import java.time.LocalDate;
 public class Main {       
     public static void main(String[] args){
         // Criar todas as instâncias das telas aqui
+        TelaInicial telaInicial = new TelaInicial();
+        
+        
+        
+        
         MenuPrincipalAdm menuPrincipalAdm = new MenuPrincipalAdm();
 
         // Criar a EntityManagerFactory e o EntityManager
@@ -39,9 +44,14 @@ public class Main {
         menuSecretariasAdm.setMenuPrincipalAdm(menuPrincipalAdm);
         menuPrincipalAdm.setMenuMedicosAdm(menuMedicosAdm);
         menuPrincipalAdm.setMenuSecretariasAdm(menuSecretariasAdm);
+        
+        telaInicial.setMenuPrincipalAdm(menuPrincipalAdm);
+        menuPrincipalAdm.setTelaInicial(telaInicial);
 
         // Mostrar a interface gráfica
-        menuPrincipalAdm.setVisible(true);
+        telaInicial.setVisible(true);
+        //menuPrincipalAdm.setVisible(false);
+        
 
         // Adicionar um listener para garantir que o EntityManager e EntityManagerFactory sejam fechados ao encerrar a aplicação
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
