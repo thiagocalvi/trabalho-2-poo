@@ -25,9 +25,6 @@ public class Main {
         // Criar todas as instâncias das telas aqui
         TelaInicial telaInicial = new TelaInicial();
         
-        
-        
-        
         MenuPrincipalAdm menuPrincipalAdm = new MenuPrincipalAdm();
 
         // Criar a EntityManagerFactory e o EntityManager
@@ -47,7 +44,7 @@ public class Main {
         
         telaInicial.setMenuPrincipalAdm(menuPrincipalAdm);
         menuPrincipalAdm.setTelaInicial(telaInicial);
-
+        
         // Mostrar a interface gráfica
         telaInicial.setVisible(true);
         //menuPrincipalAdm.setVisible(false);

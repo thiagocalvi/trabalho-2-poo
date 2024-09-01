@@ -13,19 +13,17 @@ import java.util.List;
  *
  * @author matheus
  */
-public class AtualizarMedico extends javax.swing.JFrame {
-    private Medico medico;
+public class CadastrarMedico extends javax.swing.JFrame {
     private GerenciadorAdm gerenciadorAdm; 
     List<Secretaria> allSecretarias;
     /**
      * Creates new form RelatorioMensalMedico
      */
-    public AtualizarMedico(GerenciadorAdm gerenciadorAdm, Medico medico) {
-        this.medico = medico;
+    public CadastrarMedico(GerenciadorAdm gerenciadorAdm) {
         this.gerenciadorAdm = gerenciadorAdm;
         this.allSecretarias = this.gerenciadorAdm.getAllSecretarias();
         initComponents();
-        setValues();
+        setSecretarias();
     }
 
     /**
@@ -60,20 +58,18 @@ public class AtualizarMedico extends javax.swing.JFrame {
         dataNascimento_medico = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Atualizar Medico");
+        setTitle("Cadastar Medico");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
         jLabel4.setBackground(new java.awt.Color(255, 204, 102));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Atualizar Médico");
+        jLabel4.setText("Cadastrar Médico");
         jLabel4.setOpaque(true);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -106,12 +102,12 @@ public class AtualizarMedico extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma secretaria", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.setToolTipText("");
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 255));
+        jButton1.setBackground(new java.awt.Color(0, 204, 0));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Atualizar");
+        jButton1.setText("Cadastar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                atualizarMedico(evt);
+                cadastarMedico(evt);
             }
         });
 
@@ -275,7 +271,7 @@ public class AtualizarMedico extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_fecharJanela
 
-    private void atualizarMedico(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarMedico
+    private void cadastarMedico(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastarMedico
         // TODO add your handling code here:
         String nome, especialidade, telefone, email, crm, dataNascimento, genero = null, nomeSecretaria;
         Secretaria secretariaObj = null;
@@ -315,50 +311,23 @@ public class AtualizarMedico extends javax.swing.JFrame {
         if (secretariaObj == null) {
             System.out.println("Secretaria não encontrada ou não selecionada.");
         } else {
-           this.gerenciadorAdm.atualizarMedico(this.medico, secretariaObj, nome, LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy")), telefone, email, especialidade, Integer.parseInt(crm), genero);
+           this.gerenciadorAdm.cadastrarMedico(secretariaObj, nome, LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy")), telefone, email, especialidade, Integer.parseInt(crm), genero);
            this.dispose();
         }
         
         
-    }//GEN-LAST:event_atualizarMedico
-
-    private void setValues(){
+    }//GEN-LAST:event_cadastarMedico
+    
+    
+    private void setSecretarias(){
         jComboBox1.removeAllItems();
         jComboBox1.addItem("Selecione uma secretaria");
-        
-        nome_medico.setText(this.medico.getNome());
-        
-        especialidade_medico.setText(this.medico.getEspecialidade());
-        
-        telefone_medico.setText(this.medico.getTelefone());
-        
-        email_medico.setText(this.medico.getEmail());
-        
-        crm_medico.setText( Integer.toString(this.medico.getCrm()));
-        
-        dataNascimento_medico.setText(this.medico.getDataNascimento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-        
-        if(this.medico.getGenero().equals("Masculino")){
-            genero_m_medico.setSelected(true);
-            
-        }else{
-            genero_f_medico.setSelected(true);
-        }
+        jComboBox1.setSelectedItem("Selecione uma secretaria");
         
         for(Secretaria secretaria : this.allSecretarias){
             jComboBox1.addItem(secretaria.getNome());
         }
-        
-        if(this.medico.getSecretaria() == null){
-            jComboBox1.setSelectedItem("Selecione uma secretaria");
-        
-        }else{
-            jComboBox1.setSelectedItem(medico.getSecretaria().getNome());
-
-        }
-        
     }
-    
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

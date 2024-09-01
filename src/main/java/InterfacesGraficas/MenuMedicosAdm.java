@@ -55,7 +55,7 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         label1 = new java.awt.Label();
         jButton1 = new javax.swing.JButton();
-        button1 = new java.awt.Button();
+        cadastrarMedico = new java.awt.Button();
         jTextField1 = new javax.swing.JTextField();
         label2 = new java.awt.Label();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -77,11 +77,11 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
             }
         });
 
-        button1.setBackground(new java.awt.Color(153, 153, 153));
-        button1.setLabel("Adicionar Médico");
-        button1.addActionListener(new java.awt.event.ActionListener() {
+        cadastrarMedico.setBackground(new java.awt.Color(153, 153, 153));
+        cadastrarMedico.setLabel("Adicionar Médico");
+        cadastrarMedico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
+                goCadastrarMedico(evt);
             }
         });
 
@@ -106,7 +106,7 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cadastrarMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -132,7 +132,7 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
                     .addComponent(jTextField1)
                     .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(35, 35, 35)
-                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cadastrarMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -237,10 +237,13 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
                     showInformationMedico(medico);
                 });                
                 
-                //TO-DO
+                //TO-DO - Feito
                 //Leva para pagina de atualização
                 //o objeto medico que vai ser atualuzado é passado como parametro
-                updateButton.addActionListener(e -> System.out.println("Atualizar médico com ID: " + medico.getId()));
+                updateButton.addActionListener(e -> {
+                    AtualizarMedico atualizarMedico = new AtualizarMedico(this.gerenciadorAdm, medico);
+                    atualizarMedico.setVisible(true);
+                });
                 
                 deleteButton.addActionListener(e -> {
                     int dialogResult = JOptionPane.showConfirmDialog(this, 
@@ -292,9 +295,11 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
         this.menuPrincipalAdm.setVisible(true);        
     }//GEN-LAST:event_back_menuPrincipalAdm
 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+    private void goCadastrarMedico(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goCadastrarMedico
         // TODO add your handling code here:
-    }//GEN-LAST:event_button1ActionPerformed
+        CadastrarMedico cadastrarMedico = new CadastrarMedico(this.gerenciadorAdm);
+        cadastrarMedico.setVisible(true);
+    }//GEN-LAST:event_goCadastrarMedico
     
  
     private void updateSearch() {
@@ -346,7 +351,7 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel box_medicos;
-    private java.awt.Button button1;
+    private java.awt.Button cadastrarMedico;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;

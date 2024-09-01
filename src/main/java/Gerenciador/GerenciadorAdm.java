@@ -94,11 +94,11 @@ public class GerenciadorAdm {
         }
     }
 
-    public String cadastrarMedico(String nome, LocalDate dataNascimento, String telefone, String email, String especialidade, int crm, String genero) {
+    public String cadastrarMedico(Secretaria secretaria, String nome, LocalDate dataNascimento, String telefone, String email, String especialidade, int crm, String genero) {
         EntityTransaction transaction = em.getTransaction();
         try {
             transaction.begin();
-            Medico medico = new Medico(nome, dataNascimento, telefone, email, especialidade, crm, genero);
+            Medico medico = new Medico(secretaria, nome, dataNascimento, telefone, email, especialidade, crm, genero);
             em.persist(medico);
             transaction.commit();
             return "Médico cadastrado!";
@@ -110,12 +110,11 @@ public class GerenciadorAdm {
         }
     }
 
-    public String atualizarMedico(int medicoId, int secretariaId, String nome, LocalDate dataNascimento, String telefone, String email, String especialidade, int crm, String genero) {
+    public String atualizarMedico(Medico medico, Secretaria secretaria, String nome, LocalDate dataNascimento, String telefone, String email, String especialidade, int crm, String genero) {
         EntityTransaction transaction = em.getTransaction();
         try {
             transaction.begin();
-            Medico medico = em.find(Medico.class, medicoId);
-            if (medico != null) {
+            if(medico != null) {
                 medico.setNome(nome);
                 medico.setDataNascimento(dataNascimento);
                 medico.setTelefone(telefone);
@@ -123,13 +122,8 @@ public class GerenciadorAdm {
                 medico.setEspecialidade(especialidade);
                 medico.setCrm(crm);
                 medico.setGenero(genero);
-
-                if (secretariaId != 0) {
-                    Secretaria secretaria = em.find(Secretaria.class, secretariaId);
-                    if (secretaria != null) {
-                        medico.setSecretaria(secretaria);
-                    }
-                }
+                medico.setSecretaria(secretaria);
+                
                 em.merge(medico);
                 transaction.commit();
                 return "Médico atualizado!";

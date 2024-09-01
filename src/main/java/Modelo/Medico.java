@@ -35,10 +35,11 @@ public class Medico extends Funcionario{
         
     }
     
-    public Medico(String nome, LocalDate dataNascimento, String telefone, String email, String especialidade, int crm, String genero) {
+    public Medico(Secretaria secretaria, String nome, LocalDate dataNascimento, String telefone, String email, String especialidade, int crm, String genero) {
         super(nome, dataNascimento, telefone, email, genero);
         this.especialidade = especialidade;
         this.crm = crm;
+        this.secretaria = secretaria;
     }
     
     public void setEm(EntityManager em){
