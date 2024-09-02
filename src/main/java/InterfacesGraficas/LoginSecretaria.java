@@ -6,7 +6,7 @@ package InterfacesGraficas;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import Gerenciador.GerenciadorAdm;
-import Modelo.Medico;
+import Modelo.Secretaria;
 import java.util.List;
 
 /**
@@ -121,25 +121,25 @@ public class LoginSecretaria extends javax.swing.JFrame {
         jComboBox1.removeAllItems();
     
         // Preenche o JComboBox com os nomes dos médicos
-        for (Medico medico : listaMedicos) {
-            jComboBox1.addItem(medico.getNome());
+        for (Secretaria secretaria : listaSecretarias) {
+            jComboBox1.addItem(secretaria.getNome());
         }
     }   
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.setVisible(false);
         // Obter o nome do médico selecionado no JComboBox
-        String nomeMedicoSelecionado = (String) jComboBox1.getSelectedItem();
+        String nomeSecretariaSelecionada = (String) jComboBox1.getSelectedItem();
 
         // Encontrar o objeto Medico correspondente na lista
-        Medico medicoSelecionado = null;
-        for (Medico medico : listaMedicos) {
-            if (medico.getNome().equals(nomeMedicoSelecionado)) {
-                medicoSelecionado = medico;
+        Secretaria secretariaSelecionada = null;
+        for (Secretaria secretaria : listaSecretarias) {
+            if (secretaria.getNome().equals(nomeSecretariaSelecionada)) {
+                secretariaSelecionada = secretaria;
                 break;
             }
         }
-        medico1.setVisible(true);
+        secretaria1.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
