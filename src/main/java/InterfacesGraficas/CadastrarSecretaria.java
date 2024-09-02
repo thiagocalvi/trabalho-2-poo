@@ -3,9 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package InterfacesGraficas;
-import Modelo.Secretaria;
 import Gerenciador.GerenciadorAdm;
-import Modelo.Secretaria;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
@@ -13,17 +11,14 @@ import javax.swing.JOptionPane;
  *
  * @author matheus
  */
-public class AtualizarSecretaria extends javax.swing.JFrame {
-    private Secretaria secretaria;
+public class CadastrarSecretaria extends javax.swing.JFrame {
     private GerenciadorAdm gerenciadorAdm;
     /**
      * Creates new form RelatorioMensalMedico
      */
-    public AtualizarSecretaria(GerenciadorAdm gerenciadorAdm, Secretaria secretaria) {
+    public CadastrarSecretaria(GerenciadorAdm gerenciadorAdm) {
         this.gerenciadorAdm = gerenciadorAdm;
-        this.secretaria = secretaria;
         initComponents();
-        setValues();
     }
 
     /**
@@ -64,7 +59,7 @@ public class AtualizarSecretaria extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Atualizar Secretaria");
+        jLabel4.setText("Cadastar Secretaria");
         jLabel4.setOpaque(true);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -82,12 +77,12 @@ public class AtualizarSecretaria extends javax.swing.JFrame {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Email:");
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 255));
+        jButton1.setBackground(new java.awt.Color(0, 204, 0));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Atualizar");
+        jButton1.setText("Cadastrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                atualizarSecretaria(evt);
+                cadastrarSecretaria(evt);
             }
         });
 
@@ -126,14 +121,6 @@ public class AtualizarSecretaria extends javax.swing.JFrame {
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(fechar)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(339, 339, 339))
             .addGroup(panel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,12 +129,11 @@ public class AtualizarSecretaria extends javax.swing.JFrame {
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(296, 296, 296))
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nome_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(87, Short.MAX_VALUE))
-                    .addGroup(panel1Layout.createSequentialGroup()
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nome_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -167,6 +153,15 @@ public class AtualizarSecretaria extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(genero_f_secretaria)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                        .addComponent(fechar)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(339, 339, 339))))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,7 +219,7 @@ public class AtualizarSecretaria extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_fecharJanela
 
-    private void atualizarSecretaria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarSecretaria
+    private void cadastrarSecretaria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarSecretaria
         // TODO add your handling code here:
         String nome, telefone, email, dataNascimento, genero = null;
        
@@ -242,32 +237,14 @@ public class AtualizarSecretaria extends javax.swing.JFrame {
         }
         
         int dialogResult = JOptionPane.showConfirmDialog(this, 
-                "Tem certeza que deseja atualizar a secretaria " + this.secretaria.getNome() + "?", 
-                "Confirmar Atualização", 
+                "Tem certeza que deseja cadastrar secretaria" + nome + "?", 
+                "Confirmar Cadastro", 
                 JOptionPane.YES_NO_OPTION);
         if (dialogResult == JOptionPane.YES_OPTION){
-            this.gerenciadorAdm.atualizarSecretaria(this.secretaria, nome, LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy")), telefone, email, genero);
+            this.gerenciadorAdm.cadastrarSecretaria(nome, LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy")), telefone, email, genero);
             this.dispose();
         }
-    }//GEN-LAST:event_atualizarSecretaria
-
-    private void setValues(){
-        nome_secretaria.setText(this.secretaria.getNome());
-        
-        telefone_secretaria.setText(this.secretaria.getTelefone());
-        
-        email_secretaria.setText(this.secretaria.getEmail());
-        
-        dataNascimento_secretaria.setText(this.secretaria.getDataNascimento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-        
-        if(this.secretaria.getGenero().equals("Masculino")){
-            genero_m_secretaria.setSelected(true);
-            
-        }else{
-            genero_f_secretaria.setSelected(true);
-        }
-    }
-    
+    }//GEN-LAST:event_cadastrarSecretaria
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

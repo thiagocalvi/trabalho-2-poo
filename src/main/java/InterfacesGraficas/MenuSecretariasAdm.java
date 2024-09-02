@@ -80,7 +80,7 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
         button1.setLabel("Adicionar Secretaria");
         button1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
+                goCadastrarSecretaria(evt);
             }
         });
 
@@ -91,7 +91,7 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
 
         box_secretarias.setMaximumSize(new java.awt.Dimension(797, 0));
         box_secretarias.setMinimumSize(new java.awt.Dimension(797, 0));
-        box_secretarias.setName("box_secretarias\n");
+        box_secretarias.setName("box_secretarias\n"); // NOI18N
         box_secretarias.setPreferredSize(new java.awt.Dimension(797, 0));
         box_secretarias.setLayout(new javax.swing.BoxLayout(box_secretarias, javax.swing.BoxLayout.LINE_AXIS));
         jScrollPane2.setViewportView(box_secretarias);
@@ -140,8 +140,6 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addContainerGap())
         );
-
-        button1.getAccessibleContext().setAccessibleName("Adicionar Secretaria");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -239,7 +237,10 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
                 //TO-DO
                 //Leva para pagina de atualização
                 //o objeto medico que vai ser atualuzado é passado como parametro
-                updateButton.addActionListener(e -> System.out.println("Atualizar secretaria com ID: " + secretaria.getId()));
+                updateButton.addActionListener(e -> {
+                    AtualizarSecretaria atualizarSecretaria = new AtualizarSecretaria(gerenciadorAdm, secretaria);
+                    atualizarSecretaria.setVisible(true);
+                });
                 
                 deleteButton.addActionListener(e -> {
                     int dialogResult = JOptionPane.showConfirmDialog(this, 
@@ -290,9 +291,10 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
         this.menuPrincipalAdm.setVisible(true);        
     }//GEN-LAST:event_back_menuPrincipalAdm
 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_button1ActionPerformed
+    private void goCadastrarSecretaria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goCadastrarSecretaria
+        CadastrarSecretaria cadastrarSecretaria = new CadastrarSecretaria(gerenciadorAdm);
+        cadastrarSecretaria.setVisible(true);
+    }//GEN-LAST:event_goCadastrarSecretaria
     
  
     private void updateSearch() {
