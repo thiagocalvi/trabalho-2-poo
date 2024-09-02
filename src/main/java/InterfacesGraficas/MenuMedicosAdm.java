@@ -111,12 +111,12 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
                                 .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(12, Short.MAX_VALUE))
+                        .addContainerGap(14, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(320, 320, 320))))
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
@@ -134,7 +134,7 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addComponent(cadastrarMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addContainerGap())
@@ -144,11 +144,15 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 18, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 21, Short.MAX_VALUE))
         );
 
         pack();
@@ -302,23 +306,23 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
         cadastrarMedico.setVisible(true);
     }//GEN-LAST:event_goCadastrarMedico
     
- 
-    private void updateSearch() {
-        //Isso não é nenhum pouco eficiente!
-        String searchText = jTextField1.getText().toLowerCase();
-        this.allMedicos = gerenciadorAdm.getAllMedicos();
-        List<Medico> filteredMedicos = allMedicos.stream()
-            .filter(medico -> 
-                medico.getNome().toLowerCase().contains(searchText) ||
-                Integer.toString(medico.getCrm()).contains(searchText) ||
-                medico.getEspecialidade().toLowerCase().contains(searchText))
-            .collect(Collectors.toList());
-        renderMedicos(filteredMedicos);
-    }
+// 
+//    private void updateSearch() {
+//        //Isso não é nenhum pouco eficiente!
+//        String searchText = jTextField1.getText().toLowerCase();
+//        this.allMedicos = gerenciadorAdm.getAllMedicos();
+//        List<Medico> filteredMedicos = allMedicos.stream()
+//            .filter(medico -> 
+//                medico.getNome().toLowerCase().contains(searchText) ||
+//                Integer.toString(medico.getCrm()).contains(searchText) ||
+//                medico.getEspecialidade().toLowerCase().contains(searchText))
+//            .collect(Collectors.toList());
+//        renderMedicos(filteredMedicos);
+//    }
+//    
     
-    /*
-    Assim não funciona corretamente, o textFild fica bugado
-    O sentidod da escrita é invertido
+//    Assim não funciona corretamente, o textFild fica bugado
+//    O sentidod da escrita é invertido
     private void updateSearch() {
         String searchText = jTextField1.getText().trim();
         List<Medico> filteredMedicos;
@@ -329,7 +333,7 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
         }
         renderMedicos(filteredMedicos);
     }
-    */
+    
     
     private void setupSearchField(){
         jTextField1.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {

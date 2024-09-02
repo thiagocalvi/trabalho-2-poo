@@ -47,7 +47,7 @@ public class LoginMedico extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Login_poo.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/InterfacesGraficas/Login_poo.png"))); // NOI18N
         jLabel1.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 jLabel1ComponentResized(evt);
