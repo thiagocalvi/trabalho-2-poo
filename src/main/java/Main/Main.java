@@ -9,7 +9,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import Gerenciador.GerenciadorAdm;
-
 import InterfacesGraficas.*;
 
 import java.util.List;
@@ -21,33 +20,17 @@ import java.time.LocalDate;
  * @author thiago
  */
 public class Main {       
-    public static void main(String[] args){
-        // Criar todas as instâncias das telas aqui
-        TelaInicial telaInicial = new TelaInicial();
-        
-        MenuPrincipalAdm menuPrincipalAdm = new MenuPrincipalAdm();
-
+    public static void main(String[] args){      
         // Criar a EntityManagerFactory e o EntityManager
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("segundo-trabalho-poo");
         EntityManager em = emf.createEntityManager();
 
+        // Criar todas as instâncias das telas aqui
         GerenciadorAdm gerenciadorAdm = new GerenciadorAdm(em);
-
-        // Configurar as telas
-        MenuMedicosAdm menuMedicosAdm = new MenuMedicosAdm(gerenciadorAdm);
-        MenuSecretariasAdm menuSecretariasAdm = new MenuSecretariasAdm(gerenciadorAdm);
-
-        menuMedicosAdm.setMenuPrincipalAdm(menuPrincipalAdm);
-        menuSecretariasAdm.setMenuPrincipalAdm(menuPrincipalAdm);
-        menuPrincipalAdm.setMenuMedicosAdm(menuMedicosAdm);
-        menuPrincipalAdm.setMenuSecretariasAdm(menuSecretariasAdm);
-        
-        telaInicial.setMenuPrincipalAdm(menuPrincipalAdm);
-        menuPrincipalAdm.setTelaInicial(telaInicial);
+        TelaInicial telaInicial = new TelaInicial(gerenciadorAdm);
         
         // Mostrar a interface gráfica
         telaInicial.setVisible(true);
-        //menuPrincipalAdm.setVisible(false);
         
 
         // Adicionar um listener para garantir que o EntityManager e EntityManagerFactory sejam fechados ao encerrar a aplicação

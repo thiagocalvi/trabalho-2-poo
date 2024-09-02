@@ -66,7 +66,6 @@ public class AtualizarMedico extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
-        setUndecorated(true);
         setResizable(false);
 
         jLabel4.setBackground(new java.awt.Color(255, 204, 102));

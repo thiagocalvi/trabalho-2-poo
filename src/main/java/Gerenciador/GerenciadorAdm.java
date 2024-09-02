@@ -47,11 +47,10 @@ public class GerenciadorAdm {
         }
     }
 
-    public String atualizarSecretaria(int secretariaId, String nome, LocalDate dataNascimento, String telefone, String email, String genero) {
+    public String atualizarSecretaria(Secretaria secretaria, String nome, LocalDate dataNascimento, String telefone, String email, String genero) {
         EntityTransaction transaction = em.getTransaction();
         try {
             transaction.begin();
-            Secretaria secretaria = em.find(Secretaria.class, secretariaId);
             if (secretaria != null) {
                 secretaria.setNome(nome);
                 secretaria.setDataNascimento(dataNascimento);
