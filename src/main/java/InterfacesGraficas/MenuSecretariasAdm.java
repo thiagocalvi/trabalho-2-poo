@@ -17,30 +17,17 @@ import java.util.stream.Collectors;
  * @author thiago
  */
 public class MenuSecretariasAdm extends javax.swing.JFrame {
-    
-    private MenuPrincipalAdm menuPrincipalAdm;
+    // Atríbutos
     private GerenciadorAdm gerenciadorAdm;
     private List<Secretaria> allSecretarias;
     
+    // Construtor
     public MenuSecretariasAdm(GerenciadorAdm gerenciadorAdm) {
         initComponents();
         this.gerenciadorAdm = gerenciadorAdm; 
         this.renderSecretarias(gerenciadorAdm.getAllSecretarias());
         setupSearchField();
-    }
-    
-    
-    
-    public void setMenuPrincipalAdm(MenuPrincipalAdm menuPrincipalAdm){
-        this.menuPrincipalAdm = menuPrincipalAdm;
-    }
-    
-    public void setGerenciadorAdm(GerenciadorAdm gerenciadorAdm){
-        this.gerenciadorAdm = gerenciadorAdm;
-    }
-    
-    
-    
+    } 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,7 +41,7 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         label1 = new java.awt.Label();
-        jButton1 = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
         button1 = new java.awt.Button();
         jTextField1 = new javax.swing.JTextField();
         label2 = new java.awt.Label();
@@ -69,8 +56,8 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
         label1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         label1.setText("Secretarias");
 
-        jButton1.setText("Voltar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 back_menuPrincipalAdm(evt);
             }
@@ -117,7 +104,7 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
                         .addGap(90, 90, 90))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jButton1)
+                            .addComponent(btnVoltar)
                             .addContainerGap())
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -137,7 +124,7 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(btnVoltar)
                 .addContainerGap())
         );
 
@@ -238,8 +225,11 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
                 //Leva para pagina de atualização
                 //o objeto medico que vai ser atualuzado é passado como parametro
                 updateButton.addActionListener(e -> {
-                    AtualizarSecretaria atualizarSecretaria = new AtualizarSecretaria(gerenciadorAdm, secretaria);
-                    atualizarSecretaria.setVisible(true);
+                    CadastrarSecretaria cadastrarSecretaria = new CadastrarSecretaria(gerenciadorAdm);
+                    cadastrarSecretaria.setSecretaria(secretaria);
+                    cadastrarSecretaria.setBtnText("Atualizar");
+                    cadastrarSecretaria.setVisible(true);
+                    this.dispose();
                 });
                 
                 deleteButton.addActionListener(e -> {
@@ -286,14 +276,16 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
      
     
     private void back_menuPrincipalAdm(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_menuPrincipalAdm
-
-        this.setVisible(false);
-        this.menuPrincipalAdm.setVisible(true);        
+        MenuPrincipalAdm menuPrincipalAdm = new MenuPrincipalAdm();
+        menuPrincipalAdm.setGerenciadorAdm(gerenciadorAdm);
+        menuPrincipalAdm.setVisible(true);        
+        this.dispose();
     }//GEN-LAST:event_back_menuPrincipalAdm
 
     private void goCadastrarSecretaria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goCadastrarSecretaria
         CadastrarSecretaria cadastrarSecretaria = new CadastrarSecretaria(gerenciadorAdm);
         cadastrarSecretaria.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_goCadastrarSecretaria
     
  
@@ -343,8 +335,8 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel box_secretarias;
+    private javax.swing.JButton btnVoltar;
     private java.awt.Button button1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;

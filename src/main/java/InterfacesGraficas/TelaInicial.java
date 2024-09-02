@@ -4,23 +4,19 @@
  */
 package InterfacesGraficas;
 
+import Gerenciador.GerenciadorAdm;
+
 /**
  *
  * @author jeanm
  */
 public class TelaInicial extends javax.swing.JFrame {
     // Atributos
-    private MenuPrincipalAdm menuPrincipalAdm;
-    private MenuMedicosAdm menuMedicosAdm;
-    private MenuSecretariasAdm menuSecretariasAdm;
+    private GerenciadorAdm gerenciadorAdm;
 
-    public TelaInicial() {
+    public TelaInicial(GerenciadorAdm gerenciadorAdm) {
+        this.gerenciadorAdm = gerenciadorAdm;
         initComponents();
-    }
-
-    // Métodos
-    public void setMenuPrincipalAdm(MenuPrincipalAdm menuPrincipalAdm){
-        this.menuPrincipalAdm = menuPrincipalAdm;
     }
 
     @SuppressWarnings("unchecked")
@@ -93,8 +89,10 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMed_Action
 
     private void btnAdm_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdm_Action
-        this.setVisible(false);
+        MenuPrincipalAdm menuPrincipalAdm = new MenuPrincipalAdm();
+        menuPrincipalAdm.setGerenciadorAdm(gerenciadorAdm);
         menuPrincipalAdm.setVisible(true);
+        this.dispose();
 
 
     }//GEN-LAST:event_btnAdm_Action
