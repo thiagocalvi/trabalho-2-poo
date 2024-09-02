@@ -152,6 +152,7 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void showInformationMedico(Medico medico) {

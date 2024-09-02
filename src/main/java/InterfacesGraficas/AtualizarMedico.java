@@ -9,6 +9,7 @@ import Modelo.Secretaria;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javax.swing.JOptionPane;
 /**
  *
  * @author matheus
@@ -66,7 +67,6 @@ public class AtualizarMedico extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
         jLabel4.setBackground(new java.awt.Color(255, 204, 102));
@@ -268,6 +268,7 @@ public class AtualizarMedico extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void fecharJanela(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fecharJanela
@@ -298,28 +299,44 @@ public class AtualizarMedico extends javax.swing.JFrame {
         nomeSecretaria = (String) jComboBox1.getSelectedItem();
         
         
-        if ("Selecione uma secretaria".equals(nomeSecretaria)) {
-            // Nenhuma secretaria foi selecionada
-            System.out.println("Nenhuma secretaria selecionada");
-        } else {
+        if (!("Selecione uma secretaria".equals(nomeSecretaria))){
             // Busca a secretaria correspondente
             for (Secretaria secretaria : this.allSecretarias) {
                 if (secretaria.getNome().equals(nomeSecretaria)) {
                     secretariaObj = secretaria;
                     break;  // Encontre a secretaria e saia do loop
+
                 }
             }
         }
         
-        // Verifica se secretariaObj foi inicializada corretamente
-        if (secretariaObj == null) {
-            System.out.println("Secretaria não encontrada ou não selecionada.");
-        } else {
-           this.gerenciadorAdm.atualizarMedico(this.medico, secretariaObj, nome, LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy")), telefone, email, especialidade, Integer.parseInt(crm), genero);
-           this.dispose();
+        if(secretariaObj == null){
+            int dialogResultSecNull = JOptionPane.showConfirmDialog(this, 
+                        "Tem certeza que deseja deixar o médico sem secretaria?", 
+                        "Confirmar Ação", 
+                        JOptionPane.YES_NO_OPTION);
+            if(dialogResultSecNull == JOptionPane.YES_OPTION){
+                int dialogResult = JOptionPane.showConfirmDialog(this, 
+                    "Tem certeza que deseja atualizar o médico " + this.medico.getNome() + "?", 
+                    "Confirmar Atualização", 
+                JOptionPane.YES_NO_OPTION);
+                
+                if (dialogResult == JOptionPane.YES_OPTION){
+                    this.gerenciadorAdm.atualizarMedico(this.medico, secretariaObj, nome, LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy")), telefone, email, especialidade, Integer.parseInt(crm), genero);
+                    this.dispose();
+                }
+            }
+            
+        }else{
+            int dialogResult = JOptionPane.showConfirmDialog(this, 
+                    "Tem certeza que deseja atualizar o médico " + this.medico.getNome() + "?", 
+                    "Confirmar Atualização", 
+                JOptionPane.YES_NO_OPTION);
+            if (dialogResult == JOptionPane.YES_OPTION){
+                this.gerenciadorAdm.atualizarMedico(this.medico, secretariaObj, nome, LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy")), telefone, email, especialidade, Integer.parseInt(crm), genero);
+                this.dispose();
+            }
         }
-        
-        
     }//GEN-LAST:event_atualizarMedico
 
     private void setValues(){
