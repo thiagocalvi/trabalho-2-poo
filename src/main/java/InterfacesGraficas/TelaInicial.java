@@ -5,6 +5,7 @@
 package InterfacesGraficas;
 
 import Gerenciador.GerenciadorAdm;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -13,7 +14,9 @@ import Gerenciador.GerenciadorAdm;
 public class TelaInicial extends javax.swing.JFrame {
     // Atributos
     private GerenciadorAdm gerenciadorAdm;
+    private EntityManager em;
 
+    // Construtor
     public TelaInicial(GerenciadorAdm gerenciadorAdm) {
         this.gerenciadorAdm = gerenciadorAdm;
         initComponents();
@@ -83,9 +86,18 @@ public class TelaInicial extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Método set
+    public void setEm(EntityManager em){
+        this.em = em ;
+    }
+    
+    
     // Ações
     private void btnMed_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMed_Action
-        // TODO add your handling code here:
+        LoginMedico loginMedico = new LoginMedico(gerenciadorAdm);
+        loginMedico.setEm(em);
+        loginMedico.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnMed_Action
 
     private void btnAdm_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdm_Action
@@ -98,7 +110,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdm_Action
 
     private void btnSec_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSec_Action
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnSec_Action
 
 

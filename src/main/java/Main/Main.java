@@ -25,9 +25,13 @@ public class Main {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("segundo-trabalho-poo");
         EntityManager em = emf.createEntityManager();
 
-        // Criar todas as instâncias das telas aqui
+        // Criar as instâncias de Secretaria, Medico e GerenciadorAdm
         GerenciadorAdm gerenciadorAdm = new GerenciadorAdm(em);
+
+        // Cria a instância da tela inicial
         TelaInicial telaInicial = new TelaInicial(gerenciadorAdm);
+        telaInicial.setEm(em);
+        
         
         // Mostrar a interface gráfica
         telaInicial.setVisible(true);
