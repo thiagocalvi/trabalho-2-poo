@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  *
  * @author matheus
  */
-public class CadastrarSecretaria extends javax.swing.JFrame {
+public class CadAutSecretaria extends javax.swing.JFrame {
     // Atríbutos
     private GerenciadorAdm gerenciadorAdm;
     private String Cad_Atu = "Cadastrar";
@@ -23,7 +23,7 @@ public class CadastrarSecretaria extends javax.swing.JFrame {
      */
     
     // Construtor
-    public CadastrarSecretaria(GerenciadorAdm gerenciadorAdm) {
+    public CadAutSecretaria(GerenciadorAdm gerenciadorAdm) {
         this.gerenciadorAdm = gerenciadorAdm;
         initComponents();
     }

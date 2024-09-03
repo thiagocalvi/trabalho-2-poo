@@ -227,7 +227,7 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
                 //Leva para pagina de atualização
                 //o objeto medico que vai ser atualuzado é passado como parametro
                 updateButton.addActionListener(e -> {
-                    CadastrarMedico cadastrarMedico = new CadastrarMedico(this.gerenciadorAdm);
+                    CadAutMedico cadastrarMedico = new CadAutMedico(this.gerenciadorAdm);
                     cadastrarMedico.setMedico(medico);
                     cadastrarMedico.setBtnText("Atualizar");
                     cadastrarMedico.setVisible(true);
@@ -287,7 +287,7 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
 
     private void goCadastrarMedico(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goCadastrarMedico
         // TODO add your handling code here:
-        CadastrarMedico cadastrarMedico = new CadastrarMedico(this.gerenciadorAdm);
+        CadAutMedico cadastrarMedico = new CadAutMedico(this.gerenciadorAdm);
         cadastrarMedico.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_goCadastrarMedico

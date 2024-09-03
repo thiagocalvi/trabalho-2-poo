@@ -39,7 +39,6 @@ public class LoginMedico extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnEntrar = new javax.swing.JButton();
         CBoxFunci = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
         label1 = new java.awt.Label();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -58,8 +57,6 @@ public class LoginMedico extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/InterfacesGraficas/Login_poo.png"))); // NOI18N
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -74,17 +71,11 @@ public class LoginMedico extends javax.swing.JFrame {
                         .addComponent(btnEntrar)
                         .addGap(0, 109, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(108, 108, 108))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(75, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(50, 50, 50)
+                .addContainerGap(200, Short.MAX_VALUE)
                 .addComponent(CBoxFunci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnEntrar)
@@ -123,32 +114,45 @@ public class LoginMedico extends javax.swing.JFrame {
 
     // Métodos
     private void setListMedicos(List<Medico> listMedico){
+        CBoxFunci.addItem("Selecione um médico");
+        CBoxFunci.setSelectedItem("Selecione um médico");
+        
         for (Medico medico : listMedico){
             CBoxFunci.addItem(medico.getNome());
         }
     }
     
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        em.getTransaction().begin();
         
-        this.medico = em.createQuery("SELECT m FROM Medico m WHERE m.nome = :nome", Medico.class)
-                .setParameter("nome", CBoxFunci.getSelectedItem().toString()).getSingleResult();
+        String texto = CBoxFunci.getSelectedItem().toString();
+        
+        if(texto.equals("Selecione um médico")){
+            JOptionPane.showMessageDialog(null, "Selecione o médico que vai fazer login", "Erro: entrada invalida", JOptionPane.ERROR_MESSAGE);
 
-        em.getTransaction().commit();
+        }
+        else{
+            em.getTransaction().begin();
         
-        JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!", "Informações", JOptionPane.INFORMATION_MESSAGE);
-        this.medico.setEm(em);
-        ConsultasRelatorios consultaRelatorio = new ConsultasRelatorios(medico);
-        consultaRelatorio.setGerenciadorAdm(gerenciadorAdm);
-        consultaRelatorio.setVisible(true);
-        this.dispose();
+            this.medico = em.createQuery("SELECT m FROM Medico m WHERE m.nome = :nome", Medico.class)
+                    .setParameter("nome", texto).getSingleResult();
+
+            em.getTransaction().commit();
+
+            JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!", "Informações", JOptionPane.INFORMATION_MESSAGE);
+            this.medico.setEm(em);
+            ConsultasRelatorios consultaRelatorio = new ConsultasRelatorios(medico);
+            consultaRelatorio.setGerenciadorAdm(gerenciadorAdm);
+            consultaRelatorio.setVisible(true);
+            this.dispose();
+        }
+        
+        
         
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> CBoxFunci;
     private javax.swing.JButton btnEntrar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private java.awt.Label label1;
     // End of variables declaration//GEN-END:variables

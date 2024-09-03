@@ -225,7 +225,7 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
                 //Leva para pagina de atualização
                 //o objeto medico que vai ser atualuzado é passado como parametro
                 updateButton.addActionListener(e -> {
-                    CadastrarSecretaria cadastrarSecretaria = new CadastrarSecretaria(gerenciadorAdm);
+                    CadAutSecretaria cadastrarSecretaria = new CadAutSecretaria(gerenciadorAdm);
                     cadastrarSecretaria.setSecretaria(secretaria);
                     cadastrarSecretaria.setBtnText("Atualizar");
                     cadastrarSecretaria.setVisible(true);
@@ -283,7 +283,7 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
     }//GEN-LAST:event_back_menuPrincipalAdm
 
     private void goCadastrarSecretaria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goCadastrarSecretaria
-        CadastrarSecretaria cadastrarSecretaria = new CadastrarSecretaria(gerenciadorAdm);
+        CadAutSecretaria cadastrarSecretaria = new CadAutSecretaria(gerenciadorAdm);
         cadastrarSecretaria.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_goCadastrarSecretaria
