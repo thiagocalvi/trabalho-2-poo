@@ -191,19 +191,17 @@ public class GerenciadorAdm {
         }
     }
     
-    
-    public List<Medico> buscarMedicos(String texto) {
-        // Prepara o texto para a busca, adicionando '%' para correspondência parcial
-        String searchText = "%" + texto + "%";
-        
-        // Cria a consulta HQL com correspondência parcial
-        String hql = "SELECT m FROM Medico m WHERE m.nome LIKE :texto OR m.crm LIKE :texto OR m.especialidade LIKE :texto";
-        TypedQuery<Medico> query = em.createQuery(hql, Medico.class);
-        query.setParameter("texto", searchText);
+    /*
+    Não funciona
+    public List<Medico> buscarMedicos(String texto) {  
         
         // Executa a consulta e retorna a lista de médicos encontrados
+        Query query = this.em.createQuery("SELECT m FROM Medico m WHERE m.nome LIKE :nome OR m.especialidade LIKE :texto", Medico.class);
+        query.setParameter("texto", "%"+texto+"%");
+        
         return query.getResultList();
     }
+*/
     
     
     
