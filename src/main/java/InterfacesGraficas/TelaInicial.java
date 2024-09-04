@@ -110,7 +110,10 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdm_Action
 
     private void btnSec_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSec_Action
-
+        LoginSecretaria loginSecretaria = new LoginSecretaria(this.gerenciadorAdm, this.em);
+        //loginMedico.setEm(this.em);
+        loginSecretaria.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnSec_Action
 
 

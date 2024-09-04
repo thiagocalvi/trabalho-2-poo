@@ -6,7 +6,7 @@ package InterfacesGraficas;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import Gerenciador.GerenciadorAdm;
-import Modelo.Medico;
+import Modelo.Secretaria;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
@@ -15,18 +15,18 @@ import javax.swing.JOptionPane;
  *
  * @author MatheusConsoni
  */
-public class LoginMedico extends javax.swing.JFrame {
+public class LoginSecretaria extends javax.swing.JFrame {
     // Atríbutos
     private GerenciadorAdm gerenciadorAdm;
-    private Medico medico;
+    private Secretaria secretaria;
     private EntityManager em;
     
     // Construtor
-    public LoginMedico(GerenciadorAdm gerenciadorAdm, EntityManager em) {
+    public LoginSecretaria(GerenciadorAdm gerenciadorAdm, EntityManager em) {
         this.gerenciadorAdm = gerenciadorAdm;
         this.em = em;
         initComponents();
-        setListMedicos(this.gerenciadorAdm.getAllMedicos());
+        setListSecretarias(this.gerenciadorAdm.getAllSecretarias());
     }
 
     public void setEm(EntityManager em){
@@ -45,7 +45,6 @@ public class LoginMedico extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login Médico");
-        setMaximumSize(new java.awt.Dimension(480, 500));
         setMinimumSize(new java.awt.Dimension(480, 500));
         setResizable(false);
 
@@ -127,12 +126,12 @@ public class LoginMedico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // Métodos
-    private void setListMedicos(List<Medico> listMedico){
-        CBoxFunci.addItem("Selecione um médico");
-        CBoxFunci.setSelectedItem("Selecione um médico");
+    private void setListSecretarias(List<Secretaria> listSecretaria){
+        CBoxFunci.addItem("Selecione uma secretaria");
+        CBoxFunci.setSelectedItem("Selecione uma sercretaria");
         
-        for (Medico medico : listMedico){
-            CBoxFunci.addItem(medico.getNome());
+        for (Secretaria secretaria : listSecretaria){
+            CBoxFunci.addItem(secretaria.getNome());
         }
     }
     
@@ -140,23 +139,24 @@ public class LoginMedico extends javax.swing.JFrame {
         
         String texto = CBoxFunci.getSelectedItem().toString();
         
-        if(texto.equals("Selecione um médico")){
-            JOptionPane.showMessageDialog(null, "Selecione o médico que vai fazer login", "Erro: entrada invalida", JOptionPane.ERROR_MESSAGE);
+        if(texto.equals("Selecione uma secretaria")){
+            JOptionPane.showMessageDialog(null, "Selecione a secretaria que vai fazer login", "Erro: entrada invalida", JOptionPane.ERROR_MESSAGE);
 
         }
         else{
             this.em.getTransaction().begin();
         
-            this.medico = this.em.createQuery("SELECT m FROM Medico m WHERE m.nome = :nome", Medico.class)
+            this.secretaria = this.em.createQuery("SELECT s FROM Secretaria s WHERE s.nome = :nome", Secretaria.class)
                     .setParameter("nome", texto).getSingleResult();
 
             this.em.getTransaction().commit();
 
             JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!", "Informações", JOptionPane.INFORMATION_MESSAGE);
-            this.medico.setEm(em);
-            ConsultasRelatorios consultaRelatorio = new ConsultasRelatorios(medico, em);
-            consultaRelatorio.setGerenciadorAdm(gerenciadorAdm);
-            consultaRelatorio.setVisible(true);
+            this.secretaria.setEm(em);
+            MenuPrincipalSecretaria menuPrincipalSecretaria = new MenuPrincipalSecretaria(this.secretaria, em);
+            menuPrincipalSecretaria.setGerenciadorAdm(this.gerenciadorAdm);
+            //consultaRelatorio.setGerenciadorAdm(gerenciadorAdm);
+            menuPrincipalSecretaria.setVisible(true);
             this.dispose();
         }
         
