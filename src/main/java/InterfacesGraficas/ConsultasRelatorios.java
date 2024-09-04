@@ -6,6 +6,7 @@ package InterfacesGraficas;
 
 import Gerenciador.GerenciadorAdm;
 import Modelo.Medico;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -15,10 +16,12 @@ public class ConsultasRelatorios extends javax.swing.JFrame {
     // Atríbutos
     private Medico medico;
     private GerenciadorAdm gerenciadorAdm;
+    private EntityManager em;
     
     // Construtor
-    public ConsultasRelatorios(Medico medico) {
+    public ConsultasRelatorios(Medico medico, EntityManager em) {
         this.medico = medico;
+        this.em = em;
         initComponents();
         lblNome.setText(medico.getNome());
     }
@@ -146,7 +149,7 @@ public class ConsultasRelatorios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-        LoginMedico loginMedico = new LoginMedico(gerenciadorAdm);
+        LoginMedico loginMedico = new LoginMedico(gerenciadorAdm, em);
         loginMedico.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed

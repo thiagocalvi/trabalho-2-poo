@@ -22,10 +22,11 @@ public class LoginMedico extends javax.swing.JFrame {
     private EntityManager em;
     
     // Construtor
-    public LoginMedico(GerenciadorAdm gerenciadorAdm) {
+    public LoginMedico(GerenciadorAdm gerenciadorAdm, EntityManager em) {
         this.gerenciadorAdm = gerenciadorAdm;
+        this.em = em;
         initComponents();
-        setListMedicos(gerenciadorAdm.getAllMedicos());
+        setListMedicos(this.gerenciadorAdm.getAllMedicos());
     }
 
     public void setEm(EntityManager em){
@@ -140,7 +141,7 @@ public class LoginMedico extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!", "Informações", JOptionPane.INFORMATION_MESSAGE);
             this.medico.setEm(em);
-            ConsultasRelatorios consultaRelatorio = new ConsultasRelatorios(medico);
+            ConsultasRelatorios consultaRelatorio = new ConsultasRelatorios(medico, em);
             consultaRelatorio.setGerenciadorAdm(gerenciadorAdm);
             consultaRelatorio.setVisible(true);
             this.dispose();

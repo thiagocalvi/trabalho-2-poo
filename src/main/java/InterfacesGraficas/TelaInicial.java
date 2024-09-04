@@ -94,8 +94,8 @@ public class TelaInicial extends javax.swing.JFrame {
     
     // Ações
     private void btnMed_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMed_Action
-        LoginMedico loginMedico = new LoginMedico(gerenciadorAdm);
-        loginMedico.setEm(this.em);
+        LoginMedico loginMedico = new LoginMedico(this.gerenciadorAdm, this.em);
+        //loginMedico.setEm(this.em);
         loginMedico.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnMed_Action
