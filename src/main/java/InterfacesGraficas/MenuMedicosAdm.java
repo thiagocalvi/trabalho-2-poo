@@ -12,6 +12,7 @@ import java.util.List;
 import Modelo.Medico;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
+import javax.persistence.EntityManager;
 /**
  *
  * @author thiago
@@ -19,12 +20,14 @@ import java.util.stream.Collectors;
 public class MenuMedicosAdm extends javax.swing.JFrame {
     // Atríbutos
     private GerenciadorAdm gerenciadorAdm;
+    private EntityManager em;
     private List<Medico> allMedicos;
     
     // Construtor
-    public MenuMedicosAdm(GerenciadorAdm gerenciadorAdm) {
+    public MenuMedicosAdm(GerenciadorAdm gerenciadorAdm, EntityManager em) {
         initComponents();
         this.gerenciadorAdm = gerenciadorAdm; 
+        this.em = em;
         this.renderMedicos(gerenciadorAdm.getAllMedicos());
         setupSearchField();
     }
@@ -225,7 +228,7 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
                 //Leva para pagina de atualização
                 //o objeto medico que vai ser atualuzado é passado como parametro
                 updateButton.addActionListener(e -> {
-                    CadAutMedico cadastrarMedico = new CadAutMedico(this.gerenciadorAdm);
+                    CadAutMedico cadastrarMedico = new CadAutMedico(gerenciadorAdm, em);
                     cadastrarMedico.setMedico(medico);
                     cadastrarMedico.setBtnText("Atualizar");
                     cadastrarMedico.setVisible(true);
@@ -277,15 +280,14 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
      
     
     private void back_menuPrincipalAdm(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_menuPrincipalAdm
-        MenuPrincipalAdm menuPrincipalAdm = new MenuPrincipalAdm();
-        menuPrincipalAdm.setGerenciadorAdm(gerenciadorAdm);
+        MenuPrincipalAdm menuPrincipalAdm = new MenuPrincipalAdm(gerenciadorAdm, em);
         menuPrincipalAdm.setVisible(true); 
         this.dispose();
     }//GEN-LAST:event_back_menuPrincipalAdm
 
     private void goCadastrarMedico(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goCadastrarMedico
         // TODO add your handling code here:
-        CadAutMedico cadastrarMedico = new CadAutMedico(this.gerenciadorAdm);
+        CadAutMedico cadastrarMedico = new CadAutMedico(gerenciadorAdm, em);
         cadastrarMedico.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_goCadastrarMedico

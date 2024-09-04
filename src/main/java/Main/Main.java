@@ -25,8 +25,7 @@ public class Main {
         GerenciadorAdm gerenciadorAdm = new GerenciadorAdm(em);
 
         // Cria a instância da tela inicial
-        TelaInicial telaInicial = new TelaInicial(gerenciadorAdm);
-        telaInicial.setEm(em);
+        TelaInicial telaInicial = new TelaInicial(gerenciadorAdm, em);
         
         
         // Mostrar a interface gráfica

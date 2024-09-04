@@ -9,21 +9,24 @@ import Modelo.Secretaria;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 /**
  *
  * @author matheus
  */
 public class CadAutMedico extends javax.swing.JFrame {
-    private GerenciadorAdm gerenciadorAdm; 
+    private GerenciadorAdm gerenciadorAdm;
+    private EntityManager em;
     private String Cad_Atu = "Cadastrar";
     private Medico medico;
     List<Secretaria> allSecretarias;
     
   
     // Construtor
-    public CadAutMedico(GerenciadorAdm gerenciadorAdm) {
+    public CadAutMedico(GerenciadorAdm gerenciadorAdm, EntityManager em) {
         this.gerenciadorAdm = gerenciadorAdm;
+        this.em = em;
         this.allSecretarias = this.gerenciadorAdm.getAllSecretarias();
         initComponents();
         setSecretarias();
@@ -283,7 +286,7 @@ public class CadAutMedico extends javax.swing.JFrame {
 
     // Ações
     private void voltarJanela(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarJanela
-        MenuMedicosAdm menuMedicoAdm = new MenuMedicosAdm(this.gerenciadorAdm);
+        MenuMedicosAdm menuMedicoAdm = new MenuMedicosAdm(gerenciadorAdm, em);
         menuMedicoAdm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_voltarJanela
@@ -322,7 +325,7 @@ public class CadAutMedico extends javax.swing.JFrame {
             }
         }
         
-        MenuMedicosAdm menuMedicoAdm = new MenuMedicosAdm(this.gerenciadorAdm);
+        MenuMedicosAdm menuMedicoAdm = new MenuMedicosAdm(gerenciadorAdm, em);
         if (this.Cad_Atu.equals("Atualizar")){
             if(secretariaObj == null){
                 int dialogResultSecNull = JOptionPane.showConfirmDialog(this, 

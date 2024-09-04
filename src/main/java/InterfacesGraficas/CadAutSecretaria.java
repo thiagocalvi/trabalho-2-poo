@@ -7,6 +7,7 @@ import Gerenciador.GerenciadorAdm;
 import Modelo.Secretaria;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 /**
  *
@@ -15,6 +16,7 @@ import javax.swing.JOptionPane;
 public class CadAutSecretaria extends javax.swing.JFrame {
     // Atríbutos
     private GerenciadorAdm gerenciadorAdm;
+    private EntityManager em;
     private String Cad_Atu = "Cadastrar";
     private Secretaria secretaria;
     
@@ -23,8 +25,9 @@ public class CadAutSecretaria extends javax.swing.JFrame {
      */
     
     // Construtor
-    public CadAutSecretaria(GerenciadorAdm gerenciadorAdm) {
+    public CadAutSecretaria(GerenciadorAdm gerenciadorAdm, EntityManager em) {
         this.gerenciadorAdm = gerenciadorAdm;
+        this.em = em;
         initComponents();
     }
 
@@ -237,7 +240,7 @@ public class CadAutSecretaria extends javax.swing.JFrame {
     
     // Ações
     private void voltarJanela(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarJanela
-        MenuSecretariasAdm menuSecretariaAdm = new MenuSecretariasAdm(this.gerenciadorAdm);
+        MenuSecretariasAdm menuSecretariaAdm = new MenuSecretariasAdm(gerenciadorAdm, em);
         menuSecretariaAdm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_voltarJanela
@@ -259,7 +262,7 @@ public class CadAutSecretaria extends javax.swing.JFrame {
             genero = "Feminino";
         }
         
-        MenuSecretariasAdm menuSecretariaAdm = new MenuSecretariasAdm(this.gerenciadorAdm);
+        MenuSecretariasAdm menuSecretariaAdm = new MenuSecretariasAdm(gerenciadorAdm, em);
         if (this.Cad_Atu.equals("Cadastrar")){
             int dialogResult = JOptionPane.showConfirmDialog(this, 
                     "Tem certeza que deseja cadastrar secretaria" + nome + "?", 

@@ -5,6 +5,7 @@
 package InterfacesGraficas;
 
 import Gerenciador.GerenciadorAdm;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -13,18 +14,15 @@ import Gerenciador.GerenciadorAdm;
 public class MenuPrincipalAdm extends javax.swing.JFrame {
     // Atríbutos
     private GerenciadorAdm gerenciadorAdm;
+    private EntityManager em;
     
     // Construtor
-    public MenuPrincipalAdm() {
+    public MenuPrincipalAdm(GerenciadorAdm gerenciadorAdm, EntityManager em) {
+        this.gerenciadorAdm = gerenciadorAdm;
+        this.em = em;
         initComponents();
     }
-
-    // Método set
-    public void setGerenciadorAdm(GerenciadorAdm gerenciadorAdm){
-        this.gerenciadorAdm = gerenciadorAdm;
-    }
     
- 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -121,14 +119,14 @@ public class MenuPrincipalAdm extends javax.swing.JFrame {
     // Ações
     private void go_medicosAdm(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_medicosAdm
         // TODO add your handling code here:
-        MenuMedicosAdm menuMedicosAdm = new MenuMedicosAdm(gerenciadorAdm);
+        MenuMedicosAdm menuMedicosAdm = new MenuMedicosAdm(gerenciadorAdm, em);
         menuMedicosAdm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_go_medicosAdm
 
     private void go_secretariasAdm(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_secretariasAdm
         // TODO add your handling code here:
-        MenuSecretariasAdm menuSecretariasAdm = new MenuSecretariasAdm(gerenciadorAdm);
+        MenuSecretariasAdm menuSecretariasAdm = new MenuSecretariasAdm(gerenciadorAdm, em);
         menuSecretariasAdm.setVisible(true);
         this.dispose();
         
@@ -136,7 +134,7 @@ public class MenuPrincipalAdm extends javax.swing.JFrame {
 
     private void back_telaInicial(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_telaInicial
         // TODO add your handling code here:
-        TelaInicial telaInicial = new TelaInicial(gerenciadorAdm);
+        TelaInicial telaInicial = new TelaInicial(gerenciadorAdm, em);
         telaInicial.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_back_telaInicial

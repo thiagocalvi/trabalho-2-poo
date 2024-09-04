@@ -17,8 +17,9 @@ public class TelaInicial extends javax.swing.JFrame {
     private EntityManager em;
 
     // Construtor
-    public TelaInicial(GerenciadorAdm gerenciadorAdm) {
+    public TelaInicial(GerenciadorAdm gerenciadorAdm, EntityManager em) {
         this.gerenciadorAdm = gerenciadorAdm;
+        this.em = em;
         initComponents();
     }
 
@@ -85,24 +86,18 @@ public class TelaInicial extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    // Método set
-    public void setEm(EntityManager em){
-        this.em = em ;
-    }
-    
+   
     
     // Ações
     private void btnMed_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMed_Action
-        LoginMedico loginMedico = new LoginMedico(this.gerenciadorAdm, this.em);
-        //loginMedico.setEm(this.em);
+        LoginMedSec loginMedico = new LoginMedSec(this.gerenciadorAdm, this.em);
+        loginMedico.setSecMed("Medico");
         loginMedico.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnMed_Action
 
     private void btnAdm_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdm_Action
-        MenuPrincipalAdm menuPrincipalAdm = new MenuPrincipalAdm();
-        menuPrincipalAdm.setGerenciadorAdm(gerenciadorAdm);
+        MenuPrincipalAdm menuPrincipalAdm = new MenuPrincipalAdm(gerenciadorAdm, em);
         menuPrincipalAdm.setVisible(true);
         this.dispose();
 
@@ -110,8 +105,8 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdm_Action
 
     private void btnSec_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSec_Action
-        LoginSecretaria loginSecretaria = new LoginSecretaria(this.gerenciadorAdm, this.em);
-        //loginMedico.setEm(this.em);
+        LoginMedSec loginSecretaria = new LoginMedSec(this.gerenciadorAdm, this.em);
+        loginSecretaria.setSecMed("Secretaria");
         loginSecretaria.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnSec_Action
