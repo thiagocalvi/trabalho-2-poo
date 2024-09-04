@@ -131,12 +131,12 @@ public class LoginMedico extends javax.swing.JFrame {
 
         }
         else{
-            em.getTransaction().begin();
+            this.em.getTransaction().begin();
         
-            this.medico = em.createQuery("SELECT m FROM Medico m WHERE m.nome = :nome", Medico.class)
+            this.medico = this.em.createQuery("SELECT m FROM Medico m WHERE m.nome = :nome", Medico.class)
                     .setParameter("nome", texto).getSingleResult();
 
-            em.getTransaction().commit();
+            this.em.getTransaction().commit();
 
             JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!", "Informações", JOptionPane.INFORMATION_MESSAGE);
             this.medico.setEm(em);

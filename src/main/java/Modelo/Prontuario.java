@@ -5,7 +5,6 @@
 package Modelo;
 
 
-import java.time.LocalDate;
 
 import javax.persistence.*;
 /**
@@ -20,12 +19,13 @@ public class Prontuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
     
-    @Column(name = "data_consulta")
-    private LocalDate dataConsulta;
+    @OneToOne
+    @JoinColumn(name = "consulta_id")
+    private Consulta consulta;
     
     @Column(name = "sintoma")
     private String sintomas;
@@ -40,11 +40,12 @@ public class Prontuario {
 
     }
 
-    public Prontuario(LocalDate dataConsulta, String sintomas, String diagnostico, String tratamento) {
-        this.dataConsulta = dataConsulta;
+    public Prontuario(Paciente paciente, Consulta consulta, String sintomas, String diagnostico, String tratamento) {
+        this.consulta = consulta;
         this.sintomas = sintomas;
         this.diagnostico = diagnostico;
         this.tratamento = tratamento;
+        this.paciente = paciente;
     }
 
     //Gets e Sets
@@ -64,12 +65,12 @@ public class Prontuario {
         this.paciente = paciente;
     }
     
-    public LocalDate getDataConsulta() {
-        return dataConsulta;
+    public Consulta getConsulta() {
+        return consulta;
     }
 
-    public void setDataConsulta(LocalDate dataConsulta) {
-        this.dataConsulta = dataConsulta;
+    public void setConsulta(Consulta consulta) {
+        this.consulta = consulta;
     }
 
     public String getSintomas() {

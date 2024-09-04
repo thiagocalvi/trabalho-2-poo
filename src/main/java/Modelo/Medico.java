@@ -72,12 +72,42 @@ public class Medico extends Funcionario{
     }
         
     //********************************************************//
-    public void cadastrarProntuario(){
+    public String cadastrarProntuario(Paciente paciente, Consulta consulta, String sintomas, String diagnostico, String tratamento){
         //Cadastra um protuario para o paciente da consulta atual
+        EntityTransaction transaction = em.getTransaction();
+        try{
+            transaction.begin();
+            Prontuario prontuario = new Prontuario(paciente, consulta, sintomas, diagnostico, tratamento);
+            em.persist(prontuario);
+            transaction.commit();
+            return "Prontuario cadastrado";
+        }catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            return "Erro: " + e.getMessage();
+        }
     }
     
-    public void atualizarProntuario(){
+    public String atualizarProntuario(Prontuario prontuario, Paciente paciente, Consulta consulta, String sintomas, String diagnostico, String tratamento){
         //Atualiza um prontuario
+        EntityTransaction transaction = em.getTransaction();
+        try{
+            transaction.begin();
+            prontuario.setPacienteId(paciente);
+            prontuario.setConsulta(consulta);
+            prontuario.setSintomas(sintomas);
+            prontuario.setDiagnostico(diagnostico);
+            prontuario.setTratamento(tratamento);
+            em.merge(prontuario);
+            transaction.commit();
+            return "Prontuario Atualizado";
+        }catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            return "Erro: " + e.getMessage();
+        }
     }
     
     public void removerProntuario() {

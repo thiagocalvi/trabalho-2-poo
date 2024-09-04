@@ -23,7 +23,6 @@ public class Paciente{
     
     @OneToOne
     @JoinColumn(name = "dados_medicos_id")
-    //private int dadosMedicosId = 0; //0 indica que o paciente não tem nenhum dado medico cadastrado
     private DadosMedicos dadosMedicos; 
     
     @Column(name = "nome")
