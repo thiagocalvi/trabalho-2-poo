@@ -6,6 +6,7 @@ package Modelo;
 
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -74,6 +75,7 @@ public class Medico extends Funcionario{
     //********************************************************//
     public String cadastrarProntuario(Paciente paciente, Consulta consulta, String sintomas, String diagnostico, String tratamento){
         //Cadastra um protuario para o paciente da consulta atual
+        //Um prontuario só pode ser cadastrado dento do contexto de uma consulta
         EntityTransaction transaction = em.getTransaction();
         try{
             transaction.begin();
@@ -110,35 +112,116 @@ public class Medico extends Funcionario{
         }
     }
     
-    public void removerProntuario() {
+    public String removerProntuario(int prontuarioId) {
         //Deleta um prontuario
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            Prontuario prontuario = em.find(Prontuario.class, prontuarioId);
+            if (prontuario != null) {
+                em.remove(prontuario);
+                transaction.commit();
+                return "Prontuario removida!";
+            } else {
+                transaction.commit();
+                return "Prontuario não encontrada";
+            }
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            return "Erro: " + e.getMessage();
+        }
+    
     }
     
-    public void cadastrarDados(){
+    public String cadastrarDados(Paciente paciente, boolean fuma, boolean bebe, String colesterol, boolean diabete, boolean doencaCardiaca, List<String> cirurgias, List<String> alergias){
         //Cadastra dados medico de um paciente
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            if(paciente.getDadosMedicos() != null){
+                return "O paciente já possui dados medicos cadastrado!";
+            }
+            
+            transaction.begin();
+            DadosMedicos dadosMedicos = new DadosMedicos(paciente,fuma, bebe,colesterol, diabete, doencaCardiaca, cirurgias, alergias);
+            paciente.setDadosMedicos(dadosMedicos);
+            em.persist(dadosMedicos);
+            transaction.commit();
+            return "Dados medicos cadastrado!";
+            
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            return "Erro: " + e.getMessage();
+        }
     }
     
-    public void  atualizarDados(){
-        //Atualiza os dados medico de um paciente
+    public String  atualizarDados(DadosMedicos dadosMedico, boolean fuma, boolean bebe, String colesterol, boolean diabete, boolean doencaCardiaca, List<String> cirurgias, List<String> alergias){
+        //Atualiza os dados medico de um paciente, paciente do dados medico não pode ser alterado
+        EntityTransaction transaction = em.getTransaction();
+        try{
+            transaction.begin();
+            dadosMedico.setFuma(fuma);
+            dadosMedico.setBebe(bebe);
+            dadosMedico.setColesterol(colesterol);
+            dadosMedico.setDiabete(diabete);
+            dadosMedico.setDoencaCardiaca(doencaCardiaca);
+            dadosMedico.setCirurgias(cirurgias);
+            dadosMedico.setAlergias(alergias);
+            em.merge(dadosMedico);
+            transaction.commit();
+            return "Dados medicos Atualizado";
+        }catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            return "Erro: " + e.getMessage();
+        }
     }
     
-    public void removerDados(){
+    public String removerDados(int dadosMedicoId){
         //Deleta o dados medico de um paciente
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            DadosMedicos dadosMedico = em.find(DadosMedicos.class, dadosMedicoId);
+            if (dadosMedico != null) {
+                em.remove(dadosMedico);
+                transaction.commit();
+                return "Dados medico removida!";
+            } else {
+                transaction.commit();
+                return "Dados medico não encontrada";
+            }
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            return "Erro: " + e.getMessage();
+        }
     }
     
-    public void receitaMedica(){
+    public String receitaMedica(Consulta consulta){
         //Emite um receita medica
+        return "Receita emitida";
     }
     
-    public void atestadoMedico(){
+    public String atestadoMedico(Consulta consulta){
         //Emite um atestado medico
+        return "Atestado emitido";
     }
     
-    public void declaracaoAcompanhamento(){
+    public String declaracaoAcompanhamento(Consulta consulta){
         //Emite uma declaração de aconpanhamento
+        return "Declaração de acompanhamento emitida";
     }
     
     public void relatorioMensal(){
         //Emite um relatoria mensal sobre as consultas atendidas no mês
+        //Buscar todas as consultas associadas ao medico
+        //Filtrar por consulta finalizada
+        //E pela data da consulta
     }
 }

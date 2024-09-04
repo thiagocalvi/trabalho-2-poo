@@ -20,6 +20,10 @@ public class DadosMedicos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
+    @OneToOne
+    @JoinColumn(name = "paciente_id")
+    private Paciente paciente;
+    
     @Column(name = "fuma")
     private boolean fuma;
     
@@ -48,7 +52,8 @@ public class DadosMedicos {
     
     public DadosMedicos(){}
 
-    public DadosMedicos(boolean fuma, boolean bebe, String colesterol, boolean diabete, boolean doencaCardiaca, List<String> cirurgias, List<String> alergias) {
+    public DadosMedicos(Paciente paciente,boolean fuma, boolean bebe, String colesterol, boolean diabete, boolean doencaCardiaca, List<String> cirurgias, List<String> alergias) {
+        this.paciente = paciente;
         this.fuma = fuma;
         this.bebe = bebe;
         this.colesterol = colesterol;

@@ -46,7 +46,7 @@ public class Consulta {
     @OneToOne
     @JoinColumn(name = "prontuario_id")
     private Prontuario prontuario;
-
+    
     @Column(name = "consulta_finalizada")
     private boolean consultaFinalizada = false;
     
