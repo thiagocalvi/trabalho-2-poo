@@ -93,13 +93,16 @@ public class CadAutMedico extends javax.swing.JFrame {
         dataNascimento_medico = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cadastar Medico");
+        setTitle("Cadastar Médico");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMaximumSize(new java.awt.Dimension(800, 600));
-        setMinimumSize(new java.awt.Dimension(800, 600));
+        setLocation(new java.awt.Point(525, 150));
+        setMaximumSize(new java.awt.Dimension(780, 500));
+        setMinimumSize(new java.awt.Dimension(780, 500));
         setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
+
+        panel1.setPreferredSize(new java.awt.Dimension(780, 500));
 
         jLabel4.setBackground(new java.awt.Color(255, 204, 102));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -134,11 +137,13 @@ public class CadAutMedico extends javax.swing.JFrame {
         jLabel10.setText("Email:");
 
         jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma secretaria", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.setToolTipText("");
 
         BtnCadastrar.setBackground(new java.awt.Color(0, 204, 0));
+        BtnCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         BtnCadastrar.setForeground(new java.awt.Color(255, 255, 255));
         BtnCadastrar.setText("Cadastar");
         BtnCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -158,133 +163,150 @@ public class CadAutMedico extends javax.swing.JFrame {
         jLabel12.setText("Data nascimento (dd/mm/aaaa):");
 
         buttonGroup1.add(genero_m_medico);
+        genero_m_medico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         genero_m_medico.setText("Masculino");
 
         buttonGroup1.add(genero_f_medico);
+        genero_f_medico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         genero_f_medico.setText("Feminino");
+        genero_f_medico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                genero_f_medicoActionPerformed(evt);
+            }
+        });
 
         especialidade_medico.setBackground(new java.awt.Color(204, 204, 204));
+        especialidade_medico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        especialidade_medico.setForeground(new java.awt.Color(0, 0, 0));
 
+        voltar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         voltar.setText("Voltar");
         voltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                voltarJanela(evt);
+                voltar_Action(evt);
             }
         });
 
         nome_medico.setBackground(new java.awt.Color(204, 204, 204));
+        nome_medico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        nome_medico.setForeground(new java.awt.Color(0, 0, 0));
 
         telefone_medico.setBackground(new java.awt.Color(204, 204, 204));
+        telefone_medico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        telefone_medico.setForeground(new java.awt.Color(0, 0, 0));
 
         email_medico.setBackground(new java.awt.Color(204, 204, 204));
+        email_medico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        email_medico.setForeground(new java.awt.Color(0, 0, 0));
 
         crm_medico.setBackground(new java.awt.Color(204, 204, 204));
+        crm_medico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        crm_medico.setForeground(new java.awt.Color(0, 0, 0));
 
         dataNascimento_medico.setBackground(new java.awt.Color(204, 204, 204));
+        dataNascimento_medico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        dataNascimento_medico.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(296, 296, 296))
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addContainerGap(112, Short.MAX_VALUE)
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(email_medico, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+                            .addComponent(telefone_medico)
+                            .addComponent(crm_medico)))
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addGap(0, 9, Short.MAX_VALUE)
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(panel1Layout.createSequentialGroup()
-                                .addComponent(jLabel12)
+                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dataNascimento_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(nome_medico, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+                                    .addComponent(especialidade_medico)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addGap(18, 18, 18)
+                                .addComponent(dataNascimento_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(411, 411, 411))
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(genero_m_medico)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(genero_f_medico)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(crm_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(email_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nome_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(especialidade_medico))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(telefone_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(62, Short.MAX_VALUE))))
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(239, 239, 239)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(360, 360, 360)
-                        .addComponent(BtnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(genero_m_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(genero_f_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(470, 470, 470)))))
+                .addContainerGap(10, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(voltar)
-                .addContainerGap())
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(192, 192, 192))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                        .addComponent(BtnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(324, 324, 324))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(252, 252, 252))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                        .addComponent(voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(nome_medico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(especialidade_medico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(telefone_medico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addComponent(nome_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(email_medico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(especialidade_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(crm_medico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addComponent(telefone_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                                .addComponent(email_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(crm_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dataNascimento_medico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dataNascimento_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(genero_m_medico)
-                    .addComponent(genero_f_medico))
-                .addGap(47, 47, 47)
+                    .addComponent(genero_m_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(genero_f_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(BtnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
-                .addComponent(voltar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -292,11 +314,11 @@ public class CadAutMedico extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -319,29 +341,27 @@ public class CadAutMedico extends javax.swing.JFrame {
      * 
      * @param evt o evento de clique do botão
      */
+    
     private void cadastarMedico(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastarMedico
 
         String nome, especialidade, telefone, email, crm, dataNascimento, genero = null, nomeSecretaria;
         Secretaria secretariaObj = null;
-        
+
         nome = nome_medico.getText();
         especialidade = especialidade_medico.getText();
-        telefone = telefone_medico.getText();  
-        email = email_medico.getText();        
+        telefone = telefone_medico.getText();
+        email = email_medico.getText();
         crm = crm_medico.getText();
         dataNascimento = dataNascimento_medico.getText();
-        
-        
+
         if (genero_m_medico.isSelected()) {
             genero = "Masculino";
         } else if (genero_f_medico.isSelected()) {
             genero = "Feminino";
         }
-        
-        
+
         nomeSecretaria = (String) jComboBox1.getSelectedItem();
-        
-        
+
         if (!("Selecione uma secretaria".equals(nomeSecretaria))) {
             // Busca a secretaria correspondente
             for (Secretaria secretaria : this.allSecretarias) {
@@ -352,19 +372,19 @@ public class CadAutMedico extends javax.swing.JFrame {
                 }
             }
         }
-        
+
         MenuMedicosAdm menuMedicoAdm = new MenuMedicosAdm(gerenciadorAdm, em);
         if (this.Cad_Atu.equals("Atualizar")){
             if(secretariaObj == null){
-                int dialogResultSecNull = JOptionPane.showConfirmDialog(this, 
-                            "Tem certeza que deseja deixar o médico sem secretaria?", 
-                            "Confirmar Ação", 
-                            JOptionPane.YES_NO_OPTION);
-                if(dialogResultSecNull == JOptionPane.YES_OPTION){
-                    int dialogResult = JOptionPane.showConfirmDialog(this, 
-                        "Tem certeza que deseja atualizar o médico " + this.medico.getNome() + "?", 
-                        "Confirmar Atualização", 
+                int dialogResultSecNull = JOptionPane.showConfirmDialog(this,
+                    "Tem certeza que deseja deixar o médico sem secretaria?",
+                    "Confirmar Ação",
                     JOptionPane.YES_NO_OPTION);
+                if(dialogResultSecNull == JOptionPane.YES_OPTION){
+                    int dialogResult = JOptionPane.showConfirmDialog(this,
+                        "Tem certeza que deseja atualizar o médico " + this.medico.getNome() + "?",
+                        "Confirmar Atualização",
+                        JOptionPane.YES_NO_OPTION);
 
                     if (dialogResult == JOptionPane.YES_OPTION){
                         this.gerenciadorAdm.atualizarMedico(this.medico, secretariaObj, nome, LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy")), telefone, email, especialidade, Integer.parseInt(crm), genero);
@@ -374,9 +394,9 @@ public class CadAutMedico extends javax.swing.JFrame {
                 }
 
             }else{
-                int dialogResult = JOptionPane.showConfirmDialog(this, 
-                        "Tem certeza que deseja atualizar o médico " + this.medico.getNome() + "?", 
-                        "Confirmar Atualização", 
+                int dialogResult = JOptionPane.showConfirmDialog(this,
+                    "Tem certeza que deseja atualizar o médico " + this.medico.getNome() + "?",
+                    "Confirmar Atualização",
                     JOptionPane.YES_NO_OPTION);
                 if (dialogResult == JOptionPane.YES_OPTION){
                     this.gerenciadorAdm.atualizarMedico(this.medico, secretariaObj, nome, LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy")), telefone, email, especialidade, Integer.parseInt(crm), genero);
@@ -386,14 +406,14 @@ public class CadAutMedico extends javax.swing.JFrame {
             }
         } else {
             if(secretariaObj == null){
-                int dialogResultSecNull = JOptionPane.showConfirmDialog(this, 
-                            "Tem certeza que deseja deixar o médico sem secretaria?", 
-                            "Confirmar Ação", 
-                            JOptionPane.YES_NO_OPTION);
+                int dialogResultSecNull = JOptionPane.showConfirmDialog(this,
+                    "Tem certeza que deseja deixar o médico sem secretaria?",
+                    "Confirmar Ação",
+                    JOptionPane.YES_NO_OPTION);
                 if(dialogResultSecNull == JOptionPane.YES_OPTION){
-                    int dialogResult = JOptionPane.showConfirmDialog(this, 
-                        "Tem certeza que deseja cadastrar o médico Dr. "+ nome +"?", 
-                        "Confirmar Cadastro", 
+                    int dialogResult = JOptionPane.showConfirmDialog(this,
+                        "Tem certeza que deseja cadastrar o médico Dr. "+ nome +"?",
+                        "Confirmar Cadastro",
                         JOptionPane.YES_NO_OPTION);
 
                     if (dialogResult == JOptionPane.YES_OPTION){
@@ -404,10 +424,10 @@ public class CadAutMedico extends javax.swing.JFrame {
                 }
 
             }else{
-                int dialogResult = JOptionPane.showConfirmDialog(this, 
-                        "Tem certeza que deseja cadastrar o médico Dr. "+ nome +"?", 
-                        "Confirmar Cadastro", 
-                        JOptionPane.YES_NO_OPTION);
+                int dialogResult = JOptionPane.showConfirmDialog(this,
+                    "Tem certeza que deseja cadastrar o médico Dr. "+ nome +"?",
+                    "Confirmar Cadastro",
+                    JOptionPane.YES_NO_OPTION);
                 if (dialogResult == JOptionPane.YES_OPTION){
                     this.gerenciadorAdm.cadastrarMedico(secretariaObj, nome, LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy")), telefone, email, especialidade, Integer.parseInt(crm), genero);
                     menuMedicoAdm.setVisible(true);
@@ -416,7 +436,19 @@ public class CadAutMedico extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_cadastarMedico
-    
+
+    private void voltar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltar_Action
+        MenuMedicosAdm menuMedicoAdm = new MenuMedicosAdm(gerenciadorAdm, em);
+        menuMedicoAdm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_voltar_Action
+
+    private void genero_f_medicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genero_f_medicoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_genero_f_medicoActionPerformed
+
+   
+    // Métodos
     /**
      * Configura a lista de secretarias no JComboBox.
      * Adiciona todas as secretarias ao JComboBox para seleção.
