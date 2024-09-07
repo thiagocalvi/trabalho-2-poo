@@ -183,9 +183,8 @@ public class LoginMedSec extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!", "Informações", JOptionPane.INFORMATION_MESSAGE);
                 this.medico.setEm(em);
-                MenuPrincipalMedico consultaRelatorio = new MenuPrincipalMedico(medico, em);
-                consultaRelatorio.setGerenciadorAdm(gerenciadorAdm);
-                consultaRelatorio.setVisible(true);
+                MenuPrincipalMedico menuPrincipalMedico = new MenuPrincipalMedico(gerenciadorAdm, medico, em);
+                menuPrincipalMedico.setVisible(true);
                 this.dispose();
             }
             else if (this.login_med_sec.equals("Secretaria")){
