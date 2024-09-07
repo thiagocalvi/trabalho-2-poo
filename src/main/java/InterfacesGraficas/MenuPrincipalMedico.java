@@ -19,17 +19,14 @@ public class MenuPrincipalMedico extends javax.swing.JFrame {
     private EntityManager em;
     
     // Construtor
-    public MenuPrincipalMedico(Medico medico, EntityManager em) {
+    public MenuPrincipalMedico(GerenciadorAdm gerenciadorAdm, Medico medico, EntityManager em) {
+        this.gerenciadorAdm = gerenciadorAdm;
         this.medico = medico;
         this.em = em;
         initComponents();
         lblNome.setText("  " + medico.getNome());
     }
 
-    public void setGerenciadorAdm(GerenciadorAdm gerenciadorAdm){
-        this.gerenciadorAdm = gerenciadorAdm;
-    }
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
