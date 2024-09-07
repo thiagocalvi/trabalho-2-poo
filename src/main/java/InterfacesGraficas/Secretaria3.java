@@ -37,19 +37,20 @@ public class Secretaria3 extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("RelatÛrio mensal dos clientes atendidos");
+        jLabel5.setText("Relat√≥rio mensal dos clientes atendidos");
         jLabel5.setOpaque(true);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setLocation(new java.awt.Point(525, 150));
         setUndecorated(true);
 
         jLabel1.setBackground(new java.awt.Color(255, 102, 0));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Secret·ria");
+        jLabel1.setText("Secret√°ria");
         jLabel1.setMaximumSize(new java.awt.Dimension(45, 20));
         jLabel1.setMinimumSize(new java.awt.Dimension(45, 16));
         jLabel1.setOpaque(true);

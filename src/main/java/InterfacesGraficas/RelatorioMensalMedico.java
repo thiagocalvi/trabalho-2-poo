@@ -42,19 +42,20 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Relatório mensal dos clientes atendidos");
+        jLabel5.setText("RelatÃ³rio mensal dos clientes atendidos");
         jLabel5.setOpaque(true);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setLocation(new java.awt.Point(525, 150));
         setUndecorated(true);
 
         jLabel1.setBackground(new java.awt.Color(255, 102, 0));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Médico");
+        jLabel1.setText("MÃ©dico");
         jLabel1.setMaximumSize(new java.awt.Dimension(45, 20));
         jLabel1.setMinimumSize(new java.awt.Dimension(45, 16));
         jLabel1.setOpaque(true);
@@ -63,13 +64,13 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Relatório mensal dos clientes atendidos");
+        jLabel2.setText("RelatÃ³rio mensal dos clientes atendidos");
         jLabel2.setOpaque(true);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Mês: Atual");
+        jLabel4.setText("MÃªs: Atual");
 
         jLabel7.setBackground(new java.awt.Color(204, 204, 204));
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -106,7 +107,7 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel3.setText("  Pacientes                                    Tipo de convênio                       Data");
+        jLabel3.setText("  Pacientes                                    Tipo de convÃªnio                       Data");
         jLabel3.setToolTipText("");
         jLabel3.setOpaque(true);
 

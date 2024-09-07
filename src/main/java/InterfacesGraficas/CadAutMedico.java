@@ -71,10 +71,12 @@ public class CadAutMedico extends javax.swing.JFrame {
         dataNascimento_medico = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cadastar Medico");
+        setTitle("Cadastar Médico");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMaximumSize(new java.awt.Dimension(0, 0));
+        setLocation(new java.awt.Point(525, 150));
+        setMaximumSize(new java.awt.Dimension(780, 500));
+        setMinimumSize(new java.awt.Dimension(780, 500));
         setResizable(false);
 
         panel1.setPreferredSize(new java.awt.Dimension(780, 500));
@@ -138,13 +140,21 @@ public class CadAutMedico extends javax.swing.JFrame {
         jLabel12.setText("Data nascimento (dd/mm/aaaa):");
 
         buttonGroup1.add(genero_m_medico);
+        genero_m_medico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         genero_m_medico.setText("Masculino");
 
         buttonGroup1.add(genero_f_medico);
+        genero_f_medico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         genero_f_medico.setText("Feminino");
+        genero_f_medico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                genero_f_medicoActionPerformed(evt);
+            }
+        });
 
         especialidade_medico.setBackground(new java.awt.Color(204, 204, 204));
         especialidade_medico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        especialidade_medico.setForeground(new java.awt.Color(0, 0, 0));
 
         voltar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         voltar.setText("Voltar");
@@ -156,18 +166,23 @@ public class CadAutMedico extends javax.swing.JFrame {
 
         nome_medico.setBackground(new java.awt.Color(204, 204, 204));
         nome_medico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        nome_medico.setForeground(new java.awt.Color(0, 0, 0));
 
         telefone_medico.setBackground(new java.awt.Color(204, 204, 204));
         telefone_medico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        telefone_medico.setForeground(new java.awt.Color(0, 0, 0));
 
         email_medico.setBackground(new java.awt.Color(204, 204, 204));
         email_medico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        email_medico.setForeground(new java.awt.Color(0, 0, 0));
 
         crm_medico.setBackground(new java.awt.Color(204, 204, 204));
         crm_medico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        crm_medico.setForeground(new java.awt.Color(0, 0, 0));
 
         dataNascimento_medico.setBackground(new java.awt.Color(204, 204, 204));
         dataNascimento_medico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        dataNascimento_medico.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -195,17 +210,18 @@ public class CadAutMedico extends javax.swing.JFrame {
                                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(nome_medico, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
                                     .addComponent(especialidade_medico)))
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addGap(18, 18, 18)
-                                .addComponent(genero_m_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(genero_f_medico)
-                                .addGap(497, 497, 497))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addGap(18, 18, 18)
-                                .addComponent(dataNascimento_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(dataNascimento_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(411, 411, 411))
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addGap(18, 18, 18)
+                                .addComponent(genero_m_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(genero_f_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(470, 470, 470)))))
                 .addContainerGap(18, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -266,7 +282,7 @@ public class CadAutMedico extends javax.swing.JFrame {
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BtnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -382,10 +398,14 @@ public class CadAutMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_cadastarMedico
 
     private void voltar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltar_Action
-        MenuPrincipalMedico menuPrincipalMedico = new MenuPrincipalMedico(medico, em);
-        menuPrincipalMedico.setVisible(true);
+        MenuMedicosAdm menuMedicoAdm = new MenuMedicosAdm(gerenciadorAdm, em);
+        menuMedicoAdm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_voltar_Action
+
+    private void genero_f_medicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genero_f_medicoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_genero_f_medicoActionPerformed
 
    
     // Métodos

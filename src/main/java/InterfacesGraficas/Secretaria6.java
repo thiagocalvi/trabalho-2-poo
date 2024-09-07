@@ -52,24 +52,24 @@ public class Secretaria6 extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("RelatÛrio mensal dos clientes atendidos");
+        jLabel5.setText("Relat√≥rio mensal dos clientes atendidos");
         jLabel5.setOpaque(true);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("MÍs: Atual");
+        jLabel4.setText("M√™s: Atual");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setUndecorated(true);
+        setLocation(new java.awt.Point(525, 150));
 
         jLabel1.setBackground(new java.awt.Color(255, 102, 0));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Secret·ria");
+        jLabel1.setText("Secret√°ria");
         jLabel1.setMaximumSize(new java.awt.Dimension(45, 20));
         jLabel1.setMinimumSize(new java.awt.Dimension(45, 16));
         jLabel1.setOpaque(true);
@@ -91,7 +91,7 @@ public class Secretaria6 extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel2.setText("         Secret·ria(o): Nome");
+        jLabel2.setText("         Secret√°ria(o): Nome");
         jLabel2.setOpaque(true);
 
         panel2.setBackground(new java.awt.Color(204, 204, 204));
@@ -121,7 +121,7 @@ public class Secretaria6 extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("Informe o MÈdico:");
+        jLabel9.setText("Informe o M√©dico:");
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
@@ -131,7 +131,7 @@ public class Secretaria6 extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Informe o Hor·rio:");
+        jLabel11.setText("Informe o Hor√°rio:");
 
         javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
         panel2.setLayout(panel2Layout);

@@ -44,6 +44,7 @@ public class LoginMedSec extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login ");
+        setLocation(new java.awt.Point(525, 150));
         setMinimumSize(new java.awt.Dimension(480, 500));
         setResizable(false);
 

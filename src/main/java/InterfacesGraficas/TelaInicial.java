@@ -33,6 +33,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Usuários");
+        setLocation(new java.awt.Point(525, 150));
         setPreferredSize(new java.awt.Dimension(500, 400));
 
         btnMed.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N

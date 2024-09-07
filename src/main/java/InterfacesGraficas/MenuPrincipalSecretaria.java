@@ -50,8 +50,10 @@ public class MenuPrincipalSecretaria extends javax.swing.JFrame {
         jLabel5.setOpaque(true);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Secretária(o)");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setLocation(new java.awt.Point(525, 150));
 
         jButton2.setBackground(new java.awt.Color(102, 102, 255));
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N

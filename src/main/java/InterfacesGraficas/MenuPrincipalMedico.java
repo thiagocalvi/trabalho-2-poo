@@ -55,6 +55,7 @@ public class MenuPrincipalMedico extends javax.swing.JFrame {
         setTitle("Médico");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setLocation(new java.awt.Point(525, 150));
         setPreferredSize(new java.awt.Dimension(615, 540));
 
         panel1.setPreferredSize(new java.awt.Dimension(600, 500));

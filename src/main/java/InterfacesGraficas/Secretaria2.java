@@ -39,19 +39,20 @@ public class Secretaria2 extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Relatório mensal dos clientes atendidos");
+        jLabel5.setText("RelatÃ³rio mensal dos clientes atendidos");
         jLabel5.setOpaque(true);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setLocation(new java.awt.Point(525, 150));
         setUndecorated(true);
 
         jLabel1.setBackground(new java.awt.Color(255, 102, 0));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Secretária");
+        jLabel1.setText("SecretÃ¡ria");
         jLabel1.setMaximumSize(new java.awt.Dimension(45, 20));
         jLabel1.setMinimumSize(new java.awt.Dimension(45, 16));
         jLabel1.setOpaque(true);
@@ -60,7 +61,7 @@ public class Secretaria2 extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel2.setText("         Secretária(o): Nome");
+        jLabel2.setText("         SecretÃ¡ria(o): Nome");
         jLabel2.setOpaque(true);
 
         jButton2.setBackground(new java.awt.Color(102, 102, 255));
@@ -76,7 +77,7 @@ public class Secretaria2 extends javax.swing.JFrame {
         jButton6.setBackground(new java.awt.Color(102, 102, 255));
         jButton6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Gerar relatório: Consulta do dia seguinte");
+        jButton6.setText("Gerar relatÃ³rio: Consulta do dia seguinte");
         jButton6.setToolTipText("");
 
         jLabel8.setBackground(new java.awt.Color(255, 102, 0));
