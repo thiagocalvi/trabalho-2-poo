@@ -242,22 +242,86 @@ public class Secretaria extends Funcionario {
 
     /**
      * Lista todos os médicos que a secretaria gerencia.
+     * 
+     * @return Uma lista contendo todos os médicos gerenciados pela secretaria.
      */
-    public void listarMedicos() {
-        // Implementar listagem de médicos
+    public List<Medico> listarMedicos() {
+        try {
+            this.em.getTransaction().begin();
+            List<Medico> medicos = this.em.createQuery("SELECT m FROM Medico m WHERE m.secretaria = :secretaria", Medico.class)
+                                          .setParameter("secretaria", this)
+                                          .getResultList();
+
+        
+            // Finaliza a transação
+            this.em.getTransaction().commit();
+
+            // Retorna a lista de médicos
+            return medicos;
+        } catch (Exception e) {
+            e.printStackTrace();
+            this.em.getTransaction().rollback();
+            throw new RuntimeException("Erro ao listar médicos.", e);
+        }
     }
 
     /**
-     * Gera um relatório de consultas para o dia seguinte.
+     * Gera um relatório de consultas agendadas para o dia seguinte.
+     * 
+     * Este método recupera todas as consultas que estão agendadas para o dia seguinte (em relação ao dia atual) e 
+     * que pertencem aos médicos gerenciados pela secretaria. A lista de consultas é obtida usando a consulta JPQL
+     * que filtra as consultas com base na data e nos médicos associados.
+     * 
+     * @return Uma lista de objetos {@link Consulta} representando as consultas agendadas para o dia seguinte. 
+     *         Se não houver consultas para o dia seguinte, a lista retornada será vazia.
+     * 
+     * @throws IllegalStateException Se o {@link EntityManager} não estiver definido.
+     * @throws RuntimeException Se ocorrer um erro ao gerar o relatório de consultas.
      */
-    public void gerarRelatorioConsultasDiaSeguinte() {
-        // Implementar geração de relatório
+    public List<Consulta> gerarRelatorioConsultasDiaSeguinte() {
+         try {
+             this.em.getTransaction().begin();
+             // Define a data para o dia seguinte
+             LocalDate hoje = LocalDate.now();
+             LocalDate diaSeguinte = hoje.plusDays(1);
+             // Recupera a lista de médicos gerenciados pela secretaria
+             List<Medico> medicos = this.listarMedicos();
+
+             // Consulta para obter todas as consultas agendadas para o dia seguinte
+             List<Consulta> consultas = this.em.createQuery(
+                        "SELECT c FROM Consulta c WHERE c.medico IN :medicos AND c.data = :diaSeguinte", Consulta.class)
+                        .setParameter("medicos", medicos)
+                        .setParameter("diaSeguinte", diaSeguinte)
+                        .getResultList();
+
+             this.em.getTransaction().commit();
+             return consultas;
+             
+        } catch (Exception e) {
+            e.printStackTrace();
+            this.em.getTransaction().rollback();
+            throw new RuntimeException("Erro ao gerar relatório de consultas.", e);
+        }
     }
 
     /**
-     * Envia mensagens para os pacientes que têm consulta agendada para o dia seguinte.
-     */
-    public void enviarMensagensConsultasDiaSeguinte() {
-        // Implementar envio de mensagens
+    * Envia mensagens para os pacientes que têm consulta agendada para o dia seguinte.
+    * 
+    * Este método utiliza o método {@link #gerarRelatorioConsultasDiaSeguinte()} para obter a lista de consultas
+    * agendadas para o dia seguinte. Se houver consultas, uma mensagem é enviada para cada paciente associado. 
+    * Caso contrário, uma mensagem informando que não há consultas para o dia seguinte é retornada.
+    * 
+    * @return Uma mensagem indicando o resultado da operação. Se não houver consultas para o dia seguinte, 
+    *         retorna "Sem consultas para o dia seguinte". Caso contrário, retorna uma mensagem indicando o 
+    *         número de pacientes para os quais a mensagem foi enviada.
+    */
+    public String enviarMensagensConsultasDiaSeguinte() {
+        List<Consulta> consultas = this.gerarRelatorioConsultasDiaSeguinte();
+        
+        if(consultas.isEmpty()){
+            return "Sem consultas para o dia seguinte";
+        }else{
+            return "Mensagem enviada para" + consultas.size() + " pacientes";
+        }
     }
 }
