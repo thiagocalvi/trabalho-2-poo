@@ -9,7 +9,7 @@ import Modelo.Secretaria;
 import javax.persistence.EntityManager;
 
 /**
- *
+ *Descrição generica
  * @author matheus
  */
 public class MenuPrincipalSecretaria extends javax.swing.JFrame {

@@ -8,7 +8,7 @@ import Gerenciador.GerenciadorAdm;
 import javax.persistence.EntityManager;
 
 /**
- *
+ *Descrição generica
  * @author thiago
  */
 public class MenuPrincipalAdm extends javax.swing.JFrame {

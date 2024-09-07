@@ -10,27 +10,29 @@ import java.time.format.DateTimeFormatter;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 /**
- *
+ *Descrição generica
  * @author matheus
  */
 public class CadAutSecretaria extends javax.swing.JFrame {
-    // Atríbutos
+    
+    // Atributos
     private GerenciadorAdm gerenciadorAdm;
     private EntityManager em;
     private String Cad_Atu = "Cadastrar";
     private Secretaria secretaria;
     
     /**
-     * Creates new form RelatorioMensalMedico
+     * Construtor da classe.
+     * Inicializa o gerenciador de administração e o EntityManager, e configura os componentes da interface.
+     * 
+     * @param gerenciadorAdm o gerenciador de administração responsável pelas operações de CRUD
+     * @param em o EntityManager utilizado para interagir com o banco de dados
      */
-    
-    // Construtor
     public CadAutSecretaria(GerenciadorAdm gerenciadorAdm, EntityManager em) {
         this.gerenciadorAdm = gerenciadorAdm;
         this.em = em;
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -137,43 +139,46 @@ public class CadAutSecretaria extends javax.swing.JFrame {
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panel1Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(email_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panel1Layout.createSequentialGroup()
                                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(panel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(nome_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(email_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(panel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(telefone_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(panel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel12)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(dataNascimento_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(panel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel11)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(genero_m_secretaria)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(genero_f_secretaria)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(panel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(nome_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(panel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel8)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(telefone_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(panel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel12)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(dataNascimento_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(panel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel11)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(genero_m_secretaria)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(genero_f_secretaria)))
+                                        .addGap(0, 33, Short.MAX_VALUE)))
+                                .addGap(0, 33, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(voltar)))
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(voltar)
-                        .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(330, 330, 330))
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addGap(248, 248, 248)
-                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(330, 330, 330))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(266, 266, 266))))))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,7 +219,7 @@ public class CadAutSecretaria extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,7 +230,11 @@ public class CadAutSecretaria extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    // Métodos Set's
+    /**
+     * Define o texto do botão e ajusta o título da janela para refletir a operação (Cadastrar ou Atualizar).
+     * 
+     * @param Cad_Atu o texto que será exibido no botão (Cadastrar ou Atualizar)
+     */
     public void setBtnText(String Cad_Atu){
         this.Cad_Atu = Cad_Atu;
         btnCadastrar.setText(Cad_Atu);
@@ -234,17 +243,31 @@ public class CadAutSecretaria extends javax.swing.JFrame {
         setValues();
     } 
     
+    /**
+     * Define a secretária que será atualizada.
+     * 
+     * @param secretaria o objeto Secretaria que será atualizado
+     */
     public void setSecretaria(Secretaria secretaria){
         this.secretaria = secretaria;
     }
     
-    // Ações
+    /**
+     * Navega de volta para a janela do menu de secretárias.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void voltarJanela(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarJanela
         MenuSecretariasAdm menuSecretariaAdm = new MenuSecretariasAdm(gerenciadorAdm, em);
         menuSecretariaAdm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_voltarJanela
 
+    /**
+     * Cadastra ou atualiza uma secretária com base nas informações fornecidas nos campos da interface gráfica.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void cadastrarSecretaria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarSecretaria
         // TODO add your handling code here:
         String nome, telefone, email, dataNascimento, genero = null;
@@ -287,8 +310,10 @@ public class CadAutSecretaria extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cadastrarSecretaria
     
-    
-    
+    /**
+     * Preenche os campos da interface com os dados da secretária quando a operação é de atualização.
+     * Configura os valores dos campos baseados no objeto Secretaria fornecido.
+     */
     private void setValues(){
         if (this.Cad_Atu.equals("Atualizar")){
             nome_secretaria.setText(this.secretaria.getNome());

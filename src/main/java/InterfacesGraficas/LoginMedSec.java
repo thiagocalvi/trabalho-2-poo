@@ -13,18 +13,27 @@ import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Classe responsável pela interface gráfica de login para médicos e secretárias.
+ * Permite que médicos e secretárias façam login selecionando seu nome a partir de uma lista.
+ * 
  * @author MatheusConsoni
  */
 public class LoginMedSec extends javax.swing.JFrame {
-    // Atríbutos
+    
+    // Atributos
     private GerenciadorAdm gerenciadorAdm;
     private Medico medico;
     private Secretaria secretaria;
     private EntityManager em;
     private String login_med_sec;
     
-    // Construtor
+    /**
+     * Construtor da classe.
+     * Inicializa o gerenciador de administração e o EntityManager, e configura os componentes da interface.
+     * 
+     * @param gerenciadorAdm o gerenciador de administração responsável pelas operações de CRUD
+     * @param em o EntityManager utilizado para interagir com o banco de dados
+     */
     public LoginMedSec(GerenciadorAdm gerenciadorAdm, EntityManager em) {
         this.gerenciadorAdm = gerenciadorAdm;
         this.em = em;
@@ -75,7 +84,7 @@ public class LoginMedSec extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(205, Short.MAX_VALUE)
+                .addContainerGap(200, Short.MAX_VALUE)
                 .addComponent(CBoxFunci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnEntrar)
@@ -124,12 +133,19 @@ public class LoginMedSec extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // Métodos
+     /**
+     * Define o tipo de usuário (médico ou secretária) e configura a lista correspondente de opções.
+     * 
+     * @param sec o tipo de usuário que pode fazer login ("Medico" ou "Secretaria")
+     */
     public void setSecMed(String sec){
         this.login_med_sec = sec;
         seleciona_allMed_allSec();
     }
     
+    /**
+     * Configura a lista de médicos ou secretárias com base no tipo de usuário definido.
+     */
     private void seleciona_allMed_allSec(){
         if (login_med_sec.equals("Medico")){
             setListMedicos(this.gerenciadorAdm.getAllMedicos());
@@ -141,6 +157,11 @@ public class LoginMedSec extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Preenche o JComboBox com a lista de médicos disponíveis.
+     * 
+     * @param listMedico a lista de médicos a serem exibidos no JComboBox
+     */
     private void setListMedicos(List<Medico> listMedico){
         CBoxFunci.addItem("Selecione um médico");
         CBoxFunci.setSelectedItem("Selecione um médico");
@@ -150,15 +171,25 @@ public class LoginMedSec extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Preenche o JComboBox com a lista de secretárias disponíveis.
+     * 
+     * @param listSecretaria a lista de secretárias a serem exibidas no JComboBox
+     */
     private void setListSecretarias(List<Secretaria> listSecretaria){
         CBoxFunci.addItem("Selecione uma secretaria");
-        CBoxFunci.setSelectedItem("Selecione uma sercretaria");
+        CBoxFunci.setSelectedItem("Selecione uma secretaria");
         
         for (Secretaria secretaria : listSecretaria){
             CBoxFunci.addItem(secretaria.getNome());
         }
     }
     
+    /**
+     * Realiza o login do usuário selecionado e redireciona para a tela principal correspondente.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         
         String texto = CBoxFunci.getSelectedItem().toString();
@@ -205,7 +236,11 @@ public class LoginMedSec extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEntrarActionPerformed
 
-    
+    /**
+     * Retorna à tela inicial.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void back_telaInicial(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_telaInicial
         // TODO add your handling code here:
         TelaInicial telaInicial = new TelaInicial(this.gerenciadorAdm, em);

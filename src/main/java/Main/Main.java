@@ -12,7 +12,7 @@ import Gerenciador.GerenciadorAdm;
 import InterfacesGraficas.*;
 
 /**
- *
+ * Descrição generica
  * @author thiago
  */
 public class Main {       

@@ -6,32 +6,43 @@
 package Gerenciador;
 
 import javax.persistence.*;
-
 import Modelo.Medico;
 import Modelo.Secretaria;
-
 import java.util.List;
-
-
 import java.time.LocalDate;
 
- 
- // @author thiago
- 
-
-// Gerenciador de uso exclusivo do Administrador
-// CRUD dos objetos Secretaria e Médico
-
+/**
+ * Gerenciador de operações relacionadas às entidades {@link Secretaria} e {@link Medico}.
+ * Fornece métodos para criar, atualizar, remover e listar secretarias e médicos.
+ * 
+ * <p>Descrição genérica: Gerenciador de uso exclusivo do Administrador para CRUD dos objetos Secretaria e Médico.</p>
+ * 
+ * @author thiago
+ */
 public class GerenciadorAdm {
-    
+
     private EntityManager em;
-    
-    
-    public GerenciadorAdm(EntityManager em){
+
+    /**
+     * Construtor da classe {@link GerenciadorAdm}.
+     * 
+     * @param em O {@link EntityManager} usado para as operações de banco de dados.
+     */
+    public GerenciadorAdm(EntityManager em) {
         this.em = em;
     }
-    
-     public String cadastrarSecretaria(String nome, LocalDate dataNascimento, String telefone, String email, String genero) {
+
+    /**
+     * Cadastra uma nova secretaria no banco de dados.
+     * 
+     * @param nome Nome da secretaria.
+     * @param dataNascimento Data de nascimento da secretaria.
+     * @param telefone Telefone da secretaria.
+     * @param email Email da secretaria.
+     * @param genero Gênero da secretaria.
+     * @return Mensagem indicando o resultado da operação.
+     */
+    public String cadastrarSecretaria(String nome, LocalDate dataNascimento, String telefone, String email, String genero) {
         EntityTransaction transaction = em.getTransaction();
         try {
             transaction.begin();
@@ -47,6 +58,17 @@ public class GerenciadorAdm {
         }
     }
 
+    /**
+     * Atualiza as informações de uma secretaria existente.
+     * 
+     * @param secretaria A secretaria a ser atualizada.
+     * @param nome Novo nome da secretaria.
+     * @param dataNascimento Nova data de nascimento da secretaria.
+     * @param telefone Novo telefone da secretaria.
+     * @param email Novo email da secretaria.
+     * @param genero Novo gênero da secretaria.
+     * @return Mensagem indicando o resultado da operação.
+     */
     public String atualizarSecretaria(Secretaria secretaria, String nome, LocalDate dataNascimento, String telefone, String email, String genero) {
         EntityTransaction transaction = em.getTransaction();
         try {
@@ -72,6 +94,12 @@ public class GerenciadorAdm {
         }
     }
 
+    /**
+     * Remove uma secretaria existente do banco de dados.
+     * 
+     * @param secretariaId ID da secretaria a ser removida.
+     * @return Mensagem indicando o resultado da operação.
+     */
     public String removerSecretaria(int secretariaId) {
         EntityTransaction transaction = em.getTransaction();
         try {
@@ -93,6 +121,19 @@ public class GerenciadorAdm {
         }
     }
 
+    /**
+     * Cadastra um novo médico no banco de dados.
+     * 
+     * @param secretaria Secretaria associada ao médico.
+     * @param nome Nome do médico.
+     * @param dataNascimento Data de nascimento do médico.
+     * @param telefone Telefone do médico.
+     * @param email Email do médico.
+     * @param especialidade Especialidade do médico.
+     * @param crm CRM do médico.
+     * @param genero Gênero do médico.
+     * @return Mensagem indicando o resultado da operação.
+     */
     public String cadastrarMedico(Secretaria secretaria, String nome, LocalDate dataNascimento, String telefone, String email, String especialidade, int crm, String genero) {
         EntityTransaction transaction = em.getTransaction();
         try {
@@ -109,6 +150,20 @@ public class GerenciadorAdm {
         }
     }
 
+    /**
+     * Atualiza as informações de um médico existente.
+     * 
+     * @param medico O médico a ser atualizado.
+     * @param secretaria Secretaria associada ao médico.
+     * @param nome Novo nome do médico.
+     * @param dataNascimento Nova data de nascimento do médico.
+     * @param telefone Novo telefone do médico.
+     * @param email Novo email do médico.
+     * @param especialidade Nova especialidade do médico.
+     * @param crm Novo CRM do médico.
+     * @param genero Novo gênero do médico.
+     * @return Mensagem indicando o resultado da operação.
+     */
     public String atualizarMedico(Medico medico, Secretaria secretaria, String nome, LocalDate dataNascimento, String telefone, String email, String especialidade, int crm, String genero) {
         EntityTransaction transaction = em.getTransaction();
         try {
@@ -138,6 +193,12 @@ public class GerenciadorAdm {
         }
     }
 
+    /**
+     * Remove um médico existente do banco de dados.
+     * 
+     * @param medicoId ID do médico a ser removido.
+     * @return Mensagem indicando o resultado da operação.
+     */
     public String removerMedico(int medicoId) {
         EntityTransaction transaction = em.getTransaction();
         try {
@@ -159,6 +220,11 @@ public class GerenciadorAdm {
         }
     }
 
+    /**
+     * Obtém a lista de todos os médicos cadastrados.
+     * 
+     * @return Lista de médicos.
+     */
     public List<Medico> getAllMedicos() {
         EntityTransaction transaction = em.getTransaction();
         try {
@@ -175,6 +241,11 @@ public class GerenciadorAdm {
         }
     }
     
+    /**
+     * Obtém a lista de todas as secretarias cadastradas.
+     * 
+     * @return Lista de secretarias.
+     */
     public List<Secretaria> getAllSecretarias() {
         EntityTransaction transaction = em.getTransaction();
         try {
@@ -187,7 +258,7 @@ public class GerenciadorAdm {
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Erro ao listar médicos: " + e.getMessage(), e);
+            throw new RuntimeException("Erro ao listar secretarias: " + e.getMessage(), e);
         }
     }
     
@@ -201,25 +272,23 @@ public class GerenciadorAdm {
         
         return query.getResultList();
     }
-*/
+    */
     
-    
-    
-    //Dataset
-    //Médicos
+    // Dataset
+    // Médicos
     String[] nomes = {"João Silva", "Maria Oliveira", "Carlos Souza", "Ana Santos", "Pedro Lima"};
-        String[] especialidades = {"Cardiologia", "Dermatologia", "Neurologia", "Pediatria", "Ortopedia"};
-        String[] telefones = {"(11) 91234-5678", "(21) 98765-4321", "(31) 99876-5432", "(41) 91234-5678", "(51) 98765-4321"};
-        String[] emails = {"joao.silva@exemplo.com", "maria.oliveira@exemplo.com", "carlos.souza@exemplo.com", "ana.santos@exemplo.com", "pedro.lima@exemplo.com"};
-        int[] crms = {123456, 234567, 345678, 456789, 567890};
-        LocalDate[] datasNascimento = {
-                LocalDate.of(1980, 1, 1),
-                LocalDate.of(1975, 5, 20),
-                LocalDate.of(1990, 8, 15),
-                LocalDate.of(1985, 3, 10),
-                LocalDate.of(1995, 12, 25)};
-    
-    //Secretaria
+    String[] especialidades = {"Cardiologia", "Dermatologia", "Neurologia", "Pediatria", "Ortopedia"};
+    String[] telefones = {"(11) 91234-5678", "(21) 98765-4321", "(31) 99876-5432", "(41) 91234-5678", "(51) 98765-4321"};
+    String[] emails = {"joao.silva@exemplo.com", "maria.oliveira@exemplo.com", "carlos.souza@exemplo.com", "ana.santos@exemplo.com", "pedro.lima@exemplo.com"};
+    int[] crms = {123456, 234567, 345678, 456789, 567890};
+    LocalDate[] datasNascimento = {
+            LocalDate.of(1980, 1, 1),
+            LocalDate.of(1975, 5, 20),
+            LocalDate.of(1990, 8, 15),
+            LocalDate.of(1985, 3, 10),
+            LocalDate.of(1995, 12, 25)};
+
+    // Secretarias
     String[] nomes2 = {"João Silva", "Maria Oliveira"};
     LocalDate[] datasNascimento2 = {LocalDate.of(1985, 5, 15), LocalDate.of(1990, 8, 20)};
     String[] telefones2 = {"555-1234", "555-5678"};

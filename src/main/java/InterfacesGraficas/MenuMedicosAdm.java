@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 /**
- *
+ *Descrição generica
  * @author thiago
  */
 public class MenuMedicosAdm extends javax.swing.JFrame {

@@ -8,7 +8,7 @@ import Gerenciador.GerenciadorAdm;
 import javax.persistence.EntityManager;
 
 /**
- *
+ *Descrição generica
  * @author jeanm
  */
 public class TelaInicial extends javax.swing.JFrame {
