@@ -138,7 +138,7 @@ public class Medico extends Funcionario {
      */
     
     
-    public String cadastrarProntuario(Paciente paciente, Consulta consulta, String sintomas, String diagnostico, String tratamento){
+    public Prontuario cadastrarProntuario(Paciente paciente, Consulta consulta, String sintomas, String diagnostico, String tratamento){
         //Cadastra um protuario para o paciente da consulta atual
         //Um prontuario só pode ser cadastrado dentro do contexto de uma consulta
         EntityTransaction transaction = em.getTransaction();
@@ -147,12 +147,12 @@ public class Medico extends Funcionario {
             Prontuario prontuario = new Prontuario(paciente, consulta, sintomas, diagnostico, tratamento);
             em.persist(prontuario);
             transaction.commit();
-            return "Prontuario cadastrado";
+            return prontuario;
         }catch (Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            return "Erro: " + e.getMessage();
+            return null;
         }
     }
     
@@ -203,7 +203,7 @@ public class Medico extends Funcionario {
             if (prontuario != null) {
                 em.remove(prontuario);
                 transaction.commit();
-                return "Prontuario removida!";
+                return "Prontuario removido!";
             } else {
                 transaction.commit();
                 return "Prontuario não encontrada";

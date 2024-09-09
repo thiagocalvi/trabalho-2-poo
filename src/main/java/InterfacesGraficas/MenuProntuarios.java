@@ -65,7 +65,7 @@ public class MenuProntuarios extends javax.swing.JFrame {
     }
     
     
-    private void showInformationMedico(Prontuario prontuario) {
+    private void showInformationProntuario(Prontuario prontuario) {
         JDialog dialog = new JDialog(this, prontuario.getPaciente().getNome(), true);
         dialog.setLayout(new BorderLayout());
         dialog.setPreferredSize(new Dimension(400, 300));
@@ -141,11 +141,12 @@ public class MenuProntuarios extends javax.swing.JFrame {
                 JButton infoButton = new JButton("Informações");
          
                 infoButton.addActionListener(e -> {
-                    showInformationMedico(prontuario);
+                    showInformationProntuario(prontuario);
                 });                   
                 
                 updateButton.addActionListener(e -> {
-                    CadAutProntuario cadAutProntuario = new CadAutProntuario(gerenciadorAdm, prontuario, medico, consulta, em);
+                    CadAutProntuario cadAutProntuario = new CadAutProntuario(gerenciadorAdm, medico, consulta, em);
+                    cadAutProntuario.setProntuario(prontuario);
                     cadAutProntuario.setAtualizar("Atualizar");
                     cadAutProntuario.setVisible(true);
                     this.dispose();
@@ -153,14 +154,14 @@ public class MenuProntuarios extends javax.swing.JFrame {
                 
                 deleteButton.addActionListener(e -> {
                     int dialogResult = JOptionPane.showConfirmDialog(this, 
-                        "Tem certeza que deseja deletar o médico " + medico.getNome() + "?", 
+                        "Tem certeza que deseja deletar o prontuário? " , 
                         "Confirmar Exclusão", 
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.WARNING_MESSAGE);
                     
                     if (dialogResult == JOptionPane.YES_OPTION){
-                        String result = this.gerenciadorAdm.removerMedico(medico.getId());
-                        if (result.equals("Médico removido!")) {
+                        String result = medico.removerProntuario(prontuario.getId());
+                        if (result.equals("Prontuario removido!")) {
                             JOptionPane.showMessageDialog(this, 
                             result, 
                             "Sucesso", 
@@ -173,7 +174,6 @@ public class MenuProntuarios extends javax.swing.JFrame {
                             JOptionPane.ERROR_MESSAGE);
                         }
                     }
-                
                 });                
                 
                 
@@ -274,6 +274,11 @@ public class MenuProntuarios extends javax.swing.JFrame {
 
         btnAddPron.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAddPron.setText("Adicionar prontuário");
+        btnAddPron.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddPron_Action(evt);
+            }
+        });
 
         btnVoltar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnVoltar.setText("Voltar");
@@ -364,6 +369,10 @@ public class MenuProntuarios extends javax.swing.JFrame {
     private void btnVoltar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar_Action
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVoltar_Action
+
+    private void btnAddPron_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPron_Action
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddPron_Action
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -25,18 +25,24 @@ public class CadAutProntuario extends javax.swing.JFrame {
     private String CadAut = "Cadastrar";
 
     // Construtor
-    public CadAutProntuario(GerenciadorAdm gerenciadorAdm, Prontuario prontuario, Medico medico, Consulta consulta, EntityManager em) {
+    public CadAutProntuario(GerenciadorAdm gerenciadorAdm, Medico medico, Consulta consulta, EntityManager em) {
         this.gerenciadorAdm = gerenciadorAdm;
         this.prontuario = prontuario;
         this.medico = medico;
         this.consulta = consulta;
         this.em = em;        
         initComponents();
+        colocaNome();
     }
 
     private void colocaNome(){
         lblPac.setText(" " + consulta.getPaciente().getNome());
         lblMed.setText(" " + medico.getNome());
+    }
+    
+    public void setProntuario(Prontuario prontuario){
+        
+        
     }
     
     public void setAtualizar(String atualizar){
