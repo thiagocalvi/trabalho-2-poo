@@ -53,6 +53,7 @@ public class LoginMedSec extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login ");
+        setLocation(new java.awt.Point(525, 150));
         setMinimumSize(new java.awt.Dimension(480, 500));
         setResizable(false);
 
@@ -84,7 +85,7 @@ public class LoginMedSec extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(200, Short.MAX_VALUE)
+                .addContainerGap(205, Short.MAX_VALUE)
                 .addComponent(CBoxFunci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnEntrar)
@@ -94,6 +95,7 @@ public class LoginMedSec extends javax.swing.JFrame {
         label1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         label1.setText("Login Médico");
 
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setText("Voltar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,7 +127,7 @@ public class LoginMedSec extends javax.swing.JFrame {
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -213,9 +215,8 @@ public class LoginMedSec extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!", "Informações", JOptionPane.INFORMATION_MESSAGE);
                 this.medico.setEm(em);
-                MenuPrincipalMedico consultaRelatorio = new MenuPrincipalMedico(medico, em);
-                consultaRelatorio.setGerenciadorAdm(gerenciadorAdm);
-                consultaRelatorio.setVisible(true);
+                MenuPrincipalMedico menuPrincipalMedico = new MenuPrincipalMedico(gerenciadorAdm, medico, em);
+                menuPrincipalMedico.setVisible(true);
                 this.dispose();
             }
             else if (this.login_med_sec.equals("Secretaria")){
