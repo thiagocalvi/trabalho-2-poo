@@ -12,18 +12,30 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 /**
- *
+ *Descrição generica
+ * @author matheus
+ */
+/**
+ * Classe responsável pela interface gráfica para cadastro e atualização de médicos.
+ * Permite cadastrar um novo médico ou atualizar um médico existente, incluindo a seleção de uma secretaria.
+ * 
  * @author matheus
  */
 public class CadAutMedico extends javax.swing.JFrame {
+    
     private GerenciadorAdm gerenciadorAdm;
     private EntityManager em;
     private String Cad_Atu = "Cadastrar";
     private Medico medico;
     List<Secretaria> allSecretarias;
     
-  
-    // Construtor
+    /**
+     * Construtor da classe.
+     * Inicializa o gerenciador de administração e o EntityManager, carrega todas as secretarias e configura os componentes da interface.
+     * 
+     * @param gerenciadorAdm o gerenciador de administração responsável pelas operações de CRUD
+     * @param em o EntityManager utilizado para interagir com o banco de dados
+     */
     public CadAutMedico(GerenciadorAdm gerenciadorAdm, EntityManager em) {
         this.gerenciadorAdm = gerenciadorAdm;
         this.em = em;
@@ -32,7 +44,11 @@ public class CadAutMedico extends javax.swing.JFrame {
         setSecretarias();
     }
 
-    // Métodos set's
+    /**
+     * Define o texto do botão e ajusta o título da janela para refletir a operação (Cadastrar ou Atualizar).
+     * 
+     * @param Cad_Atu o texto que será exibido no botão (Cadastrar ou Atualizar)
+     */
     public void setBtnText(String Cad_Atu){
         this.Cad_Atu = Cad_Atu;
         BtnCadastrar.setText(Cad_Atu);
@@ -41,9 +57,15 @@ public class CadAutMedico extends javax.swing.JFrame {
         setValues();
     } 
             
+    /**
+     * Define o médico que será atualizado.
+     * 
+     * @param medico o objeto Medico que será atualizado
+     */
     public void setMedico(Medico medico){
         this.medico = medico;
     }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -146,11 +168,6 @@ public class CadAutMedico extends javax.swing.JFrame {
         buttonGroup1.add(genero_f_medico);
         genero_f_medico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         genero_f_medico.setText("Feminino");
-        genero_f_medico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                genero_f_medicoActionPerformed(evt);
-            }
-        });
 
         especialidade_medico.setBackground(new java.awt.Color(204, 204, 204));
         especialidade_medico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -197,7 +214,7 @@ public class CadAutMedico extends javax.swing.JFrame {
                             .addComponent(telefone_medico)
                             .addComponent(crm_medico)))
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(0, 18, Short.MAX_VALUE)
+                        .addGap(0, 22, Short.MAX_VALUE)
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,7 +239,7 @@ public class CadAutMedico extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(genero_f_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(470, 470, 470)))))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,6 +319,23 @@ public class CadAutMedico extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Navega de volta para a janela do menu de médicos.
+     * 
+     * @param evt o evento de clique do botão
+     */
+    private void voltarJanela(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarJanela
+        MenuMedicosAdm menuMedicoAdm = new MenuMedicosAdm(gerenciadorAdm, em);
+        menuMedicoAdm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_voltarJanela
+
+    /**
+     * Cadastra ou atualiza um médico com base nas informações fornecidas nos campos da interface gráfica.
+     * 
+     * @param evt o evento de clique do botão
+     */
+    
     private void cadastarMedico(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastarMedico
 
         String nome, especialidade, telefone, email, crm, dataNascimento, genero = null, nomeSecretaria;
@@ -403,12 +437,12 @@ public class CadAutMedico extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_voltar_Action
 
-    private void genero_f_medicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genero_f_medicoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_genero_f_medicoActionPerformed
-
    
     // Métodos
+    /**
+     * Configura a lista de secretarias no JComboBox.
+     * Adiciona todas as secretarias ao JComboBox para seleção.
+     */
     private void setSecretarias(){
         jComboBox1.removeAllItems();
         jComboBox1.addItem("Selecione uma secretaria");
@@ -419,6 +453,10 @@ public class CadAutMedico extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Preenche os campos da interface com os dados do médico quando a operação é de atualização.
+     * Configura os valores dos campos baseados no objeto Medico fornecido.
+     */
     private void setValues(){
         if (this.Cad_Atu.equals("Atualizar")){
             jComboBox1.removeAllItems();

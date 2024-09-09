@@ -8,7 +8,7 @@ import Gerenciador.GerenciadorAdm;
 import javax.persistence.EntityManager;
 
 /**
- *
+ *Descrição generica
  * @author jeanm
  */
 public class TelaInicial extends javax.swing.JFrame {
@@ -34,6 +34,8 @@ public class TelaInicial extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Usuários");
         setLocation(new java.awt.Point(525, 150));
+        setMaximumSize(new java.awt.Dimension(500, 400));
+        setMinimumSize(new java.awt.Dimension(500, 400));
         setPreferredSize(new java.awt.Dimension(500, 400));
 
         btnMed.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
