@@ -39,7 +39,6 @@ public class MenuPrincipalAdm extends javax.swing.JFrame {
         setLocation(new java.awt.Point(400, 100));
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(0, 0));
 

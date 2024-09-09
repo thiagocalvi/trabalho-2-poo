@@ -13,6 +13,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *Descrição generica
@@ -43,6 +44,7 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
     }
     
     private void listarClientes(){
+        int tot = 0;
         
         String consulta1 = ("SELECT c from Consulta c WHERE c.consultaFinalizada = true");
         TypedQuery<Consulta> query = em.createQuery(consulta1, Consulta.class);
@@ -50,14 +52,24 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
         List<Consulta> con = query.getResultList();
         DefaultTableModel model = (DefaultTableModel)jtbRel.getModel(); 
         
+        model.setRowCount(0); 
         for (Consulta consulta : con){
             Object[] linha = {consulta.getPaciente().getNome(), consulta.getTipo(), consulta.getData()};
             model.addRow(linha);
+            tot ++;
         }
         
+        lblTot.setText("Total: " + tot);
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        jtbRel.setRowSorter(sorter);
         
-        model.addRow(new Object[]{"Hello", "Teste", "Pegue"});
-        
+        // Teste
+//        model.addRow(new Object[]{"Terce", "Teste", "12/12/2000"});
+//        model.addRow(new Object[]{"Segun", "Teste", "10/12/2000"});
+//        model.addRow(new Object[]{"Prim", "Teste", "01/08/1987"});
+//
+//        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+//        jtbRel.setRowSorter(sorter);
                 
     }
     
@@ -69,7 +81,7 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
         panel1 = new java.awt.Panel();
         jLabel2 = new javax.swing.JLabel();
         lblMes = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        lblTot = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jtbRel = new javax.swing.JTable();
@@ -85,10 +97,10 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
         setTitle("Médico - Relatório");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setLocation(new java.awt.Point(525, 150));
-        setMaximumSize(new java.awt.Dimension(600, 500));
-        setMinimumSize(new java.awt.Dimension(600, 500));
-        setPreferredSize(new java.awt.Dimension(600, 560));
+        setLocation(new java.awt.Point(450, 100));
+        setMaximumSize(new java.awt.Dimension(660, 600));
+        setMinimumSize(new java.awt.Dimension(660, 600));
+        setPreferredSize(new java.awt.Dimension(660, 620));
 
         jLabel2.setBackground(new java.awt.Color(204, 204, 204));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -102,13 +114,13 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
         lblMes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblMes.setText("Mês: Atual");
 
-        jLabel7.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Total: XX");
-        jLabel7.setToolTipText("");
-        jLabel7.setOpaque(true);
+        lblTot.setBackground(new java.awt.Color(204, 204, 204));
+        lblTot.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblTot.setForeground(new java.awt.Color(0, 0, 0));
+        lblTot.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTot.setText("Total: XX");
+        lblTot.setToolTipText("");
+        lblTot.setOpaque(true);
 
         btnVoltar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnVoltar.setText("Voltar");
@@ -138,34 +150,34 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panel1Layout.createSequentialGroup()
-                .addGap(202, 202, 202)
-                .addComponent(lblMes, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(214, Short.MAX_VALUE))
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(236, 236, 236)
+                        .addComponent(lblMes, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 27, Short.MAX_VALUE)
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                                .addComponent(lblTot, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(446, 446, 446)
+                                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblMes, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMes, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
+                    .addComponent(lblTot)
                     .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -176,7 +188,7 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -193,10 +205,10 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jtbRel;
     private javax.swing.JLabel lblMes;
+    private javax.swing.JLabel lblTot;
     private java.awt.Panel panel1;
     // End of variables declaration//GEN-END:variables
 }

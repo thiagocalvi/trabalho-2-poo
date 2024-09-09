@@ -63,6 +63,7 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
         });
 
         cadastrarMedico.setBackground(new java.awt.Color(153, 153, 153));
+        cadastrarMedico.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         cadastrarMedico.setLabel("Adicionar Médico");
         cadastrarMedico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

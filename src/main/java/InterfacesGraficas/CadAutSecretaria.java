@@ -66,7 +66,6 @@ public class CadAutSecretaria extends javax.swing.JFrame {
         setLocation(new java.awt.Point(525, 150));
         setMaximumSize(new java.awt.Dimension(780, 500));
         setMinimumSize(new java.awt.Dimension(780, 500));
-        setPreferredSize(new java.awt.Dimension(780, 500));
         setResizable(false);
 
         lblTitulo.setBackground(new java.awt.Color(255, 204, 102));

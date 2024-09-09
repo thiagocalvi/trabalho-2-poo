@@ -99,7 +99,6 @@ public class CadAutMedico extends javax.swing.JFrame {
         setLocation(new java.awt.Point(525, 150));
         setMaximumSize(new java.awt.Dimension(780, 500));
         setMinimumSize(new java.awt.Dimension(780, 500));
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
         panel1.setPreferredSize(new java.awt.Dimension(780, 500));
@@ -169,11 +168,6 @@ public class CadAutMedico extends javax.swing.JFrame {
         buttonGroup1.add(genero_f_medico);
         genero_f_medico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         genero_f_medico.setText("Feminino");
-        genero_f_medico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                genero_f_medicoActionPerformed(evt);
-            }
-        });
 
         especialidade_medico.setBackground(new java.awt.Color(204, 204, 204));
         especialidade_medico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -220,7 +214,7 @@ public class CadAutMedico extends javax.swing.JFrame {
                             .addComponent(telefone_medico)
                             .addComponent(crm_medico)))
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(0, 9, Short.MAX_VALUE)
+                        .addGap(0, 22, Short.MAX_VALUE)
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,7 +239,7 @@ public class CadAutMedico extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(genero_f_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(470, 470, 470)))))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -442,10 +436,6 @@ public class CadAutMedico extends javax.swing.JFrame {
         menuMedicoAdm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_voltar_Action
-
-    private void genero_f_medicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genero_f_medicoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_genero_f_medicoActionPerformed
 
    
     // Métodos

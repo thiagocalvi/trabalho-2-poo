@@ -53,11 +53,9 @@ public class MenuPrincipalSecretaria extends javax.swing.JFrame {
         setTitle("Menu Secretaria");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setLocation(new java.awt.Point(525, 150));
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
-        setPreferredSize(new java.awt.Dimension(800, 600));
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setLocation(new java.awt.Point(525, 150));
         setResizable(false);
 
         panel1.setPreferredSize(new java.awt.Dimension(800, 600));
