@@ -40,7 +40,7 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
         this.gerenciadorAdm = gerenciadorAdm;
         initComponents();
         renderConsultas(this.secretaria.getAllConsultas());
-        
+        setLocationRelativeTo(null);
     }
 
     /**

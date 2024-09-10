@@ -28,6 +28,8 @@ public class ListaMedicosSecretaria extends javax.swing.JFrame {
         this.em = em;
         this.gerenciadorAdm = gerenciadorAdm;
         setTableMedicos();
+        setLocationRelativeTo(null);
+
     }
 
     /**

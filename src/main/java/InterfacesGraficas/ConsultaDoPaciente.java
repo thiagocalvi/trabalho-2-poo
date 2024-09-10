@@ -257,7 +257,7 @@ public class ConsultaDoPaciente extends javax.swing.JFrame {
                                                JOptionPane.WARNING_MESSAGE);
         
         if (option == JOptionPane.YES_NO_OPTION){
-//            consulta.setConsultaFinalizada(true);    Tirar o comentário quando o trabalho tiver completo!
+//            consulta.setConsultaFinalizada(true);
             ConsultasDoDia consultasDoDia = new ConsultasDoDia(gerenciadorAdm, medico, em);
             consultasDoDia.setVisible(true);
             this.dispose();
