@@ -29,6 +29,7 @@ public class EmitirReceita extends javax.swing.JFrame {
         this.em = em;
         initComponents();
 //        colocaNome();
+        setLocationRelativeTo(null);
     }
 
     private void colocaNome(){
@@ -58,10 +59,11 @@ public class EmitirReceita extends javax.swing.JFrame {
         setTitle("Receita");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setLocation(new java.awt.Point(400, 100));
+        setLocation(new java.awt.Point(0, 0));
         setMaximumSize(new java.awt.Dimension(680, 560));
         setMinimumSize(new java.awt.Dimension(680, 560));
         setPreferredSize(new java.awt.Dimension(680, 560));
+        setResizable(false);
 
         jLabel3.setBackground(new java.awt.Color(204, 204, 204));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N

@@ -25,6 +25,7 @@ public class MenuPrincipalSecretaria extends javax.swing.JFrame {
         this.gerenciadorAdm = gerenciadorAdm;
         initComponents();
         lblNome.setText("  " + secretaria.getNome());
+        setLocationRelativeTo(null);
     }
 
 
@@ -54,7 +55,7 @@ public class MenuPrincipalSecretaria extends javax.swing.JFrame {
         setTitle("Menu Secretaria");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setLocation(new java.awt.Point(525, 150));
+        setLocation(new java.awt.Point(0, 0));
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setResizable(false);

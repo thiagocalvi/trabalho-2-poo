@@ -30,6 +30,7 @@ public class ConsultaDoPaciente extends javax.swing.JFrame {
         this.em = em;
         initComponents();
 //        colocaNome();
+        setLocationRelativeTo(null);
     }
 
     // Métodos
@@ -59,13 +60,14 @@ public class ConsultaDoPaciente extends javax.swing.JFrame {
         setTitle("Médico - Consulta paciente");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setLocation(new java.awt.Point(400, 100));
+        setLocation(new java.awt.Point(0, 0));
         setMaximumSize(new java.awt.Dimension(744, 532));
         setMinimumSize(new java.awt.Dimension(744, 532));
+        setResizable(false);
 
-        panel2.setBackground(new java.awt.Color(255, 204, 204));
+        panel2.setBackground(new java.awt.Color(153, 153, 153));
 
-        btnDados.setBackground(new java.awt.Color(255, 102, 0));
+        btnDados.setBackground(new java.awt.Color(255, 255, 255));
         btnDados.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnDados.setForeground(new java.awt.Color(0, 0, 0));
         btnDados.setText("Dados adicionais");
@@ -75,7 +77,7 @@ public class ConsultaDoPaciente extends javax.swing.JFrame {
             }
         });
 
-        btnPron.setBackground(new java.awt.Color(255, 255, 0));
+        btnPron.setBackground(new java.awt.Color(255, 255, 255));
         btnPron.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnPron.setForeground(new java.awt.Color(0, 0, 0));
         btnPron.setText("Prontuário");
@@ -86,7 +88,7 @@ public class ConsultaDoPaciente extends javax.swing.JFrame {
             }
         });
 
-        btnLaudo.setBackground(new java.awt.Color(0, 204, 204));
+        btnLaudo.setBackground(new java.awt.Color(255, 255, 255));
         btnLaudo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnLaudo.setForeground(new java.awt.Color(0, 0, 0));
         btnLaudo.setText("Laudos médicos");
@@ -96,7 +98,7 @@ public class ConsultaDoPaciente extends javax.swing.JFrame {
             }
         });
 
-        btnFin.setBackground(new java.awt.Color(255, 0, 0));
+        btnFin.setBackground(new java.awt.Color(255, 255, 255));
         btnFin.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnFin.setForeground(new java.awt.Color(0, 0, 0));
         btnFin.setText("Finalizar consulta");
@@ -158,9 +160,9 @@ public class ConsultaDoPaciente extends javax.swing.JFrame {
                 .addContainerGap(89, Short.MAX_VALUE))
         );
 
-        jLabel3.setBackground(new java.awt.Color(255, 102, 102));
+        jLabel3.setBackground(new java.awt.Color(153, 153, 153));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Consulta do Paciente");
         jLabel3.setToolTipText("");

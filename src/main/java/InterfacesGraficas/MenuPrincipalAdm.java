@@ -21,6 +21,7 @@ public class MenuPrincipalAdm extends javax.swing.JFrame {
         this.gerenciadorAdm = gerenciadorAdm;
         this.em = em;
         initComponents();
+        setLocationRelativeTo(null);
     }
     
     @SuppressWarnings("unchecked")
@@ -36,7 +37,7 @@ public class MenuPrincipalAdm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu ADM");
         setBackground(new java.awt.Color(255, 255, 255));
-        setLocation(new java.awt.Point(400, 100));
+        setLocation(new java.awt.Point(0, 0));
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setResizable(false);
@@ -76,7 +77,7 @@ public class MenuPrincipalAdm extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 282, Short.MAX_VALUE)
+                .addGap(0, 276, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)

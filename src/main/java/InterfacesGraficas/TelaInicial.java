@@ -21,6 +21,7 @@ public class TelaInicial extends javax.swing.JFrame {
         this.gerenciadorAdm = gerenciadorAdm;
         this.em = em;
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -33,10 +34,9 @@ public class TelaInicial extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Usuários");
-        setLocation(new java.awt.Point(525, 150));
-        setMaximumSize(new java.awt.Dimension(500, 400));
+        setLocation(new java.awt.Point(0, 0));
         setMinimumSize(new java.awt.Dimension(500, 400));
-        setPreferredSize(new java.awt.Dimension(500, 400));
+        setResizable(false);
 
         btnMed.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnMed.setText("Médico");

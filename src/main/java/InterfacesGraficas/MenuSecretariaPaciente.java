@@ -45,6 +45,7 @@ public class MenuSecretariaPaciente extends javax.swing.JFrame {
         this.renderPacientes(secretaria.getAllPacientes());
         setupSearchField();
         
+        setLocationRelativeTo(null);
     }
 
     private void showInformationPaciente(Paciente paciente) {
@@ -120,7 +121,7 @@ public class MenuSecretariaPaciente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setLocation(new java.awt.Point(525, 150));
+        setLocation(new java.awt.Point(0, 0));
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
 

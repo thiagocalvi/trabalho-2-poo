@@ -107,9 +107,7 @@ public class CadAutPaciente extends javax.swing.JFrame {
         setTitle("Cadastro Paciente");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setLocation(new java.awt.Point(525, 150));
-        setMaximumSize(new java.awt.Dimension(800, 600));
-        setMinimumSize(new java.awt.Dimension(800, 600));
+        setLocation(new java.awt.Point(0, 0));
         setResizable(false);
 
         jButton1.setBackground(new java.awt.Color(51, 204, 0));

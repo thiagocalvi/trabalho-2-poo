@@ -30,6 +30,7 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
         this.em = em;
         this.renderMedicos(gerenciadorAdm.getAllMedicos());
         setupSearchField();
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -47,8 +48,7 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Adm - alterações");
-        setLocation(new java.awt.Point(550, 150));
-        setMaximumSize(new java.awt.Dimension(800, 600));
+        setLocation(new java.awt.Point(0, 0));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
@@ -211,17 +211,38 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
             this.box_medicos.add(noMedicosLabel);
         } else {
             for (Medico medico : medicosToRender) {
-                JPanel card_medico = new JPanel();
-                card_medico.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
+                
+                JPanel card_medico = new JPanel(new GridBagLayout());
+                GridBagConstraints gbc = new GridBagConstraints();
                 card_medico.setMaximumSize(new Dimension(780, 40));
 
+                // Configurar constraints para o nameLabel
+                gbc.gridx = 0;
+                gbc.gridy = 0;
+                gbc.anchor = GridBagConstraints.WEST;
+                gbc.insets = new Insets(5, 5, 5, 5);
+                
                 JLabel nameLabel = new JLabel("Nome: " + medico.getNome());
+                nameLabel.setPreferredSize(new Dimension(215, 20));             // Limitar o tamanho
+                nameLabel.setToolTipText(medico.getNome());                     // Mostrar nome completo ao passar o mouse
+                card_medico.add(nameLabel, gbc);
+                
+                // Configurar constraints para o specialtyLabel
+                gbc.gridx = 1;
                 JLabel specialtyLabel = new JLabel("Especialidade: " + medico.getEspecialidade());
+                specialtyLabel.setPreferredSize(new Dimension(215, 20));        // Limitar o tamanho
+                specialtyLabel.setToolTipText(medico.getEspecialidade());       // Mostrar especialidade completa ao passar o mouse
+                card_medico.add(specialtyLabel, gbc);
+                
+                // Configurar constraints para o buttonPanel
+                gbc.gridx = 2;                                  // Mover para a terceira coluna
+                gbc.weightx = 1.0;                              // O botão empurrará o conteúdo para a esquerda
+                gbc.anchor = GridBagConstraints.EAST;           // Alinhar à direita
+                JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
                 
                 JButton updateButton = new JButton("Atualizar");
                 JButton deleteButton = new JButton("Deletar");
                 JButton infoButton = new JButton("Informações");
-
                 
                 infoButton.addActionListener(e -> {
                     showInformationMedico(medico);
@@ -264,11 +285,10 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
                 
                 });
 
-                card_medico.add(nameLabel);
-                card_medico.add(specialtyLabel);
-                card_medico.add(updateButton);
-                card_medico.add(deleteButton);
-                card_medico.add(infoButton);
+                buttonPanel.add(updateButton);
+                buttonPanel.add(deleteButton);
+                buttonPanel.add(infoButton);
+                card_medico.add(buttonPanel, gbc);
 
 
                 this.box_medicos.add(card_medico);
@@ -295,23 +315,8 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_goCadastrarMedico
     
- 
-    private void updateSearch() {
-        //Isso não é nenhum pouco eficiente!
-        String searchText = jTextField1.getText().toLowerCase();
-        this.allMedicos = gerenciadorAdm.getAllMedicos();
-        List<Medico> filteredMedicos = allMedicos.stream()
-            .filter(medico -> 
-                medico.getNome().toLowerCase().contains(searchText) ||
-                Integer.toString(medico.getCrm()).contains(searchText) ||
-               medico.getEspecialidade().toLowerCase().contains(searchText))
-            .collect(Collectors.toList());
-        renderMedicos(filteredMedicos);
-    }
-   
-    /*
-//    Assim não funciona corretamente, o textFild fica bugado
-//    O sentidod da escrita é invertido
+
+    
     private void updateSearch() {
         String searchText = jTextField1.getText().trim();
         List<Medico> filteredMedicos;
@@ -324,7 +329,7 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
         renderMedicos(filteredMedicos);
     }
     
-    */
+    
     
     private void setupSearchField(){
         jTextField1.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {

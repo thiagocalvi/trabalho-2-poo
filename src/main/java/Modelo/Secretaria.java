@@ -350,11 +350,12 @@ public class Secretaria extends Funcionario {
     
     
     
-    //ARRUMAR PARA LISTAR SOMENTE AS CONSULTAS DOS MEDICOS QUE A SECRETARIA GERENCIA!
+    //ARRUMAR PARA LISTAR SOMENTE AS CONSULTAS DOS MEDICOS QUE A SECRETARIA GERENCIA! - FEITO
     public List<Consulta> getAllConsultas(){
         try {
             this.em.getTransaction().begin();
-            List<Consulta> consultas = this.em.createQuery("SELECT c FROM Consulta c", Consulta.class).getResultList();
+            List<Consulta> consultas = this.em.createQuery("SELECT c FROM Consulta c WHERE c.medico IN :medicos", Consulta.class)
+                    .setParameter("medicos", this.listarMedicos()).getResultList();
 
         
             // Finaliza a transação

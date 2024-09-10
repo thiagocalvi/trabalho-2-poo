@@ -33,6 +33,7 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
         initComponents();
         mesAtual();
         listarClientes();
+        setLocationRelativeTo(null);
     }
 
     // Métodos
@@ -44,33 +45,32 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
     }
     
     private void listarClientes(){
-        int tot = 0;
         
-        String consulta1 = ("SELECT c from Consulta c WHERE c.consultaFinalizada = true");
-        TypedQuery<Consulta> query = em.createQuery(consulta1, Consulta.class);
+        int anoReferencia = LocalDate.now().getYear();
+        int mesReferencia = LocalDate.now().getMonthValue();
+        
+        String resultado = ("SELECT c from Consulta c WHERE c.consultaFinalizada = true" +
+                            "AND FUNCTION('YEAR', c.data) = :anoReferencia " +
+                            "AND FUNCTION('MONTH', c.data) = :mesReferencia" +
+                            "ORDER BY c.data ASC");
+        
+        TypedQuery<Consulta> query = em.createQuery(resultado, Consulta.class);
+        query.setParameter("anoReferencia", anoReferencia);
+        query.setParameter("mesReferencia", mesReferencia);
                         
-        List<Consulta> con = query.getResultList();
+        List<Consulta> listConsulta = query.getResultList();
         DefaultTableModel model = (DefaultTableModel)jtbRel.getModel(); 
         
         model.setRowCount(0); 
-        for (Consulta consulta : con){
+        for (Consulta consulta : listConsulta){
             Object[] linha = {consulta.getPaciente().getNome(), consulta.getTipo(), consulta.getData()};
             model.addRow(linha);
-            tot ++;
         }
         
-        lblTot.setText("Total: " + tot);
-//        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
-//        jtbRel.setRowSorter(sorter);
+        lblTot.setText("Total: " + listConsulta.size());
         
-        //Teste
-        model.addRow(new Object[]{"Terce", "Teste", "12/12/2000"});
-        model.addRow(new Object[]{"Segun", "Teste", "10/12/2000"});
-        model.addRow(new Object[]{"Prim", "Teste", "01/08/1987"});
-
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
-        jtbRel.setRowSorter(sorter);
-                
+        jtbRel.setRowSorter(sorter);          
     }
     
     @SuppressWarnings("unchecked")
@@ -97,10 +97,11 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
         setTitle("Médico - Relatório");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setLocation(new java.awt.Point(450, 100));
+        setLocation(new java.awt.Point(0, 0));
         setMaximumSize(new java.awt.Dimension(660, 600));
         setMinimumSize(new java.awt.Dimension(660, 600));
         setPreferredSize(new java.awt.Dimension(660, 620));
+        setResizable(false);
 
         jLabel2.setBackground(new java.awt.Color(204, 204, 204));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
