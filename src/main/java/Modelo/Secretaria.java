@@ -245,6 +245,7 @@ public class Secretaria extends Funcionario {
      * 
      * @return Uma lista contendo todos os médicos gerenciados pela secretaria.
      */
+    //TA GERANDO ERRO AQUI TAMBEM
     public List<Medico> listarMedicos() {
         try {
             this.em.getTransaction().begin();
@@ -351,21 +352,19 @@ public class Secretaria extends Funcionario {
     
     
     //ARRUMAR PARA LISTAR SOMENTE AS CONSULTAS DOS MEDICOS QUE A SECRETARIA GERENCIA! - FEITO
+    //TA GERANDO ERRO AQUI!!!
     public List<Consulta> getAllConsultas(){
         try {
-            this.em.getTransaction().begin();
-            List<Consulta> consultas = this.em.createQuery("SELECT c FROM Consulta c WHERE c.medico IN :medicos", Consulta.class)
-                    .setParameter("medicos", this.listarMedicos()).getResultList();
+            List<Medico> medicos = this.listarMedicos(); // Chame listarMedicos fora da consulta
+            if (medicos == null || medicos.isEmpty()) {
+                return List.of(); // Retorna uma lista vazia se não houver médicos
+            }
 
-        
-            // Finaliza a transação
-            this.em.getTransaction().commit();
-
-            // Retorna a lista de consultas
-            return consultas;
+            return this.em.createQuery("SELECT c FROM Consulta c WHERE c.medico IN :medicos", Consulta.class)
+                          .setParameter("medicos", medicos)
+                          .getResultList();
         } catch (Exception e) {
             e.printStackTrace();
-            this.em.getTransaction().rollback();
             throw new RuntimeException("Erro ao listar consultas.", e);
         }
     }
