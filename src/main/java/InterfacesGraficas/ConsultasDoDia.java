@@ -59,9 +59,8 @@ public class ConsultasDoDia extends javax.swing.JFrame {
             this.proxConsulta = consultasDoDia.get(0);
         }
         
-//        Ordena as consultas do dia caso  o 'ORDER BY c.horario' nao funcionar
-//        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
-//        tbCons.setRowSorter(sorter);
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        tbCons.setRowSorter(sorter);
     }
     
     
@@ -159,6 +158,7 @@ public class ConsultasDoDia extends javax.swing.JFrame {
             }
         });
 
+        tbCons.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tbCons.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

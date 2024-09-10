@@ -28,11 +28,11 @@ public class EmitirReceita extends javax.swing.JFrame {
         this.consulta = consulta;
         this.em = em;
         initComponents();
-//        colocaNome();
+        setNome();
         setLocationRelativeTo(null);
     }
 
-    private void colocaNome(){
+    private void setNome(){
         lblPac.setText(" " + consulta.getPaciente().getNome());
         lblMed.setText(" " + medico.getNome());
     }

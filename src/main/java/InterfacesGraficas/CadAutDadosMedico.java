@@ -46,7 +46,52 @@ public class CadAutDadosMedico extends javax.swing.JFrame {
     }
     
     public void setAtualizar(String atualizar){
-        // Falta fazer!
+        this.Cad_Atu = atualizar;
+        setTitle("Atualizar dados médicos");
+        lblTit.setText("Atualização dos dados adicionais");
+        btnCadAtu.setText(atualizar);
+        setValues();
+    }
+    
+    private void setValues(){
+        
+        if (consulta.getPaciente().getDadosMedicos().isBebe() == true){
+            BSim.setSelected(true);
+        }
+        else {
+            BNao.setSelected(true);
+        }
+        
+        
+        if (consulta.getPaciente().getDadosMedicos().isFuma()== true){
+            FSim.setSelected(true);
+        }
+        else {
+            FNao.setSelected(true);
+        }
+        
+        
+        if (consulta.getPaciente().getDadosMedicos().isDiabete() == true){
+            DSim.setSelected(true);
+        }
+        else {
+            DNao.setSelected(true);
+        } 
+        
+        
+        if (consulta.getPaciente().getDadosMedicos().isDoencaCardiaca() == true){
+            DoSim.setSelected(true);
+        }
+        else {
+            DoNao.setSelected(true);
+        }
+        
+        
+        txtColes.setText(consulta.getPaciente().getDadosMedicos().getColesterol());
+        txtPeso.setText(String.valueOf(consulta.getPaciente().getDadosMedicos().getPeso()));
+        txtCirc.setText(String.join(", ", consulta.getPaciente().getDadosMedicos().getCirurgias()));
+        txtAler.setText(String.join(", ", consulta.getPaciente().getDadosMedicos().getAlergias())); 
+        
     }
     
 
@@ -93,16 +138,17 @@ public class CadAutDadosMedico extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lblMed = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblTit = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastrar dados médicos");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setLocation(new java.awt.Point(0, 0));
-        setMaximumSize(new java.awt.Dimension(830, 600));
-        setMinimumSize(new java.awt.Dimension(830, 600));
-        setPreferredSize(new java.awt.Dimension(830, 700));
+        setMaximumSize(new java.awt.Dimension(830, 730));
+        setMinimumSize(new java.awt.Dimension(830, 730));
+        setPreferredSize(new java.awt.Dimension(830, 730));
         setResizable(false);
 
         panel2.setBackground(new java.awt.Color(204, 204, 204));
@@ -135,11 +181,13 @@ public class CadAutDadosMedico extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Bebe?");
 
+        BSim.setBackground(new java.awt.Color(255, 255, 255));
         bebe.add(BSim);
         BSim.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         BSim.setForeground(new java.awt.Color(0, 0, 0));
         BSim.setText("Sim");
 
+        BNao.setBackground(new java.awt.Color(255, 255, 255));
         bebe.add(BNao);
         BNao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         BNao.setForeground(new java.awt.Color(0, 0, 0));
@@ -175,11 +223,13 @@ public class CadAutDadosMedico extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("Fuma?");
 
+        FSim.setBackground(new java.awt.Color(255, 255, 255));
         fuma.add(FSim);
         FSim.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         FSim.setForeground(new java.awt.Color(0, 0, 0));
         FSim.setText("Sim");
 
+        FNao.setBackground(new java.awt.Color(255, 255, 255));
         fuma.add(FNao);
         FNao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         FNao.setForeground(new java.awt.Color(0, 0, 0));
@@ -215,11 +265,13 @@ public class CadAutDadosMedico extends javax.swing.JFrame {
         jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("Diabete?");
 
+        DSim.setBackground(new java.awt.Color(255, 255, 255));
         diabete.add(DSim);
         DSim.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         DSim.setForeground(new java.awt.Color(0, 0, 0));
         DSim.setText("Sim");
 
+        DNao.setBackground(new java.awt.Color(255, 255, 255));
         diabete.add(DNao);
         DNao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         DNao.setForeground(new java.awt.Color(0, 0, 0));
@@ -255,11 +307,13 @@ public class CadAutDadosMedico extends javax.swing.JFrame {
         jLabel16.setForeground(new java.awt.Color(0, 0, 0));
         jLabel16.setText("Doença cardiaca?");
 
+        DoSim.setBackground(new java.awt.Color(255, 255, 255));
         doenca.add(DoSim);
         DoSim.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         DoSim.setForeground(new java.awt.Color(0, 0, 0));
         DoSim.setText("Sim");
 
+        DoNao.setBackground(new java.awt.Color(255, 255, 255));
         doenca.add(DoNao);
         DoNao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         DoNao.setForeground(new java.awt.Color(0, 0, 0));
@@ -366,13 +420,6 @@ public class CadAutDadosMedico extends javax.swing.JFrame {
                 .addGap(326, 326, 326)
                 .addComponent(btnCadAtu, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(panel2Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel14))
-                .addGap(105, 105, 105))
         );
         panel2Layout.setVerticalGroup(
             panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -441,13 +488,13 @@ public class CadAutDadosMedico extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel3.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Cadastro dos dados adicionais");
-        jLabel3.setToolTipText("");
-        jLabel3.setOpaque(true);
+        lblTit.setBackground(new java.awt.Color(204, 204, 204));
+        lblTit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblTit.setForeground(new java.awt.Color(0, 0, 0));
+        lblTit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTit.setText("Cadastro dos dados adicionais");
+        lblTit.setToolTipText("");
+        lblTit.setOpaque(true);
 
         btnVoltar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnVoltar.setText("Voltar");
@@ -462,7 +509,7 @@ public class CadAutDadosMedico extends javax.swing.JFrame {
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblTit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -474,7 +521,7 @@ public class CadAutDadosMedico extends javax.swing.JFrame {
             .addGroup(panel1Layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTit, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19)
                 .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -582,41 +629,25 @@ public class CadAutDadosMedico extends javax.swing.JFrame {
     private javax.swing.ButtonGroup doenca;
     private javax.swing.ButtonGroup fuma;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JRadioButton jRadioButton13;
-    private javax.swing.JRadioButton jRadioButton14;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JRadioButton jRadioButton7;
-    private javax.swing.JRadioButton jRadioButton8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblMed;
     private javax.swing.JLabel lblPac;
+    private javax.swing.JLabel lblTit;
     private java.awt.Panel panel1;
     private java.awt.Panel panel2;
     private javax.swing.JTextArea txtAler;
