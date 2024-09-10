@@ -6,14 +6,21 @@ package InterfacesGraficas;
 
 import Gerenciador.GerenciadorAdm;
 import Modelo.Consulta;
+import Modelo.Paciente;
 import Modelo.Secretaria;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -154,6 +161,59 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    private void showInformationConsulta(Consulta consulta) {
+        JDialog dialog = new JDialog(this, consulta.getPaciente().getNome(), true);
+        dialog.setLayout(new BorderLayout());
+        dialog.setPreferredSize(new Dimension(400, 300));
+        
+        
+        JPanel infoPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(5, 5, 5, 5);
+
+        String[] labels = {"ID:", "Paciente:", "Medico:", "Data:", "Horario:", "Finalizada:", "Convenio:"};
+        String[] values = {
+            String.valueOf(consulta.getId()),
+            consulta.getPaciente().getNome(),
+            consulta.getMedico().getNome(),
+            consulta.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+            consulta.getHorario().toString(),
+            (consulta.getConsultaFinalizada() ? "Consulta finalizada" : "Consulta não finalizada"),
+            (consulta.getPaciente().getTipoConvenio().equals("PARTICULAR") ? "PARTICULAR" : "PLANO DE SAUDE")
+        };
+
+        for (int i = 0; i < labels.length; i++) {
+            JLabel label = new JLabel(labels[i]);
+            JLabel value = new JLabel(values[i]);
+
+            gbc.gridx = 0;
+            gbc.gridy = i;
+            infoPanel.add(label, gbc);
+
+            gbc.gridx = 1;
+            gbc.weightx = 1;
+            infoPanel.add(value, gbc);
+        }
+
+        JButton closeButton = new JButton("Fechar");
+        closeButton.addActionListener(e -> dialog.dispose());
+
+        dialog.add(infoPanel, BorderLayout.CENTER);
+        dialog.add(closeButton, BorderLayout.SOUTH);
+
+        dialog.pack();
+        dialog.setLocationRelativeTo(this);
+        dialog.setVisible(true);
+    }
+    
+    
+    
+    
+    
     private void backMenuPrincipalSecretaria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backMenuPrincipalSecretaria
         // TODO add your handling code here:
         MenuPrincipalSecretaria menuPrincipalSecretaira = new MenuPrincipalSecretaria(secretaria, gerenciadorAdm, em);
@@ -198,7 +258,7 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
 
                 
                 infoButton.addActionListener(e -> {
-                    //showInformationPaciente(paciente);
+                    showInformationConsulta(consulta);
                 });                
                 
                 //TO-DO

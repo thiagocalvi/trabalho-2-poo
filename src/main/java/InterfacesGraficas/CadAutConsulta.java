@@ -75,7 +75,7 @@ public class CadAutConsulta extends javax.swing.JFrame {
         
         //ISSO DAQUI.... TEM QUE REVER A LÓGICA
         //SÓ TA MANRCANDO O RETORNO
-        if(this.consulta.getTipo().equals("NORMAL")){
+        if(this.consulta.getTipo().equals(Consulta.Tipo.NORMAL)){
             normal.setSelected(true);
         }
         else{

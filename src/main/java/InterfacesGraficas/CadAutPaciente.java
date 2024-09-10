@@ -50,7 +50,7 @@ public class CadAutPaciente extends javax.swing.JFrame {
         idade.setText(Integer.toString(this.paciente.getIdade()));
         dataNascimento.setText(this.paciente.getDataNascimento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         
-        if(this.paciente.getTipoConvenio().equals("PLANOSAUDE")){
+        if(this.paciente.getTipoConvenio().equals(Paciente.tipoConvenio.PLANOSAUDE)){
             planoSaude.setSelected(true);
         }
         else{
@@ -108,6 +108,8 @@ public class CadAutPaciente extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setLocation(new java.awt.Point(0, 0));
+        setMaximumSize(new java.awt.Dimension(800, 600));
+        setMinimumSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
         jButton1.setBackground(new java.awt.Color(51, 204, 0));
