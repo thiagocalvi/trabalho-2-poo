@@ -60,16 +60,16 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
         }
         
         lblTot.setText("Total: " + tot);
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
-        jtbRel.setRowSorter(sorter);
-        
-        // Teste
-//        model.addRow(new Object[]{"Terce", "Teste", "12/12/2000"});
-//        model.addRow(new Object[]{"Segun", "Teste", "10/12/2000"});
-//        model.addRow(new Object[]{"Prim", "Teste", "01/08/1987"});
-//
 //        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
 //        jtbRel.setRowSorter(sorter);
+        
+        //Teste
+        model.addRow(new Object[]{"Terce", "Teste", "12/12/2000"});
+        model.addRow(new Object[]{"Segun", "Teste", "10/12/2000"});
+        model.addRow(new Object[]{"Prim", "Teste", "01/08/1987"});
+
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        jtbRel.setRowSorter(sorter);
                 
     }
     

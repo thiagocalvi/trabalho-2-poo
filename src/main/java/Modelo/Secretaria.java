@@ -324,4 +324,48 @@ public class Secretaria extends Funcionario {
             return "Mensagem enviada para" + consultas.size() + " pacientes";
         }
     }
+    
+    /**
+     * Obtém a lista de todos os pacientes cadastradas.
+     * 
+     * @return Lista de pacientes.
+     */
+    public List<Paciente> getAllPacientes(){
+        try {
+            this.em.getTransaction().begin();
+            List<Paciente> pacientes = this.em.createQuery("SELECT p FROM Paciente p", Paciente.class).getResultList();
+
+        
+            // Finaliza a transação
+            this.em.getTransaction().commit();
+
+            // Retorna a lista de pacientes
+            return pacientes;
+        } catch (Exception e) {
+            e.printStackTrace();
+            this.em.getTransaction().rollback();
+            throw new RuntimeException("Erro ao listar pacientes.", e);
+        }
+    }
+    
+    
+    
+    //ARRUMAR PARA LISTAR SOMENTE AS CONSULTAS DOS MEDICOS QUE A SECRETARIA GERENCIA!
+    public List<Consulta> getAllConsultas(){
+        try {
+            this.em.getTransaction().begin();
+            List<Consulta> consultas = this.em.createQuery("SELECT c FROM Consulta c", Consulta.class).getResultList();
+
+        
+            // Finaliza a transação
+            this.em.getTransaction().commit();
+
+            // Retorna a lista de consultas
+            return consultas;
+        } catch (Exception e) {
+            e.printStackTrace();
+            this.em.getTransaction().rollback();
+            throw new RuntimeException("Erro ao listar consultas.", e);
+        }
+    }
 }
