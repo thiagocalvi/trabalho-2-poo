@@ -281,23 +281,35 @@ public class GerenciadorAdm {
         return query.getResultList();
     }
     
-    // Dataset
-    // Médicos
-    String[] nomes = {"João Silva", "Maria Oliveira", "Carlos Souza", "Ana Santos", "Pedro Lima"};
-    String[] especialidades = {"Cardiologia", "Dermatologia", "Neurologia", "Pediatria", "Ortopedia"};
-    String[] telefones = {"(11) 91234-5678", "(21) 98765-4321", "(31) 99876-5432", "(41) 91234-5678", "(51) 98765-4321"};
-    String[] emails = {"joao.silva@exemplo.com", "maria.oliveira@exemplo.com", "carlos.souza@exemplo.com", "ana.santos@exemplo.com", "pedro.lima@exemplo.com"};
-    int[] crms = {123456, 234567, 345678, 456789, 567890};
-    LocalDate[] datasNascimento = {
-            LocalDate.of(1980, 1, 1),
-            LocalDate.of(1975, 5, 20),
-            LocalDate.of(1990, 8, 15),
-            LocalDate.of(1985, 3, 10),
-            LocalDate.of(1995, 12, 25)};
+    
+    public void cadastroEmMassa(){
+        
+        this.cadastrarSecretaria("João Paulo", LocalDate.of(1985, 5, 15), "555-1234", "joao.silva@example.com", "Maculino");   
 
-    // Secretarias
-    String[] nomes2 = {"João Silva", "Maria Oliveira"};
-    LocalDate[] datasNascimento2 = {LocalDate.of(1985, 5, 15), LocalDate.of(1990, 8, 20)};
-    String[] telefones2 = {"555-1234", "555-5678"};
-    String[] emails2 = {"joao.silva@example.com", "maria.oliveira@example.com"};
+        List<Secretaria> secretaria = this.buscarSecretarias("João Paulo");
+        
+// Dataset
+        // Médicos
+        String[] nomes = {"João Silva", "Maria Oliveira", "Carlos Souza", "Ana Santos", "Pedro Lima"};
+        String[] generos = {"Masculino", "Feminino","Masculino", "Feminino","Masculino"};
+        String[] especialidades = {"Cardiologia", "Dermatologia", "Neurologia", "Pediatria", "Ortopedia"};
+        String[] telefones = {"(11) 91234-5678", "(21) 98765-4321", "(31) 99876-5432", "(41) 91234-5678", "(51) 98765-4321"};
+        String[] emails = {"joao.silva@exemplo.com", "maria.oliveira@exemplo.com", "carlos.souza@exemplo.com", "ana.santos@exemplo.com", "pedro.lima@exemplo.com"};
+        int[] crms = {123456, 234567, 345678, 456789, 567890};
+        LocalDate[] datasNascimento = {
+                LocalDate.of(1980, 1, 1),
+                LocalDate.of(1975, 5, 20),
+                LocalDate.of(1990, 8, 15),
+                LocalDate.of(1985, 3, 10),
+                LocalDate.of(1995, 12, 25)};
+
+        
+        
+        for(int i = 0; i < nomes.length; i++){
+            this.cadastrarMedico(secretaria.get(0), nomes[i], datasNascimento[i], telefones[i], emails[i], especialidades[i], crms[i], generos[i]);
+        }
+        
+    }
+    
+    
 }

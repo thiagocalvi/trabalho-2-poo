@@ -7,6 +7,7 @@ package InterfacesGraficas;
 import Gerenciador.GerenciadorAdm;
 import Modelo.Secretaria;
 import javax.persistence.EntityManager;
+import javax.swing.JOptionPane;
 
 /**
  *Descrição generica
@@ -92,6 +93,11 @@ public class MenuPrincipalSecretaria extends javax.swing.JFrame {
         jButton7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton7.setForeground(new java.awt.Color(255, 255, 255));
         jButton7.setText("Enviar Mensagens");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enviarMensagems(evt);
+            }
+        });
 
         btnSair.setText("Sair da conta");
         btnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -209,6 +215,11 @@ public class MenuPrincipalSecretaria extends javax.swing.JFrame {
         menuSecretariaConsulta.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_goMenuSecretariaConsulta
+
+    private void enviarMensagems(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarMensagems
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, this.secretaria.enviarMensagensConsultasDiaSeguinte(), "Info",  JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_enviarMensagems
 
     public void setGerenciadorAdm(GerenciadorAdm gerenciadorAdm){
         this.gerenciadorAdm = gerenciadorAdm;

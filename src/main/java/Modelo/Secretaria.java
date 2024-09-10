@@ -6,6 +6,7 @@ package Modelo;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -284,6 +285,7 @@ public class Secretaria extends Funcionario {
              // Define a data para o dia seguinte
              LocalDate hoje = LocalDate.now();
              LocalDate diaSeguinte = hoje.plusDays(1);
+             
              // Recupera a lista de médicos gerenciados pela secretaria
              List<Medico> medicos = this.listarMedicos();
 
@@ -363,6 +365,37 @@ public class Secretaria extends Funcionario {
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Erro ao listar consultas.", e);
+        }
+    }
+    
+    
+    
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    public void cadastrarPacientesEmMassa() {
+        String[] nomes = {"João Silva", "Maria Souza", "Carlos Pereira", "Ana Santos", "Paula Lima"};
+        LocalDate[] datasNascimento = {
+            LocalDate.of(1985, 3, 10), 
+            LocalDate.of(1990, 7, 25), 
+            LocalDate.of(1978, 2, 18), 
+            LocalDate.of(2001, 9, 5), 
+            LocalDate.of(1995, 12, 15)
+        };
+        String[] enderecos = {"Rua A, 123", "Rua B, 456", "Rua C, 789", "Rua D, 321", "Rua E, 654"};
+        String[] telefones = {"11987654321", "11987654322", "11987654323", "11987654324", "11987654325"};
+        String[] emails = {"joao.silva@example.com", "maria.souza@example.com", "carlos.pereira@example.com", "ana.santos@example.com", "paula.lima@example.com"};
+        Paciente.tipoConvenio[] tiposConvenio = {
+            Paciente.tipoConvenio.PARTICULAR, 
+            Paciente.tipoConvenio.PLANOSAUDE, 
+            Paciente.tipoConvenio.PARTICULAR, 
+            Paciente.tipoConvenio.PLANOSAUDE, 
+            Paciente.tipoConvenio.PARTICULAR
+        };
+        String[] sexos = {"Masculino", "Feminino", "Masculino", "Feminino", "Feminino"};
+        int[] idades = {45,25,56,47,78};
+    
+        
+        for(int x = 0; x < nomes.length; x++){
+            this.cadastrarPaciente(nomes[x], datasNascimento[x], telefones[x], emails[x], enderecos[x], tiposConvenio[x].toString(), idades[x], sexos[x]);
         }
     }
 }

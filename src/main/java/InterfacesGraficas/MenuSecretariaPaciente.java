@@ -71,7 +71,7 @@ public class MenuSecretariaPaciente extends javax.swing.JFrame {
             paciente.getTelefone(),
             paciente.getEmail(),
             paciente.getEndereco(),
-            (paciente.getTipoConvenio().equals("PARTICULAR") ? "PARTICULAR" : "PLANO DE SAUDE")
+            (paciente.getTipoConvenio().equals(Paciente.tipoConvenio.PARTICULAR) ? "PARTICULAR" : "PLANO DE SAUDE")
         };
 
         for (int i = 0; i < labels.length; i++) {

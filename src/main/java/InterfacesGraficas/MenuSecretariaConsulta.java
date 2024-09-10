@@ -5,9 +5,7 @@
 package InterfacesGraficas;
 
 import Gerenciador.GerenciadorAdm;
-import Modelo.Consulta;
-import Modelo.Paciente;
-import Modelo.Secretaria;
+import Modelo.*;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -175,7 +173,7 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(5, 5, 5, 5);
 
-        String[] labels = {"ID:", "Paciente:", "Medico:", "Data:", "Horario:", "Finalizada:", "Convenio:"};
+        String[] labels = {"ID:", "Paciente:", "Medico:", "Data:", "Horario:", "Finalizada:", "Convenio:", "Tipo consulta"};
         String[] values = {
             String.valueOf(consulta.getId()),
             consulta.getPaciente().getNome(),
@@ -183,7 +181,8 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
             consulta.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
             consulta.getHorario().toString(),
             (consulta.getConsultaFinalizada() ? "Consulta finalizada" : "Consulta não finalizada"),
-            (consulta.getPaciente().getTipoConvenio().equals("PARTICULAR") ? "PARTICULAR" : "PLANO DE SAUDE")
+            (consulta.getPaciente().getTipoConvenio().equals(Paciente.tipoConvenio.PARTICULAR) ? "PARTICULAR" : "PLANO DE SAUDE"),
+            (consulta.getTipo().equals(Consulta.Tipo.NORMAL) ? "NORMAL" : "RETORNO")
         };
 
         for (int i = 0; i < labels.length; i++) {
@@ -252,6 +251,8 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
                 //se cadastar um consulta sem paciente ou sem medico vai dar ruim aqui!
                 JLabel nameLabel = new JLabel("Nome Paciente: " + consulta.getPaciente().getNome());
                 
+                JLabel data =  new JLabel("Data " + consulta.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                
                 JButton updateButton = new JButton("Atualizar");
                 JButton deleteButton = new JButton("Deletar");
                 JButton infoButton = new JButton("Informações");
@@ -298,7 +299,7 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
                 });
 
                 card_consulta.add(nameLabel);
-                //card_paciente.add(specialtyLabel);
+                card_consulta.add(data);
                 card_consulta.add(updateButton);
                 card_consulta.add(deleteButton);
                 card_consulta.add(infoButton);

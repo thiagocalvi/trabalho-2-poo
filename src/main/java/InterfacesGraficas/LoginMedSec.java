@@ -226,9 +226,11 @@ public class LoginMedSec extends javax.swing.JFrame {
                         .setParameter("nome", texto).getSingleResult();
 
                 this.em.getTransaction().commit();
-
+                
                 JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!", "Informações", JOptionPane.INFORMATION_MESSAGE);
                 this.secretaria.setEm(em);
+                //Ação somente para fins de teste
+                this.cadMassa();
                 MenuPrincipalSecretaria menuPrincipalSecretaria = new MenuPrincipalSecretaria(this.secretaria, this.gerenciadorAdm, this.em);
                 menuPrincipalSecretaria.setVisible(true);
                 this.dispose();
@@ -236,6 +238,20 @@ public class LoginMedSec extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEntrarActionPerformed
 
+    //Ação somente para fins de teste
+    public void cadMassa(){
+                    int dialogResult = JOptionPane.showConfirmDialog(this, 
+                                "Um pré cadastro de pacientes está disponivel, gostaria de usar? \n"
+                                        + "se usar mais de uma vez vai cadastrar geristros duplicados!", 
+                                "Pre cadastro", 
+                                JOptionPane.YES_NO_OPTION);
+                        if (dialogResult == JOptionPane.YES_OPTION){
+                            this.secretaria.cadastrarPacientesEmMassa();
+                        } 
+                }
+    
+    
+    
     /**
      * Retorna à tela inicial.
      * 

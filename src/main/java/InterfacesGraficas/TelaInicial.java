@@ -6,6 +6,7 @@ package InterfacesGraficas;
 
 import Gerenciador.GerenciadorAdm;
 import javax.persistence.EntityManager;
+import javax.swing.JOptionPane;
 
 /**
  *Descrição generica
@@ -89,7 +90,17 @@ public class TelaInicial extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-   
+    //Ação somente para fins de teste
+        public void cadMassa(){
+            int dialogResult = JOptionPane.showConfirmDialog(this, 
+                        "Um pré cadastro de medicos e secretarias está disponivel, gostaria de usar? \n"
+                                + "se usar mais de uma vez vai cadastrar geristros duplicados!", 
+                        "Pre cadastro", 
+                        JOptionPane.YES_NO_OPTION);
+                if (dialogResult == JOptionPane.YES_OPTION){
+                    gerenciadorAdm.cadastroEmMassa();
+                } 
+        }
     
     // Ações
     private void btnMed_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMed_Action
@@ -101,6 +112,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void btnAdm_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdm_Action
         MenuPrincipalAdm menuPrincipalAdm = new MenuPrincipalAdm(gerenciadorAdm, em);
+        this.cadMassa();
         menuPrincipalAdm.setVisible(true);
         this.dispose();
 

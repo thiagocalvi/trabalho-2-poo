@@ -57,7 +57,7 @@ public class CadAutPaciente extends javax.swing.JFrame {
            particular.setSelected(true);
         }
         
-        if(this.paciente.getSexo().equals("Maculino")){
+        if(this.paciente.getSexo().equals("Masculino")){
             masculino.setSelected(true);
         }
         else{
@@ -176,7 +176,7 @@ public class CadAutPaciente extends javax.swing.JFrame {
         labell4344.setText("Sexo");
 
         sexo.add(masculino);
-        masculino.setText("Maculino");
+        masculino.setText("Masculino");
 
         sexo.add(feminino);
         feminino.setText("Feminino");
@@ -344,7 +344,7 @@ public class CadAutPaciente extends javax.swing.JFrame {
         }
         
         if(masculino.isSelected()){
-           genero_p = "Maculino";
+           genero_p = "Masculino";
         }
         else{
             genero_p = "Feminino";
