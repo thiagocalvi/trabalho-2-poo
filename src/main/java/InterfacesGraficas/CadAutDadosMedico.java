@@ -550,23 +550,35 @@ public class CadAutDadosMedico extends javax.swing.JFrame {
         
         if (FSim.isSelected()){
             fuma = true;
+        } 
+        else {
+            fuma = false;
         }
         
         
         if (BSim.isSelected()){
             bebe = true;
         }
+        else {
+            bebe = false;
+        }
 
 
         if (DSim.isSelected()){
             diabete = true;
+        }
+        else {
+            diabete = false;
         }
 
 
         if (DoSim.isSelected()){
             doenca = true;
         }
-
+        else {
+            doenca = false;
+        }
+        
 
         String colesterol = txtColes.getText();
         float peso = Float.parseFloat(txtPeso.getText().replace(",", "."));

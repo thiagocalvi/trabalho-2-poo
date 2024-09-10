@@ -28,6 +28,7 @@ public class CadAutPaciente extends javax.swing.JFrame {
         this.gerenciadorAdm = gerenciadorAdm;
         this.em = em;
         lblNome1.setText(" " + secretaria.getNome());
+        setLocationRelativeTo(null);
     }
 
     

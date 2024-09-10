@@ -166,7 +166,15 @@ public class ConsultasDoDia extends javax.swing.JFrame {
             new String [] {
                 "Paciente", "Data", "Horário"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tbCons);
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
