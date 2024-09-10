@@ -69,7 +69,7 @@ public class Consulta {
     /**
      * Paciente que será atendido na consulta.
      */
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 

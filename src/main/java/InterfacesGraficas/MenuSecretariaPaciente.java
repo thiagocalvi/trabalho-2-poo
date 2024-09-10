@@ -306,8 +306,10 @@ public class MenuSecretariaPaciente extends javax.swing.JFrame {
     }
     
     
+    //MUDAR ESSA FUNÇÃO
      private void updateSearch() {
         //Isso não é nenhum pouco eficiente!
+        
         String searchText = jTextField1.getText().toLowerCase();
         this.allPacientes = this.secretaria.getAllPacientes();
         List<Paciente> filteredPacientes = allPacientes.stream()

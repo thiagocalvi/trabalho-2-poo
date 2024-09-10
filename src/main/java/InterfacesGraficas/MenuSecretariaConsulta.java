@@ -83,6 +83,11 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setText("Gerar relatório: Consulta do dia seguinte");
         jButton6.setToolTipText("");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goConsultasDiaSeguinte(evt);
+            }
+        });
 
         jButton1.setText("Voltar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -227,6 +232,14 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
         cadAutConsulta.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_goCadAutConsulta
+
+    private void goConsultasDiaSeguinte(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goConsultasDiaSeguinte
+        // TODO add your handling code here:
+        ConsultasDiaSeguinteSecretaria consultaDiaSeguinte = new ConsultasDiaSeguinteSecretaria(secretaria, gerenciadorAdm, em);
+        consultaDiaSeguinte.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_goConsultasDiaSeguinte
     
      private void renderConsultas(List<Consulta> consultasToRender) {
 

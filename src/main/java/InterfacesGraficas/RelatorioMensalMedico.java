@@ -49,9 +49,9 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
         int anoReferencia = LocalDate.now().getYear();
         int mesReferencia = LocalDate.now().getMonthValue();
         
-        String resultado = ("SELECT c from Consulta c WHERE c.consultaFinalizada = true" +
+        String resultado = ("SELECT c from Consulta c WHERE c.consultaFinalizada = true " +
                             "AND FUNCTION('YEAR', c.data) = :anoReferencia " +
-                            "AND FUNCTION('MONTH', c.data) = :mesReferencia" +
+                            "AND FUNCTION('MONTH', c.data) = :mesReferencia " +
                             "ORDER BY c.data ASC");
         
         TypedQuery<Consulta> query = em.createQuery(resultado, Consulta.class);
@@ -140,7 +140,15 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
             new String [] {
                 "Paciente", "TipoConvenio", "Data"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jtbRel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jtbRel.setShowGrid(true);
         jScrollPane3.setViewportView(jtbRel);

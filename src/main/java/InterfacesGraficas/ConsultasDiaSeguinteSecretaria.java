@@ -5,7 +5,7 @@
 package InterfacesGraficas;
 
 import Gerenciador.GerenciadorAdm;
-import Modelo.Medico;
+import Modelo.Consulta;
 import Modelo.Secretaria;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -15,19 +15,19 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author thiago
  */
-public class ListaMedicosSecretaria extends javax.swing.JFrame {
+public class ConsultasDiaSeguinteSecretaria extends javax.swing.JFrame {
     private Secretaria secretaria;
     private EntityManager em;
     private GerenciadorAdm gerenciadorAdm;
     /**
-     * Creates new form ListaMedicosSecretaria
+     * Creates new form ConsultasDiaSeguinteSecretaria
      */
-    public ListaMedicosSecretaria(Secretaria secretaria, EntityManager em, GerenciadorAdm gerenciadorAdm) {
+    public ConsultasDiaSeguinteSecretaria(Secretaria secretaria, GerenciadorAdm gerenciadorAdm, EntityManager em) {
         initComponents();
         this.secretaria = secretaria;
         this.em = em;
         this.gerenciadorAdm = gerenciadorAdm;
-        setTableMedicos();
+        setTable();
     }
 
     /**
@@ -40,21 +40,19 @@ public class ListaMedicosSecretaria extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        label1 = new java.awt.Label();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabela_medicos = new javax.swing.JTable();
+        tabela_consulta = new javax.swing.JTable();
+        label1 = new java.awt.Label();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Relatório - Consultas dia seguinte");
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
-        label1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
-        label1.setText("Medicos");
-
-        tabela_medicos.setModel(new javax.swing.table.DefaultTableModel(
+        tabela_consulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -62,7 +60,7 @@ public class ListaMedicosSecretaria extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Nome", "Especialidade", "CRM"
+                "Paciente", "Horario", "Title 3"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -73,12 +71,15 @@ public class ListaMedicosSecretaria extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tabela_medicos);
+        jScrollPane1.setViewportView(tabela_consulta);
+
+        label1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        label1.setText("Consultas Dia Seguinte");
 
         jButton1.setText("Voltar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backMenuPrincipalSecretaria(evt);
+                backMenuSecretariaConsulta(evt);
             }
         });
 
@@ -86,27 +87,24 @@ public class ListaMedicosSecretaria extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(318, 318, 318)
+                .addGap(181, 181, 181)
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(331, Short.MAX_VALUE))
+                .addContainerGap(196, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addGap(48, 48, 48)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -125,29 +123,30 @@ public class ListaMedicosSecretaria extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void backMenuPrincipalSecretaria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backMenuPrincipalSecretaria
-        // TODO add your handling code here:
-        MenuPrincipalSecretaria menuPrincipalSecretaria = new MenuPrincipalSecretaria( secretaria,  gerenciadorAdm,  em);
-        menuPrincipalSecretaria.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_backMenuPrincipalSecretaria
-
-    public void setTableMedicos(){
-        List<Medico> medicos = this.secretaria.listarMedicos();
+    public void setTable(){
+        List<Consulta> consultas = this.secretaria.gerarRelatorioConsultasDiaSeguinte();
         
-        DefaultTableModel model = (DefaultTableModel)tabela_medicos.getModel(); 
+        DefaultTableModel model = (DefaultTableModel)tabela_consulta.getModel(); 
         model.setRowCount(0);
-        for (Medico medico : medicos){
-           Object[] linha = {medico.getNome(), medico.getEspecialidade(), Integer.toString(medico.getCrm())};
+        for (Consulta consulta : consultas){
+           Object[] linha = {consulta.getPaciente().getNome(), consulta.getHorario(), consulta.getMedico().getNome()};
            model.addRow(linha);
        }
     }
+    
+    
+    private void backMenuSecretariaConsulta(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backMenuSecretariaConsulta
+        // TODO add your handling code here:
+        MenuSecretariaConsulta menuSecretariaConsulta = new MenuSecretariaConsulta(secretaria, gerenciadorAdm, em);
+        menuSecretariaConsulta.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_backMenuSecretariaConsulta
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private java.awt.Label label1;
-    private javax.swing.JTable tabela_medicos;
+    private javax.swing.JTable tabela_consulta;
     // End of variables declaration//GEN-END:variables
 }

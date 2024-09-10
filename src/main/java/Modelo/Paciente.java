@@ -34,7 +34,7 @@ public class Paciente {
     /**
      * Dados médicos associados ao paciente.
      */
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "dados_medicos_id")
     private DadosMedicos dadosMedicos;
 

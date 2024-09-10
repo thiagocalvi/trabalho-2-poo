@@ -35,7 +35,7 @@ public class DadosMedicos {
     /**
      * Paciente ao qual estes dados médicos estão associados.
      */
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
