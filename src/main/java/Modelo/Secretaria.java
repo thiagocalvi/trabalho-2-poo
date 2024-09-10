@@ -281,13 +281,14 @@ public class Secretaria extends Funcionario {
      */
     public List<Consulta> gerarRelatorioConsultasDiaSeguinte() {
          try {
-             this.em.getTransaction().begin();
              // Define a data para o dia seguinte
              LocalDate hoje = LocalDate.now();
              LocalDate diaSeguinte = hoje.plusDays(1);
              
              // Recupera a lista de médicos gerenciados pela secretaria
              List<Medico> medicos = this.listarMedicos();
+             
+             this.em.getTransaction().begin();
 
              // Consulta para obter todas as consultas agendadas para o dia seguinte
              List<Consulta> consultas = this.em.createQuery(
@@ -297,6 +298,7 @@ public class Secretaria extends Funcionario {
                         .getResultList();
 
              this.em.getTransaction().commit();
+             
              return consultas;
              
         } catch (Exception e) {
@@ -354,16 +356,22 @@ public class Secretaria extends Funcionario {
     
     public List<Consulta> getAllConsultas(){
         try {
+             
             List<Medico> medicos = this.listarMedicos(); // Chame listarMedicos fora da consulta
             if (medicos == null || medicos.isEmpty()) {
                 return List.of(); // Retorna uma lista vazia se não houver médicos
             }
 
-            return this.em.createQuery("SELECT c FROM Consulta c WHERE c.medico IN :medicos", Consulta.class)
+            this.em.getTransaction().begin();
+            List<Consulta> consultas = this.em.createQuery("SELECT c FROM Consulta c WHERE c.medico IN :medicos", Consulta.class)
                           .setParameter("medicos", medicos)
                           .getResultList();
+            
+            this.em.getTransaction().commit();
+            return consultas;
         } catch (Exception e) {
             e.printStackTrace();
+            this.em.getTransaction().rollback();
             throw new RuntimeException("Erro ao listar consultas.", e);
         }
     }

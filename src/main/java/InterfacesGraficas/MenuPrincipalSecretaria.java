@@ -88,6 +88,11 @@ public class MenuPrincipalSecretaria extends javax.swing.JFrame {
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setText("Lista de Médicos");
         jButton6.setToolTipText("");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goListarMedicos(evt);
+            }
+        });
 
         jButton7.setBackground(new java.awt.Color(102, 102, 255));
         jButton7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -220,6 +225,13 @@ public class MenuPrincipalSecretaria extends javax.swing.JFrame {
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(null, this.secretaria.enviarMensagensConsultasDiaSeguinte(), "Info",  JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_enviarMensagems
+
+    private void goListarMedicos(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goListarMedicos
+        // TODO add your handling code here:
+        ListaMedicosSecretaria listaMedicosSecretaria = new ListaMedicosSecretaria(secretaria, em, gerenciadorAdm);
+        listaMedicosSecretaria.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_goListarMedicos
 
     public void setGerenciadorAdm(GerenciadorAdm gerenciadorAdm){
         this.gerenciadorAdm = gerenciadorAdm;
