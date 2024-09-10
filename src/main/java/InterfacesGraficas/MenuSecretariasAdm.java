@@ -30,6 +30,7 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
         this.em = em;
         this.renderSecretarias(gerenciadorAdm.getAllSecretarias());
         setupSearchField();
+        setLocationRelativeTo(null);
     } 
 
     /**
@@ -53,7 +54,7 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Adm - alterações");
-        setLocation(new java.awt.Point(400, 100));
+        setLocation(new java.awt.Point(0, 0));
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setResizable(false);
@@ -208,12 +209,30 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
             this.box_secretarias.add(noSecretariasLabel);
         } else {
             for (Secretaria secretaria : secretariasToRender) {
-                JPanel card_secretaria = new JPanel();
-                card_secretaria.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
+                
+                JPanel card_secretaria = new JPanel(new GridBagLayout());
+                GridBagConstraints gbc = new GridBagConstraints();
                 card_secretaria.setMaximumSize(new Dimension(780, 40));
 
+                // Configurar constraints para o nameLabel
+                gbc.gridx = 0;
+                gbc.gridy = 0;
+                gbc.anchor = GridBagConstraints.WEST;
+                gbc.insets = new Insets(5, 5, 5, 5);
+                
                 JLabel nameLabel = new JLabel("Nome: " + secretaria.getNome());
-
+                nameLabel.setPreferredSize(new Dimension(420, 20));             // Limitar o tamanho
+                nameLabel.setToolTipText(secretaria.getNome());                 // Mostrar nome completo ao passar o mouse
+                card_secretaria.add(nameLabel, gbc);
+                
+                
+                // Configurar constraints para o buttonPanel
+                gbc.gridx = 2;                                                  // Mover para a segunda coluna
+                gbc.weightx = 1.0;                                              // O botão empurrará o conteúdo para a esquerda
+                gbc.anchor = GridBagConstraints.EAST;                           // Alinhar à direita
+                JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
+                
+                
                 JButton updateButton = new JButton("Atualizar");
                 JButton deleteButton = new JButton("Deletar");
                 JButton infoButton = new JButton("Informações");
@@ -260,10 +279,10 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
                 
                 });
 
-                card_secretaria.add(nameLabel);
-                card_secretaria.add(updateButton);
-                card_secretaria.add(deleteButton);
-                card_secretaria.add(infoButton);
+                buttonPanel.add(updateButton);
+                buttonPanel.add(deleteButton);
+                buttonPanel.add(infoButton);
+                card_secretaria.add(buttonPanel, gbc);
 
 
                 this.box_secretarias.add(card_secretaria);
@@ -289,31 +308,19 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_goCadastrarSecretaria
     
- 
-    private void updateSearch() {
-       String searchText = jTextField1.getText().toLowerCase();
-       allSecretarias = gerenciadorAdm.getAllSecretarias();
-       List<Secretaria> filteredSecretarias = allSecretarias.stream()
-           .filter(secretaria -> secretaria.getNome().toLowerCase().contains(searchText))
-           .collect(Collectors.toList());
-
-       renderSecretarias(filteredSecretarias);
-   }
     
-    /*
-    Assim não funciona corretamente, o textFild fica bugado
-    O sentidod da escrita é invertido
+    
     private void updateSearch() {
         String searchText = jTextField1.getText().trim();
-        List<Medico> filteredMedicos;
+        List<Secretaria> filteredMedicos;
         if (searchText.isEmpty()) {
-            filteredMedicos = gerenciadorAdm.getAllMedicos();
+            filteredMedicos = gerenciadorAdm.getAllSecretarias();
         } else {
-            filteredMedicos = gerenciadorAdm.buscarMedicos(searchText);
+            filteredMedicos = gerenciadorAdm.buscarSecretarias(searchText);
         }
-        renderMedicos(filteredMedicos);
+        renderSecretarias(filteredMedicos);
     }
-    */
+    
     
     private void setupSearchField(){
         jTextField1.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {

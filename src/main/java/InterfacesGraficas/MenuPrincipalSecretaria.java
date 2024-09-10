@@ -19,11 +19,13 @@ public class MenuPrincipalSecretaria extends javax.swing.JFrame {
     private GerenciadorAdm gerenciadorAdm;
 
     // Construtor
-    public MenuPrincipalSecretaria(Secretaria secretaria, EntityManager em) {
+    public MenuPrincipalSecretaria(Secretaria secretaria, GerenciadorAdm gerenciadorAdm, EntityManager em) {
         this.secretaria = secretaria;
         this.em = em;
+        this.gerenciadorAdm = gerenciadorAdm;
         initComponents();
         lblNome.setText("  " + secretaria.getNome());
+        setLocationRelativeTo(null);
     }
 
 
@@ -53,7 +55,7 @@ public class MenuPrincipalSecretaria extends javax.swing.JFrame {
         setTitle("Menu Secretaria");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setLocation(new java.awt.Point(525, 150));
+        setLocation(new java.awt.Point(0, 0));
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setResizable(false);
@@ -64,11 +66,21 @@ public class MenuPrincipalSecretaria extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Consultas");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goMenuSecretariaConsulta(evt);
+            }
+        });
 
         jButton5.setBackground(new java.awt.Color(102, 102, 255));
         jButton5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("Pacientes");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goMenuSecretariaPaciente(evt);
+            }
+        });
 
         jButton6.setBackground(new java.awt.Color(102, 102, 255));
         jButton6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -183,6 +195,20 @@ public class MenuPrincipalSecretaria extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_btnSair_Action
+
+    private void goMenuSecretariaPaciente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goMenuSecretariaPaciente
+        // TODO add your handling code here:
+        MenuSecretariaPaciente menuSecretariaPaciente = new MenuSecretariaPaciente(secretaria, gerenciadorAdm, em);
+        menuSecretariaPaciente.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_goMenuSecretariaPaciente
+
+    private void goMenuSecretariaConsulta(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goMenuSecretariaConsulta
+        // TODO add your handling code here:
+        MenuSecretariaConsulta menuSecretariaConsulta = new MenuSecretariaConsulta(secretaria, gerenciadorAdm, em);
+        menuSecretariaConsulta.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_goMenuSecretariaConsulta
 
     public void setGerenciadorAdm(GerenciadorAdm gerenciadorAdm){
         this.gerenciadorAdm = gerenciadorAdm;

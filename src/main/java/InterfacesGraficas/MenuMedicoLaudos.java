@@ -28,6 +28,7 @@ public class MenuMedicoLaudos extends javax.swing.JFrame {
         this.em = em;
         initComponents();
 //        colocaNome();
+        setLocationRelativeTo(null);
     }
 
     
@@ -58,12 +59,13 @@ public class MenuMedicoLaudos extends javax.swing.JFrame {
         setTitle("Médico - Menu laudos");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setLocation(new java.awt.Point(400, 100));
+        setLocation(new java.awt.Point(0, 0));
         setMaximumSize(new java.awt.Dimension(700, 450));
         setMinimumSize(new java.awt.Dimension(700, 450));
         setPreferredSize(new java.awt.Dimension(700, 550));
+        setResizable(false);
 
-        panel2.setBackground(new java.awt.Color(0, 153, 153));
+        panel2.setBackground(new java.awt.Color(204, 204, 204));
 
         btnRec.setBackground(new java.awt.Color(255, 255, 255));
         btnRec.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -155,9 +157,9 @@ public class MenuMedicoLaudos extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel3.setBackground(new java.awt.Color(0, 153, 153));
+        jLabel3.setBackground(new java.awt.Color(204, 204, 204));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Laudos médicos");
         jLabel3.setToolTipText("");

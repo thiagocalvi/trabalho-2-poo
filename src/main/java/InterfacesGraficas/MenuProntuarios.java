@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -43,11 +44,12 @@ public class MenuProntuarios extends javax.swing.JFrame {
         this.consulta = consulta;
         this.em = em;
         initComponents();
-//        colocaNome();
+        setNome();
         listarProntuario();
+        setLocationRelativeTo(null);
     }
 
-    private void colocaNome(){
+    private void setNome(){
         lblPac.setText(" " + consulta.getPaciente().getNome());
         lblMed.setText(" " + medico.getNome());
     }
@@ -56,6 +58,7 @@ public class MenuProntuarios extends javax.swing.JFrame {
         
         String prontuario = "SELECT p FROM Prontuario p JOIN p.consulta c " +
               "WHERE c.medico = :medico AND c.paciente = :paciente";
+        
         TypedQuery<Prontuario> query = em.createQuery(prontuario, Prontuario.class);
         query.setParameter("medico", consulta.getMedico());
         query.setParameter("paciente", consulta.getPaciente());
@@ -68,7 +71,7 @@ public class MenuProntuarios extends javax.swing.JFrame {
     private void showInformationProntuario(Prontuario prontuario) {
         JDialog dialog = new JDialog(this, prontuario.getPaciente().getNome(), true);
         dialog.setLayout(new BorderLayout());
-        dialog.setPreferredSize(new Dimension(400, 300));
+        dialog.setPreferredSize(new Dimension(500, 400));
         
         
         JPanel infoPanel = new JPanel(new GridBagLayout());
@@ -111,7 +114,6 @@ public class MenuProntuarios extends javax.swing.JFrame {
         dialog.setVisible(true);
     }  
    
-    // FALTA TERMINAR!!!
     
     private void renderProntuarios(List<Prontuario> prontuarioToRender){
         
@@ -127,14 +129,33 @@ public class MenuProntuarios extends javax.swing.JFrame {
         if (prontuarioToRender.isEmpty()) {
             JLabel noProntuariosLabel = new JLabel("Não há prontuarios cadastrados.");
             this.boxProntuario.add(noProntuariosLabel);
-        } else {    
+        } else {       
             for (Prontuario prontuario : prontuarioToRender) {
-                JPanel card_prontuario = new JPanel();
-                card_prontuario.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
+                
+                JPanel card_prontuario = new JPanel(new GridBagLayout());
+                GridBagConstraints gbc = new GridBagConstraints();
                 card_prontuario.setMaximumSize(new Dimension(780, 40));
 
-                JLabel nameLabel = new JLabel("Nome: " + medico.getNome());
-                JLabel specialtyLabel = new JLabel("Especialidade: " + medico.getEspecialidade());
+                // Configurar constraints para o nameLabel
+                gbc.gridx = 0;
+                gbc.gridy = 0;
+                gbc.anchor = GridBagConstraints.WEST;
+                gbc.insets = new Insets(5, 5, 5, 5);
+                
+                JLabel tipoLabel = new JLabel("Tipo: " + prontuario.getConsulta().getTipo().toString());
+                tipoLabel.setPreferredSize(new Dimension(215, 20));             // Limitar o tamanho
+                card_prontuario.add(tipoLabel, gbc);                
+                
+                gbc.gridx = 1;
+                JLabel dataLabel = new JLabel("Data: " + prontuario.getConsulta().getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString());
+                dataLabel.setPreferredSize(new Dimension(215, 20));             // Limitar o tamanho
+                card_prontuario.add(dataLabel, gbc);
+                
+                // Configurar constraints para o buttonPanel
+                gbc.gridx = 2;                                                  // Mover para a terceira coluna
+                gbc.weightx = 1.0;                                              // O botão empurrará o conteúdo para a esquerda
+                gbc.anchor = GridBagConstraints.EAST;                           // Alinhar à direita
+                JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
                 
                 JButton updateButton = new JButton("Atualizar");
                 JButton deleteButton = new JButton("Deletar");
@@ -146,7 +167,6 @@ public class MenuProntuarios extends javax.swing.JFrame {
                 
                 updateButton.addActionListener(e -> {
                     CadAutProntuario cadAutProntuario = new CadAutProntuario(gerenciadorAdm, medico, consulta, em);
-                    cadAutProntuario.setProntuario(prontuario);
                     cadAutProntuario.setAtualizar("Atualizar");
                     cadAutProntuario.setVisible(true);
                     this.dispose();
@@ -175,11 +195,26 @@ public class MenuProntuarios extends javax.swing.JFrame {
                         }
                     }
                 });                
+
                 
+                if (consulta.getProntuario().equals(prontuario)){
+                    buttonPanel.add(updateButton);
+                    buttonPanel.add(deleteButton);
+                    buttonPanel.add(infoButton);
+                }
+                else {
+                    buttonPanel.add(deleteButton);
+                    buttonPanel.add(infoButton);
+                }   
                 
-                
+                card_prontuario.add(buttonPanel, gbc);
+
+                this.boxProntuario.add(card_prontuario);
+                this.boxProntuario.add(Box.createRigidArea(new Dimension(0, 10)));
             }
         }
+        this.boxProntuario.revalidate();
+        this.boxProntuario.repaint();
     }
     
     
@@ -195,16 +230,17 @@ public class MenuProntuarios extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         lblPac = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        boxProntuario = new javax.swing.JPanel();
         btnAddPron = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        boxProntuario = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Médico - Prontuário");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setLocation(new java.awt.Point(400, 100));
-        setUndecorated(true);
+        setLocation(new java.awt.Point(0, 0));
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -239,14 +275,14 @@ public class MenuProntuarios extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        jLabel5.setBackground(new java.awt.Color(255, 255, 0));
+        jLabel5.setBackground(new java.awt.Color(204, 204, 204));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Prontuário do paciente");
         jLabel5.setOpaque(true);
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 0));
+        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
         lblPac.setBackground(new java.awt.Color(255, 255, 255));
         lblPac.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -257,20 +293,6 @@ public class MenuProntuarios extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Paciente:");
-
-        boxProntuario.setBackground(new java.awt.Color(255, 255, 255));
-        boxProntuario.setForeground(new java.awt.Color(0, 0, 0));
-
-        javax.swing.GroupLayout boxProntuarioLayout = new javax.swing.GroupLayout(boxProntuario);
-        boxProntuario.setLayout(boxProntuarioLayout);
-        boxProntuarioLayout.setHorizontalGroup(
-            boxProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        boxProntuarioLayout.setVerticalGroup(
-            boxProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 320, Short.MAX_VALUE)
-        );
 
         btnAddPron.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAddPron.setText("Adicionar prontuário");
@@ -288,12 +310,31 @@ public class MenuProntuarios extends javax.swing.JFrame {
             }
         });
 
+        boxProntuario.setBackground(new java.awt.Color(255, 255, 255));
+        boxProntuario.setForeground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout boxProntuarioLayout = new javax.swing.GroupLayout(boxProntuario);
+        boxProntuario.setLayout(boxProntuarioLayout);
+        boxProntuarioLayout.setHorizontalGroup(
+            boxProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 788, Short.MAX_VALUE)
+        );
+        boxProntuarioLayout.setVerticalGroup(
+            boxProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 334, Short.MAX_VALUE)
+        );
+
+        jScrollPane1.setViewportView(boxProntuario);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -304,15 +345,9 @@ public class MenuProntuarios extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(btnAddPron, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 24, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(boxProntuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 24, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addComponent(jScrollPane1)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,8 +359,8 @@ public class MenuProntuarios extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnAddPron, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(boxProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -367,11 +402,22 @@ public class MenuProntuarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar_Action
-        // TODO add your handling code here:
+        ConsultaDoPaciente consultaDoPaciente = new ConsultaDoPaciente(gerenciadorAdm, medico, consulta, em);
+        consultaDoPaciente.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnVoltar_Action
 
     private void btnAddPron_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPron_Action
-        // TODO add your handling code here:
+        if (consulta.getProntuario() != null){
+            CadAutProntuario cadAutProntuario = new CadAutProntuario(gerenciadorAdm, medico, consulta, em);
+            cadAutProntuario.setVisible(true);
+            this.dispose();
+        } 
+        else {
+            JOptionPane.showMessageDialog(null, "Você já 'CADASTROU' um prontuário!\n Limite de 1 cadastro por consulta!", 
+                                                "Aviso", 
+                                                JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnAddPron_Action
 
 
@@ -384,6 +430,7 @@ public class MenuProntuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblMed;
     private javax.swing.JLabel lblPac;
     private java.awt.Panel panel1;

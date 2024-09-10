@@ -57,7 +57,7 @@ public class LoginMedSec extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(480, 500));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(70, 73, 75));
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
         jPanel1.setPreferredSize(new java.awt.Dimension(300, 300));
 
         btnEntrar.setText("Entrar");
@@ -229,8 +229,7 @@ public class LoginMedSec extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!", "Informações", JOptionPane.INFORMATION_MESSAGE);
                 this.secretaria.setEm(em);
-                MenuPrincipalSecretaria menuPrincipalSecretaria = new MenuPrincipalSecretaria(this.secretaria, em);
-                menuPrincipalSecretaria.setGerenciadorAdm(this.gerenciadorAdm);
+                MenuPrincipalSecretaria menuPrincipalSecretaria = new MenuPrincipalSecretaria(this.secretaria, this.gerenciadorAdm, this.em);
                 menuPrincipalSecretaria.setVisible(true);
                 this.dispose();
             }

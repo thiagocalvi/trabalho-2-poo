@@ -24,6 +24,7 @@ public class MenuPrincipalMedico extends javax.swing.JFrame {
         this.medico = medico;
         this.em = em;
         initComponents();
+        setLocationRelativeTo(null);
         lblNome.setText(" " + medico.getNome());
     }
 
@@ -42,9 +43,10 @@ public class MenuPrincipalMedico extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu Médico");
-        setLocation(new java.awt.Point(450, 150));
+        setLocation(new java.awt.Point(0, 0));
         setMaximumSize(new java.awt.Dimension(600, 500));
         setMinimumSize(new java.awt.Dimension(600, 500));
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 

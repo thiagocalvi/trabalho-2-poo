@@ -32,6 +32,7 @@ public class CadAutSecretaria extends javax.swing.JFrame {
         this.gerenciadorAdm = gerenciadorAdm;
         this.em = em;
         initComponents();
+        setLocationRelativeTo(null);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,8 +64,7 @@ public class CadAutSecretaria extends javax.swing.JFrame {
         setTitle("Cadastrar Secretaria");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setLocation(new java.awt.Point(525, 150));
-        setMaximumSize(new java.awt.Dimension(780, 500));
+        setLocation(new java.awt.Point(0, 0));
         setMinimumSize(new java.awt.Dimension(780, 500));
         setResizable(false);
 
@@ -77,7 +77,7 @@ public class CadAutSecretaria extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel6.setText("Nome:");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -104,7 +104,7 @@ public class CadAutSecretaria extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Genero:");
+        jLabel11.setText("Gênero:");
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));
@@ -155,24 +155,12 @@ public class CadAutSecretaria extends javax.swing.JFrame {
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGap(331, 331, 331)
                         .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 266, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                 .addContainerGap(23, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(nome_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel10))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(telefone_secretaria)
-                                    .addComponent(email_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -182,7 +170,17 @@ public class CadAutSecretaria extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(genero_m_secretaria)
                                 .addGap(18, 18, 18)
-                                .addComponent(genero_f_secretaria)))
+                                .addComponent(genero_f_secretaria))
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(email_secretaria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
+                                    .addComponent(telefone_secretaria, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(nome_secretaria))))
                         .addGap(21, 21, 21))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                         .addComponent(voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -291,14 +289,14 @@ public class CadAutSecretaria extends javax.swing.JFrame {
             genero = "Feminino";
         }
         
-        MenuSecretariasAdm menuSecretariaAdm = new MenuSecretariasAdm(gerenciadorAdm, em);
         if (this.Cad_Atu.equals("Cadastrar")){
             int dialogResult = JOptionPane.showConfirmDialog(this, 
-                    "Tem certeza que deseja cadastrar secretaria" + nome + "?", 
+                    "Tem certeza que deseja cadastrar secretaria " + nome + "?", 
                     "Confirmar Cadastro", 
                     JOptionPane.YES_NO_OPTION);
             if (dialogResult == JOptionPane.YES_OPTION){
                 this.gerenciadorAdm.cadastrarSecretaria(nome, LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy")), telefone, email, genero);
+                MenuSecretariasAdm menuSecretariaAdm = new MenuSecretariasAdm(gerenciadorAdm, em);
                 menuSecretariaAdm.setVisible(true);
                 this.dispose();
             }
@@ -310,6 +308,7 @@ public class CadAutSecretaria extends javax.swing.JFrame {
                     JOptionPane.YES_NO_OPTION);
             if (dialogResult == JOptionPane.YES_OPTION){
                 this.gerenciadorAdm.atualizarSecretaria(this.secretaria, nome, LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy")), telefone, email, genero);
+                MenuSecretariasAdm menuSecretariaAdm = new MenuSecretariasAdm(gerenciadorAdm, em);
                 menuSecretariaAdm.setVisible(true);
                 this.dispose();
             }        

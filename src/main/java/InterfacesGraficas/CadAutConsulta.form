@@ -2,10 +2,7 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Component class="javax.swing.JButton" name="jButton2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jButton2"/>
-      </Properties>
+    <Component class="javax.swing.ButtonGroup" name="tipoConsulta">
     </Component>
   </NonVisualComponents>
   <Properties>
@@ -67,18 +64,29 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="label1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="data_consulta_label" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="data_consulta" min="-2" pref="501" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="horario_consulta" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="horario_consulta_label" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tipo_consulta_label" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="medico_consulta" min="-2" pref="362" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="paciente_consulta" min="-2" pref="362" max="-2" attributes="0"/>
-                                          <Component id="jTextField2" max="32767" attributes="0"/>
+                                      <Component id="horario_consulta" max="32767" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="medico_consulta" min="-2" pref="362" max="-2" attributes="0"/>
+                                              <Component id="paciente_consulta" min="-2" pref="362" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="normal" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                                                  <Component id="retorno" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -114,19 +122,27 @@
                   <Component id="jLabel4" min="-2" pref="28" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="label1" min="-2" max="-2" attributes="0"/>
+                      <Component id="data_consulta_label" min="-2" max="-2" attributes="0"/>
                       <Component id="data_consulta" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jTextField2" min="-2" max="-2" attributes="0"/>
                       <Component id="horario_consulta" min="-2" max="-2" attributes="0"/>
+                      <Component id="horario_consulta_label" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="normal" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="retorno" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="tipo_consulta_label" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                   <Component id="paciente_consulta" min="-2" pref="33" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                   <Component id="medico_consulta" min="-2" pref="33" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                   <Component id="jButton3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="113" max="32767" attributes="0"/>
                   <Component id="jButton1" min="-2" max="-2" attributes="0"/>
@@ -174,19 +190,19 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="java.awt.Label" name="label1">
+        <Component class="java.awt.Label" name="data_consulta_label">
           <Properties>
             <Property name="text" type="java.lang.String" value="Data da consulta (dd/mm/aaaa):"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="data_consulta">
         </Component>
-        <Component class="java.awt.Label" name="horario_consulta">
+        <Component class="java.awt.Label" name="horario_consulta_label">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Horario da consulta (hh:mm):"/>
+            <Property name="text" type="java.lang.String" value="Horario da consulta (hh:mm:ss):"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField2">
+        <Component class="javax.swing.JTextField" name="horario_consulta">
         </Component>
         <Component class="javax.swing.JComboBox" name="paciente_consulta">
           <Properties>
@@ -214,10 +230,37 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Voltar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backMenuSecretariaConsulta"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton3">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cadastrar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cadAutConsultaBtn"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="normal">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="tipoConsulta"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Normal"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="retorno">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="tipoConsulta"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Retorno"/>
+          </Properties>
+        </Component>
+        <Component class="java.awt.Label" name="tipo_consulta_label">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Tipo consulta:"/>
           </Properties>
         </Component>
       </SubComponents>
