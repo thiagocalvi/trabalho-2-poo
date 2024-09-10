@@ -17,7 +17,8 @@ public class MenuPrincipalMedico extends javax.swing.JFrame {
     private GerenciadorAdm gerenciadorAdm;
     private Medico medico;
     private EntityManager em;
-
+    
+    // Construtor
     public MenuPrincipalMedico(GerenciadorAdm gerenciadorAdm, Medico medico, EntityManager em) {
         this.gerenciadorAdm = gerenciadorAdm;
         this.medico = medico;

@@ -27,7 +27,7 @@ public class MenuMedicoLaudos extends javax.swing.JFrame {
         this.consulta = consulta;
         this.em = em;
         initComponents();
-//        colocaNome();
+        colocaNome();
         setLocationRelativeTo(null);
     }
 
