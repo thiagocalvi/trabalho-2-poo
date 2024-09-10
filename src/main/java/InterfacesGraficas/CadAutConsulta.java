@@ -73,8 +73,6 @@ public class CadAutConsulta extends javax.swing.JFrame {
         horario_consulta.setText(this.consulta.getHorario().toString());
         
         
-        //ISSO DAQUI.... TEM QUE REVER A LÓGICA
-        //SÓ TA MANRCANDO O RETORNO
         if(this.consulta.getTipo().equals(Consulta.Tipo.NORMAL)){
             normal.setSelected(true);
         }
@@ -250,6 +248,10 @@ public class CadAutConsulta extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(346, 346, 346))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,10 +287,6 @@ public class CadAutConsulta extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton1)
                                 .addContainerGap())))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(346, 346, 346))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,8 +317,6 @@ public class CadAutConsulta extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addContainerGap())
         );
-
-        horario_consulta_label.getAccessibleContext().setAccessibleName("Horario da consulta (hh:mm:ss):");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

@@ -60,7 +60,7 @@ public class ConsultasDiaSeguinteSecretaria extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Paciente", "Horario", "Title 3"
+                "Paciente", "Horario", "Medico"
             }
         ) {
             boolean[] canEdit = new boolean [] {
