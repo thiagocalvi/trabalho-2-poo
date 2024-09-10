@@ -15,6 +15,7 @@ public class CadAutConsulta extends javax.swing.JFrame {
      */
     public CadAutConsulta() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

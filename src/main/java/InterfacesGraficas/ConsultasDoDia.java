@@ -32,8 +32,9 @@ public class ConsultasDoDia extends javax.swing.JFrame {
         this.medico = medico;
         this.em = em;
         initComponents();
-        lblNome.setText(" " + medico.getNome());
         listarConsultas();
+        setLocationRelativeTo(null);
+        lblNome.setText(" " + medico.getNome());
     }
 
     
@@ -92,7 +93,7 @@ public class ConsultasDoDia extends javax.swing.JFrame {
         setTitle("Médico - Consultas");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setLocation(new java.awt.Point(400, 100));
+        setLocation(new java.awt.Point(0, 0));
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setPreferredSize(new java.awt.Dimension(800, 650));

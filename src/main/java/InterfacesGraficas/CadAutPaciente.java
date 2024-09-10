@@ -15,6 +15,7 @@ public class CadAutPaciente extends javax.swing.JFrame {
      */
     public CadAutPaciente() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -49,7 +50,8 @@ public class CadAutPaciente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setUndecorated(true);
+        setLocation(new java.awt.Point(0, 0));
+        setResizable(false);
 
         jLabel1.setBackground(new java.awt.Color(255, 102, 0));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N

@@ -32,17 +32,13 @@ public class CadAutProntuario extends javax.swing.JFrame {
         this.consulta = consulta;
         this.em = em;        
         initComponents();
-        colocaNome();
+        setNome();
+        setLocationRelativeTo(null);
     }
 
-    private void colocaNome(){
+    private void setNome(){
         lblPac.setText(" " + consulta.getPaciente().getNome());
         lblMed.setText(" " + medico.getNome());
-    }
-    
-    public void setProntuario(Prontuario prontuario){
-        
-        
     }
     
     public void setAtualizar(String atualizar){
@@ -88,7 +84,7 @@ public class CadAutProntuario extends javax.swing.JFrame {
         setTitle("Cadastro prontuário");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setLocation(new java.awt.Point(400, 100));
+        setLocation(new java.awt.Point(0, 0));
         setMaximumSize(new java.awt.Dimension(750, 670));
         setMinimumSize(new java.awt.Dimension(750, 670));
         setUndecorated(true);
@@ -295,7 +291,6 @@ public class CadAutProntuario extends javax.swing.JFrame {
         diagnostico = txtDoe.getText();
         tratamento = txtTrat.getText();
 
-        MenuProntuarios menuProntuarios = new MenuProntuarios(gerenciadorAdm, medico, consulta, em);
         if (this.CadAut.equals("Cadastrar")){
             int dialogResult = JOptionPane.showConfirmDialog(this,
                 "Tem certeza que deseja 'CADASTRAR' o prontuário?",
@@ -303,26 +298,30 @@ public class CadAutProntuario extends javax.swing.JFrame {
                 JOptionPane.YES_NO_OPTION);
 
             if (dialogResult == JOptionPane.YES_OPTION){
-                medico.cadastrarProntuario(consulta.getPaciente(), consulta, sintomas, diagnostico, tratamento);
+                prontuario = medico.cadastrarProntuario(consulta.getPaciente(), consulta, sintomas, diagnostico, tratamento);
+                consulta.setProntuario(prontuario);
+                MenuProntuarios menuProntuarios = new MenuProntuarios(gerenciadorAdm, medico, consulta, em);
                 menuProntuarios.setVisible(true);
                 this.dispose();
-                }     
+            }     
         }
         else if (this.CadAut.equals("Atualizar")){
             int dialogResult = JOptionPane.showConfirmDialog(this,
                 "Tem certeza que deseja 'ATUALIZAR' o prontuário?",
-                "Confirmar Cadastro",
+                "Confirmar Atualização",
                 JOptionPane.YES_NO_OPTION);
 
             if (dialogResult == JOptionPane.YES_OPTION){
-                medico.atualizarProntuario(prontuario, consulta.getPaciente(), consulta, sintomas, diagnostico, tratamento);
+                prontuario = medico.atualizarProntuario(prontuario, consulta.getPaciente(), consulta, sintomas, diagnostico, tratamento);
+                consulta.setProntuario(prontuario);
+                MenuProntuarios menuProntuarios = new MenuProntuarios(gerenciadorAdm, medico, consulta, em);
                 menuProntuarios.setVisible(true);
                 this.dispose();
-                }  
+            }  
         }
-        
     }//GEN-LAST:event_btnCadAut_Action
 
+    
     private void btnVoltar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar_Action
         MenuProntuarios menuProntuarios = new MenuProntuarios(gerenciadorAdm, medico, consulta, em);
         menuProntuarios.setVisible(true);

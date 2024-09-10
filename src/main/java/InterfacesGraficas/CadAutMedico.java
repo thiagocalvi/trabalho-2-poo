@@ -42,6 +42,7 @@ public class CadAutMedico extends javax.swing.JFrame {
         this.allSecretarias = this.gerenciadorAdm.getAllSecretarias();
         initComponents();
         setSecretarias();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -96,7 +97,7 @@ public class CadAutMedico extends javax.swing.JFrame {
         setTitle("Cadastar Médico");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setLocation(new java.awt.Point(525, 150));
+        setLocation(new java.awt.Point(0, 0));
         setMaximumSize(new java.awt.Dimension(780, 500));
         setMinimumSize(new java.awt.Dimension(780, 500));
         setResizable(false);
@@ -127,7 +128,7 @@ public class CadAutMedico extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel9.setText("CRM:");
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -154,7 +155,7 @@ public class CadAutMedico extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Genero:");
+        jLabel11.setText("Gênero:");
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));
@@ -367,7 +368,6 @@ public class CadAutMedico extends javax.swing.JFrame {
             }
         }
 
-        MenuMedicosAdm menuMedicoAdm = new MenuMedicosAdm(gerenciadorAdm, em);
         if (this.Cad_Atu.equals("Atualizar")){
             if(secretariaObj == null){
                 int dialogResultSecNull = JOptionPane.showConfirmDialog(this,
@@ -382,6 +382,7 @@ public class CadAutMedico extends javax.swing.JFrame {
 
                     if (dialogResult == JOptionPane.YES_OPTION){
                         this.gerenciadorAdm.atualizarMedico(this.medico, secretariaObj, nome, LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy")), telefone, email, especialidade, Integer.parseInt(crm), genero);
+                        MenuMedicosAdm menuMedicoAdm = new MenuMedicosAdm(gerenciadorAdm, em);
                         menuMedicoAdm.setVisible(true);
                         this.dispose();
                     }
@@ -394,6 +395,7 @@ public class CadAutMedico extends javax.swing.JFrame {
                     JOptionPane.YES_NO_OPTION);
                 if (dialogResult == JOptionPane.YES_OPTION){
                     this.gerenciadorAdm.atualizarMedico(this.medico, secretariaObj, nome, LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy")), telefone, email, especialidade, Integer.parseInt(crm), genero);
+                    MenuMedicosAdm menuMedicoAdm = new MenuMedicosAdm(gerenciadorAdm, em);
                     menuMedicoAdm.setVisible(true);
                     this.dispose();
                 }
@@ -412,6 +414,7 @@ public class CadAutMedico extends javax.swing.JFrame {
 
                     if (dialogResult == JOptionPane.YES_OPTION){
                         this.gerenciadorAdm.cadastrarMedico(secretariaObj, nome, LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy")), telefone, email, especialidade, Integer.parseInt(crm), genero);
+                        MenuMedicosAdm menuMedicoAdm = new MenuMedicosAdm(gerenciadorAdm, em);
                         menuMedicoAdm.setVisible(true);
                         this.dispose();
                     }
@@ -424,6 +427,7 @@ public class CadAutMedico extends javax.swing.JFrame {
                     JOptionPane.YES_NO_OPTION);
                 if (dialogResult == JOptionPane.YES_OPTION){
                     this.gerenciadorAdm.cadastrarMedico(secretariaObj, nome, LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy")), telefone, email, especialidade, Integer.parseInt(crm), genero);
+                    MenuMedicosAdm menuMedicoAdm = new MenuMedicosAdm(gerenciadorAdm, em);
                     menuMedicoAdm.setVisible(true);
                     this.dispose();
                 }

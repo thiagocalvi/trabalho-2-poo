@@ -16,6 +16,7 @@ public class MenuSecretariaPaciente extends javax.swing.JFrame {
      */
     public MenuSecretariaPaciente() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -36,7 +37,7 @@ public class MenuSecretariaPaciente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setUndecorated(true);
+        setLocation(new java.awt.Point(0, 0));
 
         jLabel1.setBackground(new java.awt.Color(255, 102, 0));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N

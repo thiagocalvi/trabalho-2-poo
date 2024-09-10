@@ -167,7 +167,7 @@ public class Medico extends Funcionario {
      * @param tratamento o novo tratamento recomendado
      * @return uma mensagem indicando o sucesso ou a falha da operação
      */
-    public String atualizarProntuario(Prontuario prontuario, Paciente paciente, Consulta consulta, String sintomas, String diagnostico, String tratamento){
+    public Prontuario atualizarProntuario(Prontuario prontuario, Paciente paciente, Consulta consulta, String sintomas, String diagnostico, String tratamento){
         //Atualiza um prontuario
         EntityTransaction transaction = em.getTransaction();
         try{
@@ -179,12 +179,12 @@ public class Medico extends Funcionario {
             prontuario.setTratamento(tratamento);
             em.merge(prontuario);
             transaction.commit();
-            return "Prontuario Atualizado";
+            return prontuario;
         }catch (Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            return "Erro: " + e.getMessage();
+            return null;
         }
     }
     
@@ -230,12 +230,12 @@ public class Medico extends Funcionario {
      * @param alergias uma lista de alergias do paciente
      * @return uma mensagem indicando o sucesso ou a falha da operação
      */
-    public String cadastrarDados(Paciente paciente, boolean fuma, boolean bebe, String colesterol, boolean diabete, boolean doencaCardiaca, List<String> cirurgias, List<String> alergias){
+    public DadosMedicos cadastrarDados(Paciente paciente, boolean fuma, boolean bebe, String colesterol, boolean diabete, boolean doencaCardiaca, List<String> cirurgias, List<String> alergias){
         //Cadastra dados medico de um paciente
         EntityTransaction transaction = em.getTransaction();
         try {
             if(paciente.getDadosMedicos() != null){
-                return "O paciente já possui dados medicos cadastrado!";
+                return null;
             }
             
             transaction.begin();
@@ -243,13 +243,13 @@ public class Medico extends Funcionario {
             paciente.setDadosMedicos(dadosMedicos);
             em.persist(dadosMedicos);
             transaction.commit();
-            return "Dados medicos cadastrado!";
+            return dadosMedicos;
             
         } catch (Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            return "Erro: " + e.getMessage();
+            return null;
         }
     }
     
@@ -266,7 +266,7 @@ public class Medico extends Funcionario {
      * @param alergias uma lista de alergias do paciente
      * @return uma mensagem indicando o sucesso ou a falha da operação
      */
-    public String  atualizarDados(DadosMedicos dadosMedico, boolean fuma, boolean bebe, String colesterol, boolean diabete, boolean doencaCardiaca, List<String> cirurgias, List<String> alergias){
+    public DadosMedicos atualizarDados(DadosMedicos dadosMedico, boolean fuma, boolean bebe, String colesterol, boolean diabete, boolean doencaCardiaca, List<String> cirurgias, List<String> alergias){
         //Atualiza os dados medico de um paciente, paciente do dados medico não pode ser alterado
         EntityTransaction transaction = em.getTransaction();
         try{
@@ -280,12 +280,12 @@ public class Medico extends Funcionario {
             dadosMedico.setAlergias(alergias);
             em.merge(dadosMedico);
             transaction.commit();
-            return "Dados medicos Atualizado";
+            return dadosMedico;
         }catch (Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            return "Erro: " + e.getMessage();
+            return null;
         }
     }
     

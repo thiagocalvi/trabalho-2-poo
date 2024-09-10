@@ -29,6 +29,7 @@ public class EmitirAtestado extends javax.swing.JFrame {
         this.em = em;
         initComponents();
 //        colocaNome();
+        setLocationRelativeTo(null);
     }
 
     private void colocaNome(){
@@ -62,10 +63,11 @@ public class EmitirAtestado extends javax.swing.JFrame {
         setTitle("Atestado");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setLocation(new java.awt.Point(400, 100));
+        setLocation(new java.awt.Point(0, 0));
         setMaximumSize(new java.awt.Dimension(680, 610));
         setMinimumSize(new java.awt.Dimension(680, 610));
         setPreferredSize(new java.awt.Dimension(680, 610));
+        setResizable(false);
 
         jLabel3.setBackground(new java.awt.Color(204, 204, 204));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -75,7 +77,7 @@ public class EmitirAtestado extends javax.swing.JFrame {
         jLabel3.setToolTipText("");
         jLabel3.setOpaque(true);
 
-        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));

@@ -262,17 +262,24 @@ public class GerenciadorAdm {
         }
     }
     
-    /*
-    Não funciona
+   
     public List<Medico> buscarMedicos(String texto) {  
         
         // Executa a consulta e retorna a lista de médicos encontrados
-        Query query = this.em.createQuery("SELECT m FROM Medico m WHERE m.nome LIKE :nome OR m.especialidade LIKE :texto", Medico.class);
+        Query query = this.em.createQuery("SELECT m FROM Medico m WHERE m.nome LIKE :texto OR m.especialidade LIKE :texto", Medico.class);
         query.setParameter("texto", "%"+texto+"%");
         
         return query.getResultList();
     }
-    */
+    
+    public List<Secretaria> buscarSecretarias(String texto) {  
+        
+        // Executa a consulta e retorna a lista de secretarias encontrados
+        Query query = this.em.createQuery("SELECT s FROM Secretaria s WHERE s.nome LIKE :texto", Secretaria.class);
+        query.setParameter("texto", "%"+texto+"%");
+        
+        return query.getResultList();
+    }
     
     // Dataset
     // Médicos
