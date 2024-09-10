@@ -281,8 +281,8 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
                     
                     if (dialogResult == JOptionPane.YES_OPTION){
                         String result = this.secretaria.removerConsulta(consulta.getId());
-                        if (result.equals("Consulta removido!")) {
-                            //updateSearch(); // Atualiza a lista após a exclusão
+                        if (result.equals("Consulta removida!")) {
+                            updateSearch(); // Atualiza a lista após a exclusão
                             JOptionPane.showMessageDialog(this, 
                             result, 
                             "Sucesso", 
@@ -313,6 +313,11 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
         // Revalidar e repintar para atualizar o JScrollPane
         this.box_consultas.revalidate();
         this.box_consultas.repaint();
+    }
+     
+     private void updateSearch() {
+        List<Consulta> consultas = this.secretaria.getAllConsultas();
+        renderConsultas(consultas);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

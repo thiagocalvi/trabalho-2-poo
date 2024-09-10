@@ -130,7 +130,7 @@ public class Secretaria extends Funcionario {
             this.em.getTransaction().begin();
             Consulta consulta = em.find(Consulta.class, consultaId);
             if (consulta != null) {
-                em.remove(consulta);
+                this.em.remove(consulta);
                 this.em.getTransaction().commit();
                 return "Consulta removida!";
             } else {
@@ -138,6 +138,8 @@ public class Secretaria extends Funcionario {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            this.em.getTransaction().commit();
+            
         }
         return "Erro";
     }
