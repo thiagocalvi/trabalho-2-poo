@@ -245,7 +245,6 @@ public class Secretaria extends Funcionario {
      * 
      * @return Uma lista contendo todos os médicos gerenciados pela secretaria.
      */
-    //TA GERANDO ERRO AQUI TAMBEM
     public List<Medico> listarMedicos() {
         try {
             this.em.getTransaction().begin();
@@ -351,8 +350,6 @@ public class Secretaria extends Funcionario {
     
     
     
-    //ARRUMAR PARA LISTAR SOMENTE AS CONSULTAS DOS MEDICOS QUE A SECRETARIA GERENCIA! - FEITO
-    //TA GERANDO ERRO AQUI!!!
     public List<Consulta> getAllConsultas(){
         try {
             List<Medico> medicos = this.listarMedicos(); // Chame listarMedicos fora da consulta
