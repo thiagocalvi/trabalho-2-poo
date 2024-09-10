@@ -85,10 +85,10 @@ public class CadAutProntuario extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setLocation(new java.awt.Point(0, 0));
-        setMaximumSize(new java.awt.Dimension(750, 670));
-        setMinimumSize(new java.awt.Dimension(750, 670));
-        setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(750, 670));
+        setMaximumSize(new java.awt.Dimension(750, 690));
+        setMinimumSize(new java.awt.Dimension(750, 690));
+        setPreferredSize(new java.awt.Dimension(750, 690));
+        setResizable(false);
 
         lblTitulo.setBackground(new java.awt.Color(204, 204, 204));
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -267,7 +267,7 @@ public class CadAutProntuario extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

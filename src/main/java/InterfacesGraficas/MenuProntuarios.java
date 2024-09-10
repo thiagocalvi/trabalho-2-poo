@@ -408,7 +408,7 @@ public class MenuProntuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltar_Action
 
     private void btnAddPron_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPron_Action
-        if (consulta.getProntuario() != null){
+        if (consulta.getProntuario() == null){
             CadAutProntuario cadAutProntuario = new CadAutProntuario(gerenciadorAdm, medico, consulta, em);
             cadAutProntuario.setVisible(true);
             this.dispose();
