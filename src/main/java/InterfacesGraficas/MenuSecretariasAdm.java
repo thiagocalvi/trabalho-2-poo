@@ -148,7 +148,7 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
     private void showInformationSecretaria(Secretaria secretaria) {
         JDialog dialog = new JDialog(this, secretaria.getNome(), true);
         dialog.setLayout(new BorderLayout());
-        dialog.setPreferredSize(new Dimension(400, 300));
+        dialog.setPreferredSize(new Dimension(400, 250));
         
         
         JPanel infoPanel = new JPanel(new GridBagLayout());

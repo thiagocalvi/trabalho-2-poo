@@ -32,6 +32,7 @@ public class CadAutConsulta extends javax.swing.JFrame {
         this.gerenciadorAdm = gerenciadorAdm;
         this.em = em;
         setMedPac();
+        setLocationRelativeTo(null);
     }
     
     

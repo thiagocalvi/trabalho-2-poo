@@ -71,7 +71,7 @@ public class MenuProntuarios extends javax.swing.JFrame {
     private void showInformationProntuario(Prontuario prontuario) {
         JDialog dialog = new JDialog(this, prontuario.getPaciente().getNome(), true);
         dialog.setLayout(new BorderLayout());
-        dialog.setPreferredSize(new Dimension(500, 400));
+        dialog.setPreferredSize(new Dimension(400, 300));
         
         
         JPanel infoPanel = new JPanel(new GridBagLayout());

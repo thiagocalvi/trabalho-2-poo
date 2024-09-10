@@ -59,7 +59,7 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
     private void showInformationDadosMedicos(DadosMedicos dadosMedicos) {
         JDialog dialog = new JDialog(this, consulta.getPaciente().getNome(), true);
         dialog.setLayout(new BorderLayout());
-        dialog.setPreferredSize(new Dimension(500, 400));
+        dialog.setPreferredSize(new Dimension(450, 280));
         
         
         JPanel infoPanel = new JPanel(new GridBagLayout());
@@ -180,7 +180,7 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
                     JOptionPane.WARNING_MESSAGE);
                     
                 if (dialogResult == JOptionPane.YES_OPTION){
-                    String result = medico.removerDados(dadosMedicos.getId());
+                    String result = medico.removerDados(consulta.getPaciente().getDadosMedicos().getId());
                     if (result.equals("Dados médicos removido!")) {
                         JOptionPane.showMessageDialog(this, 
                         result, 
@@ -333,7 +333,7 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblMed, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
