@@ -50,9 +50,9 @@ public class CadAutProntuario extends javax.swing.JFrame {
     }
     
     private void setValues(){
-        txtDoe.setText(this.prontuario.getDiagnostico());
-        txtSin.setText(this.prontuario.getSintomas());
-        txtTrat.setText(this.prontuario.getTratamento());
+        txtDoe.setText(consulta.getProntuario().getDiagnostico());
+        txtSin.setText(consulta.getProntuario().getSintomas());
+        txtTrat.setText(consulta.getProntuario().getTratamento());
     }
 
     
@@ -298,8 +298,13 @@ public class CadAutProntuario extends javax.swing.JFrame {
                 JOptionPane.YES_NO_OPTION);
 
             if (dialogResult == JOptionPane.YES_OPTION){
-                prontuario = medico.cadastrarProntuario(consulta.getPaciente(), consulta, sintomas, diagnostico, tratamento);
-                consulta.setProntuario(prontuario);
+                this.prontuario = medico.cadastrarProntuario(consulta.getPaciente(), consulta, sintomas, diagnostico, tratamento);
+                
+                em.getTransaction().begin();
+                consulta.setProntuario(this.prontuario);
+                em.merge(consulta);
+                em.getTransaction().commit();
+                
                 MenuProntuarios menuProntuarios = new MenuProntuarios(gerenciadorAdm, medico, consulta, em);
                 menuProntuarios.setVisible(true);
                 this.dispose();
@@ -312,8 +317,13 @@ public class CadAutProntuario extends javax.swing.JFrame {
                 JOptionPane.YES_NO_OPTION);
 
             if (dialogResult == JOptionPane.YES_OPTION){
-                prontuario = medico.atualizarProntuario(prontuario, consulta.getPaciente(), consulta, sintomas, diagnostico, tratamento);
-                consulta.setProntuario(prontuario);
+                this.prontuario = medico.atualizarProntuario(consulta.getProntuario(), consulta.getPaciente(), consulta, sintomas, diagnostico, tratamento);
+                
+                em.getTransaction().begin();
+                consulta.setProntuario(this.prontuario);
+                em.merge(consulta);
+                em.getTransaction().commit(); 
+                
                 MenuProntuarios menuProntuarios = new MenuProntuarios(gerenciadorAdm, medico, consulta, em);
                 menuProntuarios.setVisible(true);
                 this.dispose();

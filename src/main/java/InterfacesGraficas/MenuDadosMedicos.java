@@ -168,8 +168,6 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
                 cadAtuDadosMedicos.setVisible(true);
                 this.dispose();
                 
-                
-                this.dispose();
             });
                 
             deleteButton.addActionListener(e -> {
@@ -186,6 +184,12 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
                         result, 
                         "Sucesso", 
                         JOptionPane.INFORMATION_MESSAGE);
+                        
+                        this.em.getTransaction().begin();
+                        consulta.getPaciente().setDadosMedicos(null);
+                        em.merge(consulta);
+                        this.em.getTransaction().commit();
+                        
                     }else {
                         System.out.println(result);
                         JOptionPane.showMessageDialog(this, 

@@ -56,12 +56,14 @@ public class MenuProntuarios extends javax.swing.JFrame {
     
     private void listarProntuario(){
         
-        String prontuario = "SELECT p FROM Prontuario p JOIN p.consulta c " +
-              "WHERE c.medico = :medico AND c.paciente = :paciente";
+        String prontuario ="SELECT p FROM Prontuario p " +
+                            "JOIN p.consulta c " +
+                            "WHERE p.paciente = :paciente AND c.medico = :medico";
         
         TypedQuery<Prontuario> query = em.createQuery(prontuario, Prontuario.class);
-        query.setParameter("medico", consulta.getMedico());
         query.setParameter("paciente", consulta.getPaciente());
+        query.setParameter("medico", consulta.getMedico());
+    
         
         List<Prontuario> listProntuario = query.getResultList();
         renderProntuarios(listProntuario);
@@ -71,7 +73,7 @@ public class MenuProntuarios extends javax.swing.JFrame {
     private void showInformationProntuario(Prontuario prontuario) {
         JDialog dialog = new JDialog(this, prontuario.getPaciente().getNome(), true);
         dialog.setLayout(new BorderLayout());
-        dialog.setPreferredSize(new Dimension(400, 300));
+        dialog.setPreferredSize(new Dimension(400, 250));
         
         
         JPanel infoPanel = new JPanel(new GridBagLayout());
@@ -186,6 +188,13 @@ public class MenuProntuarios extends javax.swing.JFrame {
                             result, 
                             "Sucesso", 
                             JOptionPane.INFORMATION_MESSAGE);
+                            listarProntuario();
+                            
+                            this.em.getTransaction().begin();
+                            consulta.setProntuario(null);
+                            em.merge(consulta);
+                            this.em.getTransaction().commit();
+                            
                         }else {
                             System.out.println(result);
                             JOptionPane.showMessageDialog(this, 
