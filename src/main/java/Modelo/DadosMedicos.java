@@ -35,7 +35,7 @@ public class DadosMedicos {
     /**
      * Paciente ao qual estes dados médicos estão associados.
      */
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne (cascade = CascadeType.MERGE)
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
@@ -105,13 +105,14 @@ public class DadosMedicos {
      * @param cirurgias Lista de cirurgias que o paciente já realizou.
      * @param alergias Lista de alergias que o paciente possui.
      */
-    public DadosMedicos(Paciente paciente, boolean fuma, boolean bebe, String colesterol, boolean diabete, boolean doencaCardiaca, List<String> cirurgias, List<String> alergias) {
+    public DadosMedicos(Paciente paciente, boolean fuma, boolean bebe, String colesterol, boolean diabete, boolean doencaCardiaca, float peso, List<String> cirurgias, List<String> alergias) {
         this.paciente = paciente;
         this.fuma = fuma;
         this.bebe = bebe;
         this.colesterol = colesterol;
         this.diabete = diabete;
         this.doencaCardiaca = doencaCardiaca;
+        this.peso = peso;
         this.cirurgias = cirurgias;
         this.alergias = alergias;
     }
@@ -124,6 +125,16 @@ public class DadosMedicos {
     public int getId() {
         return id;
     }
+    
+    public Paciente getPaciente(){
+        return paciente;
+    }
+    
+    public void setPaciente(Paciente paciente){
+        this.paciente = paciente;
+    }
+            
+    
     
     /**
      * Retorna o peso do paciente em quilogramas.

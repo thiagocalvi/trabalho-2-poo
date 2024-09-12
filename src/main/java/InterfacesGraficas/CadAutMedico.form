@@ -70,8 +70,8 @@
                           <EmptySpace pref="112" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="email_medico" alignment="0" pref="650" max="32767" attributes="0"/>
-                              <Component id="telefone_medico" max="32767" attributes="0"/>
-                              <Component id="crm_medico" alignment="0" max="32767" attributes="0"/>
+                              <Component id="telefone_medico" pref="650" max="32767" attributes="0"/>
+                              <Component id="crm_medico" alignment="0" pref="650" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
@@ -88,7 +88,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="nome_medico" pref="650" max="32767" attributes="0"/>
-                                      <Component id="especialidade_medico" max="32767" attributes="0"/>
+                                      <Component id="especialidade_medico" pref="650" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">

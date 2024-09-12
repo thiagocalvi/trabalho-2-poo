@@ -201,6 +201,8 @@ public class Medico extends Funcionario {
             transaction.begin();
             Prontuario prontuario = em.find(Prontuario.class, prontuarioId);
             if (prontuario != null) {
+                prontuario.setConsulta(null);
+                prontuario.setPaciente(null);
                 em.remove(prontuario);
                 transaction.commit();
                 return "Prontuario removido!";
@@ -230,7 +232,7 @@ public class Medico extends Funcionario {
      * @param alergias uma lista de alergias do paciente
      * @return uma mensagem indicando o sucesso ou a falha da operação
      */
-    public DadosMedicos cadastrarDados(Paciente paciente, boolean fuma, boolean bebe, String colesterol, boolean diabete, boolean doencaCardiaca, List<String> cirurgias, List<String> alergias){
+    public String cadastrarDados(Paciente paciente, boolean fuma, boolean bebe, String colesterol, boolean diabete, boolean doencaCardiaca, float peso, List<String> cirurgias, List<String> alergias){
         //Cadastra dados medico de um paciente
         EntityTransaction transaction = em.getTransaction();
         try {
@@ -239,11 +241,12 @@ public class Medico extends Funcionario {
             }
             
             transaction.begin();
-            DadosMedicos dadosMedicos = new DadosMedicos(paciente,fuma, bebe,colesterol, diabete, doencaCardiaca, cirurgias, alergias);
+            DadosMedicos dadosMedicos = new DadosMedicos(paciente,fuma, bebe,colesterol, diabete, doencaCardiaca, peso, cirurgias, alergias);
             paciente.setDadosMedicos(dadosMedicos);
+            dadosMedicos.setPaciente(paciente);
             em.persist(dadosMedicos);
             transaction.commit();
-            return dadosMedicos;
+            return "Sucesso";
             
         } catch (Exception e) {
             if (transaction.isActive()) {
@@ -266,7 +269,7 @@ public class Medico extends Funcionario {
      * @param alergias uma lista de alergias do paciente
      * @return uma mensagem indicando o sucesso ou a falha da operação
      */
-    public DadosMedicos atualizarDados(DadosMedicos dadosMedico, boolean fuma, boolean bebe, String colesterol, boolean diabete, boolean doencaCardiaca, List<String> cirurgias, List<String> alergias){
+    public String atualizarDados(DadosMedicos dadosMedico, boolean fuma, boolean bebe, String colesterol, boolean diabete, boolean doencaCardiaca, float peso, List<String> cirurgias, List<String> alergias){
         //Atualiza os dados medico de um paciente, paciente do dados medico não pode ser alterado
         EntityTransaction transaction = em.getTransaction();
         try{
@@ -276,11 +279,12 @@ public class Medico extends Funcionario {
             dadosMedico.setColesterol(colesterol);
             dadosMedico.setDiabete(diabete);
             dadosMedico.setDoencaCardiaca(doencaCardiaca);
+            dadosMedico.setPeso(peso);
             dadosMedico.setCirurgias(cirurgias);
             dadosMedico.setAlergias(alergias);
             em.merge(dadosMedico);
             transaction.commit();
-            return dadosMedico;
+            return "Sucesso";
         }catch (Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();
@@ -302,9 +306,11 @@ public class Medico extends Funcionario {
             transaction.begin();
             DadosMedicos dadosMedico = em.find(DadosMedicos.class, dadosMedicoId);
             if (dadosMedico != null) {
+                dadosMedico.getPaciente().setDadosMedicos(null);
+                dadosMedico.setPaciente(null);
                 em.remove(dadosMedico);
                 transaction.commit();
-                return "Dados medico removida!";
+                return "Dados médico removido!";
             } else {
                 transaction.commit();
                 return "Dados medico não encontrada";
@@ -363,4 +369,32 @@ public class Medico extends Funcionario {
         //Filtrar por consulta finalizada
         //E pela data da consulta
     }
+    
+    public List<Prontuario> listarProntuario(Paciente paciente, Medico medico) {
+        try {
+            // Inicia a transação
+            this.em.getTransaction().begin();
+
+            // Executa a query e obtém diretamente a lista de prontuários
+            List<Prontuario> listProntuario = this.em.createQuery(
+                "SELECT p FROM Prontuario p JOIN p.consulta c WHERE p.paciente = :paciente AND c.medico = :medico", 
+                Prontuario.class)
+                .setParameter("paciente", paciente)
+                .setParameter("medico", medico)
+                .getResultList();
+
+            // Finaliza a transação
+            this.em.getTransaction().commit();
+
+            // Retorna a lista de prontuários
+            return listProntuario;
+        } catch (Exception e) {
+            // Em caso de erro, faz rollback da transação e lança a exceção
+            e.printStackTrace();
+            this.em.getTransaction().rollback();
+            throw new RuntimeException("Erro ao listar prontuários.", e);
+        }
+    }
 }
+
+   

@@ -30,14 +30,14 @@ public class Prontuario {
     /**
      * O paciente associado a este prontuário.
      */
-    @ManyToOne
+    @ManyToOne 
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
     /**
      * A consulta associada a este prontuário.
      */
-    @OneToOne
+    @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "consulta_id")
     private Consulta consulta;
 

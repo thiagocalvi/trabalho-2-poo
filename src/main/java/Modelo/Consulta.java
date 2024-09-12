@@ -62,21 +62,21 @@ public class Consulta {
     /**
      * Médico responsável pela consulta.
      */
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "medico_id")
     private Medico medico;
 
     /**
      * Paciente que será atendido na consulta.
      */
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
     /**
      * Prontuário associado à consulta.
      */
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "prontuario_id")
     private Prontuario prontuario;
     
