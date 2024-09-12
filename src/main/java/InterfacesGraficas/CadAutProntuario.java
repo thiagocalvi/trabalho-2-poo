@@ -319,10 +319,11 @@ public class CadAutProntuario extends javax.swing.JFrame {
             if (dialogResult == JOptionPane.YES_OPTION){
                 this.prontuario = medico.atualizarProntuario(consulta.getProntuario(), consulta.getPaciente(), consulta, sintomas, diagnostico, tratamento);
                 
-                em.getTransaction().begin();
-                consulta.setProntuario(this.prontuario);
-                em.merge(consulta);
-                em.getTransaction().commit(); 
+//                Talvez não precise disso!
+//                em.getTransaction().begin();
+//                consulta.setProntuario(this.prontuario);
+//                em.merge(consulta);
+//                em.getTransaction().commit(); 
                 
                 MenuProntuarios menuProntuarios = new MenuProntuarios(gerenciadorAdm, medico, consulta, em);
                 menuProntuarios.setVisible(true);

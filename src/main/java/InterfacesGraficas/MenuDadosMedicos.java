@@ -25,6 +25,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 /**
  *Descrição generica
@@ -45,7 +46,7 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
         this.em = em;
         initComponents();
         setNome();
-        renderDadosMedicos(consulta.getPaciente().getDadosMedicos());
+        updateSearch();
         setLocationRelativeTo(null);
     }
 
@@ -55,11 +56,15 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
         lblMed.setText(" " + medico.getNome());
     }
     
+    private void updateSearch(){
+        renderDadosMedicos(consulta.getPaciente().getDadosMedicos());
+    }
+    
    
     private void showInformationDadosMedicos(DadosMedicos dadosMedicos) {
         JDialog dialog = new JDialog(this, consulta.getPaciente().getNome(), true);
         dialog.setLayout(new BorderLayout());
-        dialog.setPreferredSize(new Dimension(450, 280));
+        dialog.setPreferredSize(new Dimension(350, 300));
         
         
         JPanel infoPanel = new JPanel(new GridBagLayout());
@@ -69,7 +74,7 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(5, 5, 5, 5);
 
-        String[] labels = {"Fuma:", "Bebe:", "Diabete:", "Doença cardiaca:", "Colesterol:", "Peso:", "Cirurgias:", "Alergias:"};
+        String[] labels = {"Fuma:", "Bebe:", "Diabete:", "Doença cardiaca:", "Colesterol:", "Peso(Kg):", "Cirurgias:", "Alergias:"};
         
         String fuma = dadosMedicos.isFuma() ? "Sim" : "Não";
         String bebe = dadosMedicos.isBebe() ? "Sim" : "Não";
@@ -92,14 +97,30 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
 
         for (int i = 0; i < labels.length; i++) {
             JLabel label = new JLabel(labels[i]);
-            JLabel value = new JLabel(values[i]);
-
+ 
             gbc.gridx = 0;
             gbc.gridy = i;
             infoPanel.add(label, gbc);
+            
+            String value1 = values[i];
+            if (value1.length() > 30) {
+                value1 = value1.substring(0, 30) + "...";
+            }
+            
 
+            JLabel value = new JLabel("<html>" + value1 + "</html>");  // Habilitar HTML para permitir quebra de linha
+            value.setPreferredSize(new Dimension(200, 20));  // Ajustar a largura dos valores
+            value.setVerticalAlignment(JLabel.TOP);  // Alinhar o texto ao topo
+            value.setToolTipText(values[i]);
+            
+                     
+            if (i == 6 || i == 7){
+                value.setToolTipText(values[i]);
+            }
+            
             gbc.gridx = 1;
             gbc.weightx = 1;
+            gbc.fill = GridBagConstraints.HORIZONTAL;
             infoPanel.add(value, gbc);
         }
 
@@ -115,7 +136,7 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
     }  
     
     
-   private void renderDadosMedicos(DadosMedicos dadosMedicos){
+   private void renderDadosMedicos(DadosMedicos dadosMedico){
         
         // Configurar o layout do boxProntuario para vertical
         this.boxDados.setLayout(new BoxLayout(this.boxDados, BoxLayout.Y_AXIS));
@@ -123,8 +144,8 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
         // Limpar o painel antes de adicionar novos médicos
         this.boxDados.removeAll();        
         
-        if (dadosMedicos == null) {
-            JLabel noProntuariosLabel = new JLabel("Não há Dados Médicos cadastrados.");
+        if (dadosMedico == null) {
+            JLabel noProntuariosLabel = new JLabel("Não há Dados Médico cadastrados.");
             this.boxDados.add(noProntuariosLabel);
         } else {    
                 
@@ -159,7 +180,7 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
             JButton infoButton = new JButton("Informações");
          
             infoButton.addActionListener(e -> {
-                showInformationDadosMedicos(dadosMedicos);
+                showInformationDadosMedicos(dadosMedico);
             });                   
                 
             updateButton.addActionListener(e -> {
@@ -172,14 +193,15 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
                 
             deleteButton.addActionListener(e -> {
                 int dialogResult = JOptionPane.showConfirmDialog(this, 
-                    "Tem certeza que deseja deletar os dados médicos? " , 
+                    "Tem certeza que deseja deletar os dados médico? " , 
                     "Confirmar Exclusão", 
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.WARNING_MESSAGE);
                     
                 if (dialogResult == JOptionPane.YES_OPTION){
-                    String result = medico.removerDados(consulta.getPaciente().getDadosMedicos().getId());
-                    if (result.equals("Dados médicos removido!")) {
+                    
+                    String result = medico.removerDados(dadosMedico.getId());
+                    if (result.equals("Dados médico removido!")) {      
                         JOptionPane.showMessageDialog(this, 
                         result, 
                         "Sucesso", 
@@ -189,6 +211,7 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
                         consulta.getPaciente().setDadosMedicos(null);
                         em.merge(consulta);
                         this.em.getTransaction().commit();
+                        updateSearch();                             // Atualiza o dado após a exclusão
                         
                     }else {
                         System.out.println(result);

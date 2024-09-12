@@ -8,8 +8,6 @@ import Gerenciador.GerenciadorAdm;
 import Modelo.Consulta;
 import Modelo.DadosMedicos;
 import Modelo.Medico;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -24,7 +22,6 @@ public class CadAutDadosMedico extends javax.swing.JFrame {
     private GerenciadorAdm gerenciadorAdm;
     private Medico medico;
     private Consulta consulta;
-    private DadosMedicos dadosMedicos;
     private EntityManager em;
     private String Cad_Atu = "Cadastrar";
     
@@ -351,7 +348,7 @@ public class CadAutDadosMedico extends javax.swing.JFrame {
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel18.setText("Peso:");
+        jLabel18.setText("Peso(kg):");
 
         txtPeso.setBackground(new java.awt.Color(255, 255, 255));
         txtPeso.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -585,15 +582,15 @@ public class CadAutDadosMedico extends javax.swing.JFrame {
         List<String> cirurgias =  Arrays.asList(txtCirc.getText().split("[,\\.]"));
         List<String> alergias = Arrays.asList(txtAler.getText().split("[,\\.]"));
         
+        
         if (Cad_Atu.equals("Cadastrar")){
             int dialogResult = JOptionPane.showConfirmDialog(this,
-                        "Tem certeza que deseja 'CADASTRAR' os Dados médicos?",
+                        "Tem certeza que deseja 'CADASTRAR' os Dados médico?",
                         "Confirmar Cadastro",
                         JOptionPane.YES_NO_OPTION);
             
             if (dialogResult == JOptionPane.YES_OPTION){
-                dadosMedicos = medico.cadastrarDados(consulta.getPaciente(), fuma, bebe, colesterol, diabete, doenca, cirurgias, alergias);
-                consulta.getPaciente().setDadosMedicos(dadosMedicos);
+                medico.cadastrarDados(consulta.getPaciente(), fuma, bebe, colesterol, diabete, doenca, peso, cirurgias, alergias);
                 MenuDadosMedicos menuDadosMedicos = new MenuDadosMedicos(gerenciadorAdm, medico, consulta, em);
                 menuDadosMedicos.setVisible(true);
                 this.dispose();
@@ -601,13 +598,12 @@ public class CadAutDadosMedico extends javax.swing.JFrame {
         }
         else if (Cad_Atu.equals("Atualizar")){
             int dialogResult = JOptionPane.showConfirmDialog(this,
-                        "Tem certeza que deseja 'ATUALIZAR' os Dados médicos?",
+                        "Tem certeza que deseja 'ATUALIZAR' os Dados médico?",
                         "Confirmar Cadastro",
                         JOptionPane.YES_NO_OPTION);
             
             if (dialogResult == JOptionPane.YES_OPTION){
-                dadosMedicos = medico.atualizarDados(consulta.getPaciente().getDadosMedicos(), fuma, bebe, colesterol, diabete, doenca, cirurgias, alergias);
-                consulta.getPaciente().setDadosMedicos(dadosMedicos);
+                medico.atualizarDados(consulta.getPaciente().getDadosMedicos(), fuma, bebe, colesterol, diabete, doenca, peso, cirurgias, alergias);
                 MenuDadosMedicos menuDadosMedicos = new MenuDadosMedicos(gerenciadorAdm, medico, consulta, em);
                 menuDadosMedicos.setVisible(true);
                 this.dispose();

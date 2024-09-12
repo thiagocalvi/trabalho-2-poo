@@ -170,17 +170,29 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
 
         for (int i = 0; i < labels.length; i++) {
             JLabel label = new JLabel(labels[i]);
-            JLabel value = new JLabel(values[i]);
-
+            
             gbc.gridx = 0;
             gbc.gridy = i;
             infoPanel.add(label, gbc);
+            
+            String value1 = values[i];
+            if (value1.length() > 30) {
+                value1 = value1.substring(0, 30) + "...";
+            }
+                   
+            
+            JLabel value = new JLabel("<html>" + value1 + "</html>");  // Habilitar HTML para permitir quebra de linha
+            value.setPreferredSize(new Dimension(200, 20));  // Ajustar a largura dos valores
+            value.setVerticalAlignment(JLabel.TOP);  // Alinhar o texto ao topo
+            value.setToolTipText(values[i]);
 
             gbc.gridx = 1;
             gbc.weightx = 1;
+            gbc.fill = GridBagConstraints.HORIZONTAL;
             infoPanel.add(value, gbc);
         }
 
+        
         JButton closeButton = new JButton("Fechar");
         closeButton.addActionListener(e -> dialog.dispose());
 
