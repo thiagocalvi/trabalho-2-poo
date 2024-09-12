@@ -27,8 +27,8 @@ public class Medico extends Funcionario {
     
     @Column(name = "crm")
     private int crm;
-    
-    @OneToOne
+
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "secretaria_id")
     private Secretaria secretaria;
     

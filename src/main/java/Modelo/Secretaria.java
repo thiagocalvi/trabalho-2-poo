@@ -20,7 +20,7 @@ import javax.persistence.*;
 @Table(name = "secretaria")
 public class Secretaria extends Funcionario {
 
-    @OneToMany(mappedBy = "secretaria")
+    @OneToMany(mappedBy = "secretaria", cascade = CascadeType.ALL)
     private List<Medico> medicos;
 
     @Transient
@@ -231,6 +231,8 @@ public class Secretaria extends Funcionario {
             this.em.getTransaction().begin();
             Paciente paciente = em.find(Paciente.class, pacienteId);
             if (paciente != null) {
+                em.remove(paciente.getDadosMedicos());
+                em.createQuery("DELETE FROM Consulta WHERE paciente = :p", Consulta.class).setParameter("p", paciente).getResultList();
                 em.remove(paciente);
                 this.em.getTransaction().commit();
                 return "Paciente removido!";
