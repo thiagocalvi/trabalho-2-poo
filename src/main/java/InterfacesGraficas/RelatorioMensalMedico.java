@@ -9,6 +9,7 @@ import Modelo.Consulta;
 import Modelo.Medico;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -52,18 +53,20 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
         String resultado = ("SELECT c from Consulta c WHERE c.consultaFinalizada = true " +
                             "AND FUNCTION('YEAR', c.data) = :anoReferencia " +
                             "AND FUNCTION('MONTH', c.data) = :mesReferencia " +
+                            "AND c.medico = :medico " +
                             "ORDER BY c.data ASC");
         
         TypedQuery<Consulta> query = em.createQuery(resultado, Consulta.class);
         query.setParameter("anoReferencia", anoReferencia);
         query.setParameter("mesReferencia", mesReferencia);
+        query.setParameter("medico", medico);
                         
         List<Consulta> listConsulta = query.getResultList();
         DefaultTableModel model = (DefaultTableModel)jtbRel.getModel(); 
         
         model.setRowCount(0); 
         for (Consulta consulta : listConsulta){
-            Object[] linha = {consulta.getPaciente().getNome(), consulta.getTipo(), consulta.getData()};
+            Object[] linha = {consulta.getPaciente().getNome(), consulta.getTipo(), consulta.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString()};
             model.addRow(linha);
         }
         

@@ -17,7 +17,6 @@ import java.awt.Insets;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -25,6 +24,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 /**
  *Descrição generica
@@ -45,7 +45,7 @@ public class MenuProntuarios extends javax.swing.JFrame {
         this.em = em;
         initComponents();
         setNome();
-        listarProntuario();
+        updateSearch();
         setLocationRelativeTo(null);
     }
 
@@ -54,16 +54,8 @@ public class MenuProntuarios extends javax.swing.JFrame {
         lblMed.setText(" " + medico.getNome());
     }
     
-    private void listarProntuario(){
-        
-        String prontuario = "SELECT p FROM Prontuario p JOIN p.consulta c " +
-              "WHERE c.medico = :medico AND c.paciente = :paciente";
-        
-        TypedQuery<Prontuario> query = em.createQuery(prontuario, Prontuario.class);
-        query.setParameter("medico", consulta.getMedico());
-        query.setParameter("paciente", consulta.getPaciente());
-        
-        List<Prontuario> listProntuario = query.getResultList();
+    private void updateSearch(){
+        List<Prontuario> listProntuario = this.medico.listarProntuario(consulta.getPaciente(), consulta.getMedico());
         renderProntuarios(listProntuario);
     }
     
@@ -71,7 +63,7 @@ public class MenuProntuarios extends javax.swing.JFrame {
     private void showInformationProntuario(Prontuario prontuario) {
         JDialog dialog = new JDialog(this, prontuario.getPaciente().getNome(), true);
         dialog.setLayout(new BorderLayout());
-        dialog.setPreferredSize(new Dimension(400, 300));
+        dialog.setPreferredSize(new Dimension(400, 250));
         
         
         JPanel infoPanel = new JPanel(new GridBagLayout());
@@ -92,14 +84,25 @@ public class MenuProntuarios extends javax.swing.JFrame {
 
         for (int i = 0; i < labels.length; i++) {
             JLabel label = new JLabel(labels[i]);
-            JLabel value = new JLabel(values[i]);
 
             gbc.gridx = 0;
             gbc.gridy = i;
             infoPanel.add(label, gbc);
+              
+            String value1 = values[i];
+            if (value1.length() > 30) {
+                value1 = value1.substring(0, 30) + "...";
+            }
+            
+
+            JLabel value = new JLabel("<html>" + value1 + "</html>");  // Habilitar HTML para permitir quebra de linha
+            value.setPreferredSize(new Dimension(200, 20));  // Ajustar a largura dos valores
+            value.setVerticalAlignment(JLabel.TOP);  // Alinhar o texto ao topo
+            value.setToolTipText(values[i]);
 
             gbc.gridx = 1;
             gbc.weightx = 1;
+            gbc.fill = GridBagConstraints.HORIZONTAL;
             infoPanel.add(value, gbc);
         }
 
@@ -142,7 +145,7 @@ public class MenuProntuarios extends javax.swing.JFrame {
                 gbc.anchor = GridBagConstraints.WEST;
                 gbc.insets = new Insets(5, 5, 5, 5);
                 
-                JLabel tipoLabel = new JLabel("Tipo: " + prontuario.getConsulta().getTipo().toString());
+                JLabel tipoLabel = new JLabel("Tipo/Consulta: " + prontuario.getConsulta().getTipo().toString());
                 tipoLabel.setPreferredSize(new Dimension(215, 20));             // Limitar o tamanho
                 card_prontuario.add(tipoLabel, gbc);                
                 
@@ -180,12 +183,19 @@ public class MenuProntuarios extends javax.swing.JFrame {
                         JOptionPane.WARNING_MESSAGE);
                     
                     if (dialogResult == JOptionPane.YES_OPTION){
+                        this.em.getTransaction().begin();
+                        consulta.setProntuario(null);
+                        this.em.merge(consulta);
+                        this.em.getTransaction().commit();
+                        
                         String result = medico.removerProntuario(prontuario.getId());
                         if (result.equals("Prontuario removido!")) {
                             JOptionPane.showMessageDialog(this, 
                             result, 
                             "Sucesso", 
                             JOptionPane.INFORMATION_MESSAGE);
+                            updateSearch();                                     // Atualiza os prontuários após a exclusão
+                            
                         }else {
                             System.out.println(result);
                             JOptionPane.showMessageDialog(this, 
@@ -197,7 +207,7 @@ public class MenuProntuarios extends javax.swing.JFrame {
                 });                
 
                 
-                if (consulta.getProntuario().equals(prontuario)){
+                if (consulta.getProntuario().equals(prontuario) || consulta.getProntuario() != null){
                     buttonPanel.add(updateButton);
                     buttonPanel.add(deleteButton);
                     buttonPanel.add(infoButton);

@@ -8,6 +8,7 @@ import Gerenciador.GerenciadorAdm;
 import Modelo.Consulta;
 import Modelo.Medico;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -51,10 +52,11 @@ public class ConsultasDoDia extends javax.swing.JFrame {
 
         model.setRowCount(0); 
         for (Consulta consulta : consultasDoDia){
-            Object[] linha = {consulta.getPaciente().getNome(), consulta.getData(), consulta.getHorario()};
+            Object[] linha = {consulta.getPaciente().getNome(), consulta.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString(), 
+                                consulta.getHorario()};
             model.addRow(linha);
         }
-        
+ 
         if (!consultasDoDia.isEmpty()) {
             this.proxConsulta = consultasDoDia.get(0);
         }
@@ -242,7 +244,7 @@ public class ConsultasDoDia extends javax.swing.JFrame {
                                   JOptionPane.INFORMATION_MESSAGE);
         }
         else {
-            ConsultaDoPaciente consultaDoPaciente = new ConsultaDoPaciente(gerenciadorAdm, medico, proxConsulta, em);
+            ConsultaDoPaciente consultaDoPaciente = new ConsultaDoPaciente(gerenciadorAdm, medico, this.proxConsulta, em);
             consultaDoPaciente.setVisible(true);
             this.dispose();
             

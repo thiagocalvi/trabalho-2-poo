@@ -257,7 +257,14 @@ public class ConsultaDoPaciente extends javax.swing.JFrame {
                                                JOptionPane.WARNING_MESSAGE);
         
         if (option == JOptionPane.YES_NO_OPTION){
-//            consulta.setConsultaFinalizada(true);
+            // Iniciar a transação
+            em.getTransaction().begin();
+
+            // Alterar o estado da consulta dentro da transação
+            consulta.setConsultaFinalizada(true);
+            em.merge(consulta);                          // Atualizar a consulta no banco
+            em.getTransaction().commit();                // Confirmar a transação para salvar no banco
+            
             ConsultasDoDia consultasDoDia = new ConsultasDoDia(gerenciadorAdm, medico, em);
             consultasDoDia.setVisible(true);
             this.dispose();
