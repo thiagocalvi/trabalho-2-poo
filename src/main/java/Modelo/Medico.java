@@ -5,6 +5,7 @@
 package Modelo;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -138,21 +139,22 @@ public class Medico extends Funcionario {
      */
     
     
-    public Prontuario cadastrarProntuario(Paciente paciente, Consulta consulta, String sintomas, String diagnostico, String tratamento){
+    public String cadastrarProntuario(Paciente paciente, Consulta consulta, String sintomas, String diagnostico, String tratamento){
         //Cadastra um protuario para o paciente da consulta atual
         //Um prontuario só pode ser cadastrado dentro do contexto de uma consulta
         EntityTransaction transaction = em.getTransaction();
         try{
             transaction.begin();
             Prontuario prontuario = new Prontuario(paciente, consulta, sintomas, diagnostico, tratamento);
+            consulta.setProntuario(prontuario);
             em.persist(prontuario);
             transaction.commit();
-            return prontuario;
+            return "Prontuário cadastrado!";
         }catch (Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            return null;
+            return "Erro: " + e.getMessage();
         }
     }
     
@@ -167,7 +169,7 @@ public class Medico extends Funcionario {
      * @param tratamento o novo tratamento recomendado
      * @return uma mensagem indicando o sucesso ou a falha da operação
      */
-    public Prontuario atualizarProntuario(Prontuario prontuario, Paciente paciente, Consulta consulta, String sintomas, String diagnostico, String tratamento){
+    public String atualizarProntuario(Prontuario prontuario, Paciente paciente, Consulta consulta, String sintomas, String diagnostico, String tratamento){
         //Atualiza um prontuario
         EntityTransaction transaction = em.getTransaction();
         try{
@@ -179,12 +181,12 @@ public class Medico extends Funcionario {
             prontuario.setTratamento(tratamento);
             em.merge(prontuario);
             transaction.commit();
-            return prontuario;
+            return "Prontuário atualizado!";
         }catch (Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            return null;
+            return "Erro: " + e.getMessage();
         }
     }
     
@@ -246,13 +248,13 @@ public class Medico extends Funcionario {
             dadosMedicos.setPaciente(paciente);
             em.persist(dadosMedicos);
             transaction.commit();
-            return "Sucesso";
+            return "Dados médicos cadastrados!";
             
         } catch (Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            return null;
+            return "Erro: " + e.getMessage();
         }
     }
     
@@ -280,16 +282,23 @@ public class Medico extends Funcionario {
             dadosMedico.setDiabete(diabete);
             dadosMedico.setDoencaCardiaca(doencaCardiaca);
             dadosMedico.setPeso(peso);
+            
+//            List<String> cirurgiasAtualizadas = (cirurgias != null) ? new ArrayList<>(cirurgias) : new ArrayList<>();
+//            List<String> alergiasAtualizadas = (alergias != null) ? new ArrayList<>(alergias) : new ArrayList<>();
+//            
             dadosMedico.setCirurgias(cirurgias);
             dadosMedico.setAlergias(alergias);
             em.merge(dadosMedico);
             transaction.commit();
-            return "Sucesso";
+            return "Dados medicos Atualizado";
         }catch (Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            return null;
+            
+            System.out.println("DEU ERRO!");
+            e.printStackTrace();
+            return "Erro: " + e.getMessage();
         }
     }
     
@@ -377,7 +386,8 @@ public class Medico extends Funcionario {
 
             // Executa a query e obtém diretamente a lista de prontuários
             List<Prontuario> listProntuario = this.em.createQuery(
-                "SELECT p FROM Prontuario p JOIN p.consulta c WHERE p.paciente = :paciente AND c.medico = :medico", 
+                "SELECT p FROM Prontuario p JOIN p.consulta c WHERE p.paciente = :paciente AND " 
+                        + "c.medico = :medico ORDER BY c.data DESC, c.horario DESC", 
                 Prontuario.class)
                 .setParameter("paciente", paciente)
                 .setParameter("medico", medico)

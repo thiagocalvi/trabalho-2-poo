@@ -37,7 +37,7 @@ public class Prontuario {
     /**
      * A consulta associada a este prontuário.
      */
-    @OneToOne (cascade = CascadeType.ALL)
+    @OneToOne (cascade = CascadeType.MERGE)
     @JoinColumn(name = "consulta_id")
     private Consulta consulta;
 
