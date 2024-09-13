@@ -8,6 +8,7 @@ import Gerenciador.GerenciadorAdm;
 import Modelo.Consulta;
 import Modelo.DadosMedicos;
 import Modelo.Medico;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -579,9 +580,8 @@ public class CadAutDadosMedico extends javax.swing.JFrame {
 
         String colesterol = txtColes.getText();
         float peso = Float.parseFloat(txtPeso.getText().replace(",", "."));
-        List<String> cirurgias =  Arrays.asList(txtCirc.getText().split("[,\\.]"));
-        List<String> alergias = Arrays.asList(txtAler.getText().split("[,\\.]"));
-        
+        List<String> cirurgias = new ArrayList<>(List.of(txtCirc.getText().split("[,\\.]")));      
+        List<String> alergias = new ArrayList<>(List.of(txtAler.getText().split("[,\\.]")));        
         
         if (Cad_Atu.equals("Cadastrar")){
             int dialogResult = JOptionPane.showConfirmDialog(this,
