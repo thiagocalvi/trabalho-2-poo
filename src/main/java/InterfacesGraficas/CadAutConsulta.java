@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package InterfacesGraficas;
 
 import Gerenciador.GerenciadorAdm;
@@ -14,7 +10,10 @@ import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
 /**
- *Descrição generica
+ * Tela de cadastro e atualização de consultas.
+ * Esta classe é responsável por permitir o agendamento e atualização de consultas, 
+ * incluindo seleção de pacientes, médicos e definição de tipo de consulta.
+ * 
  * @author matheus
  */
 public class CadAutConsulta extends javax.swing.JFrame {
@@ -23,9 +22,15 @@ public class CadAutConsulta extends javax.swing.JFrame {
     private GerenciadorAdm gerenciadorAdm;
     private Consulta consulta = null;
     private String Cad_Atu = "Cadastrar";
-    /**
-     * Creates new form RelatorioMensalMedico
+   
+   /**
+     * Cria uma nova instância da tela de cadastro e atualização de consultas.
+     *
+     * @param secretaria A instância da secretaria que gerencia os pacientes e médicos.
+     * @param gerenciadorAdm O gerenciador de administração.
+     * @param em O EntityManager usado para interações com o banco de dados.
      */
+
     public CadAutConsulta(Secretaria secretaria, GerenciadorAdm gerenciadorAdm, EntityManager em) {
         initComponents();
         this.secretaria = secretaria;
@@ -35,7 +40,9 @@ public class CadAutConsulta extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
     
-    
+    /**
+     * Inicializa as listas de médicos e pacientes nos respectivos combo boxes.
+     */
     public void setMedPac(){
         paciente_consulta.removeAllItems();
         paciente_consulta.addItem("Selecione um paciente");
@@ -58,24 +65,27 @@ public class CadAutConsulta extends javax.swing.JFrame {
         
     }
     
+    /**
+     * Define a consulta a ser editada e atualiza a interface com os detalhes da consulta.
+     *
+     * @param consulta A consulta a ser editada.
+     */
     public void setConsulta(Consulta consulta){
         this.consulta = consulta;
         this.Cad_Atu = "Atualizar Consulta";
         jLabel4.setText(Cad_Atu);
         jButton3.setText(Cad_Atu);
-        //Mudar a cor para um azul
-        //jButton1.setBackground(new java.awt.Color(0, 204, 0)); --> arrumar a cor!
         this.setTitle(this.Cad_Atu);
         setValues();
     }
 
+    /**
+     * Preenche os campos da tela com os valores da consulta.
+     */
     public void setValues(){
         data_consulta.setText(this.consulta.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         horario_consulta.setText(this.consulta.getHorario().toString());
         
-        
-        //ISSO DAQUI.... TEM QUE REVER A LÓGICA
-        //SÓ TA MANRCANDO O RETORNO
         if(this.consulta.getTipo().equals(Consulta.Tipo.NORMAL)){
             normal.setSelected(true);
         }
