@@ -130,6 +130,11 @@ public class Secretaria extends Funcionario {
             this.em.getTransaction().begin();
             Consulta consulta = em.find(Consulta.class, consultaId);
             if (consulta != null) {
+                // Setando 'null' para tirar o relaciomento entre as tabelas.
+//                consulta.setMedico(null);
+//                consulta.setPaciente(null);
+//                consulta.getProntuario().setConsulta(null);
+//                consulta.getProntuario().setPaciente(null);
                 this.em.remove(consulta);
                 this.em.getTransaction().commit();
                 return "Consulta removida!";

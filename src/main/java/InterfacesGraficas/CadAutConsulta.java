@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package InterfacesGraficas;
 
 import Gerenciador.GerenciadorAdm;
@@ -26,14 +22,15 @@ public class CadAutConsulta extends javax.swing.JFrame {
     private GerenciadorAdm gerenciadorAdm;
     private Consulta consulta = null;
     private String Cad_Atu = "Cadastrar";
-
-    /**
+   
+   /**
      * Cria uma nova instância da tela de cadastro e atualização de consultas.
      *
      * @param secretaria A instância da secretaria que gerencia os pacientes e médicos.
      * @param gerenciadorAdm O gerenciador de administração.
      * @param em O EntityManager usado para interações com o banco de dados.
      */
+
     public CadAutConsulta(Secretaria secretaria, GerenciadorAdm gerenciadorAdm, EntityManager em) {
         initComponents();
         this.secretaria = secretaria;
@@ -74,8 +71,6 @@ public class CadAutConsulta extends javax.swing.JFrame {
         this.Cad_Atu = "Atualizar Consulta";
         jLabel4.setText(Cad_Atu);
         jButton3.setText(Cad_Atu);
-        //Mudar a cor para um azul
-        //jButton1.setBackground(new java.awt.Color(0, 204, 0)); --> arrumar a cor!
         this.setTitle(this.Cad_Atu);
         setValues();
     }

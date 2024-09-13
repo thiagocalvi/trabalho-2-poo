@@ -70,21 +70,21 @@ public class Consulta {
     /**
      * Médico responsável pela consulta.
      */
-    @ManyToOne (cascade = CascadeType.ALL)
+    @ManyToOne (cascade = CascadeType.MERGE)
     @JoinColumn(name = "medico_id")
     private Medico medico;
 
     /**
      * Paciente que será atendido na consulta.
      */
-    @ManyToOne (cascade = CascadeType.ALL)
+    @ManyToOne (cascade = CascadeType.MERGE)
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
     /**
      * Prontuário associado à consulta.
      */
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "prontuario_id")
     private Prontuario prontuario;
     

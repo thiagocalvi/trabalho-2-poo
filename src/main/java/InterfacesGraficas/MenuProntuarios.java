@@ -221,7 +221,7 @@ public class MenuProntuarios extends javax.swing.JFrame {
                     }
                 });                
 
-                if (consulta.getProntuario().equals(prontuario) || consulta.getProntuario() != null){
+                if (consulta.getProntuario() != null && consulta.getProntuario().equals(prontuario)){
                     buttonPanel.add(updateButton);
                     buttonPanel.add(deleteButton);
                     buttonPanel.add(infoButton);
