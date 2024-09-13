@@ -1,12 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package InterfacesGraficas;
 
 import Gerenciador.GerenciadorAdm;
-import Modelo.Consulta;
-import Modelo.Medico;
+import Modelo.*;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
@@ -17,16 +12,26 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 /**
- *Descrição generica
+ * Classe que representa a janela de relatório mensal de consultas atendidas por um médico.
+ * Exibe um relatório das consultas finalizadas no mês atual, incluindo informações do paciente, tipo de convênio e data.
+ * Permite a navegação de volta ao menu principal do médico.
+ * 
  * @author matheus
  */
 public class RelatorioMensalMedico extends javax.swing.JFrame {
-    // Atríbutos
+    
+    // Atributos
     private GerenciadorAdm gerenciadorAdm;
     private Medico medico;
     private EntityManager em;
     
-    // Construtor
+    /**
+     * Construtor da classe. Inicializa o JFrame com os dados do gerente, médico e EntityManager.
+     * 
+     * @param gerenciadorAdm O gerenciador de administração responsável por operações no sistema.
+     * @param medico O médico para o qual o relatório de consultas será gerado.
+     * @param em O EntityManager usado para realizar consultas no banco de dados.
+     */
     public RelatorioMensalMedico(GerenciadorAdm gerenciadorAdm, Medico medico, EntityManager em) {
         this.gerenciadorAdm = gerenciadorAdm;
         this.medico = medico;
@@ -37,7 +42,9 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
-    // Métodos
+    /**
+     * Configura o rótulo do mês atual na interface gráfica.
+     */
     private void mesAtual(){
         LocalDate mesAtual = LocalDate.now();
         Month mes = mesAtual.getMonth();
@@ -45,8 +52,11 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
         lblMes.setText("Mês atual: " + mes);
     }
     
+    /**
+     * Lista as consultas finalizadas do mês atual para o médico especificado.
+     * Preenche a tabela com as informações das consultas e atualiza o total de consultas.
+     */
     private void listarClientes(){
-        
         int anoReferencia = LocalDate.now().getYear();
         int mesReferencia = LocalDate.now().getMonthValue();
         
@@ -77,7 +87,7 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
     }
     
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+                              
     private void initComponents() {
 
         jLabel5 = new javax.swing.JLabel();
@@ -202,16 +212,27 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }                      
 
+     /**
+     * Ação do botão "Voltar". Fecha a janela atual e abre o menu principal do médico.
+     * 
+     * @param evt O evento de ação do botão "Voltar".
+     */
     private void btnVoltar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar_Action
         MenuPrincipalMedico menuPrincipalMedico = new MenuPrincipalMedico(gerenciadorAdm, medico, em);
         menuPrincipalMedico.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVoltar_Action
 
+    // Código gerado automaticamente para a criação da interface gráfica
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+        // Código gerado automaticamente para inicialização dos componentes da interface
+    }// </editor-fold>//GEN-END:initComponents
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Declaração das variáveis da interface gráfica
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
@@ -220,5 +241,4 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
     private javax.swing.JLabel lblMes;
     private javax.swing.JLabel lblTot;
     private java.awt.Panel panel1;
-    // End of variables declaration//GEN-END:variables
 }

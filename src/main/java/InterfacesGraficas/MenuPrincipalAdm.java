@@ -1,22 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package InterfacesGraficas;
 
 import Gerenciador.GerenciadorAdm;
 import javax.persistence.EntityManager;
 
 /**
- *Descrição generica
+ * Tela principal para administração de usuários.
+ * Oferece opções para acessar as telas de administração de médicos e secretárias,
+ * bem como retornar à tela inicial.
+ * 
  * @author thiago
  */
 public class MenuPrincipalAdm extends javax.swing.JFrame {
-    // Atríbutos
+    // Atributos
     private GerenciadorAdm gerenciadorAdm;
     private EntityManager em;
     
-    // Construtor
+    /**
+     * Construtor da classe.
+     * Inicializa os componentes da interface e configura as informações iniciais.
+     * 
+     * @param gerenciadorAdm o gerenciador de administração para operações de CRUD
+     * @param em o EntityManager utilizado para interagir com o banco de dados
+     */
     public MenuPrincipalAdm(GerenciadorAdm gerenciadorAdm, EntityManager em) {
         this.gerenciadorAdm = gerenciadorAdm;
         this.em = em;
@@ -120,35 +125,44 @@ public class MenuPrincipalAdm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // Ações
+    /**
+     * Abre a tela de administração de médicos.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void go_medicosAdm(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_medicosAdm
-        // TODO add your handling code here:
         MenuMedicosAdm menuMedicosAdm = new MenuMedicosAdm(gerenciadorAdm, em);
         menuMedicosAdm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_go_medicosAdm
 
+    /**
+     * Abre a tela de administração de secretárias.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void go_secretariasAdm(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_secretariasAdm
-        // TODO add your handling code here:
         MenuSecretariasAdm menuSecretariasAdm = new MenuSecretariasAdm(gerenciadorAdm, em);
         menuSecretariasAdm.setVisible(true);
         this.dispose();
-        
     }//GEN-LAST:event_go_secretariasAdm
 
+    /**
+     * Volta para a tela inicial.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void back_telaInicial(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_telaInicial
-        // TODO add your handling code here:
         TelaInicial telaInicial = new TelaInicial(gerenciadorAdm, em);
         telaInicial.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_back_telaInicial
 
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variáveis de declaração - não modificar
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     private java.awt.Label label1;
-    // End of variables declaration//GEN-END:variables
+    // Fim da declaração de variáveis
 }

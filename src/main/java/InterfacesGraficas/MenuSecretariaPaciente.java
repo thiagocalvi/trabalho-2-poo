@@ -25,17 +25,25 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- *Descrição generica
+ * Tela de gerenciamento de pacientes para a Secretaria.
+ * Esta classe representa a interface gráfica para exibir e gerenciar os pacientes associados à secretaria,
+ * permitindo a visualização, atualização e exclusão dos pacientes.
  * 
  * @author matheus
  */
 public class MenuSecretariaPaciente extends javax.swing.JFrame {
-    private List<Paciente> allPacientes;
-    private GerenciadorAdm gerenciadorAdm; //É necessariao pois estamos dando um dispose nas telas
-    private EntityManager em;
-    private Secretaria secretaria;
+    private List<Paciente> allPacientes; // Lista completa de pacientes
+    private GerenciadorAdm gerenciadorAdm; // Gerenciador de administração para operações com o banco de dados
+    private EntityManager em; // Gerenciador de entidades para operações com o banco de dados
+    private Secretaria secretaria; // Secretaria associada
+
     /**
-     * Creates new form RelatorioMensalMedico
+     * Construtor da classe MenuSecretariaPaciente.
+     * Inicializa os componentes da interface gráfica e define os dados da secretaria.
+     * 
+     * @param secretaria A secretaria associada aos pacientes.
+     * @param gerenciadorAdm O gerenciador de administração para operações com o banco de dados.
+     * @param em O EntityManager para realizar operações com o banco de dados.
      */
     public MenuSecretariaPaciente(Secretaria secretaria, GerenciadorAdm gerenciadorAdm, EntityManager em) {
         initComponents();
@@ -44,15 +52,18 @@ public class MenuSecretariaPaciente extends javax.swing.JFrame {
         this.em = em;
         this.renderPacientes(secretaria.getAllPacientes());
         setupSearchField();
-        
         setLocationRelativeTo(null);
     }
 
+    /**
+     * Exibe um diálogo com informações detalhadas sobre um paciente.
+     * 
+     * @param paciente O paciente cujas informações serão exibidas.
+     */
     private void showInformationPaciente(Paciente paciente) {
         JDialog dialog = new JDialog(this, paciente.getNome(), true);
         dialog.setLayout(new BorderLayout());
         dialog.setPreferredSize(new Dimension(400, 300));
-        
         
         JPanel infoPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -61,7 +72,7 @@ public class MenuSecretariaPaciente extends javax.swing.JFrame {
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(5, 5, 5, 5);
 
-        String[] labels = {"ID:", "Nome:", "Idade" , "Genero:", "Data nascimento:", "Telefone:", "Email:", "Endereço:", "Convenio:"};
+        String[] labels = {"ID:", "Nome:", "Idade:", "Genero:", "Data nascimento:", "Telefone:", "Email:", "Endereço:", "Convenio:"};
         String[] values = {
             String.valueOf(paciente.getId()),
             paciente.getNome(),
@@ -214,27 +225,31 @@ public class MenuSecretariaPaciente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+        /**
+     * Ação do botão Voltar.
+     * Fecha a tela atual e abre o menu principal da Secretaria.
+     * 
+     * @param evt Evento de ação do botão.
+     */
     private void backMenuPrincipalSecretaria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backMenuPrincipalSecretaria
-        MenuPrincipalSecretaria menuPrincipalSecretaira = new MenuPrincipalSecretaria(secretaria, gerenciadorAdm, em);
-        menuPrincipalSecretaira.setVisible(true);
+        MenuPrincipalSecretaria menuPrincipalSecretaria = new MenuPrincipalSecretaria(secretaria, gerenciadorAdm, em);
+        menuPrincipalSecretaria.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backMenuPrincipalSecretaria
 
-        
+    /**
+     * Renderiza a lista de pacientes na interface gráfica.
+     * 
+     * @param pacientesToRender Lista de pacientes a serem exibidos.
+     */
     private void renderPacientes(List<Paciente> pacientesToRender) {
-
-        // Configurar o layout do box_medicos para vertical
         this.box_pacientes.setLayout(new BoxLayout(this.box_pacientes, BoxLayout.Y_AXIS));
-
-        // Definir um tamanho preferido para o box_medicos
         this.box_pacientes.setPreferredSize(new Dimension(780, pacientesToRender.size() * 50));
-
-        // Limpar o painel antes de adicionar novos médicos
         this.box_pacientes.removeAll();
 
         if (pacientesToRender.isEmpty()) {
-            JLabel noMedicosLabel = new JLabel("Não há pacientes cadastrados.");
-            this.box_pacientes.add(noMedicosLabel);
+            JLabel noPacientesLabel = new JLabel("Não há pacientes cadastrados.");
+            this.box_pacientes.add(noPacientesLabel);
         } else {
             for (Paciente paciente : pacientesToRender) {
                 JPanel card_paciente = new JPanel();
@@ -247,21 +262,15 @@ public class MenuSecretariaPaciente extends javax.swing.JFrame {
                 JButton deleteButton = new JButton("Deletar");
                 JButton infoButton = new JButton("Informações");
 
+                infoButton.addActionListener(e -> showInformationPaciente(paciente));
                 
-                infoButton.addActionListener(e -> {
-                    showInformationPaciente(paciente);
-                });                
-                
-                //TO-DO
-                //Leva para pagina de atualização
-                //o objeto paciente que vai ser atualuzado é passado como parametro
                 updateButton.addActionListener(e -> {
                     CadAutPaciente cadastrarPaciente = new CadAutPaciente(secretaria, gerenciadorAdm, em);
                     cadastrarPaciente.setPaciente(paciente);
                     cadastrarPaciente.setVisible(true);
                     this.dispose();
                 });
-                
+
                 deleteButton.addActionListener(e -> {
                     int dialogResult = JOptionPane.showConfirmDialog(this, 
                         "Tem certeza que deseja deletar o paciente " + paciente.getNome() + "?", 
@@ -269,7 +278,7 @@ public class MenuSecretariaPaciente extends javax.swing.JFrame {
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.WARNING_MESSAGE);
                     
-                    if (dialogResult == JOptionPane.YES_OPTION){
+                    if (dialogResult == JOptionPane.YES_OPTION) {
                         String result = this.secretaria.removerPaciente(paciente.getId());
                         if (result.equals("Paciente removido!")) {
                             updateSearch(); // Atualiza a lista após a exclusão
@@ -277,7 +286,7 @@ public class MenuSecretariaPaciente extends javax.swing.JFrame {
                             result, 
                             "Sucesso", 
                             JOptionPane.INFORMATION_MESSAGE);
-                        }else {
+                        } else {
                             System.out.println(result);
                             JOptionPane.showMessageDialog(this, 
                             result, 
@@ -285,42 +294,39 @@ public class MenuSecretariaPaciente extends javax.swing.JFrame {
                             JOptionPane.ERROR_MESSAGE);
                         }
                     }
-                
                 });
 
                 card_paciente.add(nameLabel);
-                //card_paciente.add(specialtyLabel);
                 card_paciente.add(updateButton);
                 card_paciente.add(deleteButton);
                 card_paciente.add(infoButton);
-
 
                 this.box_pacientes.add(card_paciente);
                 this.box_pacientes.add(Box.createRigidArea(new Dimension(0, 10))); // Espaço entre cards
             }
         }
 
-        // Revalidar e repintar para atualizar o JScrollPane
         this.box_pacientes.revalidate();
         this.box_pacientes.repaint();
     }
-    
-    
-    //MUDAR ESSA FUNÇÃO
-     private void updateSearch() {
-        //Isso não é nenhum pouco eficiente!
-        
+
+    /**
+     * Atualiza a lista de pacientes exibida na interface.
+     * Filtra os pacientes com base no texto de pesquisa atual.
+     */
+    private void updateSearch() {
         String searchText = jTextField1.getText().toLowerCase();
-        this.allPacientes = this.secretaria.getAllPacientes();
         List<Paciente> filteredPacientes = allPacientes.stream()
-            .filter(paciente -> 
-                paciente.getNome().toLowerCase().contains(searchText))
+            .filter(paciente -> paciente.getNome().toLowerCase().contains(searchText))
             .collect(Collectors.toList());
         renderPacientes(filteredPacientes);
     }
-     
-     
-     private void setupSearchField(){
+
+    /**
+     * Configura o campo de pesquisa para atualizar a lista de pacientes
+     * sempre que o texto for modificado.
+     */
+    private void setupSearchField() {
         jTextField1.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
             @Override
             public void insertUpdate(javax.swing.event.DocumentEvent e) {
@@ -339,13 +345,17 @@ public class MenuSecretariaPaciente extends javax.swing.JFrame {
         });
     }
     
+    /**
+     * Ação do botão Cadastrar Paciente.
+     * Abre a tela de cadastro/atualização de paciente.
+     * 
+     * @param evt Evento de ação do botão.
+     */
     private void goCadastrarPaciente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goCadastrarPaciente
-        // TODO add your handling code here:
         CadAutPaciente cadastrarPaciente = new CadAutPaciente(secretaria, gerenciadorAdm, em);
         cadastrarPaciente.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_goCadastrarPaciente
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel box_pacientes;

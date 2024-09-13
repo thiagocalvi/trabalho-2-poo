@@ -1,38 +1,41 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package InterfacesGraficas;
+
 import Gerenciador.GerenciadorAdm;
+import Modelo.Medico;
+import javax.persistence.EntityManager;
 import javax.swing.*;
 import java.awt.*;
-
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import Modelo.Medico;
-import java.time.format.DateTimeFormatter;
-import java.util.stream.Collectors;
-import javax.persistence.EntityManager;
 /**
- *Descrição generica
+ * Tela de interface gráfica para a administração de médicos.
+ * Permite visualizar, atualizar, deletar e obter informações detalhadas dos médicos cadastrados.
+ * Também oferece a funcionalidade de buscar médicos por nome ou especialidade.
+ * 
  * @author thiago
  */
 public class MenuMedicosAdm extends javax.swing.JFrame {
-    // Atríbutos
+    // Atributos
     private GerenciadorAdm gerenciadorAdm;
     private EntityManager em;
     private List<Medico> allMedicos;
     
-    // Construtor
+    /**
+     * Construtor da classe.
+     * Inicializa os componentes da interface e configura as informações iniciais.
+     * 
+     * @param gerenciadorAdm o gerenciador de administração para operações de CRUD
+     * @param em o EntityManager utilizado para interagir com o banco de dados
+     */
     public MenuMedicosAdm(GerenciadorAdm gerenciadorAdm, EntityManager em) {
         initComponents();
-        this.gerenciadorAdm = gerenciadorAdm; 
+        this.gerenciadorAdm = gerenciadorAdm;
         this.em = em;
         this.renderMedicos(gerenciadorAdm.getAllMedicos());
         setupSearchField();
         setLocationRelativeTo(null);
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -144,11 +147,15 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Exibe um diálogo com informações detalhadas sobre o médico selecionado.
+     * 
+     * @param medico o médico cujas informações serão exibidas
+     */
     private void showInformationMedico(Medico medico) {
         JDialog dialog = new JDialog(this, medico.getNome(), true);
         dialog.setLayout(new BorderLayout());
         dialog.setPreferredSize(new Dimension(400, 300));
-        
         
         JPanel infoPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -192,7 +199,6 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
             gbc.fill = GridBagConstraints.HORIZONTAL;
             infoPanel.add(value, gbc);
         }
-       
         
         JButton closeButton = new JButton("Fechar");
         closeButton.addActionListener(e -> dialog.dispose());
@@ -205,9 +211,12 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
         dialog.setVisible(true);
     }
     
+    /**
+     * Renderiza a lista de médicos no painel.
+     * 
+     * @param medicosToRender a lista de médicos a serem exibidos
+     */
     private void renderMedicos(List<Medico> medicosToRender) {
-        //this.allMedicos = this.gerenciadorAdm.getAllMedicos();
-
         // Configurar o layout do box_medicos para vertical
         this.box_medicos.setLayout(new BoxLayout(this.box_medicos, BoxLayout.Y_AXIS));
 
@@ -257,11 +266,8 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
                 
                 infoButton.addActionListener(e -> {
                     showInformationMedico(medico);
-                });                
+                });
                 
-                //TO-DO - Feito
-                //Leva para pagina de atualização
-                //o objeto medico que vai ser atualuzado é passado como parametro
                 updateButton.addActionListener(e -> {
                     CadAutMedico cadastrarMedico = new CadAutMedico(gerenciadorAdm, em);
                     cadastrarMedico.setMedico(medico);
@@ -285,22 +291,19 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
                             result, 
                             "Sucesso", 
                             JOptionPane.INFORMATION_MESSAGE);
-                        }else {
-                            System.out.println(result);
+                        } else {
                             JOptionPane.showMessageDialog(this, 
                             result, 
                             "Erro", 
                             JOptionPane.ERROR_MESSAGE);
                         }
                     }
-                
                 });
 
                 buttonPanel.add(updateButton);
                 buttonPanel.add(deleteButton);
                 buttonPanel.add(infoButton);
                 card_medico.add(buttonPanel, gbc);
-
 
                 this.box_medicos.add(card_medico);
                 this.box_medicos.add(Box.createRigidArea(new Dimension(0, 10))); // Espaço entre cards
@@ -311,23 +314,32 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
         this.box_medicos.revalidate();
         this.box_medicos.repaint();
     }
-     
     
+    /**
+     * Volta para a tela principal de administração.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void back_menuPrincipalAdm(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_menuPrincipalAdm
         MenuPrincipalAdm menuPrincipalAdm = new MenuPrincipalAdm(gerenciadorAdm, em);
-        menuPrincipalAdm.setVisible(true); 
+        menuPrincipalAdm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_back_menuPrincipalAdm
 
+    /**
+     * Abre a tela para cadastrar um novo médico.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void goCadastrarMedico(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goCadastrarMedico
-        // TODO add your handling code here:
         CadAutMedico cadastrarMedico = new CadAutMedico(gerenciadorAdm, em);
         cadastrarMedico.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_goCadastrarMedico
     
-
-    
+    /**
+     * Atualiza a lista de médicos com base no texto de busca.
+     */
     private void updateSearch() {
         String searchText = jTextField1.getText().trim();
         List<Medico> filteredMedicos;
@@ -340,9 +352,10 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
         renderMedicos(filteredMedicos);
     }
     
-    
-    
-    private void setupSearchField(){
+    /**
+     * Configura o campo de busca para atualizar a lista de médicos quando o texto é alterado.
+     */
+    private void setupSearchField() {
         jTextField1.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
             @Override
             public void insertUpdate(javax.swing.event.DocumentEvent e) {
@@ -361,7 +374,7 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
         });
     }
     
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variáveis de declaração - não modificar
     private javax.swing.JPanel box_medicos;
     private java.awt.Button cadastrarMedico;
     private javax.swing.JButton jButton1;
@@ -370,5 +383,5 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private java.awt.Label label1;
     private java.awt.Label label2;
-    // End of variables declaration//GEN-END:variables
+    // Fim da declaração de variáveis
 }

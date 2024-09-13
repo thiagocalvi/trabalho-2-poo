@@ -10,23 +10,35 @@ import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
 /**
- *Descrição generica
+ * Tela principal do menu da secretaria.
+ * Esta classe representa a interface gráfica que é exibida para a secretaria.
+ * Contém botões para acessar diferentes funcionalidades, como listar médicos, 
+ * gerenciar pacientes e consultas, e sair da conta.
+ * 
  * @author matheus
  */
 public class MenuPrincipalSecretaria extends javax.swing.JFrame {
-    // Atríbutos
-    private Secretaria secretaria;
-    private EntityManager em;
-    private GerenciadorAdm gerenciadorAdm;
 
-    // Construtor
+    // Atributos
+    private Secretaria secretaria; // Instância da secretaria
+    private EntityManager em; // Gerenciador de entidades para operações com o banco de dados
+    private GerenciadorAdm gerenciadorAdm; // Gerenciador de administração
+
+    /**
+     * Construtor da classe MenuPrincipalSecretaria.
+     * Inicializa os componentes da interface gráfica e define o nome da secretaria no rótulo.
+     * 
+     * @param secretaria A instância da secretaria que está usando o menu.
+     * @param gerenciadorAdm O gerenciador de administração para operações com o banco de dados.
+     * @param em O EntityManager para realizar operações com o banco de dados.
+     */
     public MenuPrincipalSecretaria(Secretaria secretaria, GerenciadorAdm gerenciadorAdm, EntityManager em) {
         this.secretaria = secretaria;
         this.em = em;
         this.gerenciadorAdm = gerenciadorAdm;
         initComponents();
-        lblNome.setText("  " + secretaria.getNome());
-        setLocationRelativeTo(null);
+        lblNome.setText("  " + secretaria.getNome()); // Define o nome da secretaria na interface
+        setLocationRelativeTo(null); // Centraliza a janela
     }
 
 
@@ -199,48 +211,77 @@ public class MenuPrincipalSecretaria extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Ação do botão de sair da conta.
+     * Abre a tela de login e fecha a tela atual.
+     * 
+     * @param evt O evento de ação do botão.
+     */
     private void btnSair_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSair_Action
         LoginMedSec loginSecretaria = new LoginMedSec(gerenciadorAdm, em);
-        loginSecretaria.setSecMed("Secretaria");
-        loginSecretaria.setVisible(true);
-        this.dispose();
-        
+        loginSecretaria.setSecMed("Secretaria"); // Define o tipo de usuário
+        loginSecretaria.setVisible(true); // Mostra a tela de login
+        this.dispose(); // Fecha a tela atual
     }//GEN-LAST:event_btnSair_Action
 
+    /**
+     * Ação do botão para acessar o menu de pacientes.
+     * Abre o menu de gerenciamento de pacientes e fecha a tela atual.
+     * 
+     * @param evt O evento de ação do botão.
+     */
     private void goMenuSecretariaPaciente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goMenuSecretariaPaciente
-        // TODO add your handling code here:
         MenuSecretariaPaciente menuSecretariaPaciente = new MenuSecretariaPaciente(secretaria, gerenciadorAdm, em);
-        menuSecretariaPaciente.setVisible(true);
-        this.dispose();
+        menuSecretariaPaciente.setVisible(true); // Mostra o menu de pacientes
+        this.dispose(); // Fecha a tela atual
     }//GEN-LAST:event_goMenuSecretariaPaciente
 
+    /**
+     * Ação do botão para acessar o menu de consultas.
+     * Abre o menu de gerenciamento de consultas e fecha a tela atual.
+     * 
+     * @param evt O evento de ação do botão.
+     */
     private void goMenuSecretariaConsulta(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goMenuSecretariaConsulta
-        // TODO add your handling code here:
         MenuSecretariaConsulta menuSecretariaConsulta = new MenuSecretariaConsulta(secretaria, gerenciadorAdm, em);
-        menuSecretariaConsulta.setVisible(true);
-        this.dispose();
+        menuSecretariaConsulta.setVisible(true); // Mostra o menu de consultas
+        this.dispose(); // Fecha a tela atual
     }//GEN-LAST:event_goMenuSecretariaConsulta
 
+    /**
+     * Ação do botão para enviar mensagens sobre consultas do dia seguinte.
+     * Exibe uma caixa de diálogo com as mensagens das consultas do dia seguinte.
+     * 
+     * @param evt O evento de ação do botão.
+     */
     private void enviarMensagems(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarMensagems
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, this.secretaria.enviarMensagensConsultasDiaSeguinte(), "Info",  JOptionPane.INFORMATION_MESSAGE);
+        // Mostra uma caixa de diálogo com as mensagens das consultas do dia seguinte
+        JOptionPane.showMessageDialog(null, this.secretaria.enviarMensagensConsultasDiaSeguinte(), "Info", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_enviarMensagems
 
+    /**
+     * Ação do botão para listar médicos.
+     * Abre a tela que exibe a lista de médicos e fecha a tela atual.
+     * 
+     * @param evt O evento de ação do botão.
+     */
     private void goListarMedicos(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goListarMedicos
-        // TODO add your handling code here:
         ListaMedicosSecretaria listaMedicosSecretaria = new ListaMedicosSecretaria(secretaria, em, gerenciadorAdm);
-        listaMedicosSecretaria.setVisible(true);
-        this.dispose();
+        listaMedicosSecretaria.setVisible(true); // Mostra a lista de médicos
+        this.dispose(); // Fecha a tela atual
     }//GEN-LAST:event_goListarMedicos
 
+    /**
+     * Define o gerenciador de administração.
+     * 
+     * @param gerenciadorAdm O gerenciador de administração a ser definido.
+     */
     public void setGerenciadorAdm(GerenciadorAdm gerenciadorAdm){
         this.gerenciadorAdm = gerenciadorAdm;
     }
-    /**
-     * @param args the command line arguments
-     */
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+   
+    // Variables declaration - do not modify
     private javax.swing.JButton btnSair;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
@@ -251,5 +292,5 @@ public class MenuPrincipalSecretaria extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblNome;
     private java.awt.Panel panel1;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration
 }

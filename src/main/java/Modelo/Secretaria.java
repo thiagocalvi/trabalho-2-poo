@@ -108,7 +108,7 @@ public class Secretaria extends Funcionario {
                 consulta.setTipo(tipo);
             } catch (IllegalArgumentException e) {
                 System.out.println("Tipo de consulta inválido: " + tipoConsulta);
-                return null; // ou lance uma exceção, ou outro tratamento adequado
+                return null; // ou lance uma exceção
             }
         }
 
@@ -210,7 +210,7 @@ public class Secretaria extends Funcionario {
             paciente.setTipoConvenio(tipo);
         } catch (IllegalArgumentException e) {
             System.out.println("Tipo de convênio inválido: " + tipoConvenio);
-            return null; // ou lance uma exceção, ou outro tratamento adequado
+            return null; // ou lance uma exceção
         }
 
         this.em.getTransaction().begin();
@@ -229,20 +229,39 @@ public class Secretaria extends Funcionario {
     public String removerPaciente(int pacienteId) {
         try {
             this.em.getTransaction().begin();
+
+            // Buscar o paciente pelo ID
             Paciente paciente = em.find(Paciente.class, pacienteId);
             if (paciente != null) {
-                em.remove(paciente.getDadosMedicos());
-                em.createQuery("DELETE FROM Consulta WHERE paciente = :p", Consulta.class).setParameter("p", paciente).getResultList();
+
+                // Remover consultas relacionadas ao paciente, se necessário
+                // Descomente essa parte se não houver CascadeType.REMOVE ou CascadeType.ALL no relacionamento
+                // em.createQuery("DELETE FROM Consulta c WHERE c.paciente = :p")
+                //   .setParameter("p", paciente)
+                //   .executeUpdate();
+
+                // Remover DadosMedicos relacionados ao paciente, se necessário
+                if (paciente.getDadosMedicos() != null) {
+                    em.remove(paciente.getDadosMedicos());
+                }
+
+                // Remover o paciente
                 em.remove(paciente);
+
+                // Commit da transação
                 this.em.getTransaction().commit();
                 return "Paciente removido!";
             } else {
                 return "Paciente não encontrado.";
             }
         } catch (Exception e) {
+            // Em caso de erro, reverter a transação
+            if (this.em.getTransaction().isActive()) {
+                this.em.getTransaction().rollback();
+            }
             e.printStackTrace();
+            return "Erro ao remover o paciente.";
         }
-        return "Erro";
     }
 
     /**

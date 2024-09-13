@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package InterfacesGraficas;
 
 import Gerenciador.GerenciadorAdm;
@@ -11,18 +7,28 @@ import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
 /**
- *Descrição generica
+ * Tela de consulta do paciente.
+ * Esta classe exibe informações sobre uma consulta específica e permite acessar diferentes funcionalidades relacionadas a essa consulta.
+ * 
  * @author matheus
  */
 public class ConsultaDoPaciente extends javax.swing.JFrame {
-    // Atríbutos
+
+    // Atributos
     private GerenciadorAdm gerenciadorAdm;
     private Medico medico;
     private Consulta consulta;
     private EntityManager em;
 
-    
-    // Construtor
+    /**
+     * Construtor da classe.
+     * Inicializa os atributos e configura os componentes da interface.
+     * 
+     * @param gerenciadorAdm o gerenciador de administração responsável pelas operações
+     * @param medico o médico associado à consulta
+     * @param consulta a consulta a ser exibida
+     * @param em o EntityManager utilizado para interagir com o banco de dados
+     */
     public ConsultaDoPaciente(GerenciadorAdm gerenciadorAdm, Medico medico, Consulta consulta, EntityManager em) {
         this.gerenciadorAdm = gerenciadorAdm;
         this.medico = medico;
@@ -33,7 +39,9 @@ public class ConsultaDoPaciente extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
-    // Métodos
+    /**
+     * Define os nomes do paciente e do médico nos rótulos da interface.
+     */
     private void setNome(){
         lblPac.setText(" " + consulta.getPaciente().getNome());
         lblMed.setText(" " + medico.getNome());
@@ -234,21 +242,33 @@ public class ConsultaDoPaciente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    // Ações
+     /**
+     * Abre a tela de prontuários do paciente.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void btnPron_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPron_Action
         MenuProntuarios menuProntuarios = new MenuProntuarios(gerenciadorAdm, medico, consulta, em);
         menuProntuarios.setVisible(true); 
         this.dispose();
     }//GEN-LAST:event_btnPron_Action
 
-    
+    /**
+     * Abre a tela de laudos médicos.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void btnLaudo_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaudo_Action
         MenuMedicoLaudos menuMedicoLaudos = new MenuMedicoLaudos(gerenciadorAdm, medico, consulta, em);
         menuMedicoLaudos.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLaudo_Action
 
-    
+    /**
+     * Finaliza a consulta e atualiza o estado no banco de dados.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void btnFin_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFin_Action
         int option = JOptionPane.showConfirmDialog(null, 
                                                "Deseja 'FINALIZAR' a consulta?!", 
@@ -256,7 +276,7 @@ public class ConsultaDoPaciente extends javax.swing.JFrame {
                                                JOptionPane.YES_NO_OPTION, 
                                                JOptionPane.WARNING_MESSAGE);
         
-        if (option == JOptionPane.YES_NO_OPTION){
+        if (option == JOptionPane.YES_OPTION){
             // Iniciar a transação
             em.getTransaction().begin();
 
@@ -271,12 +291,16 @@ public class ConsultaDoPaciente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnFin_Action
 
+    /**
+     * Abre a tela de dados médicos da consulta.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void btnDados_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDados_Action
         MenuDadosMedicos menuDadosMedicos = new MenuDadosMedicos(gerenciadorAdm, medico, consulta, em);
         menuDadosMedicos.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnDados_Action
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDados;

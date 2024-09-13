@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package InterfacesGraficas;
 
 import Gerenciador.GerenciadorAdm;
@@ -17,17 +13,26 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 /**
- *Descrição generica
+ * Tela que exibe as consultas agendadas para o dia atual para um médico.
+ * Oferece opções para visualizar a consulta e retornar ao menu principal do médico.
+ * 
  * @author matheus
  */
 public class ConsultasDoDia extends javax.swing.JFrame {
-    // Atríbutos
+
     private GerenciadorAdm gerenciadorAdm;
     private Medico medico;
     private EntityManager em;
     private Consulta proxConsulta;
 
-    // Construtor
+    /**
+     * Construtor da classe.
+     * Inicializa os atributos e configura os componentes da interface.
+     * 
+     * @param gerenciadorAdm o gerenciador de administração responsável pelas operações
+     * @param medico o médico cujas consultas serão exibidas
+     * @param em o EntityManager utilizado para interagir com o banco de dados
+     */
     public ConsultasDoDia(GerenciadorAdm gerenciadorAdm, Medico medico, EntityManager em) {
         this.gerenciadorAdm = gerenciadorAdm;
         this.medico = medico;
@@ -38,11 +43,14 @@ public class ConsultasDoDia extends javax.swing.JFrame {
         lblNome.setText(" " + medico.getNome());
     }
 
-    
+    /**
+     * Lista as consultas do dia para o médico na tabela.
+     * Obtém as consultas do banco de dados e as exibe na tabela.
+     */
     private void listarConsultas(){
         LocalDate dataAtual = LocalDate.now();
         
-        String cons = "SELECT c FROM Consulta c WHERE c.medico = :medico AND c.consultaFinalizada = false AND c.data = :data ORDER BY c.horario ";
+        String cons = "SELECT c FROM Consulta c WHERE c.medico = :medico AND c.consultaFinalizada = false AND c.data = :data ORDER BY c.horario";
         TypedQuery<Consulta> query = em.createQuery(cons, Consulta.class);
         query.setParameter("medico", medico);
         query.setParameter("data", dataAtual);
@@ -52,8 +60,9 @@ public class ConsultasDoDia extends javax.swing.JFrame {
 
         model.setRowCount(0); 
         for (Consulta consulta : consultasDoDia){
-            Object[] linha = {consulta.getPaciente().getNome(), consulta.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString(), 
-                                consulta.getHorario()};
+            Object[] linha = {consulta.getPaciente().getNome(), 
+                              consulta.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), 
+                              consulta.getHorario()};
             model.addRow(linha);
         }
  
@@ -64,7 +73,6 @@ public class ConsultasDoDia extends javax.swing.JFrame {
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
         tbCons.setRowSorter(sorter);
     }
-    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -236,27 +244,38 @@ public class ConsultasDoDia extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Ação do botão "Sim".
+     * Abre a tela para visualizar a consulta do paciente selecionado, se houver uma consulta marcada para hoje.
+     * Caso contrário, exibe uma mensagem informando que não há consultas marcadas.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void btnSim_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSim_Action
         if (this.proxConsulta == null){
             JOptionPane.showMessageDialog(null, 
-                                  "Nenhuma consulta marcada para hoje!", 
-                                  "Aviso", 
-                                  JOptionPane.INFORMATION_MESSAGE);
+                                          "Nenhuma consulta marcada para hoje!", 
+                                          "Aviso", 
+                                          JOptionPane.INFORMATION_MESSAGE);
         }
         else {
             ConsultaDoPaciente consultaDoPaciente = new ConsultaDoPaciente(gerenciadorAdm, medico, this.proxConsulta, em);
             consultaDoPaciente.setVisible(true);
             this.dispose();
-            
         }
     }//GEN-LAST:event_btnSim_Action
 
+    /**
+     * Ação do botão "Voltar".
+     * Retorna ao menu principal do médico.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void btnVoltar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar_Action
         MenuPrincipalMedico menuPrincipalMedico = new MenuPrincipalMedico(gerenciadorAdm, medico, em);
         menuPrincipalMedico.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVoltar_Action
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSim;

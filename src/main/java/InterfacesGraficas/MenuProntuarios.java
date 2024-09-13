@@ -27,44 +27,66 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 /**
- *Descrição generica
+ * Tela de gerenciamento de prontuários.
+ * Esta classe representa a interface gráfica para exibir e gerenciar os prontuários 
+ * associados a uma consulta específica, permitindo a visualização, atualização e exclusão
+ * dos prontuários.
+ * 
  * @author matheus
  */
 public class MenuProntuarios extends javax.swing.JFrame {
-    // Atríbutos
-    private GerenciadorAdm gerenciadorAdm;
-    private Medico medico;
-    private Consulta consulta;
-    private EntityManager em;
+    // Atributos
+    private GerenciadorAdm gerenciadorAdm; // Gerenciador de administração
+    private Medico medico; // Médico associado
+    private Consulta consulta; // Consulta associada
+    private EntityManager em; // Gerenciador de entidades para operações com o banco de dados
     
-    // Construtor
+    /**
+     * Construtor da classe MenuProntuarios.
+     * Inicializa os componentes da interface gráfica e define os dados da consulta e do médico.
+     * 
+     * @param gerenciadorAdm O gerenciador de administração para operações com o banco de dados.
+     * @param medico O médico associado à consulta.
+     * @param consulta A consulta para a qual os prontuários são gerenciados.
+     * @param em O EntityManager para realizar operações com o banco de dados.
+     */
     public MenuProntuarios(GerenciadorAdm gerenciadorAdm, Medico medico, Consulta consulta, EntityManager em) {
         this.gerenciadorAdm = gerenciadorAdm;
         this.medico = medico;
         this.consulta = consulta;
         this.em = em;
         initComponents();
-        setNome();
-        updateSearch();
-        setLocationRelativeTo(null);
+        setNome(); // Define os nomes do paciente e do médico na interface
+        updateSearch(); // Atualiza a lista de prontuários
+        setLocationRelativeTo(null); // Centraliza a janela
     }
 
+    /**
+     * Define os nomes do paciente e do médico nos rótulos da interface.
+     */
     private void setNome(){
         lblPac.setText(" " + consulta.getPaciente().getNome());
         lblMed.setText(" " + medico.getNome());
     }
     
+    /**
+     * Atualiza a lista de prontuários exibida na interface.
+     * Obtém a lista de prontuários associados à consulta e ao médico, e renderiza a lista.
+     */
     private void updateSearch(){
         List<Prontuario> listProntuario = this.medico.listarProntuario(consulta.getPaciente(), consulta.getMedico());
-        renderProntuarios(listProntuario);
+        renderProntuarios(listProntuario); // Renderiza os prontuários
     }
     
-    
+    /**
+     * Exibe um diálogo com informações detalhadas sobre um prontuário.
+     * 
+     * @param prontuario O prontuário cujas informações serão exibidas.
+     */
     private void showInformationProntuario(Prontuario prontuario) {
         JDialog dialog = new JDialog(this, prontuario.getPaciente().getNome(), true);
         dialog.setLayout(new BorderLayout());
         dialog.setPreferredSize(new Dimension(400, 250));
-        
         
         JPanel infoPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -94,10 +116,9 @@ public class MenuProntuarios extends javax.swing.JFrame {
                 value1 = value1.substring(0, 30) + "...";
             }
             
-
-            JLabel value = new JLabel("<html>" + value1 + "</html>");  // Habilitar HTML para permitir quebra de linha
-            value.setPreferredSize(new Dimension(200, 20));  // Ajustar a largura dos valores
-            value.setVerticalAlignment(JLabel.TOP);  // Alinhar o texto ao topo
+            JLabel value = new JLabel("<html>" + value1 + "</html>");  // Habilita HTML para permitir quebra de linha
+            value.setPreferredSize(new Dimension(200, 20));  // Ajusta a largura dos valores
+            value.setVerticalAlignment(JLabel.TOP);  // Alinha o texto ao topo
             value.setToolTipText(values[i]);
 
             gbc.gridx = 1;
@@ -116,48 +137,43 @@ public class MenuProntuarios extends javax.swing.JFrame {
         dialog.setLocationRelativeTo(this);
         dialog.setVisible(true);
     }  
-   
     
+    /**
+     * Renderiza a lista de prontuários na interface gráfica.
+     * 
+     * @param prontuarioToRender Lista de prontuários a serem exibidos.
+     */
     private void renderProntuarios(List<Prontuario> prontuarioToRender){
-        
-        // Configurar o layout do boxProntuario para vertical
         this.boxProntuario.setLayout(new BoxLayout(this.boxProntuario, BoxLayout.Y_AXIS));
-        
-        // Definir um tamanho preferido para o box_medicos
         this.boxProntuario.setPreferredSize(new Dimension(780, prontuarioToRender.size() * 50));
-
-        // Limpar o painel antes de adicionar novos médicos
         this.boxProntuario.removeAll();        
         
         if (prontuarioToRender.isEmpty()) {
-            JLabel noProntuariosLabel = new JLabel("Não há prontuarios cadastrados.");
+            JLabel noProntuariosLabel = new JLabel("Não há prontuários cadastrados.");
             this.boxProntuario.add(noProntuariosLabel);
         } else {       
             for (Prontuario prontuario : prontuarioToRender) {
-                
                 JPanel card_prontuario = new JPanel(new GridBagLayout());
                 GridBagConstraints gbc = new GridBagConstraints();
                 card_prontuario.setMaximumSize(new Dimension(780, 40));
 
-                // Configurar constraints para o nameLabel
                 gbc.gridx = 0;
                 gbc.gridy = 0;
                 gbc.anchor = GridBagConstraints.WEST;
                 gbc.insets = new Insets(5, 5, 5, 5);
                 
                 JLabel tipoLabel = new JLabel("Tipo/Consulta: " + prontuario.getConsulta().getTipo().toString());
-                tipoLabel.setPreferredSize(new Dimension(215, 20));             // Limitar o tamanho
+                tipoLabel.setPreferredSize(new Dimension(215, 20));
                 card_prontuario.add(tipoLabel, gbc);                
                 
                 gbc.gridx = 1;
                 JLabel dataLabel = new JLabel("Data: " + prontuario.getConsulta().getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString());
-                dataLabel.setPreferredSize(new Dimension(215, 20));             // Limitar o tamanho
+                dataLabel.setPreferredSize(new Dimension(215, 20));
                 card_prontuario.add(dataLabel, gbc);
                 
-                // Configurar constraints para o buttonPanel
-                gbc.gridx = 2;                                                  // Mover para a terceira coluna
-                gbc.weightx = 1.0;                                              // O botão empurrará o conteúdo para a esquerda
-                gbc.anchor = GridBagConstraints.EAST;                           // Alinhar à direita
+                gbc.gridx = 2;                                                  
+                gbc.weightx = 1.0;                                             
+                gbc.anchor = GridBagConstraints.EAST;                           
                 JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
                 
                 JButton updateButton = new JButton("Atualizar");
@@ -177,7 +193,7 @@ public class MenuProntuarios extends javax.swing.JFrame {
                 
                 deleteButton.addActionListener(e -> {
                     int dialogResult = JOptionPane.showConfirmDialog(this, 
-                        "Tem certeza que deseja deletar o prontuário? " , 
+                        "Tem certeza que deseja deletar o prontuário?", 
                         "Confirmar Exclusão", 
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.WARNING_MESSAGE);
@@ -194,9 +210,8 @@ public class MenuProntuarios extends javax.swing.JFrame {
                             result, 
                             "Sucesso", 
                             JOptionPane.INFORMATION_MESSAGE);
-                            updateSearch();                                     // Atualiza os prontuários após a exclusão
-                            
-                        }else {
+                            updateSearch(); // Atualiza a lista de prontuários após a exclusão
+                        } else {
                             System.out.println(result);
                             JOptionPane.showMessageDialog(this, 
                             result, 
@@ -206,13 +221,11 @@ public class MenuProntuarios extends javax.swing.JFrame {
                     }
                 });                
 
-                
                 if (consulta.getProntuario().equals(prontuario) || consulta.getProntuario() != null){
                     buttonPanel.add(updateButton);
                     buttonPanel.add(deleteButton);
                     buttonPanel.add(infoButton);
-                }
-                else {
+                } else {
                     buttonPanel.add(deleteButton);
                     buttonPanel.add(infoButton);
                 }   
@@ -411,25 +424,35 @@ public class MenuProntuarios extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Ação do botão Voltar.
+     * Fecha a tela atual e abre a tela de consultas do paciente.
+     * 
+     * @param evt Evento de ação do botão.
+     */
     private void btnVoltar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar_Action
         ConsultaDoPaciente consultaDoPaciente = new ConsultaDoPaciente(gerenciadorAdm, medico, consulta, em);
         consultaDoPaciente.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVoltar_Action
 
+    /**
+     * Ação do botão Adicionar Prontuário.
+     * Abre a tela de cadastro de prontuário, caso ainda não exista um prontuário associado à consulta.
+     * 
+     * @param evt Evento de ação do botão.
+     */
     private void btnAddPron_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPron_Action
         if (consulta.getProntuario() == null){
             CadAutProntuario cadAutProntuario = new CadAutProntuario(gerenciadorAdm, medico, consulta, em);
             cadAutProntuario.setVisible(true);
             this.dispose();
-        } 
-        else {
+        } else {
             JOptionPane.showMessageDialog(null, "Você já 'CADASTROU' um prontuário!\n Limite de 1 cadastro por consulta!", 
                                                 "Aviso", 
                                                 JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnAddPron_Action
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel boxProntuario;

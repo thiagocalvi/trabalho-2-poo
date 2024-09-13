@@ -24,23 +24,32 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- *Descrição generica
+ * Tela de gerenciamento de consultas para a Secretaria.
+ * Esta classe representa a interface gráfica para exibir e gerenciar as consultas associadas à secretaria,
+ * permitindo a visualização, atualização e exclusão das consultas.
+ * 
  * @author matheus
  */
 public class MenuSecretariaConsulta extends javax.swing.JFrame {
-    private Secretaria secretaria;
-    private EntityManager em;
-    private GerenciadorAdm gerenciadorAdm;
+    private Secretaria secretaria; // Secretaria associada
+    private EntityManager em; // Gerenciador de entidades para operações com o banco de dados
+    private GerenciadorAdm gerenciadorAdm; // Gerenciador de administração
+    
     /**
-     * Creates new form RelatorioMensalMedico
+     * Construtor da classe MenuSecretariaConsulta.
+     * Inicializa os componentes da interface gráfica e define os dados da secretaria.
+     * 
+     * @param secretaria A secretaria associada às consultas.
+     * @param gerenciadorAdm O gerenciador de administração para operações com o banco de dados.
+     * @param em O EntityManager para realizar operações com o banco de dados.
      */
     public MenuSecretariaConsulta(Secretaria secretaria, GerenciadorAdm gerenciadorAdm, EntityManager em) {
         this.secretaria = secretaria;
         this.em = em;
         this.gerenciadorAdm = gerenciadorAdm;
         initComponents();
-        renderConsultas(this.secretaria.getAllConsultas());
-        setLocationRelativeTo(null);
+        renderConsultas(this.secretaria.getAllConsultas()); // Renderiza as consultas
+        setLocationRelativeTo(null); // Centraliza a janela
     }
 
     /**
@@ -165,11 +174,15 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
+     /**
+     * Exibe um diálogo com informações detalhadas sobre uma consulta.
+     * 
+     * @param consulta A consulta cujas informações serão exibidas.
+     */
     private void showInformationConsulta(Consulta consulta) {
         JDialog dialog = new JDialog(this, consulta.getPaciente().getNome(), true);
         dialog.setLayout(new BorderLayout());
         dialog.setPreferredSize(new Dimension(400, 300));
-        
         
         JPanel infoPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -214,70 +227,72 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
         dialog.setVisible(true);
     }
     
-    
-    
-    
-    
+    /**
+     * Ação do botão Voltar.
+     * Fecha a tela atual e abre o menu principal da Secretaria.
+     * 
+     * @param evt Evento de ação do botão.
+     */
     private void backMenuPrincipalSecretaria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backMenuPrincipalSecretaria
-        // TODO add your handling code here:
-        MenuPrincipalSecretaria menuPrincipalSecretaira = new MenuPrincipalSecretaria(secretaria, gerenciadorAdm, em);
-        menuPrincipalSecretaira.setVisible(true);
+        MenuPrincipalSecretaria menuPrincipalSecretaria = new MenuPrincipalSecretaria(secretaria, gerenciadorAdm, em);
+        menuPrincipalSecretaria.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backMenuPrincipalSecretaria
 
-    
+    /**
+     * Ação do botão Cadastrar/Atualizar Consulta.
+     * Abre a tela de cadastro/atualização de consulta.
+     * 
+     * @param evt Evento de ação do botão.
+     */
     private void goCadAutConsulta(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goCadAutConsulta
-        // TODO add your handling code here:
         CadAutConsulta cadAutConsulta = new CadAutConsulta(secretaria, gerenciadorAdm, em);
         cadAutConsulta.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_goCadAutConsulta
 
+    /**
+     * Ação do botão Consultas do Dia Seguinte.
+     * Abre a tela de consultas para o dia seguinte.
+     * 
+     * @param evt Evento de ação do botão.
+     */
     private void goConsultasDiaSeguinte(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goConsultasDiaSeguinte
-        // TODO add your handling code here:
         ConsultasDiaSeguinteSecretaria consultaDiaSeguinte = new ConsultasDiaSeguinteSecretaria(secretaria, gerenciadorAdm, em);
         consultaDiaSeguinte.setVisible(true);
         this.dispose();
-        
     }//GEN-LAST:event_goConsultasDiaSeguinte
     
-     private void renderConsultas(List<Consulta> consultasToRender) {
-
-        // Configurar o layout do box_consultas para vertical
+    /**
+     * Renderiza a lista de consultas na interface gráfica.
+     * 
+     * @param consultasToRender Lista de consultas a serem exibidas.
+     */
+    private void renderConsultas(List<Consulta> consultasToRender) {
         this.box_consultas.setLayout(new BoxLayout(this.box_consultas, BoxLayout.Y_AXIS));
-
-        // Definir um tamanho preferido para
         this.box_consultas.setPreferredSize(new Dimension(780, consultasToRender.size() * 50));
-
-        // Limpar o painel antes de adicionar novos médicos
         this.box_consultas.removeAll();
 
         if (consultasToRender.isEmpty()) {
-            JLabel noMedicosLabel = new JLabel("Não há consultas cadastradas.");
-            this.box_consultas.add(noMedicosLabel);
+            JLabel noConsultasLabel = new JLabel("Não há consultas cadastradas.");
+            this.box_consultas.add(noConsultasLabel);
         } else {
             for (Consulta consulta : consultasToRender) {
                 JPanel card_consulta = new JPanel();
                 card_consulta.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
                 card_consulta.setMaximumSize(new Dimension(780, 40));
 
-                //se cadastar um consulta sem paciente ou sem medico vai dar ruim aqui!
                 JLabel nameLabel = new JLabel("Nome Paciente: " + consulta.getPaciente().getNome());
-                
-                JLabel data =  new JLabel("Data " + consulta.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                JLabel data = new JLabel("Data: " + consulta.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
                 
                 JButton updateButton = new JButton("Atualizar");
                 JButton deleteButton = new JButton("Deletar");
                 JButton infoButton = new JButton("Informações");
 
-                
                 infoButton.addActionListener(e -> {
                     showInformationConsulta(consulta);
-                });                
+                });
                 
-                //TO-DO
-                //Leva para pagina de atualização
-                //o objeto consulta que vai ser atualuzado é passado como parametro
                 updateButton.addActionListener(e -> {
                     CadAutConsulta cadAutConsulta = new CadAutConsulta(secretaria, gerenciadorAdm, em);
                     cadAutConsulta.setConsulta(consulta);
@@ -287,12 +302,12 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
                 
                 deleteButton.addActionListener(e -> {
                     int dialogResult = JOptionPane.showConfirmDialog(this, 
-                        "Tem certeza que deseja deletar a consulta ?", 
+                        "Tem certeza que deseja deletar a consulta?", 
                         "Confirmar Exclusão", 
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.WARNING_MESSAGE);
                     
-                    if (dialogResult == JOptionPane.YES_OPTION){
+                    if (dialogResult == JOptionPane.YES_OPTION) {
                         String result = this.secretaria.removerConsulta(consulta.getId());
                         if (result.equals("Consulta removida!")) {
                             updateSearch(); // Atualiza a lista após a exclusão
@@ -300,7 +315,7 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
                             result, 
                             "Sucesso", 
                             JOptionPane.INFORMATION_MESSAGE);
-                        }else {
+                        } else {
                             System.out.println(result);
                             JOptionPane.showMessageDialog(this, 
                             result, 
@@ -308,7 +323,6 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
                             JOptionPane.ERROR_MESSAGE);
                         }
                     }
-                
                 });
 
                 card_consulta.add(nameLabel);
@@ -317,18 +331,19 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
                 card_consulta.add(deleteButton);
                 card_consulta.add(infoButton);
 
-
                 this.box_consultas.add(card_consulta);
                 this.box_consultas.add(Box.createRigidArea(new Dimension(0, 10))); // Espaço entre cards
             }
         }
 
-        // Revalidar e repintar para atualizar o JScrollPane
         this.box_consultas.revalidate();
         this.box_consultas.repaint();
     }
-     
-     private void updateSearch() {
+    
+    /**
+     * Atualiza a lista de consultas exibida na interface.
+     */
+    private void updateSearch() {
         List<Consulta> consultas = this.secretaria.getAllConsultas();
         renderConsultas(consultas);
     }

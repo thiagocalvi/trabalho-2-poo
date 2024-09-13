@@ -1,26 +1,34 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package InterfacesGraficas;
+
+
 import Gerenciador.GerenciadorAdm;
 import Modelo.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
+
 /**
- *Descrição generica
+ * Classe responsável pela interface gráfica para cadastro e atualização de pacientes.
+ * Permite cadastrar um novo paciente ou atualizar um paciente existente, incluindo a seleção de informações pessoais e de convênio.
+ * 
  * @author matheus
  */
 public class CadAutPaciente extends javax.swing.JFrame {
+    
     private GerenciadorAdm gerenciadorAdm;
     private EntityManager em;
     private Secretaria secretaria = null;
     private Paciente paciente;
     private String Cad_Atu = "Cadastrar";
+    
     /**
-     * Creates new form RelatorioMensalMedico
+     * Construtor da classe.
+     * Inicializa a interface gráfica e configura o nome da secretaria.
+     * 
+     * @param secretaria a secretaria associada ao paciente
+     * @param gerenciadorAdm o gerenciador de administração responsável pelas operações de CRUD
+     * @param em o EntityManager utilizado para interagir com o banco de dados
      */
     public CadAutPaciente(Secretaria secretaria, GerenciadorAdm gerenciadorAdm, EntityManager em) {
         initComponents();
@@ -31,18 +39,26 @@ public class CadAutPaciente extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
-    
+    /**
+     * Define o paciente que será atualizado e ajusta o texto dos componentes da interface para refletir a operação de atualização.
+     * 
+     * @param paciente o objeto Paciente que será atualizado
+     */
     public void setPaciente(Paciente paciente){
         this.paciente = paciente;
         this.Cad_Atu = "Atualizar Paciente";
         jLabel6.setText(Cad_Atu);
         jButton1.setText(Cad_Atu);
-        //Mudar a cor para um azul
-        //jButton1.setBackground(new java.awt.Color(0, 204, 0)); --> arrumar a cor!
+        // TODO: Mudar a cor do botão para um azul adequado.
+        // jButton1.setBackground(new java.awt.Color(0, 204, 0)); 
         this.setTitle("Atualizar Paciente");
         setValues();
     }
     
+    /**
+     * Preenche os campos da interface com os dados do paciente quando a operação é de atualização.
+     * Configura os valores dos campos baseados no objeto Paciente fornecido.
+     */
     public void setValues(){
         nome.setText(this.paciente.getNome());
         telefone.setText(this.paciente.getTelefone());
@@ -53,18 +69,15 @@ public class CadAutPaciente extends javax.swing.JFrame {
         
         if(this.paciente.getTipoConvenio().equals(Paciente.tipoConvenio.PLANOSAUDE)){
             planoSaude.setSelected(true);
-        }
-        else{
-           particular.setSelected(true);
+        } else {
+            particular.setSelected(true);
         }
         
         if(this.paciente.getSexo().equals("Masculino")){
             masculino.setSelected(true);
-        }
-        else{
+        } else {
             feminino.setSelected(true);
         }
-       
     }
     
     /**
@@ -327,8 +340,13 @@ public class CadAutPaciente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
+/**
+     * Cadastra ou atualiza um paciente com base nas informações fornecidas nos campos da interface gráfica.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void cadAutPaciente(){
-        String nome_p,endereco_p, telefone_p, email_p, idade_p, dataNascimento_p, genero_p = null, convenio_p = null;
+        String nome_p, endereco_p, telefone_p, email_p, idade_p, dataNascimento_p, genero_p = null, convenio_p = null;
 
         nome_p = nome.getText();
         telefone_p = telefone.getText();
@@ -339,18 +357,15 @@ public class CadAutPaciente extends javax.swing.JFrame {
         
         if(planoSaude.isSelected()){
             convenio_p = "PLANOSAUDE";
-        }
-        else{
+        } else {
             convenio_p = "PARTICULAR";
         }
         
         if(masculino.isSelected()){
            genero_p = "Masculino";
-        }
-        else{
+        } else {
             genero_p = "Feminino";
         }
-        
         
         if(this.paciente == null){
             int dialogResult = JOptionPane.showConfirmDialog(this,
@@ -359,41 +374,45 @@ public class CadAutPaciente extends javax.swing.JFrame {
                         JOptionPane.YES_NO_OPTION);
             
             if (dialogResult == JOptionPane.YES_OPTION){
-                        this.secretaria.cadastrarPaciente(nome_p, LocalDate.parse(dataNascimento_p, DateTimeFormatter.ofPattern("dd/MM/yyyy")), telefone_p, email_p, endereco_p, convenio_p, Integer.parseInt(idade_p), genero_p);
-                        MenuSecretariaPaciente menuSecretariaPaciente = new MenuSecretariaPaciente(secretaria, gerenciadorAdm, em);
-                        menuSecretariaPaciente.setVisible(true);
-                        this.dispose();
-                    }
-        }else{
+                this.secretaria.cadastrarPaciente(nome_p, LocalDate.parse(dataNascimento_p, DateTimeFormatter.ofPattern("dd/MM/yyyy")), telefone_p, email_p, endereco_p, convenio_p, Integer.parseInt(idade_p), genero_p);
+                MenuSecretariaPaciente menuSecretariaPaciente = new MenuSecretariaPaciente(secretaria, gerenciadorAdm, em);
+                menuSecretariaPaciente.setVisible(true);
+                this.dispose();
+            }
+        } else {
             int dialogResult = JOptionPane.showConfirmDialog(this,
                         "Tem certeza que deseja atualizar o paciente " + this.paciente.getNome() + "?",
                         "Confirmar Atualização",
                         JOptionPane.YES_NO_OPTION);
             
             if (dialogResult == JOptionPane.YES_OPTION){
-                        this.secretaria.atualizarPaciente(this.paciente, nome_p, LocalDate.parse(dataNascimento_p, DateTimeFormatter.ofPattern("dd/MM/yyyy")), telefone_p, email_p, endereco_p, convenio_p, Integer.parseInt(idade_p), genero_p);
-                        MenuSecretariaPaciente menuSecretariaPaciente = new MenuSecretariaPaciente(secretaria, gerenciadorAdm, em);
-                        menuSecretariaPaciente.setVisible(true);
-                        this.dispose();
-                    }
+                this.secretaria.atualizarPaciente(this.paciente, nome_p, LocalDate.parse(dataNascimento_p, DateTimeFormatter.ofPattern("dd/MM/yyyy")), telefone_p, email_p, endereco_p, convenio_p, Integer.parseInt(idade_p), genero_p);
+                MenuSecretariaPaciente menuSecretariaPaciente = new MenuSecretariaPaciente(secretaria, gerenciadorAdm, em);
+                menuSecretariaPaciente.setVisible(true);
+                this.dispose();
+            }
         }
     }
     
-    
-    
+    /**
+     * Chama o método {@link #cadAutPaciente} quando o botão é clicado para cadastrar ou atualizar o paciente.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         cadAutPaciente();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * Navega de volta para a janela do menu da secretaria.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void backMenuPricipalSecretaria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backMenuPricipalSecretaria
-        // TODO add your handling code here:
         MenuSecretariaPaciente menuSecretariaPaciente = new MenuSecretariaPaciente(secretaria, gerenciadorAdm, em);
         menuSecretariaPaciente.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backMenuPricipalSecretaria
-
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField dataNascimento;

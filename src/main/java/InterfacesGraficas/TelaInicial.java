@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package InterfacesGraficas;
 
 import Gerenciador.GerenciadorAdm;
@@ -9,22 +5,29 @@ import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
 /**
- *Descrição generica
+ * Classe que representa a tela inicial do sistema. Oferece opções para acessar diferentes áreas de usuário: Médico, Administrador e Secretária.
+ * Fornece botões para navegar para a tela de login específica para cada tipo de usuário.
+ * 
  * @author jeanm
  */
 public class TelaInicial extends javax.swing.JFrame {
+
     // Atributos
     private GerenciadorAdm gerenciadorAdm;
     private EntityManager em;
 
-    // Construtor
+    /**
+     * Construtor da classe. Inicializa o JFrame com o gerenciador de administração e o EntityManager.
+     * 
+     * @param gerenciadorAdm O gerenciador de administração responsável por operações no sistema.
+     * @param em O EntityManager usado para realizar consultas no banco de dados.
+     */
     public TelaInicial(GerenciadorAdm gerenciadorAdm, EntityManager em) {
         this.gerenciadorAdm = gerenciadorAdm;
         this.em = em;
         initComponents();
         setLocationRelativeTo(null);
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -90,6 +93,8 @@ public class TelaInicial extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    //+++++++++++++++++++++++++++++++++++++++++++++
     //Ação somente para fins de teste
         public void cadMassa(){
             int dialogResult = JOptionPane.showConfirmDialog(this, 
@@ -102,7 +107,11 @@ public class TelaInicial extends javax.swing.JFrame {
                 } 
         }
     
-    // Ações
+    /**
+     * Ação do botão "Médico". Abre a tela de login para médicos e fecha a tela inicial.
+     * 
+     * @param evt O evento de ação do botão "Médico".
+     */
     private void btnMed_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMed_Action
         LoginMedSec loginMedico = new LoginMedSec(this.gerenciadorAdm, this.em);
         loginMedico.setSecMed("Medico");
@@ -110,15 +119,23 @@ public class TelaInicial extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnMed_Action
 
+    /**
+     * Ação do botão "Administrador". Abre a tela principal do administrador, executa o pré-cadastro em massa e fecha a tela inicial.
+     * 
+     * @param evt O evento de ação do botão "Administrador".
+     */
     private void btnAdm_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdm_Action
         MenuPrincipalAdm menuPrincipalAdm = new MenuPrincipalAdm(gerenciadorAdm, em);
         this.cadMassa();
         menuPrincipalAdm.setVisible(true);
         this.dispose();
-
-
     }//GEN-LAST:event_btnAdm_Action
 
+    /**
+     * Ação do botão "Secretária". Abre a tela de login para secretárias e fecha a tela inicial.
+     * 
+     * @param evt O evento de ação do botão "Secretária".
+     */
     private void btnSec_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSec_Action
         LoginMedSec loginSecretaria = new LoginMedSec(this.gerenciadorAdm, this.em);
         loginSecretaria.setSecMed("Secretaria");
@@ -126,10 +143,8 @@ public class TelaInicial extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnSec_Action
 
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Declaração das variáveis da interface gráfica
     private javax.swing.JButton btnAdm;
     private javax.swing.JButton btnMed;
     private javax.swing.JButton btnSec;
-    // End of variables declaration//GEN-END:variables
 }

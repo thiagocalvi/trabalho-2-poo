@@ -14,18 +14,27 @@ import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
 /**
- *Descrição generica
+ * Tela para cadastro e atualização de dados médicos dos pacientes.
+ * Permite ao usuário cadastrar novos dados médicos ou atualizar dados existentes.
+ * 
  * @author matheus
  */
 public class CadAutDadosMedico extends javax.swing.JFrame {
-    // Atríbutos
+    // Atributos
     private GerenciadorAdm gerenciadorAdm;
     private Medico medico;
     private Consulta consulta;
     private EntityManager em;
     private String Cad_Atu = "Cadastrar";
-    
-    // Construtor
+
+    /**
+     * Construtor da tela de cadastro e atualização de dados médicos.
+     * 
+     * @param gerenciadorAdm O gerenciador de administração.
+     * @param medico O médico associado.
+     * @param consulta A consulta associada.
+     * @param em O EntityManager para operações de banco de dados.
+     */
     public CadAutDadosMedico(GerenciadorAdm gerenciadorAdm, Medico medico, Consulta consulta, EntityManager em) {
         this.gerenciadorAdm = gerenciadorAdm;
         this.medico = medico;
@@ -36,12 +45,19 @@ public class CadAutDadosMedico extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
-    // Métodos
+    /**
+     * Define os nomes do paciente e médico na tela.
+     */
     private void setNome(){
         lblPac.setText(" " + consulta.getPaciente().getNome());
         lblMed.setText(" " + medico.getNome());
     }
-    
+
+    /**
+     * Configura a tela para cadastro ou atualização de dados médicos.
+     * 
+     * @param atualizar Define se a operação é de cadastro ou atualização.
+     */
     public void setAtualizar(String atualizar){
         this.Cad_Atu = atualizar;
         setTitle("Atualizar dados médicos");
@@ -49,46 +65,41 @@ public class CadAutDadosMedico extends javax.swing.JFrame {
         btnCadAtu.setText(atualizar);
         setValues();
     }
-    
+
+    /**
+     * Preenche os campos da tela com os valores atuais dos dados médicos.
+     */
     private void setValues(){
-        
-        if (consulta.getPaciente().getDadosMedicos().isBebe() == true){
+        // Define os valores dos campos de acordo com os dados médicos do paciente.
+        if (consulta.getPaciente().getDadosMedicos().isBebe()) {
             BSim.setSelected(true);
-        }
-        else {
+        } else {
             BNao.setSelected(true);
         }
-        
-        
-        if (consulta.getPaciente().getDadosMedicos().isFuma()== true){
+
+        if (consulta.getPaciente().getDadosMedicos().isFuma()) {
             FSim.setSelected(true);
-        }
-        else {
+        } else {
             FNao.setSelected(true);
         }
-        
-        
-        if (consulta.getPaciente().getDadosMedicos().isDiabete() == true){
+
+        if (consulta.getPaciente().getDadosMedicos().isDiabete()) {
             DSim.setSelected(true);
-        }
-        else {
+        } else {
             DNao.setSelected(true);
-        } 
-        
-        
-        if (consulta.getPaciente().getDadosMedicos().isDoencaCardiaca() == true){
-            DoSim.setSelected(true);
         }
-        else {
+
+        if (consulta.getPaciente().getDadosMedicos().isDoencaCardiaca()) {
+            DoSim.setSelected(true);
+        } else {
             DoNao.setSelected(true);
         }
-        
-        
+
+        // Preenche os campos de texto com os valores dos dados médicos.
         txtColes.setText(consulta.getPaciente().getDadosMedicos().getColesterol());
         txtPeso.setText(String.valueOf(consulta.getPaciente().getDadosMedicos().getPeso()));
         txtCirc.setText(String.join(", ", consulta.getPaciente().getDadosMedicos().getCirurgias()));
         txtAler.setText(String.join(", ", consulta.getPaciente().getDadosMedicos().getAlergias())); 
-        
     }
     
 
@@ -542,84 +553,61 @@ public class CadAutDadosMedico extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Realiza o cadastro ou atualização dos dados médicos ao clicar no botão.
+     * 
+     * @param evt O evento de clique do botão.
+     */
     private void btnCadAtu_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadAtu_Action
-        boolean fuma = false, bebe = false, diabete = false, doenca = false;
-        
-        if (FSim.isSelected()){
-            fuma = true;
-        } 
-        else {
-            fuma = false;
-        }
-        
-        
-        if (BSim.isSelected()){
-            bebe = true;
-        }
-        else {
-            bebe = false;
-        }
-
-
-        if (DSim.isSelected()){
-            diabete = true;
-        }
-        else {
-            diabete = false;
-        }
-
-
-        if (DoSim.isSelected()){
-            doenca = true;
-        }
-        else {
-            doenca = false;
-        }
-        
+        // Obtém os valores selecionados nos campos de dados médicos.
+        boolean fuma = FSim.isSelected();
+        boolean bebe = BSim.isSelected();
+        boolean diabete = DSim.isSelected();
+        boolean doenca = DoSim.isSelected();
 
         String colesterol = txtColes.getText();
         float peso = Float.parseFloat(txtPeso.getText().replace(",", "."));
-        List<String> cirurgias =  Arrays.asList(txtCirc.getText().split("[,\\.]"));
+        List<String> cirurgias = Arrays.asList(txtCirc.getText().split("[,\\.]"));
         List<String> alergias = Arrays.asList(txtAler.getText().split("[,\\.]"));
-        
-        
-        if (Cad_Atu.equals("Cadastrar")){
+
+        // Verifica se o usuário deseja cadastrar ou atualizar os dados médicos.
+        if (Cad_Atu.equals("Cadastrar")) {
             int dialogResult = JOptionPane.showConfirmDialog(this,
-                        "Tem certeza que deseja 'CADASTRAR' os Dados médico?",
-                        "Confirmar Cadastro",
-                        JOptionPane.YES_NO_OPTION);
-            
-            if (dialogResult == JOptionPane.YES_OPTION){
+                "Tem certeza que deseja 'CADASTRAR' os Dados médicos?",
+                "Confirmar Cadastro",
+                JOptionPane.YES_NO_OPTION);
+
+            if (dialogResult == JOptionPane.YES_OPTION) {
                 medico.cadastrarDados(consulta.getPaciente(), fuma, bebe, colesterol, diabete, doenca, peso, cirurgias, alergias);
                 MenuDadosMedicos menuDadosMedicos = new MenuDadosMedicos(gerenciadorAdm, medico, consulta, em);
                 menuDadosMedicos.setVisible(true);
                 this.dispose();
             }
-        }
-        else if (Cad_Atu.equals("Atualizar")){
+        } else if (Cad_Atu.equals("Atualizar")) {
             int dialogResult = JOptionPane.showConfirmDialog(this,
-                        "Tem certeza que deseja 'ATUALIZAR' os Dados médico?",
-                        "Confirmar Cadastro",
-                        JOptionPane.YES_NO_OPTION);
-            
-            if (dialogResult == JOptionPane.YES_OPTION){
+                "Tem certeza que deseja 'ATUALIZAR' os Dados médicos?",
+                "Confirmar Atualização",
+                JOptionPane.YES_NO_OPTION);
+
+            if (dialogResult == JOptionPane.YES_OPTION) {
                 medico.atualizarDados(consulta.getPaciente().getDadosMedicos(), fuma, bebe, colesterol, diabete, doenca, peso, cirurgias, alergias);
                 MenuDadosMedicos menuDadosMedicos = new MenuDadosMedicos(gerenciadorAdm, medico, consulta, em);
                 menuDadosMedicos.setVisible(true);
                 this.dispose();
             }
         }
-         
-        
-
     }//GEN-LAST:event_btnCadAtu_Action
 
+    /**
+     * Retorna para o menu de dados médicos ao clicar no botão "Voltar".
+     * 
+     * @param evt O evento de clique do botão "Voltar".
+     */
     private void btnVoltar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar_Action
         MenuDadosMedicos menuDadosMedicos = new MenuDadosMedicos(gerenciadorAdm, medico, consulta, em);
         menuDadosMedicos.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVoltar_Action
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton BNao;

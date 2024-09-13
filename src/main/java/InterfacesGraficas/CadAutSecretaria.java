@@ -1,26 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package InterfacesGraficas;
+
 import Gerenciador.GerenciadorAdm;
 import Modelo.Secretaria;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
+
 /**
- *Descrição generica
+ * Tela de cadastro e atualização de secretárias.
+ * Esta classe permite cadastrar uma nova secretária ou atualizar os dados de uma secretária existente.
+ * 
  * @author matheus
  */
 public class CadAutSecretaria extends javax.swing.JFrame {
-    
+
     // Atributos
     private GerenciadorAdm gerenciadorAdm;
     private EntityManager em;
     private String Cad_Atu = "Cadastrar";
     private Secretaria secretaria;
-    
+
     /**
      * Construtor da classe.
      * Inicializa o gerenciador de administração e o EntityManager, e configura os componentes da interface.
@@ -234,7 +234,7 @@ public class CadAutSecretaria extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
+       /**
      * Define o texto do botão e ajusta o título da janela para refletir a operação (Cadastrar ou Atualizar).
      * 
      * @param Cad_Atu o texto que será exibido no botão (Cadastrar ou Atualizar)
@@ -245,8 +245,8 @@ public class CadAutSecretaria extends javax.swing.JFrame {
         lblTitulo.setText("Atualizar Secretaria");
         setTitle("Atualizar Secretaria");
         setValues();
-    } 
-    
+    }
+
     /**
      * Define a secretária que será atualizada.
      * 
@@ -255,7 +255,7 @@ public class CadAutSecretaria extends javax.swing.JFrame {
     public void setSecretaria(Secretaria secretaria){
         this.secretaria = secretaria;
     }
-    
+
     /**
      * Navega de volta para a janela do menu de secretárias.
      * 
@@ -273,15 +273,12 @@ public class CadAutSecretaria extends javax.swing.JFrame {
      * @param evt o evento de clique do botão
      */
     private void cadastrarSecretaria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarSecretaria
-        // TODO add your handling code here:
         String nome, telefone, email, dataNascimento, genero = null;
-       
        
         nome = nome_secretaria.getText();
         telefone = telefone_secretaria.getText();  
         email = email_secretaria.getText();
         dataNascimento = dataNascimento_secretaria.getText();
-        
         
         if (genero_m_secretaria.isSelected()) {
             genero = "Masculino";
@@ -314,7 +311,7 @@ public class CadAutSecretaria extends javax.swing.JFrame {
             }        
         }
     }//GEN-LAST:event_cadastrarSecretaria
-    
+
     /**
      * Preenche os campos da interface com os dados da secretária quando a operação é de atualização.
      * Configura os valores dos campos baseados no objeto Secretaria fornecido.
@@ -322,22 +319,18 @@ public class CadAutSecretaria extends javax.swing.JFrame {
     private void setValues(){
         if (this.Cad_Atu.equals("Atualizar")){
             nome_secretaria.setText(this.secretaria.getNome());
-
             telefone_secretaria.setText(this.secretaria.getTelefone());
-
             email_secretaria.setText(this.secretaria.getEmail());
-
             dataNascimento_secretaria.setText(this.secretaria.getDataNascimento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
             if(this.secretaria.getGenero().equals("Masculino")){
                 genero_m_secretaria.setSelected(true);
-
-            }else{
+            } else {
                 genero_f_secretaria.setSelected(true);
             }
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
     private javax.swing.ButtonGroup buttonGroup1;

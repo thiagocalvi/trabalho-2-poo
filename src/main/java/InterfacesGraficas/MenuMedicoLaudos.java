@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package InterfacesGraficas;
 
 import Gerenciador.GerenciadorAdm;
@@ -10,17 +6,28 @@ import Modelo.Medico;
 import javax.persistence.EntityManager;
 
 /**
- *Descrição generica
+ * Tela de interface gráfica para o menu de laudos médicos.
+ * Permite ao médico emitir atestados, receitas e declarações de acompanhamento para um paciente específico.
+ * 
  * @author matheus
  */
 public class MenuMedicoLaudos extends javax.swing.JFrame {
-    // Atríbutos
+
+    // Atributos
     private GerenciadorAdm gerenciadorAdm;
     private Medico medico;
     private Consulta consulta;
     private EntityManager em;
     
-    // Construtor
+    /**
+     * Construtor da classe.
+     * Inicializa os componentes da interface e configura as informações iniciais.
+     * 
+     * @param gerenciadorAdm o gerenciador de administração para operações de CRUD
+     * @param medico o médico associado à consulta
+     * @param consulta a consulta atual
+     * @param em o EntityManager utilizado para interagir com o banco de dados
+     */
     public MenuMedicoLaudos(GerenciadorAdm gerenciadorAdm, Medico medico, Consulta consulta, EntityManager em) {
         this.gerenciadorAdm = gerenciadorAdm;
         this.medico = medico;
@@ -31,8 +38,10 @@ public class MenuMedicoLaudos extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
-    
-    private void colocaNome(){
+    /**
+     * Configura os rótulos com o nome do paciente e do médico.
+     */
+    private void colocaNome() {
         lblPac.setText(" " + consulta.getPaciente().getNome());
         lblMed.setText(" " + medico.getNome());
     }
@@ -230,31 +239,51 @@ public class MenuMedicoLaudos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+/**
+     * Abre a tela para emitir um atestado para o paciente atual.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void btnAtes_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtes_Action
         EmitirAtestado emitirAtestado = new EmitirAtestado(gerenciadorAdm, medico, consulta, em);
-        emitirAtestado.setVisible(true); 
+        emitirAtestado.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAtes_Action
 
+    /**
+     * Abre a tela para emitir uma receita para o paciente atual.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void btnRec_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRec_Action
         EmitirReceita emitirReceita = new EmitirReceita(gerenciadorAdm, medico, consulta, em);
         emitirReceita.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRec_Action
 
+    /**
+     * Abre a tela para emitir uma declaração de acompanhamento para o paciente atual.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void btnDec_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDec_Action
         EmitirDeclaraçãoAcomponhamento emitirDec = new EmitirDeclaraçãoAcomponhamento(gerenciadorAdm, medico, consulta, em);
         emitirDec.setVisible(true);
-        this.dispose();    }//GEN-LAST:event_btnDec_Action
+        this.dispose();
+    }//GEN-LAST:event_btnDec_Action
 
+    /**
+     * Volta para a tela de consulta do paciente.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void btnVoltar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar_Action
         ConsultaDoPaciente consultaDoPaciente = new ConsultaDoPaciente(gerenciadorAdm, medico, consulta, em);
         consultaDoPaciente.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVoltar_Action
 
-    
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variáveis de declaração - não modificar
     private javax.swing.JButton btnAtes;
     private javax.swing.JButton btnDec;
     private javax.swing.JButton btnRec;
@@ -267,5 +296,6 @@ public class MenuMedicoLaudos extends javax.swing.JFrame {
     private javax.swing.JLabel lblPac;
     private java.awt.Panel panel1;
     private java.awt.Panel panel2;
-    // End of variables declaration//GEN-END:variables
+    // Fim da declaração de variáveis
 }
+

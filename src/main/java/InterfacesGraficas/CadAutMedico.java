@@ -1,20 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package InterfacesGraficas;
+
+
 import Gerenciador.GerenciadorAdm;
-import Modelo.Medico;
-import Modelo.Secretaria;
+import Modelo.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
-/**
- *Descrição generica
- * @author matheus
- */
+
 /**
  * Classe responsável pela interface gráfica para cadastro e atualização de médicos.
  * Permite cadastrar um novo médico ou atualizar um médico existente, incluindo a seleção de uma secretaria.
@@ -215,7 +209,7 @@ public class CadAutMedico extends javax.swing.JFrame {
                             .addComponent(telefone_medico, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
                             .addComponent(crm_medico, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)))
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(0, 24, Short.MAX_VALUE)
+                        .addGap(0, 13, Short.MAX_VALUE)
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,7 +234,7 @@ public class CadAutMedico extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(genero_f_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(470, 470, 470)))))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,7 +314,7 @@ public class CadAutMedico extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
+        /**
      * Navega de volta para a janela do menu de médicos.
      * 
      * @param evt o evento de clique do botão
@@ -336,9 +330,7 @@ public class CadAutMedico extends javax.swing.JFrame {
      * 
      * @param evt o evento de clique do botão
      */
-    
     private void cadastarMedico(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastarMedico
-
         String nome, especialidade, telefone, email, crm, dataNascimento, genero = null, nomeSecretaria;
         Secretaria secretariaObj = null;
 
@@ -363,7 +355,6 @@ public class CadAutMedico extends javax.swing.JFrame {
                 if (secretaria.getNome().equals(nomeSecretaria)) {
                     secretariaObj = secretaria;
                     break;  // Encontre a secretaria e saia do loop
-
                 }
             }
         }
@@ -387,8 +378,7 @@ public class CadAutMedico extends javax.swing.JFrame {
                         this.dispose();
                     }
                 }
-
-            }else{
+            } else {
                 int dialogResult = JOptionPane.showConfirmDialog(this,
                     "Tem certeza que deseja atualizar o médico " + this.medico.getNome() + "?",
                     "Confirmar Atualização",
@@ -419,8 +409,7 @@ public class CadAutMedico extends javax.swing.JFrame {
                         this.dispose();
                     }
                 }
-
-            }else{
+            } else {
                 int dialogResult = JOptionPane.showConfirmDialog(this,
                     "Tem certeza que deseja cadastrar o médico Dr. "+ nome +"?",
                     "Confirmar Cadastro",
@@ -435,14 +424,17 @@ public class CadAutMedico extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cadastarMedico
 
+    /**
+     * Navega de volta para a janela do menu de médicos.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void voltar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltar_Action
         MenuMedicosAdm menuMedicoAdm = new MenuMedicosAdm(gerenciadorAdm, em);
         menuMedicoAdm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_voltar_Action
 
-   
-    // Métodos
     /**
      * Configura a lista de secretarias no JComboBox.
      * Adiciona todas as secretarias ao JComboBox para seleção.
@@ -480,8 +472,7 @@ public class CadAutMedico extends javax.swing.JFrame {
 
             if(this.medico.getGenero().equals("Masculino")){
                 genero_m_medico.setSelected(true);
-
-            }else{
+            } else {
                 genero_f_medico.setSelected(true);
             }
 
@@ -491,14 +482,11 @@ public class CadAutMedico extends javax.swing.JFrame {
 
             if(this.medico.getSecretaria() == null){
                 jComboBox1.setSelectedItem("Selecione uma secretaria");
-
-            }else{
+            } else {
                 jComboBox1.setSelectedItem(medico.getSecretaria().getNome());
-
             }
         }
     }
-    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCadastrar;

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package InterfacesGraficas;
 
 import Gerenciador.GerenciadorAdm;
@@ -11,17 +7,28 @@ import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
 /**
- *Descrição generica
+ * Tela para emissão de declarações de acompanhamento.
+ * Permite ao médico gerar uma declaração de acompanhamento para uma consulta específica,
+ * preenchendo os campos necessários.
+ * 
  * @author matheus
  */
 public class EmitirDeclaraçãoAcomponhamento extends javax.swing.JFrame {
-    // Atríbutos
+
     private GerenciadorAdm gerenciadorAdm;
     private Medico medico;
     private Consulta consulta;
     private EntityManager em;
     
-    // Construtor
+    /**
+     * Construtor da classe.
+     * Inicializa os atributos e configura os componentes da interface.
+     * 
+     * @param gerenciadorAdm o gerenciador de administração responsável pelas operações
+     * @param medico o médico que está emitindo a declaração
+     * @param consulta a consulta para a qual a declaração será emitida
+     * @param em o EntityManager utilizado para interagir com o banco de dados
+     */
     public EmitirDeclaraçãoAcomponhamento(GerenciadorAdm gerenciadorAdm, Medico medico, Consulta consulta, EntityManager em) {
         this.gerenciadorAdm = gerenciadorAdm;
         this.medico = medico;
@@ -32,6 +39,9 @@ public class EmitirDeclaraçãoAcomponhamento extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
+    /**
+     * Configura os nomes do paciente e do médico nos rótulos da interface.
+     */
     private void setNome(){
         lblPac.setText(" " + consulta.getPaciente().getNome());
         lblMed.setText(" " + medico.getNome());
@@ -247,29 +257,40 @@ public class EmitirDeclaraçãoAcomponhamento extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Ação do botão "Gerar".
+     * Gera e exibe uma declaração de acompanhamento se todos os campos forem preenchidos.
+     * Caso contrário, exibe uma mensagem informando que os campos devem ser preenchidos.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void btnGerar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerar_Action
-        
         if (!txtMotivo.getText().isEmpty() && !txtAcom.getText().isEmpty()){
             String imprimir = medico.declaracaoAcompanhamento(consulta);
             JOptionPane.showMessageDialog(null, 
-                                      imprimir, 
-                                      "Declaração de acompanhamento", 
-                                      JOptionPane.INFORMATION_MESSAGE);
+                                          imprimir, 
+                                          "Declaração de acompanhamento", 
+                                          JOptionPane.INFORMATION_MESSAGE);
         }
         else {
             JOptionPane.showMessageDialog(null, 
-                                      "Preencha todos os campos!", 
-                                      "Aviso!", 
-                                      JOptionPane.WARNING_MESSAGE);   
+                                          "Preencha todos os campos!", 
+                                          "Aviso!", 
+                                          JOptionPane.WARNING_MESSAGE);   
         }
     }//GEN-LAST:event_btnGerar_Action
 
+    /**
+     * Ação do botão "Voltar".
+     * Retorna ao menu de laudos do médico.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void btnVoltar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar_Action
         MenuMedicoLaudos menuMedicoLaudos = new MenuMedicoLaudos(gerenciadorAdm, medico, consulta, em);
         menuMedicoLaudos.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVoltar_Action
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGerar;

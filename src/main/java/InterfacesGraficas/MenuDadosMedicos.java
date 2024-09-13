@@ -1,44 +1,38 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package InterfacesGraficas;
 
 import Gerenciador.GerenciadorAdm;
 import Modelo.Consulta;
 import Modelo.DadosMedicos;
 import Modelo.Medico;
-import Modelo.Prontuario;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import javax.persistence.EntityManager;
+import javax.swing.*;
+import java.awt.*;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
 /**
- *Descrição generica
+ * Tela de interface gráfica para exibição e gerenciamento de dados médicos de um paciente em uma consulta.
+ * Permite visualizar, atualizar e deletar dados médicos associados a um paciente.
+ * 
  * @author matheus
  */
 public class MenuDadosMedicos extends javax.swing.JFrame {
-    // Atríbutos
+
+    // Atributos
     private GerenciadorAdm gerenciadorAdm;
     private Medico medico;
     private Consulta consulta;
     private EntityManager em;
     
-    // Construtor
+    /**
+     * Construtor da classe.
+     * Inicializa os componentes da interface e configura as informações iniciais.
+     * 
+     * @param gerenciadorAdm o gerenciador de administração para operações de CRUD
+     * @param medico o médico associado à consulta
+     * @param consulta a consulta atual
+     * @param em o EntityManager utilizado para interagir com o banco de dados
+     */
     public MenuDadosMedicos(GerenciadorAdm gerenciadorAdm, Medico medico, Consulta consulta, EntityManager em) {
         this.gerenciadorAdm = gerenciadorAdm;
         this.medico = medico;
@@ -50,22 +44,30 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
-    // Métodos
+    /**
+     * Configura os rótulos com o nome do paciente e do médico.
+     */
     private void setNome(){
         lblPac.setText(" " + consulta.getPaciente().getNome());
         lblMed.setText(" " + medico.getNome());
     }
     
+    /**
+     * Atualiza a exibição dos dados médicos do paciente.
+     */
     private void updateSearch(){
         renderDadosMedicos(consulta.getPaciente().getDadosMedicos());
     }
     
-   
+    /**
+     * Exibe um diálogo com informações detalhadas sobre os dados médicos do paciente.
+     * 
+     * @param dadosMedicos os dados médicos a serem exibidos
+     */
     private void showInformationDadosMedicos(DadosMedicos dadosMedicos) {
         JDialog dialog = new JDialog(this, consulta.getPaciente().getNome(), true);
         dialog.setLayout(new BorderLayout());
         dialog.setPreferredSize(new Dimension(350, 300));
-        
         
         JPanel infoPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -107,13 +109,11 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
                 value1 = value1.substring(0, 30) + "...";
             }
             
-
             JLabel value = new JLabel("<html>" + value1 + "</html>");  // Habilitar HTML para permitir quebra de linha
             value.setPreferredSize(new Dimension(200, 20));  // Ajustar a largura dos valores
             value.setVerticalAlignment(JLabel.TOP);  // Alinhar o texto ao topo
             value.setToolTipText(values[i]);
             
-                     
             if (i == 6 || i == 7){
                 value.setToolTipText(values[i]);
             }
@@ -135,44 +135,40 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
         dialog.setVisible(true);
     }  
     
-    
-   private void renderDadosMedicos(DadosMedicos dadosMedico){
-        
-        // Configurar o layout do boxProntuario para vertical
+    /**
+     * Renderiza e exibe os dados médicos do paciente no painel.
+     * 
+     * @param dadosMedico os dados médicos a serem exibidos
+     */
+    private void renderDadosMedicos(DadosMedicos dadosMedico){
         this.boxDados.setLayout(new BoxLayout(this.boxDados, BoxLayout.Y_AXIS));
-
-        // Limpar o painel antes de adicionar novos médicos
         this.boxDados.removeAll();        
         
         if (dadosMedico == null) {
             JLabel noProntuariosLabel = new JLabel("Não há Dados Médico cadastrados.");
             this.boxDados.add(noProntuariosLabel);
         } else {    
-                
             JPanel card_dados = new JPanel(new GridBagLayout());
             GridBagConstraints gbc = new GridBagConstraints();
             card_dados.setMaximumSize(new Dimension(780, 40));
 
-            // Configurar constraints para o nameLabel
             gbc.gridx = 0;
             gbc.gridy = 0;
             gbc.anchor = GridBagConstraints.WEST;
             gbc.insets = new Insets(5, 5, 5, 5);
                 
             JLabel idadeLabel = new JLabel("Idade: " + consulta.getPaciente().getIdade());
-            idadeLabel.setPreferredSize(new Dimension(130, 20));                // Limitar o tamanho
+            idadeLabel.setPreferredSize(new Dimension(130, 20));
             card_dados.add(idadeLabel, gbc);                
                 
             gbc.gridx = 1;
             JLabel sexoLabel = new JLabel("Sexo: " + consulta.getPaciente().getSexo());
-            sexoLabel.setPreferredSize(new Dimension(130, 20));                 // Limitar o tamanho
+            sexoLabel.setPreferredSize(new Dimension(130, 20));
             card_dados.add(sexoLabel, gbc);
                 
-            
-            // Configurar constraints para o buttonPanel
-            gbc.gridx = 2;                                                  // Mover para a quarta coluna
-            gbc.weightx = 1.0;                                              // O botão empurrará o conteúdo para a esquerda
-            gbc.anchor = GridBagConstraints.EAST;                           // Alinhar à direita
+            gbc.gridx = 2;
+            gbc.weightx = 1.0;
+            gbc.anchor = GridBagConstraints.EAST;
             JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
                 
             JButton updateButton = new JButton("Atualizar");
@@ -181,25 +177,23 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
          
             infoButton.addActionListener(e -> {
                 showInformationDadosMedicos(dadosMedico);
-            });                   
+            });
                 
             updateButton.addActionListener(e -> {
                 CadAutDadosMedico cadAtuDadosMedicos = new CadAutDadosMedico(gerenciadorAdm, medico, consulta, em);
                 cadAtuDadosMedicos.setAtualizar("Atualizar");
                 cadAtuDadosMedicos.setVisible(true);
                 this.dispose();
-                
             });
                 
             deleteButton.addActionListener(e -> {
                 int dialogResult = JOptionPane.showConfirmDialog(this, 
-                    "Tem certeza que deseja deletar os dados médico? " , 
+                    "Tem certeza que deseja deletar os dados médico?", 
                     "Confirmar Exclusão", 
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.WARNING_MESSAGE);
                     
                 if (dialogResult == JOptionPane.YES_OPTION){
-                    
                     String result = medico.removerDados(dadosMedico.getId());
                     if (result.equals("Dados médico removido!")) {      
                         JOptionPane.showMessageDialog(this, 
@@ -212,36 +206,26 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
                         em.merge(consulta);
                         this.em.getTransaction().commit();
                         updateSearch();                             // Atualiza o dado após a exclusão
-                        
-                    }else {
-                        System.out.println(result);
+                    } else {
                         JOptionPane.showMessageDialog(this, 
                         result, 
                         "Erro", 
                         JOptionPane.ERROR_MESSAGE);
                     }
                 }
-            });                
+            });
 
-                
             buttonPanel.add(updateButton);
             buttonPanel.add(deleteButton);
             buttonPanel.add(infoButton);
        
-                
             card_dados.add(buttonPanel, gbc);
-
             this.boxDados.add(card_dados);
             this.boxDados.add(Box.createRigidArea(new Dimension(0, 10)));
-            
         }
         this.boxDados.revalidate();
         this.boxDados.repaint();
     }
-       
-    
- 
-    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -426,13 +410,17 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+ /**
+     * Abre a tela para adicionar novos dados médicos, se ainda não houver dados cadastrados para o paciente.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void btnAddDados_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDados_Action
         if (consulta.getPaciente().getDadosMedicos() == null){
             CadAutDadosMedico cadAtuDadosMedicos = new CadAutDadosMedico(gerenciadorAdm, medico, consulta, em);
             cadAtuDadosMedicos.setVisible(true);
             this.dispose();
-        }
-        else {
+        } else {
             JOptionPane.showMessageDialog(null, "Você já 'CADASTROU' um dado médico para o paciente!"
                                                 + "\n Limite de 1 cadastro por paciente!", 
                                                 "Aviso", 
@@ -440,14 +428,18 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAddDados_Action
 
+    /**
+     * Volta para a tela de consulta do paciente.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void btnVoltar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar_Action
         ConsultaDoPaciente consultaDoPaciente = new ConsultaDoPaciente(gerenciadorAdm, medico, consulta, em);
         consultaDoPaciente.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVoltar_Action
 
-    
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variáveis de declaração - não modificar
     private javax.swing.JPanel boxDados;
     private javax.swing.JButton btnAddDados;
     private javax.swing.JButton btnVoltar;
@@ -461,5 +453,5 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
     private javax.swing.JLabel lblPac;
     private java.awt.Panel panel1;
     private java.awt.Panel panel2;
-    // End of variables declaration//GEN-END:variables
+    // Fim da declaração de variáveis
 }

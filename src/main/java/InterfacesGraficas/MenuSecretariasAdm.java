@@ -3,35 +3,44 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package InterfacesGraficas;
+
 import Gerenciador.GerenciadorAdm;
+import Modelo.Secretaria;
+import javax.persistence.EntityManager;
 import javax.swing.*;
 import java.awt.*;
-
-import java.util.List;
-
-import Modelo.Secretaria;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.stream.Collectors;
-import javax.persistence.EntityManager;
+
 /**
- *Descrição generica
+ * Tela de gerenciamento de secretarias para o Administrador.
+ * Esta classe representa a interface gráfica para exibir e gerenciar secretarias,
+ * permitindo a visualização, atualização e exclusão das secretarias.
+ * 
  * @author thiago
  */
 public class MenuSecretariasAdm extends javax.swing.JFrame {
-    // Atríbutos
-    private GerenciadorAdm gerenciadorAdm;
-    private EntityManager em;
-    private List<Secretaria> allSecretarias;
-    
-    // Construtor
+    private GerenciadorAdm gerenciadorAdm; // Gerenciador de administração para operações com o banco de dados
+    private EntityManager em; // Gerenciador de entidades para operações com o banco de dados
+    private List<Secretaria> allSecretarias; // Lista completa de secretarias
+
+    /**
+     * Construtor da classe MenuSecretariasAdm.
+     * Inicializa os componentes da interface gráfica e carrega as secretarias.
+     * 
+     * @param gerenciadorAdm O gerenciador de administração para operações com o banco de dados.
+     * @param em O EntityManager para realizar operações com o banco de dados.
+     */
     public MenuSecretariasAdm(GerenciadorAdm gerenciadorAdm, EntityManager em) {
         initComponents();
         this.gerenciadorAdm = gerenciadorAdm; 
         this.em = em;
-        this.renderSecretarias(gerenciadorAdm.getAllSecretarias());
+        this.allSecretarias = gerenciadorAdm.getAllSecretarias(); // Carrega a lista completa de secretarias
+        renderSecretarias(allSecretarias);
         setupSearchField();
         setLocationRelativeTo(null);
-    } 
+    }     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -145,11 +154,15 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Exibe um diálogo com informações detalhadas sobre uma secretaria.
+     * 
+     * @param secretaria A secretaria cujas informações serão exibidas.
+     */
     private void showInformationSecretaria(Secretaria secretaria) {
         JDialog dialog = new JDialog(this, secretaria.getNome(), true);
         dialog.setLayout(new BorderLayout());
         dialog.setPreferredSize(new Dimension(400, 250));
-        
         
         JPanel infoPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -179,7 +192,6 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
             if (value1.length() > 30) {
                 value1 = value1.substring(0, 30) + "...";
             }
-                   
             
             JLabel value = new JLabel("<html>" + value1 + "</html>");  // Habilitar HTML para permitir quebra de linha
             value.setPreferredSize(new Dimension(200, 20));  // Ajustar a largura dos valores
@@ -192,7 +204,6 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
             infoPanel.add(value, gbc);
         }
 
-        
         JButton closeButton = new JButton("Fechar");
         closeButton.addActionListener(e -> dialog.dispose());
 
@@ -203,60 +214,47 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
         dialog.setLocationRelativeTo(this);
         dialog.setVisible(true);
     }
-    
+
+    /**
+     * Renderiza a lista de secretarias na interface gráfica.
+     * 
+     * @param secretariasToRender Lista de secretarias a serem exibidas.
+     */
     private void renderSecretarias(List<Secretaria> secretariasToRender) {
-        //this.allMedicos = this.gerenciadorAdm.getAllMedicos();
-
-        // Configurar o layout do box_medicos para vertical
         this.box_secretarias.setLayout(new BoxLayout(this.box_secretarias, BoxLayout.Y_AXIS));
-
-        // Definir um tamanho preferido para o box_medicos
         this.box_secretarias.setPreferredSize(new Dimension(780, secretariasToRender.size() * 50));
-
-        // Limpar o painel antes de adicionar novos médicos
         this.box_secretarias.removeAll();
 
         if (secretariasToRender.isEmpty()) {
-            JLabel noSecretariasLabel = new JLabel("Não há secretarias cadastrados.");
+            JLabel noSecretariasLabel = new JLabel("Não há secretarias cadastradas.");
             this.box_secretarias.add(noSecretariasLabel);
         } else {
             for (Secretaria secretaria : secretariasToRender) {
-                
                 JPanel card_secretaria = new JPanel(new GridBagLayout());
                 GridBagConstraints gbc = new GridBagConstraints();
                 card_secretaria.setMaximumSize(new Dimension(780, 40));
 
-                // Configurar constraints para o nameLabel
                 gbc.gridx = 0;
                 gbc.gridy = 0;
                 gbc.anchor = GridBagConstraints.WEST;
                 gbc.insets = new Insets(5, 5, 5, 5);
                 
                 JLabel nameLabel = new JLabel("Nome: " + secretaria.getNome());
-                nameLabel.setPreferredSize(new Dimension(420, 20));             // Limitar o tamanho
-                nameLabel.setToolTipText(secretaria.getNome());                 // Mostrar nome completo ao passar o mouse
+                nameLabel.setPreferredSize(new Dimension(420, 20));
+                nameLabel.setToolTipText(secretaria.getNome());
                 card_secretaria.add(nameLabel, gbc);
                 
-                
-                // Configurar constraints para o buttonPanel
-                gbc.gridx = 2;                                                  // Mover para a segunda coluna
-                gbc.weightx = 1.0;                                              // O botão empurrará o conteúdo para a esquerda
-                gbc.anchor = GridBagConstraints.EAST;                           // Alinhar à direita
+                gbc.gridx = 2;
+                gbc.weightx = 1.0;
+                gbc.anchor = GridBagConstraints.EAST;
                 JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
-                
                 
                 JButton updateButton = new JButton("Atualizar");
                 JButton deleteButton = new JButton("Deletar");
                 JButton infoButton = new JButton("Informações");
 
+                infoButton.addActionListener(e -> showInformationSecretaria(secretaria));
                 
-                infoButton.addActionListener(e -> {
-                    showInformationSecretaria(secretaria);
-                });                
-                
-                //TO-DO
-                //Leva para pagina de atualização
-                //o objeto medico que vai ser atualuzado é passado como parametro
                 updateButton.addActionListener(e -> {
                     CadAutSecretaria cadastrarSecretaria = new CadAutSecretaria(gerenciadorAdm, em);
                     cadastrarSecretaria.setSecretaria(secretaria);
@@ -272,23 +270,21 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.WARNING_MESSAGE);
                     
-                    if (dialogResult == JOptionPane.YES_OPTION){
-                        String result = this.gerenciadorAdm.removerSecretaria(secretaria.getId());
+                    if (dialogResult == JOptionPane.YES_OPTION) {
+                        String result = gerenciadorAdm.removerSecretaria(secretaria.getId());
                         if (result.equals("Secretaria removida!")) {
                             updateSearch(); // Atualiza a lista após a exclusão
                             JOptionPane.showMessageDialog(this, 
                             result, 
                             "Sucesso", 
                             JOptionPane.INFORMATION_MESSAGE);
-                        }else {
-                            System.out.println(result);
+                        } else {
                             JOptionPane.showMessageDialog(this, 
                             result, 
                             "Erro", 
                             JOptionPane.ERROR_MESSAGE);
                         }
                     }
-                
                 });
 
                 buttonPanel.add(updateButton);
@@ -296,44 +292,60 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
                 buttonPanel.add(infoButton);
                 card_secretaria.add(buttonPanel, gbc);
 
-
                 this.box_secretarias.add(card_secretaria);
                 this.box_secretarias.add(Box.createRigidArea(new Dimension(0, 10))); // Espaço entre cards
             }
         }
 
-        // Revalidar e repintar para atualizar o JScrollPane
         this.box_secretarias.revalidate();
         this.box_secretarias.repaint();
     }
-     
     
+    /**
+     * Ação do botão Voltar.
+     * Fecha a tela atual e abre o menu principal do Administrador.
+     * 
+     * @param evt Evento de ação do botão.
+     */
     private void back_menuPrincipalAdm(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_menuPrincipalAdm
         MenuPrincipalAdm menuPrincipalAdm = new MenuPrincipalAdm(gerenciadorAdm, em);
         menuPrincipalAdm.setVisible(true);        
         this.dispose();
     }//GEN-LAST:event_back_menuPrincipalAdm
 
+    /**
+     * Ação do botão Cadastrar Secretaria.
+     * Abre a tela de cadastro de uma nova secretaria.
+     * 
+     * @param evt Evento de ação do botão.
+     */
     private void goCadastrarSecretaria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goCadastrarSecretaria
         CadAutSecretaria cadastrarSecretaria = new CadAutSecretaria(gerenciadorAdm, em);
         cadastrarSecretaria.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_goCadastrarSecretaria
     
-    
-    
+    /**
+     * Atualiza a lista de secretarias exibida na interface.
+     * Filtra as secretarias com base no texto de pesquisa atual.
+     */
     private void updateSearch() {
         String searchText = jTextField1.getText().trim();
-        List<Secretaria> filteredMedicos;
+        List<Secretaria> filteredSecretarias;
         if (searchText.isEmpty()) {
-            filteredMedicos = gerenciadorAdm.getAllSecretarias();
+            filteredSecretarias = allSecretarias;
         } else {
-            filteredMedicos = gerenciadorAdm.buscarSecretarias(searchText);
+            filteredSecretarias = allSecretarias.stream()
+                .filter(secretaria -> secretaria.getNome().toLowerCase().contains(searchText.toLowerCase()))
+                .collect(Collectors.toList());
         }
-        renderSecretarias(filteredMedicos);
+        renderSecretarias(filteredSecretarias);
     }
     
-    
+    /**
+     * Configura o campo de pesquisa para atualizar a lista de secretarias
+     * sempre que o texto for modificado.
+     */
     private void setupSearchField(){
         jTextField1.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
             @Override

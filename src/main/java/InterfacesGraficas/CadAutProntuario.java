@@ -1,22 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package InterfacesGraficas;
 
 import Gerenciador.GerenciadorAdm;
-import Modelo.Consulta;
-import Modelo.Medico;
-import Modelo.Prontuario;
+import InterfacesGraficas.MenuProntuarios;
+import Modelo.*;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
 /**
- *Descrição generica
+ * Classe responsável pela interface gráfica para cadastro e atualização de prontuários de consultas.
+ * Permite cadastrar um novo prontuário ou atualizar um prontuário existente, incluindo a entrada de informações sobre diagnóstico, sintomas e tratamento.
+ * 
  * @author matheus
  */
 public class CadAutProntuario extends javax.swing.JFrame {
-    // Atríbutos
+    
+    // Atributos
     private GerenciadorAdm gerenciadorAdm;
     private Medico medico;
     private Consulta consulta;
@@ -24,7 +22,15 @@ public class CadAutProntuario extends javax.swing.JFrame {
     private EntityManager em;
     private String CadAut = "Cadastrar";
 
-    // Construtor
+    /**
+     * Construtor da classe.
+     * Inicializa a interface gráfica e configura os nomes dos pacientes e médicos associados à consulta.
+     * 
+     * @param gerenciadorAdm o gerenciador de administração responsável pelas operações de CRUD
+     * @param medico o médico associado à consulta
+     * @param consulta a consulta associada ao prontuário
+     * @param em o EntityManager utilizado para interagir com o banco de dados
+     */
     public CadAutProntuario(GerenciadorAdm gerenciadorAdm, Medico medico, Consulta consulta, EntityManager em) {
         this.gerenciadorAdm = gerenciadorAdm;
         this.prontuario = prontuario;
@@ -36,11 +42,19 @@ public class CadAutProntuario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
+    /**
+     * Configura os rótulos de paciente e médico na interface gráfica.
+     */
     private void setNome(){
         lblPac.setText(" " + consulta.getPaciente().getNome());
         lblMed.setText(" " + medico.getNome());
     }
     
+    /**
+     * Define o modo de operação da interface (Cadastrar ou Atualizar) e ajusta o título e os textos dos componentes conforme o modo selecionado.
+     * 
+     * @param atualizar o modo de operação, que pode ser "Cadastrar" ou "Atualizar"
+     */
     public void setAtualizar(String atualizar){
         this.CadAut = atualizar;
         setTitle("Atualizar prontuário");
@@ -49,12 +63,14 @@ public class CadAutProntuario extends javax.swing.JFrame {
         setValues();
     }
     
+    /**
+     * Preenche os campos da interface com os valores do prontuário associado à consulta.
+     */
     private void setValues(){
         txtDoe.setText(consulta.getProntuario().getDiagnostico());
         txtSin.setText(consulta.getProntuario().getSintomas());
         txtTrat.setText(consulta.getProntuario().getTratamento());
     }
-
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -284,6 +300,11 @@ public class CadAutProntuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Cadastra ou atualiza um prontuário com base nas informações fornecidas nos campos da interface gráfica.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void btnCadAut_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadAut_Action
         String sintomas, diagnostico, tratamento;
 
@@ -319,11 +340,11 @@ public class CadAutProntuario extends javax.swing.JFrame {
             if (dialogResult == JOptionPane.YES_OPTION){
                 this.prontuario = medico.atualizarProntuario(consulta.getProntuario(), consulta.getPaciente(), consulta, sintomas, diagnostico, tratamento);
                 
-//                Talvez não precise disso!
-//                em.getTransaction().begin();
-//                consulta.setProntuario(this.prontuario);
-//                em.merge(consulta);
-//                em.getTransaction().commit(); 
+                // Comentado por não ser necessário fazer merge da consulta
+                // em.getTransaction().begin();
+                // consulta.setProntuario(this.prontuario);
+                // em.merge(consulta);
+                // em.getTransaction().commit();
                 
                 MenuProntuarios menuProntuarios = new MenuProntuarios(gerenciadorAdm, medico, consulta, em);
                 menuProntuarios.setVisible(true);
@@ -332,7 +353,11 @@ public class CadAutProntuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCadAut_Action
 
-    
+    /**
+     * Navega de volta para a janela do menu de prontuários.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void btnVoltar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar_Action
         MenuProntuarios menuProntuarios = new MenuProntuarios(gerenciadorAdm, medico, consulta, em);
         menuProntuarios.setVisible(true);

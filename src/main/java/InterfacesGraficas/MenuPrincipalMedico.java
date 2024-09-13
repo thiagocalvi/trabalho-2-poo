@@ -9,7 +9,7 @@ import Modelo.Medico;
 import javax.persistence.EntityManager;
 
 /**
- *
+ * Tela principal para o menu do médico.
  * @author jeanm
  */
 public class MenuPrincipalMedico extends javax.swing.JFrame {
@@ -25,9 +25,8 @@ public class MenuPrincipalMedico extends javax.swing.JFrame {
         this.em = em;
         initComponents();
         setLocationRelativeTo(null);
-        lblNome.setText(" " + medico.getNome());
+        lblNome.setText(" " + medico.getNome());  // Define o nome do médico na interface
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -52,15 +51,15 @@ public class MenuPrincipalMedico extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 153));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // Fonte do rótulo
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0)); // Cor do texto
         jLabel1.setText("Doutor(a):");
 
         lblNome.setBackground(new java.awt.Color(255, 255, 255));
-        lblNome.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblNome.setForeground(new java.awt.Color(0, 0, 0));
-        lblNome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblNome.setOpaque(true);
+        lblNome.setFont(new java.awt.Font("Segoe UI", 0, 16)); // Fonte do nome do médico
+        lblNome.setForeground(new java.awt.Color(0, 0, 0)); // Cor do texto
+        lblNome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT); // Alinhamento do texto
+        lblNome.setOpaque(true); // Permite a definição da cor de fundo
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -85,27 +84,27 @@ public class MenuPrincipalMedico extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        btnVoltar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnVoltar.setText("Sair da Conta");
+        btnVoltar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // Fonte do botão
+        btnVoltar.setText("Sair da Conta"); // Texto do botão
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSait_Action(evt);
+                btnSait_Action(evt); // Ação do botão de voltar
             }
         });
 
-        btnRel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnRel.setText("Relatório/Clientes");
+        btnRel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // Fonte do botão
+        btnRel.setText("Relatório/Clientes"); // Texto do botão
         btnRel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRel_Action(evt);
+                btnRel_Action(evt); // Ação do botão de relatório
             }
         });
 
-        btnCon.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnCon.setText("Consultas marcadas");
+        btnCon.setFont(new java.awt.Font("Segoe UI", 0, 18)); // Fonte do botão
+        btnCon.setText("Consultas marcadas"); // Texto do botão
         btnCon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCon_Action(evt);
+                btnCon_Action(evt); // Ação do botão de consultas
             }
         });
 
@@ -152,27 +151,27 @@ public class MenuPrincipalMedico extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Ação do botão de consultas marcadas
     private void btnCon_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCon_Action
         ConsultasDoDia consultasDoDia = new ConsultasDoDia(gerenciadorAdm, medico, em);
         consultasDoDia.setVisible(true);
-        this.dispose();
+        this.dispose(); // Fecha a tela atual
     }//GEN-LAST:event_btnCon_Action
 
+    // Ação do botão de relatório mensal
     private void btnRel_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRel_Action
         RelatorioMensalMedico relatorioMensalMedico = new RelatorioMensalMedico(gerenciadorAdm, medico, em);
         relatorioMensalMedico.setVisible(true);
-        this.dispose();
+        this.dispose(); // Fecha a tela atual
     }//GEN-LAST:event_btnRel_Action
 
+    // Ação do botão de sair da conta
     private void btnSait_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSait_Action
         LoginMedSec loginMedico = new LoginMedSec(gerenciadorAdm, em);
         loginMedico.setSecMed("Medico");
         loginMedico.setVisible(true);
-        this.dispose();
+        this.dispose(); // Fecha a tela atual
     }//GEN-LAST:event_btnSait_Action
-
-  
-  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCon;

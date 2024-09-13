@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package InterfacesGraficas;
 
 import Gerenciador.GerenciadorAdm;
@@ -11,17 +7,28 @@ import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
 /**
- *Descrição generica
+ * Tela para emissão de receitas médicas.
+ * Permite ao médico gerar uma receita médica para uma consulta específica,
+ * preenchendo os campos necessários.
+ * 
  * @author matheus
  */
 public class EmitirReceita extends javax.swing.JFrame {
-    // Atríbutos
+
     private GerenciadorAdm gerenciadorAdm;
     private Medico medico;
     private Consulta consulta;
     private EntityManager em;
     
-    // Construtor
+    /**
+     * Construtor da classe.
+     * Inicializa os atributos e configura os componentes da interface.
+     * 
+     * @param gerenciadorAdm o gerenciador de administração responsável pelas operações
+     * @param medico o médico que está emitindo a receita
+     * @param consulta a consulta para a qual a receita será emitida
+     * @param em o EntityManager utilizado para interagir com o banco de dados
+     */
     public EmitirReceita(GerenciadorAdm gerenciadorAdm, Medico medico, Consulta consulta, EntityManager em) {
         this.gerenciadorAdm = gerenciadorAdm;
         this.medico = medico;
@@ -32,10 +39,14 @@ public class EmitirReceita extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
+    /**
+     * Configura os nomes do paciente e do médico nos rótulos da interface.
+     */
     private void setNome(){
         lblPac.setText(" " + consulta.getPaciente().getNome());
         lblMed.setText(" " + medico.getNome());
     }
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -230,29 +241,40 @@ public class EmitirReceita extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Ação do botão "Gerar".
+     * Gera e exibe uma receita médica se o campo de medicamentos estiver preenchido.
+     * Caso contrário, exibe uma mensagem informando que o campo deve ser preenchido.
+     * 
+     * @param evt o evento de clique do botão
+     */
+    private void btnGerar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerar_Action
+        if (!txtMedicamentos.getText().isEmpty()){
+            String imprimir = medico.receitaMedica(consulta);
+            JOptionPane.showMessageDialog(null, 
+                                          imprimir, 
+                                          "Receita", 
+                                          JOptionPane.INFORMATION_MESSAGE);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, 
+                                          "Preencha todos os campos!", 
+                                          "Aviso!", 
+                                          JOptionPane.WARNING_MESSAGE);            
+        }
+    }//GEN-LAST:event_btnGerar_Action
+
+    /**
+     * Ação do botão "Voltar".
+     * Retorna ao menu de laudos do médico.
+     * 
+     * @param evt o evento de clique do botão
+     */
     private void btnVoltar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar_Action
         MenuMedicoLaudos menuMedicoLaudos = new MenuMedicoLaudos(gerenciadorAdm, medico, consulta, em);
         menuMedicoLaudos.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVoltar_Action
-
-    private void btnGerar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerar_Action
-        
-        if (!txtMedicamentos.getText().isEmpty()){
-            String imprimir = medico.receitaMedica(consulta);
-            JOptionPane.showMessageDialog(null, 
-                                      imprimir, 
-                                      "Receita", 
-                                      JOptionPane.INFORMATION_MESSAGE);
-        }
-        else {
-            JOptionPane.showMessageDialog(null, 
-                                      "Preencha todos os campos!", 
-                                      "Aviso!", 
-                                      JOptionPane.WARNING_MESSAGE);            
-        }
-    }//GEN-LAST:event_btnGerar_Action
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGerar;
