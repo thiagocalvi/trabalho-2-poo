@@ -568,18 +568,10 @@ public class CadAutDadosMedico extends javax.swing.JFrame {
 
         String colesterol = txtColes.getText();
         float peso = Float.parseFloat(txtPeso.getText().replace(",", "."));
-<<<<<<< HEAD
-        List<String> cirurgias = Arrays.asList(txtCirc.getText().split("[,\\.]"));
-        List<String> alergias = Arrays.asList(txtAler.getText().split("[,\\.]"));
-
-        // Verifica se o usuário deseja cadastrar ou atualizar os dados médicos.
-        if (Cad_Atu.equals("Cadastrar")) {
-=======
         List<String> cirurgias = new ArrayList<>(List.of(txtCirc.getText().split("[,\\.]")));      
         List<String> alergias = new ArrayList<>(List.of(txtAler.getText().split("[,\\.]")));        
         
         if (Cad_Atu.equals("Cadastrar")){
->>>>>>> cda7ecd106699e7a2be20938fd2deae0d18e9b5a
             int dialogResult = JOptionPane.showConfirmDialog(this,
                 "Tem certeza que deseja 'CADASTRAR' os Dados médicos?",
                 "Confirmar Cadastro",
