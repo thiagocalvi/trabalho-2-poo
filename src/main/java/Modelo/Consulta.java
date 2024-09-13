@@ -30,8 +30,16 @@ public class Consulta {
      * {@link Tipo#NORMAL} e {@link Tipo#RETORNO}.
      */
     public enum Tipo {
-        NORMAL,  /**< Consulta normal. */
-        RETORNO  /**< Consulta de retorno. */
+    
+    /**
+     * Consulta normal.
+     */
+        NORMAL,
+    
+            /**
+     * Consulta normal.
+     */
+        RETORNO
     };
     
     /**

@@ -1,7 +1,8 @@
 package InterfacesGraficas;
 
 import Gerenciador.GerenciadorAdm;
-import Modelo.*;
+import Modelo.Consulta;
+import Modelo.Medico;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
@@ -87,7 +88,7 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
     }
     
     @SuppressWarnings("unchecked")
-                              
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLabel5 = new javax.swing.JLabel();
@@ -212,9 +213,9 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
         );
 
         pack();
-    }                      
+    }// </editor-fold>//GEN-END:initComponents
 
-     /**
+    /**
      * Ação do botão "Voltar". Fecha a janela atual e abre o menu principal do médico.
      * 
      * @param evt O evento de ação do botão "Voltar".
@@ -224,13 +225,6 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
         menuPrincipalMedico.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVoltar_Action
-
-    // Código gerado automaticamente para a criação da interface gráfica
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-        // Código gerado automaticamente para inicialização dos componentes da interface
-    }// </editor-fold>//GEN-END:initComponents
 
     // Declaração das variáveis da interface gráfica
     private javax.swing.JButton btnVoltar;
