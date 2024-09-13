@@ -242,7 +242,7 @@ public class LoginMedSec extends javax.swing.JFrame {
     public void cadMassa(){
                     int dialogResult = JOptionPane.showConfirmDialog(this, 
                                 "Um pré cadastro de pacientes está disponivel, gostaria de usar? \n"
-                                        + "se usar mais de uma vez vai cadastrar geristros duplicados!", 
+                                        + "se usar mais de uma vez vai cadastrar registros duplicados!", 
                                 "Pre cadastro", 
                                 JOptionPane.YES_NO_OPTION);
                         if (dialogResult == JOptionPane.YES_OPTION){
