@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import Gerenciador.GerenciadorAdm;
-import InterfacesGraficas.TelaInicial;
+import InterfaceAdministrador.TelaInicial;
 
 /**
  * Classe principal do sistema que inicializa a aplicação e configura a interface gráfica.
