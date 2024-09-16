@@ -34,16 +34,16 @@ public class MenuMedicoLaudos extends javax.swing.JFrame {
         this.consulta = consulta;
         this.em = em;
         initComponents();
-        colocaNome();
+        setNome();
         setLocationRelativeTo(null);
     }
 
     /**
      * Configura os rótulos com o nome do paciente e do médico.
      */
-    private void colocaNome() {
-        lblPac.setText(" " + consulta.getPaciente().getNome());
-        lblMed.setText(" " + medico.getNome());
+    private void setNome() {
+        lblNomePaciente.setText(" " + consulta.getPaciente().getNome());
+        lblNomeMedico.setText(" " + medico.getNome());
     }
  
     
@@ -53,16 +53,16 @@ public class MenuMedicoLaudos extends javax.swing.JFrame {
 
         panel1 = new java.awt.Panel();
         panel2 = new java.awt.Panel();
-        btnRec = new javax.swing.JButton();
-        btnAtes = new javax.swing.JButton();
-        btnDec = new javax.swing.JButton();
+        btnReceita = new javax.swing.JButton();
+        btnAtestado = new javax.swing.JButton();
+        btnDeclaracao = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
-        lblPac = new javax.swing.JLabel();
+        lblNomePaciente = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        lblMed = new javax.swing.JLabel();
+        lblNomeMedico = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Médico - Menu laudos");
@@ -76,34 +76,34 @@ public class MenuMedicoLaudos extends javax.swing.JFrame {
 
         panel2.setBackground(new java.awt.Color(204, 204, 204));
 
-        btnRec.setBackground(new java.awt.Color(255, 255, 255));
-        btnRec.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnRec.setForeground(new java.awt.Color(0, 0, 0));
-        btnRec.setText("Receita médica");
-        btnRec.addActionListener(new java.awt.event.ActionListener() {
+        btnReceita.setBackground(new java.awt.Color(255, 255, 255));
+        btnReceita.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnReceita.setForeground(new java.awt.Color(0, 0, 0));
+        btnReceita.setText("Receita médica");
+        btnReceita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRec_Action(evt);
+                go_receita(evt);
             }
         });
 
-        btnAtes.setBackground(new java.awt.Color(255, 255, 255));
-        btnAtes.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnAtes.setForeground(new java.awt.Color(0, 0, 0));
-        btnAtes.setText("Atestado médico");
-        btnAtes.setToolTipText("");
-        btnAtes.addActionListener(new java.awt.event.ActionListener() {
+        btnAtestado.setBackground(new java.awt.Color(255, 255, 255));
+        btnAtestado.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnAtestado.setForeground(new java.awt.Color(0, 0, 0));
+        btnAtestado.setText("Atestado médico");
+        btnAtestado.setToolTipText("");
+        btnAtestado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAtes_Action(evt);
+                go_atestado(evt);
             }
         });
 
-        btnDec.setBackground(new java.awt.Color(255, 255, 255));
-        btnDec.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnDec.setForeground(new java.awt.Color(0, 0, 0));
-        btnDec.setText("Declaração de acompanhamento");
-        btnDec.addActionListener(new java.awt.event.ActionListener() {
+        btnDeclaracao.setBackground(new java.awt.Color(255, 255, 255));
+        btnDeclaracao.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnDeclaracao.setForeground(new java.awt.Color(0, 0, 0));
+        btnDeclaracao.setText("Declaração de acompanhamento");
+        btnDeclaracao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDec_Action(evt);
+                go_declaracao(evt);
             }
         });
 
@@ -115,15 +115,15 @@ public class MenuMedicoLaudos extends javax.swing.JFrame {
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltar_Action(evt);
+                back_consultaDoPaciente(evt);
             }
         });
 
-        lblPac.setBackground(new java.awt.Color(255, 255, 255));
-        lblPac.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblPac.setForeground(new java.awt.Color(0, 0, 0));
-        lblPac.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblPac.setOpaque(true);
+        lblNomePaciente.setBackground(new java.awt.Color(255, 255, 255));
+        lblNomePaciente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblNomePaciente.setForeground(new java.awt.Color(0, 0, 0));
+        lblNomePaciente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblNomePaciente.setOpaque(true);
 
         javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
         panel2.setLayout(panel2Layout);
@@ -132,9 +132,9 @@ public class MenuMedicoLaudos extends javax.swing.JFrame {
             .addGroup(panel2Layout.createSequentialGroup()
                 .addGap(186, 186, 186)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnAtes, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRec, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDec, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAtestado, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReceita, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDeclaracao, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
                 .addContainerGap(41, Short.MAX_VALUE)
@@ -142,7 +142,7 @@ public class MenuMedicoLaudos extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblPac, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
                         .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -154,13 +154,13 @@ public class MenuMedicoLaudos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(lblPac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblNomePaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(47, 47, 47)
-                .addComponent(btnRec, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnReceita, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addComponent(btnAtes, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAtestado, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
-                .addComponent(btnDec, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDeclaracao, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -180,11 +180,11 @@ public class MenuMedicoLaudos extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Doutor(a):");
 
-        lblMed.setBackground(new java.awt.Color(255, 255, 255));
-        lblMed.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblMed.setForeground(new java.awt.Color(0, 0, 0));
-        lblMed.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblMed.setOpaque(true);
+        lblNomeMedico.setBackground(new java.awt.Color(255, 255, 255));
+        lblNomeMedico.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblNomeMedico.setForeground(new java.awt.Color(0, 0, 0));
+        lblNomeMedico.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblNomeMedico.setOpaque(true);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -194,7 +194,7 @@ public class MenuMedicoLaudos extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMed, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblNomeMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -203,7 +203,7 @@ public class MenuMedicoLaudos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                    .addComponent(lblMed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblNomeMedico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -244,58 +244,58 @@ public class MenuMedicoLaudos extends javax.swing.JFrame {
      * 
      * @param evt o evento de clique do botão
      */
-    private void btnAtes_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtes_Action
+    private void go_atestado(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_atestado
         EmitirAtestado emitirAtestado = new EmitirAtestado(gerenciadorAdm, medico, consulta, em);
         emitirAtestado.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnAtes_Action
+    }//GEN-LAST:event_go_atestado
 
     /**
      * Abre a tela para emitir uma receita para o paciente atual.
      * 
      * @param evt o evento de clique do botão
      */
-    private void btnRec_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRec_Action
+    private void go_receita(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_receita
         EmitirReceita emitirReceita = new EmitirReceita(gerenciadorAdm, medico, consulta, em);
         emitirReceita.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnRec_Action
+    }//GEN-LAST:event_go_receita
 
     /**
      * Abre a tela para emitir uma declaração de acompanhamento para o paciente atual.
      * 
      * @param evt o evento de clique do botão
      */
-    private void btnDec_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDec_Action
+    private void go_declaracao(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_declaracao
         EmitirDeclaraçãoAcomponhamento emitirDec = new EmitirDeclaraçãoAcomponhamento(gerenciadorAdm, medico, consulta, em);
         emitirDec.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnDec_Action
+    }//GEN-LAST:event_go_declaracao
 
     /**
      * Volta para a tela de consulta do paciente.
      * 
      * @param evt o evento de clique do botão
      */
-    private void btnVoltar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar_Action
+    private void back_consultaDoPaciente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_consultaDoPaciente
         ConsultaDoPaciente consultaDoPaciente = new ConsultaDoPaciente(gerenciadorAdm, medico, consulta, em);
         consultaDoPaciente.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnVoltar_Action
+    }//GEN-LAST:event_back_consultaDoPaciente
 
-    // Variáveis de declaração - não modificar
-    private javax.swing.JButton btnAtes;
-    private javax.swing.JButton btnDec;
-    private javax.swing.JButton btnRec;
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtestado;
+    private javax.swing.JButton btnDeclaracao;
+    private javax.swing.JButton btnReceita;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblMed;
-    private javax.swing.JLabel lblPac;
+    private javax.swing.JLabel lblNomeMedico;
+    private javax.swing.JLabel lblNomePaciente;
     private java.awt.Panel panel1;
     private java.awt.Panel panel2;
-    // Fim da declaração de variáveis
+    // End of variables declaration//GEN-END:variables
 }
 

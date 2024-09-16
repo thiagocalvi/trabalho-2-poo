@@ -54,37 +54,41 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         label1 = new java.awt.Label();
-        btnVoltar = new javax.swing.JButton();
-        button1 = new java.awt.Button();
-        jTextField1 = new javax.swing.JTextField();
+        btnBack = new javax.swing.JButton();
+        btnRegisterSecreatary = new java.awt.Button();
+        txtSearch = new javax.swing.JTextField();
         label2 = new java.awt.Label();
         jScrollPane2 = new javax.swing.JScrollPane();
         box_secretarias = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Adm - alterações");
+        setTitle("Administrador - Gestão de Secretárias");
         setLocation(new java.awt.Point(0, 0));
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
         label1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
-        label1.setText("Secretarias");
+        label1.setText("Secretárias");
 
-        btnVoltar.setText("Voltar");
-        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+        btnBack.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnBack.setText("Voltar");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 back_menuPrincipalAdm(evt);
             }
         });
 
-        button1.setBackground(new java.awt.Color(153, 153, 153));
-        button1.setLabel("Adicionar Secretaria");
-        button1.addActionListener(new java.awt.event.ActionListener() {
+        btnRegisterSecreatary.setBackground(new java.awt.Color(153, 153, 153));
+        btnRegisterSecreatary.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnRegisterSecreatary.setLabel("Adicionar Secretaria");
+        btnRegisterSecreatary.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 goCadastrarSecretaria(evt);
             }
         });
+
+        txtSearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         label2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         label2.setText("Pesquisar por Nome:");
@@ -105,22 +109,23 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(90, 90, 90))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addComponent(btnRegisterSecreatary, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(278, 278, 278))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,14 +134,14 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
+                    .addComponent(txtSearch)
                     .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(25, 25, 25)
-                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRegisterSecreatary, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
         );
 
@@ -258,14 +263,14 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
                 updateButton.addActionListener(e -> {
                     CadAutSecretaria cadastrarSecretaria = new CadAutSecretaria(gerenciadorAdm, em);
                     cadastrarSecretaria.setSecretaria(secretaria);
-                    cadastrarSecretaria.setBtnText("Atualizar");
+                    cadastrarSecretaria.configureDisplay("Atualizar");
                     cadastrarSecretaria.setVisible(true);
                     this.dispose();
                 });
                 
                 deleteButton.addActionListener(e -> {
                     int dialogResult = JOptionPane.showConfirmDialog(this, 
-                        "Tem certeza que deseja deletar a secretaria " + secretaria.getNome() + "?", 
+                        "Tem certeza que deseja 'DELETAR' a secretaria " + secretaria.getNome() + "?", 
                         "Confirmar Exclusão", 
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.WARNING_MESSAGE);
@@ -273,11 +278,12 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
                     if (dialogResult == JOptionPane.YES_OPTION) {
                         String result = gerenciadorAdm.removerSecretaria(secretaria.getId());
                         if (result.equals("Secretaria removida!")) {
-                            updateSearch(); // Atualiza a lista após a exclusão
                             JOptionPane.showMessageDialog(this, 
                             result, 
                             "Sucesso", 
                             JOptionPane.INFORMATION_MESSAGE);
+                            updateSearch(); // Atualiza a lista após a exclusão
+
                         } else {
                             JOptionPane.showMessageDialog(this, 
                             result, 
@@ -299,6 +305,46 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
 
         this.box_secretarias.revalidate();
         this.box_secretarias.repaint();
+    }
+    
+        /**
+     * Atualiza a lista de secretarias exibida na interface.
+     * Filtra as secretarias com base no texto de pesquisa atual.
+     */
+    private void updateSearch() {
+        String searchText = txtSearch.getText().trim();
+        List<Secretaria> filteredSecretarias;
+        if (searchText.isEmpty()) {
+            filteredSecretarias = allSecretarias;
+        } else {
+            filteredSecretarias = allSecretarias.stream()
+                .filter(secretaria -> secretaria.getNome().toLowerCase().contains(searchText.toLowerCase()))
+                .collect(Collectors.toList());
+        }
+        renderSecretarias(filteredSecretarias);
+    }
+    
+    /**
+     * Configura o campo de pesquisa para atualizar a lista de secretarias
+     * sempre que o texto for modificado.
+     */
+    private void setupSearchField(){
+        txtSearch.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            @Override
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                updateSearch();
+            }
+
+            @Override
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                updateSearch();
+            }
+
+            @Override
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                updateSearch();
+            }
+        });
     }
     
     /**
@@ -325,54 +371,15 @@ public class MenuSecretariasAdm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_goCadastrarSecretaria
     
-    /**
-     * Atualiza a lista de secretarias exibida na interface.
-     * Filtra as secretarias com base no texto de pesquisa atual.
-     */
-    private void updateSearch() {
-        String searchText = jTextField1.getText().trim();
-        List<Secretaria> filteredSecretarias;
-        if (searchText.isEmpty()) {
-            filteredSecretarias = allSecretarias;
-        } else {
-            filteredSecretarias = allSecretarias.stream()
-                .filter(secretaria -> secretaria.getNome().toLowerCase().contains(searchText.toLowerCase()))
-                .collect(Collectors.toList());
-        }
-        renderSecretarias(filteredSecretarias);
-    }
-    
-    /**
-     * Configura o campo de pesquisa para atualizar a lista de secretarias
-     * sempre que o texto for modificado.
-     */
-    private void setupSearchField(){
-        jTextField1.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-            @Override
-            public void insertUpdate(javax.swing.event.DocumentEvent e) {
-                updateSearch();
-            }
-
-            @Override
-            public void removeUpdate(javax.swing.event.DocumentEvent e) {
-                updateSearch();
-            }
-
-            @Override
-            public void changedUpdate(javax.swing.event.DocumentEvent e) {
-                updateSearch();
-            }
-        });
-    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel box_secretarias;
-    private javax.swing.JButton btnVoltar;
-    private java.awt.Button button1;
+    private javax.swing.JButton btnBack;
+    private java.awt.Button btnRegisterSecreatary;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private java.awt.Label label1;
     private java.awt.Label label2;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

@@ -45,35 +45,35 @@ public class CadAutSecretaria extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         panel1 = new java.awt.Panel();
-        lblTitulo = new javax.swing.JLabel();
+        lblSubTitulo = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        btnCadastrar = new javax.swing.JButton();
+        btnRegister = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         genero_m_secretaria = new javax.swing.JRadioButton();
         genero_f_secretaria = new javax.swing.JRadioButton();
-        voltar = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         nome_secretaria = new javax.swing.JTextPane();
         telefone_secretaria = new javax.swing.JTextPane();
         email_secretaria = new javax.swing.JTextPane();
         dataNascimento_secretaria = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cadastrar Secretaria");
+        setTitle("Administrador - Cadastrar secretária");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setLocation(new java.awt.Point(0, 0));
         setMinimumSize(new java.awt.Dimension(780, 500));
         setResizable(false);
 
-        lblTitulo.setBackground(new java.awt.Color(255, 204, 102));
-        lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        lblTitulo.setForeground(new java.awt.Color(0, 0, 0));
-        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo.setText("Cadastrar Secretaria");
-        lblTitulo.setOpaque(true);
+        lblSubTitulo.setBackground(new java.awt.Color(255, 204, 102));
+        lblSubTitulo.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblSubTitulo.setForeground(new java.awt.Color(0, 0, 0));
+        lblSubTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSubTitulo.setText("Cadastrar secretária");
+        lblSubTitulo.setOpaque(true);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
@@ -90,14 +90,14 @@ public class CadAutSecretaria extends javax.swing.JFrame {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Email:");
 
-        btnCadastrar.setBackground(new java.awt.Color(0, 204, 0));
-        btnCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnCadastrar.setForeground(new java.awt.Color(255, 255, 255));
-        btnCadastrar.setText("Cadastrar ");
-        btnCadastrar.setPreferredSize(new java.awt.Dimension(89, 25));
-        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        btnRegister.setBackground(new java.awt.Color(0, 204, 0));
+        btnRegister.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnRegister.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegister.setText("Cadastrar ");
+        btnRegister.setPreferredSize(new java.awt.Dimension(89, 25));
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cadastrarSecretaria(evt);
+                go_Cad_Atu_secretaria(evt);
             }
         });
 
@@ -119,11 +119,11 @@ public class CadAutSecretaria extends javax.swing.JFrame {
         genero_f_secretaria.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         genero_f_secretaria.setText("Feminino");
 
-        voltar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        voltar.setText("Voltar");
-        voltar.addActionListener(new java.awt.event.ActionListener() {
+        btnBack.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnBack.setText("Voltar");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                voltarJanela(evt);
+                back_menuSecretariasAdm(evt);
             }
         });
 
@@ -151,10 +151,10 @@ public class CadAutSecretaria extends javax.swing.JFrame {
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGap(254, 254, 254)
-                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblSubTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGap(331, 331, 331)
-                        .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 266, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                 .addContainerGap(23, Short.MAX_VALUE)
@@ -178,19 +178,19 @@ public class CadAutSecretaria extends javax.swing.JFrame {
                                     .addComponent(jLabel6))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(email_secretaria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
-                                    .addComponent(telefone_secretaria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
-                                    .addComponent(nome_secretaria, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE))))
+                                    .addComponent(email_secretaria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(telefone_secretaria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(nome_secretaria, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(21, 21, 21))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                        .addComponent(voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblSubTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -213,9 +213,9 @@ public class CadAutSecretaria extends javax.swing.JFrame {
                     .addComponent(genero_m_secretaria)
                     .addComponent(genero_f_secretaria))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(82, 82, 82)
-                .addComponent(voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -239,11 +239,11 @@ public class CadAutSecretaria extends javax.swing.JFrame {
      * 
      * @param Cad_Atu o texto que será exibido no botão (Cadastrar ou Atualizar)
      */
-    public void setBtnText(String Cad_Atu){
+    public void configureDisplay(String Cad_Atu){
         this.Cad_Atu = Cad_Atu;
-        btnCadastrar.setText(Cad_Atu);
-        lblTitulo.setText("Atualizar Secretaria");
-        setTitle("Atualizar Secretaria");
+        btnRegister.setText(Cad_Atu);
+        lblSubTitulo.setText("Atualizar secretária");
+        setTitle("Administrador - Atualizar secretária");
         setValues();
     }
 
@@ -257,22 +257,39 @@ public class CadAutSecretaria extends javax.swing.JFrame {
     }
 
     /**
+     * Preenche os campos da interface com os dados da secretária quando a operação é de atualização.
+     * Configura os valores dos campos baseados no objeto Secretaria fornecido.
+     */
+    private void setValues(){
+        nome_secretaria.setText(this.secretaria.getNome());
+        telefone_secretaria.setText(this.secretaria.getTelefone());
+        email_secretaria.setText(this.secretaria.getEmail());
+        dataNascimento_secretaria.setText(this.secretaria.getDataNascimento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+        if (this.secretaria.getGenero().equals("Masculino")) {
+            genero_m_secretaria.setSelected(true);
+        } else {
+            genero_f_secretaria.setSelected(true);
+        }
+    }
+    
+    /**
      * Navega de volta para a janela do menu de secretárias.
      * 
      * @param evt o evento de clique do botão
      */
-    private void voltarJanela(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarJanela
+    private void back_menuSecretariasAdm(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_menuSecretariasAdm
         MenuSecretariasAdm menuSecretariaAdm = new MenuSecretariasAdm(gerenciadorAdm, em);
         menuSecretariaAdm.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_voltarJanela
+    }//GEN-LAST:event_back_menuSecretariasAdm
 
     /**
      * Cadastra ou atualiza uma secretária com base nas informações fornecidas nos campos da interface gráfica.
      * 
      * @param evt o evento de clique do botão
      */
-    private void cadastrarSecretaria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarSecretaria
+    private void go_Cad_Atu_secretaria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_Cad_Atu_secretaria
         String nome, telefone, email, dataNascimento, genero = null;
        
         nome = nome_secretaria.getText();
@@ -288,7 +305,7 @@ public class CadAutSecretaria extends javax.swing.JFrame {
         
         if (this.Cad_Atu.equals("Cadastrar")){
             int dialogResult = JOptionPane.showConfirmDialog(this, 
-                    "Tem certeza que deseja cadastrar secretaria " + nome + "?", 
+                    "Tem certeza que deseja 'CADASTRAR' a secretaria " + nome + "?", 
                     "Confirmar Cadastro", 
                     JOptionPane.YES_NO_OPTION);
             if (dialogResult == JOptionPane.YES_OPTION){
@@ -300,7 +317,7 @@ public class CadAutSecretaria extends javax.swing.JFrame {
             
         } else if (this.Cad_Atu.equals("Atualizar")){
             int dialogResult = JOptionPane.showConfirmDialog(this, 
-                    "Tem certeza que deseja atualizar a secretaria " + this.secretaria.getNome() + "?", 
+                    "Tem certeza que deseja 'ATUALIZAR' a secretaria " + this.secretaria.getNome() + "?", 
                     "Confirmar Atualização", 
                     JOptionPane.YES_NO_OPTION);
             if (dialogResult == JOptionPane.YES_OPTION){
@@ -310,29 +327,12 @@ public class CadAutSecretaria extends javax.swing.JFrame {
                 this.dispose();
             }        
         }
-    }//GEN-LAST:event_cadastrarSecretaria
+    }//GEN-LAST:event_go_Cad_Atu_secretaria
 
-    /**
-     * Preenche os campos da interface com os dados da secretária quando a operação é de atualização.
-     * Configura os valores dos campos baseados no objeto Secretaria fornecido.
-     */
-    private void setValues(){
-        if (this.Cad_Atu.equals("Atualizar")){
-            nome_secretaria.setText(this.secretaria.getNome());
-            telefone_secretaria.setText(this.secretaria.getTelefone());
-            email_secretaria.setText(this.secretaria.getEmail());
-            dataNascimento_secretaria.setText(this.secretaria.getDataNascimento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-
-            if(this.secretaria.getGenero().equals("Masculino")){
-                genero_m_secretaria.setSelected(true);
-            } else {
-                genero_f_secretaria.setSelected(true);
-            }
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnRegister;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextPane dataNascimento_secretaria;
     private javax.swing.JTextPane email_secretaria;
@@ -343,10 +343,9 @@ public class CadAutSecretaria extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblSubTitulo;
     private javax.swing.JTextPane nome_secretaria;
     private java.awt.Panel panel1;
     private javax.swing.JTextPane telefone_secretaria;
-    private javax.swing.JButton voltar;
     // End of variables declaration//GEN-END:variables
 }

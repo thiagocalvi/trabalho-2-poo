@@ -24,7 +24,6 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
 /**
  * Tela de gerenciamento de prontuários.
@@ -65,8 +64,8 @@ public class MenuProntuarios extends javax.swing.JFrame {
      * Define os nomes do paciente e do médico nos rótulos da interface.
      */
     private void setNome(){
-        lblPac.setText(" " + consulta.getPaciente().getNome());
-        lblMed.setText(" " + medico.getNome());
+        lblNomePaciente.setText(" " + consulta.getPaciente().getNome());
+        lblNomeMedico.setText(" " + medico.getNome());
     }
     
     /**
@@ -74,7 +73,7 @@ public class MenuProntuarios extends javax.swing.JFrame {
      * Obtém a lista de prontuários associados à consulta e ao médico, e renderiza a lista.
      */
     private void updateSearch(){
-        List<Prontuario> listProntuario = this.medico.listarProntuario(consulta.getPaciente(), consulta.getMedico());
+        List<Prontuario> listProntuario = this.medico.listarProntuario(consulta.getPaciente());
         renderProntuarios(listProntuario); // Renderiza os prontuários
     }
     
@@ -186,7 +185,7 @@ public class MenuProntuarios extends javax.swing.JFrame {
                 
                 updateButton.addActionListener(e -> {
                     CadAutProntuario cadAutProntuario = new CadAutProntuario(gerenciadorAdm, medico, consulta, em);
-                    cadAutProntuario.setAtualizar("Atualizar");
+                    cadAutProntuario.configureDisplay("Atualizar");
                     cadAutProntuario.setVisible(true);
                     this.dispose();
                 });
@@ -199,10 +198,6 @@ public class MenuProntuarios extends javax.swing.JFrame {
                         JOptionPane.WARNING_MESSAGE);
                     
                     if (dialogResult == JOptionPane.YES_OPTION){
-                        this.em.getTransaction().begin();
-                        consulta.setProntuario(null);
-                        this.em.merge(consulta);
-                        this.em.getTransaction().commit();
                         
                         String result = medico.removerProntuario(prontuario.getId());
                         if (result.equals("Prontuario removido!")) {
@@ -248,10 +243,10 @@ public class MenuProntuarios extends javax.swing.JFrame {
         panel1 = new java.awt.Panel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        lblMed = new javax.swing.JLabel();
+        lblNomeMedico = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        lblPac = new javax.swing.JLabel();
+        lblNomePaciente = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnAddPron = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
@@ -271,11 +266,11 @@ public class MenuProntuarios extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Doutor(a):");
 
-        lblMed.setBackground(new java.awt.Color(255, 255, 255));
-        lblMed.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblMed.setForeground(new java.awt.Color(0, 0, 0));
-        lblMed.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblMed.setOpaque(true);
+        lblNomeMedico.setBackground(new java.awt.Color(255, 255, 255));
+        lblNomeMedico.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblNomeMedico.setForeground(new java.awt.Color(0, 0, 0));
+        lblNomeMedico.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblNomeMedico.setOpaque(true);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -285,7 +280,7 @@ public class MenuProntuarios extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblMed, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblNomeMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -294,7 +289,7 @@ public class MenuProntuarios extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblMed, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblNomeMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -307,11 +302,11 @@ public class MenuProntuarios extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
-        lblPac.setBackground(new java.awt.Color(255, 255, 255));
-        lblPac.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblPac.setForeground(new java.awt.Color(0, 0, 0));
-        lblPac.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblPac.setOpaque(true);
+        lblNomePaciente.setBackground(new java.awt.Color(255, 255, 255));
+        lblNomePaciente.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblNomePaciente.setForeground(new java.awt.Color(0, 0, 0));
+        lblNomePaciente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblNomePaciente.setOpaque(true);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
@@ -321,7 +316,7 @@ public class MenuProntuarios extends javax.swing.JFrame {
         btnAddPron.setText("Adicionar prontuário");
         btnAddPron.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddPron_Action(evt);
+                go_adicionar_prontuario(evt);
             }
         });
 
@@ -329,7 +324,7 @@ public class MenuProntuarios extends javax.swing.JFrame {
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltar_Action(evt);
+                back_consultaDoPaciente(evt);
             }
         });
 
@@ -364,7 +359,7 @@ public class MenuProntuarios extends javax.swing.JFrame {
                                 .addGap(34, 34, 34)
                                 .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
-                                .addComponent(lblPac, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(btnAddPron, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -377,7 +372,7 @@ public class MenuProntuarios extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPac, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnAddPron, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -430,11 +425,11 @@ public class MenuProntuarios extends javax.swing.JFrame {
      * 
      * @param evt Evento de ação do botão.
      */
-    private void btnVoltar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar_Action
+    private void back_consultaDoPaciente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_consultaDoPaciente
         ConsultaDoPaciente consultaDoPaciente = new ConsultaDoPaciente(gerenciadorAdm, medico, consulta, em);
         consultaDoPaciente.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnVoltar_Action
+    }//GEN-LAST:event_back_consultaDoPaciente
 
     /**
      * Ação do botão Adicionar Prontuário.
@@ -442,7 +437,7 @@ public class MenuProntuarios extends javax.swing.JFrame {
      * 
      * @param evt Evento de ação do botão.
      */
-    private void btnAddPron_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPron_Action
+    private void go_adicionar_prontuario(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_adicionar_prontuario
         if (consulta.getProntuario() == null){
             CadAutProntuario cadAutProntuario = new CadAutProntuario(gerenciadorAdm, medico, consulta, em);
             cadAutProntuario.setVisible(true);
@@ -452,7 +447,7 @@ public class MenuProntuarios extends javax.swing.JFrame {
                                                 "Aviso", 
                                                 JOptionPane.WARNING_MESSAGE);
         }
-    }//GEN-LAST:event_btnAddPron_Action
+    }//GEN-LAST:event_go_adicionar_prontuario
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel boxProntuario;
@@ -464,8 +459,8 @@ public class MenuProntuarios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblMed;
-    private javax.swing.JLabel lblPac;
+    private javax.swing.JLabel lblNomeMedico;
+    private javax.swing.JLabel lblNomePaciente;
     private java.awt.Panel panel1;
     // End of variables declaration//GEN-END:variables
 }

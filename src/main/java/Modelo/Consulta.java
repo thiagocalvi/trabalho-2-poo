@@ -84,7 +84,7 @@ public class Consulta {
     /**
      * Prontuário associado à consulta.
      */
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne (cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "prontuario_id")
     private Prontuario prontuario;
     

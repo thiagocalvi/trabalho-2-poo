@@ -87,9 +87,9 @@
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="btnPron" min="-2" pref="319" max="-2" attributes="0"/>
+                              <Component id="btnProntuario" min="-2" pref="319" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="btnFin" min="-2" pref="319" max="-2" attributes="0"/>
+                              <Component id="btnFinalizar" min="-2" pref="319" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -102,7 +102,7 @@
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lblPac" min="-2" pref="617" max="-2" attributes="0"/>
+                                      <Component id="lblNomePaciente" min="-2" pref="617" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
@@ -117,7 +117,7 @@
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jLabel4" pref="35" max="32767" attributes="0"/>
-                          <Component id="lblPac" max="32767" attributes="0"/>
+                          <Component id="lblNomePaciente" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -126,8 +126,8 @@
                       </Group>
                       <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnPron" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
-                          <Component id="btnFin" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
+                          <Component id="btnProntuario" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
+                          <Component id="btnFinalizar" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="89" max="32767" attributes="0"/>
                   </Group>
@@ -149,10 +149,10 @@
                 <Property name="text" type="java.lang.String" value="Dados adicionais"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDados_Action"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="go_dados_adicionais"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnPron">
+            <Component class="javax.swing.JButton" name="btnProntuario">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -167,7 +167,7 @@
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPron_Action"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="go_prontuario"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnLaudo">
@@ -184,10 +184,10 @@
                 <Property name="text" type="java.lang.String" value="Laudos m&#xe9;dicos"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLaudo_Action"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="go_laudos_medicos"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnFin">
+            <Component class="javax.swing.JButton" name="btnFinalizar">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -201,7 +201,7 @@
                 <Property name="text" type="java.lang.String" value="Finalizar consulta"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFin_Action"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="go_finalizar_consulta"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
@@ -215,7 +215,7 @@
                 <Property name="text" type="java.lang.String" value="Paciente:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblPac">
+            <Component class="javax.swing.JLabel" name="lblNomePaciente">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -263,7 +263,7 @@
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" pref="86" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblMed" min="-2" pref="604" max="-2" attributes="0"/>
+                      <Component id="lblNomeMedico" min="-2" pref="604" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -273,7 +273,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="lblMed" max="32767" attributes="0"/>
+                          <Component id="lblNomeMedico" max="32767" attributes="0"/>
                           <Component id="jLabel1" pref="37" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
@@ -282,7 +282,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="lblMed">
+            <Component class="javax.swing.JLabel" name="lblNomeMedico">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>

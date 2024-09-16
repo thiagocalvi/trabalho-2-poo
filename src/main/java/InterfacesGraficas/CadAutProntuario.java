@@ -46,8 +46,8 @@ public class CadAutProntuario extends javax.swing.JFrame {
      * Configura os rótulos de paciente e médico na interface gráfica.
      */
     private void setNome(){
-        lblPac.setText(" " + consulta.getPaciente().getNome());
-        lblMed.setText(" " + medico.getNome());
+        lblNomePaciente.setText(" " + consulta.getPaciente().getNome());
+        lblNomeMedico.setText(" " + medico.getNome());
     }
     
     /**
@@ -55,7 +55,7 @@ public class CadAutProntuario extends javax.swing.JFrame {
      * 
      * @param atualizar o modo de operação, que pode ser "Cadastrar" ou "Atualizar"
      */
-    public void setAtualizar(String atualizar){
+    public void configureDisplay(String atualizar){
         this.CadAut = atualizar;
         setTitle("Atualizar prontuário");
         lblTitulo.setText("Atualizar prontuário");
@@ -67,9 +67,9 @@ public class CadAutProntuario extends javax.swing.JFrame {
      * Preenche os campos da interface com os valores do prontuário associado à consulta.
      */
     private void setValues(){
-        txtDoe.setText(consulta.getProntuario().getDiagnostico());
-        txtSin.setText(consulta.getProntuario().getSintomas());
-        txtTrat.setText(consulta.getProntuario().getTratamento());
+        txtDoenca.setText(consulta.getProntuario().getDiagnostico());
+        txtSintomas.setText(consulta.getProntuario().getSintomas());
+        txtTratamento.setText(consulta.getProntuario().getTratamento());
     }
     
     @SuppressWarnings("unchecked")
@@ -80,20 +80,20 @@ public class CadAutProntuario extends javax.swing.JFrame {
         lblTitulo = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        lblMed = new javax.swing.JLabel();
+        lblNomeMedico = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        lblPac = new javax.swing.JLabel();
+        lblNomePaciente = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         btnCadAut = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtDoe = new javax.swing.JTextArea();
+        txtDoenca = new javax.swing.JTextArea();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        txtSin = new javax.swing.JTextArea();
+        txtSintomas = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
-        txtTrat = new javax.swing.JTextArea();
+        txtTratamento = new javax.swing.JTextArea();
         btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -120,14 +120,14 @@ public class CadAutProntuario extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Doutor(a):");
 
-        lblMed.setBackground(new java.awt.Color(255, 255, 255));
-        lblMed.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblMed.setForeground(new java.awt.Color(0, 0, 0));
-        lblMed.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblMed.setMaximumSize(new java.awt.Dimension(720, 550));
-        lblMed.setMinimumSize(new java.awt.Dimension(720, 550));
-        lblMed.setOpaque(true);
-        lblMed.setPreferredSize(new java.awt.Dimension(720, 550));
+        lblNomeMedico.setBackground(new java.awt.Color(255, 255, 255));
+        lblNomeMedico.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblNomeMedico.setForeground(new java.awt.Color(0, 0, 0));
+        lblNomeMedico.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblNomeMedico.setMaximumSize(new java.awt.Dimension(720, 550));
+        lblNomeMedico.setMinimumSize(new java.awt.Dimension(720, 550));
+        lblNomeMedico.setOpaque(true);
+        lblNomeMedico.setPreferredSize(new java.awt.Dimension(720, 550));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -137,7 +137,7 @@ public class CadAutProntuario extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMed, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblNomeMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -145,30 +145,30 @@ public class CadAutProntuario extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblMed, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(lblNomeMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
-        lblPac.setBackground(new java.awt.Color(255, 255, 255));
-        lblPac.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblPac.setForeground(new java.awt.Color(0, 0, 0));
-        lblPac.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblPac.setOpaque(true);
+        lblNomePaciente.setBackground(new java.awt.Color(255, 255, 255));
+        lblNomePaciente.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblNomePaciente.setForeground(new java.awt.Color(0, 0, 0));
+        lblNomePaciente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblNomePaciente.setOpaque(true);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Paciente:");
 
-        btnCadAut.setBackground(new java.awt.Color(51, 255, 51));
+        btnCadAut.setBackground(new java.awt.Color(51, 204, 0));
         btnCadAut.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnCadAut.setForeground(new java.awt.Color(0, 0, 0));
+        btnCadAut.setForeground(new java.awt.Color(255, 255, 255));
         btnCadAut.setText("Cadastrar");
         btnCadAut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadAut_Action(evt);
+                go_Cad_Atu_prontuario(evt);
             }
         });
 
@@ -177,11 +177,11 @@ public class CadAutProntuario extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Sintomas:");
 
-        txtDoe.setBackground(new java.awt.Color(255, 255, 255));
-        txtDoe.setColumns(20);
-        txtDoe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtDoe.setRows(5);
-        jScrollPane1.setViewportView(txtDoe);
+        txtDoenca.setBackground(new java.awt.Color(255, 255, 255));
+        txtDoenca.setColumns(20);
+        txtDoenca.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtDoenca.setRows(5);
+        jScrollPane1.setViewportView(txtDoenca);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
@@ -193,17 +193,17 @@ public class CadAutProntuario extends javax.swing.JFrame {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Prescrição do tratamento:");
 
-        txtSin.setBackground(new java.awt.Color(255, 255, 255));
-        txtSin.setColumns(20);
-        txtSin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtSin.setRows(5);
-        jScrollPane2.setViewportView(txtSin);
+        txtSintomas.setBackground(new java.awt.Color(255, 255, 255));
+        txtSintomas.setColumns(20);
+        txtSintomas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtSintomas.setRows(5);
+        jScrollPane2.setViewportView(txtSintomas);
 
-        txtTrat.setBackground(new java.awt.Color(255, 255, 255));
-        txtTrat.setColumns(20);
-        txtTrat.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtTrat.setRows(5);
-        jScrollPane3.setViewportView(txtTrat);
+        txtTratamento.setBackground(new java.awt.Color(255, 255, 255));
+        txtTratamento.setColumns(20);
+        txtTratamento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtTratamento.setRows(5);
+        jScrollPane3.setViewportView(txtTratamento);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -218,7 +218,7 @@ public class CadAutProntuario extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblPac, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel7)
                             .addComponent(jScrollPane2)
                             .addComponent(jLabel8)
@@ -235,7 +235,7 @@ public class CadAutProntuario extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPac, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -257,7 +257,7 @@ public class CadAutProntuario extends javax.swing.JFrame {
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltar_Action(evt);
+                back_menuProntuarios(evt);
             }
         });
 
@@ -305,12 +305,11 @@ public class CadAutProntuario extends javax.swing.JFrame {
      * 
      * @param evt o evento de clique do botão
      */
-    private void btnCadAut_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadAut_Action
-        String sintomas, diagnostico, tratamento;
+    private void go_Cad_Atu_prontuario(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_Cad_Atu_prontuario
 
-        sintomas = txtSin.getText();
-        diagnostico = txtDoe.getText();
-        tratamento = txtTrat.getText();
+        String sintomas = txtSintomas.getText();
+        String diagnostico = txtDoenca.getText();
+        String tratamento = txtTratamento.getText();
 
         if (this.CadAut.equals("Cadastrar")){
             int dialogResult = JOptionPane.showConfirmDialog(this,
@@ -340,18 +339,18 @@ public class CadAutProntuario extends javax.swing.JFrame {
                 this.dispose();
             }  
         }
-    }//GEN-LAST:event_btnCadAut_Action
+    }//GEN-LAST:event_go_Cad_Atu_prontuario
 
     /**
      * Navega de volta para a janela do menu de prontuários.
      * 
      * @param evt o evento de clique do botão
      */
-    private void btnVoltar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar_Action
+    private void back_menuProntuarios(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_menuProntuarios
         MenuProntuarios menuProntuarios = new MenuProntuarios(gerenciadorAdm, medico, consulta, em);
         menuProntuarios.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnVoltar_Action
+    }//GEN-LAST:event_back_menuProntuarios
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadAut;
@@ -366,12 +365,12 @@ public class CadAutProntuario extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblMed;
-    private javax.swing.JLabel lblPac;
+    private javax.swing.JLabel lblNomeMedico;
+    private javax.swing.JLabel lblNomePaciente;
     private javax.swing.JLabel lblTitulo;
     private java.awt.Panel panel1;
-    private javax.swing.JTextArea txtDoe;
-    private javax.swing.JTextArea txtSin;
-    private javax.swing.JTextArea txtTrat;
+    private javax.swing.JTextArea txtDoenca;
+    private javax.swing.JTextArea txtSintomas;
+    private javax.swing.JTextArea txtTratamento;
     // End of variables declaration//GEN-END:variables
 }

@@ -42,8 +42,8 @@ public class EmitirAtestado extends javax.swing.JFrame {
      * Configura os nomes do paciente e do médico nos rótulos da interface.
      */
     private void setNome(){
-        lblPac.setText(" " + consulta.getPaciente().getNome());
-        lblMed.setText(" " + medico.getNome());
+        lblNomePaciente.setText(" " + consulta.getPaciente().getNome());
+        lblNomeMedico.setText(" " + medico.getNome());
     }
     
     @SuppressWarnings("unchecked")
@@ -54,16 +54,16 @@ public class EmitirAtestado extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        lblMed = new javax.swing.JLabel();
+        lblNomeMedico = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
         btnGerar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        lblPac = new javax.swing.JLabel();
+        lblNomePaciente = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtAus = new javax.swing.JTextArea();
+        txtAusencia = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtDias = new javax.swing.JTextArea();
 
@@ -91,11 +91,11 @@ public class EmitirAtestado extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Doutor(a):");
 
-        lblMed.setBackground(new java.awt.Color(255, 255, 255));
-        lblMed.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblMed.setForeground(new java.awt.Color(0, 0, 0));
-        lblMed.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblMed.setOpaque(true);
+        lblNomeMedico.setBackground(new java.awt.Color(255, 255, 255));
+        lblNomeMedico.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblNomeMedico.setForeground(new java.awt.Color(0, 0, 0));
+        lblNomeMedico.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblNomeMedico.setOpaque(true);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -105,7 +105,7 @@ public class EmitirAtestado extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMed, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblNomeMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -113,7 +113,7 @@ public class EmitirAtestado extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblMed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblNomeMedico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -136,17 +136,17 @@ public class EmitirAtestado extends javax.swing.JFrame {
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltar_Action(evt);
+                back_menuMedicosLaudos(evt);
             }
         });
 
-        btnGerar.setBackground(new java.awt.Color(51, 255, 102));
+        btnGerar.setBackground(new java.awt.Color(51, 204, 0));
         btnGerar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnGerar.setForeground(new java.awt.Color(0, 0, 0));
         btnGerar.setText("Gerar Atestado");
         btnGerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGerar_Action(evt);
+                go_gerar(evt);
             }
         });
 
@@ -154,19 +154,19 @@ public class EmitirAtestado extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Paciente:");
 
-        lblPac.setBackground(new java.awt.Color(255, 255, 255));
-        lblPac.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblPac.setForeground(new java.awt.Color(0, 0, 0));
-        lblPac.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblPac.setOpaque(true);
+        lblNomePaciente.setBackground(new java.awt.Color(255, 255, 255));
+        lblNomePaciente.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblNomePaciente.setForeground(new java.awt.Color(0, 0, 0));
+        lblNomePaciente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblNomePaciente.setOpaque(true);
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtAus.setBackground(new java.awt.Color(255, 255, 255));
-        txtAus.setColumns(20);
-        txtAus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtAus.setRows(5);
-        jScrollPane1.setViewportView(txtAus);
+        txtAusencia.setBackground(new java.awt.Color(255, 255, 255));
+        txtAusencia.setColumns(20);
+        txtAusencia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtAusencia.setRows(5);
+        jScrollPane1.setViewportView(txtAusencia);
 
         jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -193,7 +193,7 @@ public class EmitirAtestado extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblPac, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE))
+                                .addComponent(lblNomePaciente, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE))
                             .addComponent(jScrollPane1)
                             .addComponent(jScrollPane2))
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -209,7 +209,7 @@ public class EmitirAtestado extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(lblPac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblNomePaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(33, 33, 33)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -265,8 +265,8 @@ public class EmitirAtestado extends javax.swing.JFrame {
      * 
      * @param evt o evento de clique do botão
      */
-    private void btnGerar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerar_Action
-        if (!txtAus.getText().isEmpty() && !txtDias.getText().isEmpty()){
+    private void go_gerar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_gerar
+        if (!txtAusencia.getText().isEmpty() && !txtDias.getText().isEmpty()){
             String imprimir = medico.atestadoMedico(consulta);
             JOptionPane.showMessageDialog(null, 
                                           imprimir, 
@@ -279,7 +279,7 @@ public class EmitirAtestado extends javax.swing.JFrame {
                                           "Aviso!", 
                                           JOptionPane.WARNING_MESSAGE);   
         }
-    }//GEN-LAST:event_btnGerar_Action
+    }//GEN-LAST:event_go_gerar
 
     /**
      * Ação do botão "Voltar".
@@ -287,11 +287,11 @@ public class EmitirAtestado extends javax.swing.JFrame {
      * 
      * @param evt o evento de clique do botão
      */
-    private void btnVoltar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar_Action
+    private void back_menuMedicosLaudos(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_menuMedicosLaudos
         MenuMedicoLaudos menuMedicoLaudos = new MenuMedicoLaudos(gerenciadorAdm, medico, consulta, em);
         menuMedicoLaudos.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnVoltar_Action
+    }//GEN-LAST:event_back_menuMedicosLaudos
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGerar;
@@ -305,10 +305,10 @@ public class EmitirAtestado extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lblMed;
-    private javax.swing.JLabel lblPac;
+    private javax.swing.JLabel lblNomeMedico;
+    private javax.swing.JLabel lblNomePaciente;
     private java.awt.Panel panel1;
-    private javax.swing.JTextArea txtAus;
+    private javax.swing.JTextArea txtAusencia;
     private javax.swing.JTextArea txtDias;
     // End of variables declaration//GEN-END:variables
 }

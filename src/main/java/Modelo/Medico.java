@@ -5,7 +5,6 @@
 package Modelo;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -29,7 +28,7 @@ public class Medico extends Funcionario {
     @Column(name = "crm")
     private int crm;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "secretaria_id")
     private Secretaria secretaria;
     
@@ -203,8 +202,7 @@ public class Medico extends Funcionario {
             transaction.begin();
             Prontuario prontuario = em.find(Prontuario.class, prontuarioId);
             if (prontuario != null) {
-                prontuario.setConsulta(null);
-                prontuario.setPaciente(null);
+                prontuario.getConsulta().setProntuario(null);
                 em.remove(prontuario);
                 transaction.commit();
                 return "Prontuario removido!";
@@ -282,10 +280,6 @@ public class Medico extends Funcionario {
             dadosMedico.setDiabete(diabete);
             dadosMedico.setDoencaCardiaca(doencaCardiaca);
             dadosMedico.setPeso(peso);
-            
-//            List<String> cirurgiasAtualizadas = (cirurgias != null) ? new ArrayList<>(cirurgias) : new ArrayList<>();
-//            List<String> alergiasAtualizadas = (alergias != null) ? new ArrayList<>(alergias) : new ArrayList<>();
-//            
             dadosMedico.setCirurgias(cirurgias);
             dadosMedico.setAlergias(alergias);
             em.merge(dadosMedico);
@@ -316,7 +310,6 @@ public class Medico extends Funcionario {
             DadosMedicos dadosMedico = em.find(DadosMedicos.class, dadosMedicoId);
             if (dadosMedico != null) {
                 dadosMedico.getPaciente().setDadosMedicos(null);
-                dadosMedico.setPaciente(null);
                 em.remove(dadosMedico);
                 transaction.commit();
                 return "Dados médico removido!";
@@ -372,14 +365,29 @@ public class Medico extends Funcionario {
      * filtrar por consultas finalizadas e pela data da consulta.
      * </p>
      */
-    public void relatorioMensal(){
-        //Emite um relatoria mensal sobre as consultas atendidas no mês
-        //Buscar todas as consultas associadas ao medico
-        //Filtrar por consulta finalizada
-        //E pela data da consulta
+    public List<Consulta> relatorioMensal(){
+        int anoReferencia = LocalDate.now().getYear();
+        int mesReferencia = LocalDate.now().getMonthValue();
+        
+        this.em.getTransaction().begin();
+        
+        String resultado = ("SELECT c from Consulta c WHERE c.consultaFinalizada = true " +
+                            "AND FUNCTION('YEAR', c.data) = :anoReferencia " +
+                            "AND FUNCTION('MONTH', c.data) = :mesReferencia " +
+                            "AND c.medico = :medico " +
+                            "ORDER BY c.data ASC");
+        
+        TypedQuery<Consulta> query = em.createQuery(resultado, Consulta.class);
+        query.setParameter("anoReferencia", anoReferencia);
+        query.setParameter("mesReferencia", mesReferencia);
+        query.setParameter("medico", this);
+        
+        this.em.getTransaction().commit();
+        
+        return query.getResultList();
     }
     
-    public List<Prontuario> listarProntuario(Paciente paciente, Medico medico) {
+    public List<Prontuario> listarProntuario(Paciente paciente) {
         try {
             // Inicia a transação
             this.em.getTransaction().begin();
@@ -390,7 +398,7 @@ public class Medico extends Funcionario {
                         + "c.medico = :medico ORDER BY c.data DESC, c.horario DESC", 
                 Prontuario.class)
                 .setParameter("paciente", paciente)
-                .setParameter("medico", medico)
+                .setParameter("medico", this)
                 .getResultList();
 
             // Finaliza a transação

@@ -6,7 +6,6 @@ package Modelo;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -20,7 +19,7 @@ import javax.persistence.*;
 @Table(name = "secretaria")
 public class Secretaria extends Funcionario {
 
-    @OneToMany(mappedBy = "secretaria", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "secretaria", cascade = CascadeType.MERGE)
     private List<Medico> medicos;
 
     @Transient
@@ -130,11 +129,11 @@ public class Secretaria extends Funcionario {
             this.em.getTransaction().begin();
             Consulta consulta = em.find(Consulta.class, consultaId);
             if (consulta != null) {
-                // Setando 'null' para tirar o relaciomento entre as tabelas.
-//                consulta.setMedico(null);
-//                consulta.setPaciente(null);
-//                consulta.getProntuario().setConsulta(null);
-//                consulta.getProntuario().setPaciente(null);
+                
+                if (consulta.getProntuario() != null){
+                    consulta.getProntuario().setConsulta(null);
+                }
+
                 this.em.remove(consulta);
                 this.em.getTransaction().commit();
                 return "Consulta removida!";
@@ -238,25 +237,51 @@ public class Secretaria extends Funcionario {
             // Buscar o paciente pelo ID
             Paciente paciente = em.find(Paciente.class, pacienteId);
             if (paciente != null) {
+                // Busca todas as consultas pendentes do paciente
+                String consultas = ("SELECT c FROM Consulta c WHERE c.consultaFinalizada = false AND c.paciente = :paciente");
 
-                // Remover consultas relacionadas ao paciente, se necessário
-                // Descomente essa parte se não houver CascadeType.REMOVE ou CascadeType.ALL no relacionamento
-                // em.createQuery("DELETE FROM Consulta c WHERE c.paciente = :p")
-                //   .setParameter("p", paciente)
-                //   .executeUpdate();
-
-                // Remover DadosMedicos relacionados ao paciente, se necessário
-                if (paciente.getDadosMedicos() != null) {
-                    em.remove(paciente.getDadosMedicos());
+                List<Consulta> consultasPendentes = this.em.createQuery(consultas, Consulta.class)
+                        .setParameter("paciente", paciente)
+                        .getResultList();
+                // Verifica se há consultas pendentes
+                // Se sim, não será possivel remover o paciente, pois ainda tem uma consulta para fazer
+                if (consultasPendentes.isEmpty()){
+                    
+                    // Modifica o paciente para null nos dados médicos diretamente do banco de dados 
+                    Query dados = this.em.createQuery("UPDATE DadosMedicos d SET d.paciente = null WHERE d.paciente = :paciente")
+                            .setParameter("paciente", paciente);
+                    dados.executeUpdate();
+         
+                    // Retira os dados do paciente da consulta, setando para null.
+                    // As consultas só serão excluidas quando o médico for removido, pois ele não terá mais 
+                    // ligação com o consultório
+                    Query consulta = this.em.createQuery("UPDATE Consulta c SET c.paciente = null WHERE c.paciente = :paciente")
+                            .setParameter("paciente", paciente);
+                    consulta.executeUpdate();
+                    
+                    Query prontuario = this.em.createQuery("UPDATE Prontuario p SET p.paciente = null WHERE p.paciente = :paciente")
+                            .setParameter("paciente", paciente);
+                    prontuario.executeUpdate();
+                    
+                                        
+                    // Aplicar todas as alterações pendentes antes de remover
+                    em.flush();
+                    
+                    // Remover o paciente
+                    em.remove(paciente);
+                    
+                    // Commit da transação
+                    this.em.getTransaction().commit();
+                    return "Paciente removido com sucesso!";                    
                 }
-
-                // Remover o paciente
-                em.remove(paciente);
-
-                // Commit da transação
-                this.em.getTransaction().commit();
-                return "Paciente removido!";
+                // Se não, será possivel remover o paciente e suas informações de consultas!
+                else {
+                    this.em.getTransaction().rollback();
+                    return "O paciente ainda possui consultas pendentes. Não é possível removê-lo.";
+                }
+               
             } else {
+                this.em.getTransaction().rollback();
                 return "Paciente não encontrado.";
             }
         } catch (Exception e) {
@@ -320,7 +345,8 @@ public class Secretaria extends Funcionario {
 
              // Consulta para obter todas as consultas agendadas para o dia seguinte
              List<Consulta> consultas = this.em.createQuery(
-                        "SELECT c FROM Consulta c WHERE c.medico IN :medicos AND c.data = :diaSeguinte", Consulta.class)
+                        "SELECT c FROM Consulta c WHERE c.medico IN :medicos AND c.data = :diaSeguinte "
+                                + "ORDER BY c.horario ASC", Consulta.class)
                         .setParameter("medicos", medicos)
                         .setParameter("diaSeguinte", diaSeguinte)
                         .getResultList();
@@ -353,7 +379,7 @@ public class Secretaria extends Funcionario {
         if(consultas.isEmpty()){
             return "Sem consultas para o dia seguinte";
         }else{
-            return "Mensagem enviada para" + consultas.size() + " pacientes";
+            return "Mensagem enviada para " + consultas.size() + " pacientes";
         }
     }
     
@@ -391,9 +417,10 @@ public class Secretaria extends Funcionario {
             }
 
             this.em.getTransaction().begin();
-            List<Consulta> consultas = this.em.createQuery("SELECT c FROM Consulta c WHERE c.medico IN :medicos", Consulta.class)
-                          .setParameter("medicos", medicos)
-                          .getResultList();
+            List<Consulta> consultas = this.em.createQuery("SELECT c FROM Consulta c WHERE c.medico "
+                    + "IN :medicos AND c.consultaFinalizada = false ORDER BY c.data ASC, c.horario ASC", Consulta.class)
+                    .setParameter("medicos", medicos)
+                    .getResultList();
             
             this.em.getTransaction().commit();
             return consultas;
@@ -404,6 +431,29 @@ public class Secretaria extends Funcionario {
         }
     }
     
+    /**
+     * Buscar todas as consultas associadas a um paciente cujo nome contém um determinado texto
+     * 
+     */
+    public List<Consulta> buscarConsulta(String texto) {
+        Query query = this.em.createQuery("SELECT c FROM Consulta c WHERE  c.paciente.nome "
+                + "LIKE : nome AND c.consultaFinalizada = false", Consulta.class);
+        query.setParameter("nome", "%" + texto + "%");
+        
+        return query.getResultList();
+    }
+    
+    
+     /**
+     * Buscar todas os pacientes cujo nome contém um determinado texto
+     * 
+     */
+    public List<Paciente> buscarPaciente(String texto){
+        Query query = this.em.createQuery("SELECT p FROM Paciente p WHERE p.nome LIKE :nome", Paciente.class);
+        query.setParameter("nome", "%" + texto + "%");
+        
+        return query.getResultList();
+    }
     
     
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

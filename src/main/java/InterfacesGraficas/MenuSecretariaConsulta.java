@@ -49,6 +49,8 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
         this.gerenciadorAdm = gerenciadorAdm;
         initComponents();
         renderConsultas(this.secretaria.getAllConsultas()); // Renderiza as consultas
+        setupSearchField();
+        lblNomeSecretaria.setText(" " + secretaria.getNome());
         setLocationRelativeTo(null); // Centraliza a janela
     }
 
@@ -68,12 +70,17 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
         label1 = new java.awt.Label();
         jScrollPane1 = new javax.swing.JScrollPane();
         box_consultas = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        pesquisar = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        lblNomeSecretaria = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Secretária - Gestão de consultas");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setLocation(new java.awt.Point(0, 0));
-        setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
@@ -90,7 +97,7 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
         jButton6.setBackground(new java.awt.Color(102, 102, 255));
         jButton6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Gerar relatório: Consulta do dia seguinte");
+        jButton6.setText("Gerar relatório: Consultas do dia seguinte");
         jButton6.setToolTipText("");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,6 +105,7 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setText("Voltar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,8 +113,8 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
             }
         });
 
-        label1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        label1.setText("Conusltas");
+        label1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        label1.setText("Consultas");
 
         javax.swing.GroupLayout box_consultasLayout = new javax.swing.GroupLayout(box_consultas);
         box_consultas.setLayout(box_consultasLayout);
@@ -116,44 +124,97 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
         );
         box_consultasLayout.setVerticalGroup(
             box_consultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 383, Short.MAX_VALUE)
+            .addGap(0, 404, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(box_consultas);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Pesquisar pelo Paciente:");
+
+        pesquisar.setBackground(new java.awt.Color(204, 204, 204));
+        pesquisar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        pesquisar.setForeground(new java.awt.Color(0, 0, 0));
+
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Secretária:");
+
+        lblNomeSecretaria.setBackground(new java.awt.Color(255, 255, 255));
+        lblNomeSecretaria.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblNomeSecretaria.setForeground(new java.awt.Color(0, 0, 0));
+        lblNomeSecretaria.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblNomeSecretaria.setOpaque(true);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(lblNomeSecretaria, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(lblNomeSecretaria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
             .addGroup(panel1Layout.createSequentialGroup()
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1))
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(jButton6)
+                        .addGap(27, 27, 27)
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39)
+                                .addComponent(jButton6)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(352, 352, 352))
-            .addComponent(jScrollPane1)
+                .addGap(313, 313, 313))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addContainerGap())
@@ -205,14 +266,24 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
 
         for (int i = 0; i < labels.length; i++) {
             JLabel label = new JLabel(labels[i]);
-            JLabel value = new JLabel(values[i]);
 
             gbc.gridx = 0;
             gbc.gridy = i;
             infoPanel.add(label, gbc);
 
+            String value1 = values[i];
+            if (value1.length() > 30) {
+                value1 = value1.substring(0, 30) + "...";
+            }
+            
+            JLabel value = new JLabel("<html>" + value1 + "</html>");    // Habilitar HTML para permitir quebra de linha
+            value.setPreferredSize(new Dimension(200, 20));              // Ajustar a largura dos valores
+            value.setVerticalAlignment(JLabel.TOP);                      // Alinhar o texto ao topo
+            value.setToolTipText(values[i]);
+            
             gbc.gridx = 1;
             gbc.weightx = 1;
+            gbc.fill = GridBagConstraints.HORIZONTAL;
             infoPanel.add(value, gbc);
         }
 
@@ -226,6 +297,108 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
         dialog.setLocationRelativeTo(this);
         dialog.setVisible(true);
     }
+    
+    /**
+     * Renderiza a lista de consultas na interface gráfica.
+     * 
+     * @param consultasToRender Lista de consultas a serem exibidas.
+     */
+    private void renderConsultas(List<Consulta> consultasToRender) {
+        this.box_consultas.setLayout(new BoxLayout(this.box_consultas, BoxLayout.Y_AXIS));
+        this.box_consultas.setPreferredSize(new Dimension(780, consultasToRender.size() * 50));
+        this.box_consultas.removeAll();
+
+        if (consultasToRender.isEmpty()) {
+            JLabel noConsultasLabel = new JLabel("Não há consultas cadastradas.");
+            this.box_consultas.add(noConsultasLabel);
+        } else {
+            for (Consulta consulta : consultasToRender) {
+                
+                JPanel card_consulta = new JPanel(new GridBagLayout());
+                GridBagConstraints gbc = new GridBagConstraints();
+                card_consulta.setMaximumSize(new Dimension(780, 40));
+
+                // Configurar constraints para o nameLabel
+                gbc.gridx = 0;
+                gbc.gridy = 0;
+                gbc.anchor = GridBagConstraints.WEST;
+                gbc.insets = new Insets(5, 5, 5, 5);
+                
+                
+                JLabel nameLabel = new JLabel("Nome do Paciente: " + consulta.getPaciente().getNome());
+                nameLabel.setPreferredSize(new Dimension(215, 20));             // Limitar o tamanho
+                nameLabel.setToolTipText(consulta.getPaciente().getNome());  
+                card_consulta.add(nameLabel, gbc);
+                
+                // Configurar constraints para a data
+                gbc.gridx = 1;
+                JLabel data = new JLabel("Data: " + consulta.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                data.setPreferredSize(new Dimension(215, 20));
+                card_consulta.add(data, gbc);
+                
+                // Configurar constraints para o buttonPanel
+                gbc.gridx = 2;                                  // Mover para a terceira coluna
+                gbc.weightx = 1.0;                              // O botão empurrará o conteúdo para a esquerda
+                gbc.anchor = GridBagConstraints.EAST;           // Alinhar à direita
+                JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
+                
+                JButton updateButton = new JButton("Atualizar");
+                JButton deleteButton = new JButton("Deletar");
+                JButton infoButton = new JButton("Informações");
+
+                infoButton.addActionListener(e -> {
+                    showInformationConsulta(consulta);
+                });
+                
+                updateButton.addActionListener(e -> {
+                    CadAutConsulta cadAutConsulta = new CadAutConsulta(secretaria, gerenciadorAdm, em);
+                    cadAutConsulta.setConsulta(consulta);
+                    cadAutConsulta.setVisible(true);
+                    this.dispose();
+                });
+                
+                deleteButton.addActionListener(e -> {
+                    int dialogResult = JOptionPane.showConfirmDialog(this, 
+                        "Tem certeza que deseja deletar a consulta?", 
+                        "Confirmar Exclusão", 
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE);
+                    
+                    if (dialogResult == JOptionPane.YES_OPTION) {
+                        String result = this.secretaria.removerConsulta(consulta.getId());
+                        
+                        if (result.equals("Consulta removida!")) {
+                            JOptionPane.showMessageDialog(this, 
+                            result, 
+                            "Sucesso", 
+                            JOptionPane.INFORMATION_MESSAGE);
+                            updateSearch(); // Atualiza a lista após a exclusão
+
+                        } else {
+                            System.out.println(result);
+                            JOptionPane.showMessageDialog(this, 
+                            result, 
+                            "Erro", 
+                            JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                });
+                
+                buttonPanel.add(updateButton);
+                buttonPanel.add(deleteButton);
+                buttonPanel.add(infoButton);
+                card_consulta.add(buttonPanel, gbc);
+                
+
+                this.box_consultas.add(card_consulta);
+                this.box_consultas.add(Box.createRigidArea(new Dimension(0, 10))); // Espaço entre cards
+            }
+        }
+
+        this.box_consultas.revalidate();
+        this.box_consultas.repaint();
+    }
+    
     
     /**
      * Ação do botão Voltar.
@@ -263,98 +436,60 @@ public class MenuSecretariaConsulta extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_goConsultasDiaSeguinte
     
-    /**
-     * Renderiza a lista de consultas na interface gráfica.
-     * 
-     * @param consultasToRender Lista de consultas a serem exibidas.
-     */
-    private void renderConsultas(List<Consulta> consultasToRender) {
-        this.box_consultas.setLayout(new BoxLayout(this.box_consultas, BoxLayout.Y_AXIS));
-        this.box_consultas.setPreferredSize(new Dimension(780, consultasToRender.size() * 50));
-        this.box_consultas.removeAll();
-
-        if (consultasToRender.isEmpty()) {
-            JLabel noConsultasLabel = new JLabel("Não há consultas cadastradas.");
-            this.box_consultas.add(noConsultasLabel);
-        } else {
-            for (Consulta consulta : consultasToRender) {
-                JPanel card_consulta = new JPanel();
-                card_consulta.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
-                card_consulta.setMaximumSize(new Dimension(780, 40));
-
-                JLabel nameLabel = new JLabel("Nome Paciente: " + consulta.getPaciente().getNome());
-                JLabel data = new JLabel("Data: " + consulta.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-                
-                JButton updateButton = new JButton("Atualizar");
-                JButton deleteButton = new JButton("Deletar");
-                JButton infoButton = new JButton("Informações");
-
-                infoButton.addActionListener(e -> {
-                    showInformationConsulta(consulta);
-                });
-                
-                updateButton.addActionListener(e -> {
-                    CadAutConsulta cadAutConsulta = new CadAutConsulta(secretaria, gerenciadorAdm, em);
-                    cadAutConsulta.setConsulta(consulta);
-                    cadAutConsulta.setVisible(true);
-                    this.dispose();
-                });
-                
-                deleteButton.addActionListener(e -> {
-                    int dialogResult = JOptionPane.showConfirmDialog(this, 
-                        "Tem certeza que deseja deletar a consulta?", 
-                        "Confirmar Exclusão", 
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.WARNING_MESSAGE);
-                    
-                    if (dialogResult == JOptionPane.YES_OPTION) {
-                        String result = this.secretaria.removerConsulta(consulta.getId());
-                        if (result.equals("Consulta removida!")) {
-                            updateSearch(); // Atualiza a lista após a exclusão
-                            JOptionPane.showMessageDialog(this, 
-                            result, 
-                            "Sucesso", 
-                            JOptionPane.INFORMATION_MESSAGE);
-                        } else {
-                            System.out.println(result);
-                            JOptionPane.showMessageDialog(this, 
-                            result, 
-                            "Erro", 
-                            JOptionPane.ERROR_MESSAGE);
-                        }
-                    }
-                });
-
-                card_consulta.add(nameLabel);
-                card_consulta.add(data);
-                card_consulta.add(updateButton);
-                card_consulta.add(deleteButton);
-                card_consulta.add(infoButton);
-
-                this.box_consultas.add(card_consulta);
-                this.box_consultas.add(Box.createRigidArea(new Dimension(0, 10))); // Espaço entre cards
-            }
-        }
-
-        this.box_consultas.revalidate();
-        this.box_consultas.repaint();
-    }
     
     /**
      * Atualiza a lista de consultas exibida na interface.
      */
     private void updateSearch() {
-        List<Consulta> consultas = this.secretaria.getAllConsultas();
-        renderConsultas(consultas);
+        String searchText = pesquisar.getText().trim();
+        List<Consulta> filteredConsultas;
+        
+        if (searchText.isEmpty()) {
+            filteredConsultas = secretaria.getAllConsultas();
+        
+        } 
+        else {
+            filteredConsultas = secretaria.buscarConsulta(searchText);
+            
+        }
+        this.renderConsultas(filteredConsultas);
     }
 
+        /**
+     * Configura o campo de pesquisa para atualizar a lista de consultas
+     * sempre que o texto for modificado.
+     */
+    private void setupSearchField() {
+        pesquisar.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            @Override
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                updateSearch();
+            }
+
+            @Override
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                updateSearch();
+            }
+
+            @Override
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                updateSearch();
+            }
+        });
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel box_consultas;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton6;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private java.awt.Label label1;
+    private javax.swing.JLabel lblNomeSecretaria;
     private java.awt.Panel panel1;
+    private javax.swing.JTextField pesquisar;
     // End of variables declaration//GEN-END:variables
 }

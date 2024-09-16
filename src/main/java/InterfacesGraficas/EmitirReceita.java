@@ -43,8 +43,8 @@ public class EmitirReceita extends javax.swing.JFrame {
      * Configura os nomes do paciente e do médico nos rótulos da interface.
      */
     private void setNome(){
-        lblPac.setText(" " + consulta.getPaciente().getNome());
-        lblMed.setText(" " + medico.getNome());
+        lblNomePaciente.setText(" " + consulta.getPaciente().getNome());
+        lblNomeMedico.setText(" " + medico.getNome());
     }
     
     
@@ -58,13 +58,13 @@ public class EmitirReceita extends javax.swing.JFrame {
         btnGerar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        lblPac = new javax.swing.JLabel();
+        lblNomePaciente = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtMedicamentos = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        lblMed = new javax.swing.JLabel();
+        lblNomeMedico = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Receita");
@@ -77,7 +77,7 @@ public class EmitirReceita extends javax.swing.JFrame {
         setResizable(false);
 
         jLabel3.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Receita médica");
@@ -86,13 +86,13 @@ public class EmitirReceita extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
-        btnGerar.setBackground(new java.awt.Color(51, 255, 0));
+        btnGerar.setBackground(new java.awt.Color(51, 204, 0));
         btnGerar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnGerar.setForeground(new java.awt.Color(0, 0, 0));
         btnGerar.setText("Gerar receita");
         btnGerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGerar_Action(evt);
+                go_gerar(evt);
             }
         });
 
@@ -100,7 +100,7 @@ public class EmitirReceita extends javax.swing.JFrame {
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltar_Action(evt);
+                back_menuMedicosLaudos(evt);
             }
         });
 
@@ -110,11 +110,11 @@ public class EmitirReceita extends javax.swing.JFrame {
         jLabel6.setText("Informe os medicamentos que devem ser prescritos na receita (separados por vírgula):");
         jLabel6.setToolTipText("");
 
-        lblPac.setBackground(new java.awt.Color(255, 255, 255));
-        lblPac.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblPac.setForeground(new java.awt.Color(0, 0, 0));
-        lblPac.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblPac.setOpaque(true);
+        lblNomePaciente.setBackground(new java.awt.Color(255, 255, 255));
+        lblNomePaciente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblNomePaciente.setForeground(new java.awt.Color(0, 0, 0));
+        lblNomePaciente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblNomePaciente.setOpaque(true);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
@@ -131,24 +131,21 @@ public class EmitirReceita extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel6)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel6)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblPac, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(267, 267, 267)
-                        .addComponent(btnGerar)))
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(265, 265, 265)
+                .addComponent(btnGerar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnVoltar)
-                .addGap(24, 24, 24))
+                .addGap(19, 19, 19))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,16 +153,19 @@ public class EmitirReceita extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPac, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(btnGerar)
-                .addGap(18, 18, 18)
-                .addComponent(btnVoltar)
-                .addGap(32, 32, 32))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnGerar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(btnVoltar)))
+                .addGap(41, 41, 41))
         );
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
@@ -174,11 +174,11 @@ public class EmitirReceita extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Doutor(a):");
 
-        lblMed.setBackground(new java.awt.Color(255, 255, 255));
-        lblMed.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblMed.setForeground(new java.awt.Color(0, 0, 0));
-        lblMed.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblMed.setOpaque(true);
+        lblNomeMedico.setBackground(new java.awt.Color(255, 255, 255));
+        lblNomeMedico.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblNomeMedico.setForeground(new java.awt.Color(0, 0, 0));
+        lblNomeMedico.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblNomeMedico.setOpaque(true);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -188,7 +188,7 @@ public class EmitirReceita extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMed, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblNomeMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -196,7 +196,7 @@ public class EmitirReceita extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblMed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblNomeMedico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -248,7 +248,7 @@ public class EmitirReceita extends javax.swing.JFrame {
      * 
      * @param evt o evento de clique do botão
      */
-    private void btnGerar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerar_Action
+    private void go_gerar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_gerar
         if (!txtMedicamentos.getText().isEmpty()){
             String imprimir = medico.receitaMedica(consulta);
             JOptionPane.showMessageDialog(null, 
@@ -262,7 +262,7 @@ public class EmitirReceita extends javax.swing.JFrame {
                                           "Aviso!", 
                                           JOptionPane.WARNING_MESSAGE);            
         }
-    }//GEN-LAST:event_btnGerar_Action
+    }//GEN-LAST:event_go_gerar
 
     /**
      * Ação do botão "Voltar".
@@ -270,11 +270,11 @@ public class EmitirReceita extends javax.swing.JFrame {
      * 
      * @param evt o evento de clique do botão
      */
-    private void btnVoltar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar_Action
+    private void back_menuMedicosLaudos(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_menuMedicosLaudos
         MenuMedicoLaudos menuMedicoLaudos = new MenuMedicoLaudos(gerenciadorAdm, medico, consulta, em);
         menuMedicoLaudos.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnVoltar_Action
+    }//GEN-LAST:event_back_menuMedicosLaudos
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGerar;
@@ -286,8 +286,8 @@ public class EmitirReceita extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblMed;
-    private javax.swing.JLabel lblPac;
+    private javax.swing.JLabel lblNomeMedico;
+    private javax.swing.JLabel lblNomePaciente;
     private java.awt.Panel panel1;
     private javax.swing.JTextArea txtMedicamentos;
     // End of variables declaration//GEN-END:variables

@@ -43,8 +43,8 @@ public class ConsultaDoPaciente extends javax.swing.JFrame {
      * Define os nomes do paciente e do médico nos rótulos da interface.
      */
     private void setNome(){
-        lblPac.setText(" " + consulta.getPaciente().getNome());
-        lblMed.setText(" " + medico.getNome());
+        lblNomePaciente.setText(" " + consulta.getPaciente().getNome());
+        lblNomeMedico.setText(" " + medico.getNome());
     }
  
     @SuppressWarnings("unchecked")
@@ -54,14 +54,14 @@ public class ConsultaDoPaciente extends javax.swing.JFrame {
         panel1 = new java.awt.Panel();
         panel2 = new java.awt.Panel();
         btnDados = new javax.swing.JButton();
-        btnPron = new javax.swing.JButton();
+        btnProntuario = new javax.swing.JButton();
         btnLaudo = new javax.swing.JButton();
-        btnFin = new javax.swing.JButton();
+        btnFinalizar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        lblPac = new javax.swing.JLabel();
+        lblNomePaciente = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        lblMed = new javax.swing.JLabel();
+        lblNomeMedico = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -81,18 +81,18 @@ public class ConsultaDoPaciente extends javax.swing.JFrame {
         btnDados.setText("Dados adicionais");
         btnDados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDados_Action(evt);
+                go_dados_adicionais(evt);
             }
         });
 
-        btnPron.setBackground(new java.awt.Color(255, 255, 255));
-        btnPron.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnPron.setForeground(new java.awt.Color(0, 0, 0));
-        btnPron.setText("Prontuário");
-        btnPron.setToolTipText("");
-        btnPron.addActionListener(new java.awt.event.ActionListener() {
+        btnProntuario.setBackground(new java.awt.Color(255, 255, 255));
+        btnProntuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnProntuario.setForeground(new java.awt.Color(0, 0, 0));
+        btnProntuario.setText("Prontuário");
+        btnProntuario.setToolTipText("");
+        btnProntuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPron_Action(evt);
+                go_prontuario(evt);
             }
         });
 
@@ -102,17 +102,17 @@ public class ConsultaDoPaciente extends javax.swing.JFrame {
         btnLaudo.setText("Laudos médicos");
         btnLaudo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLaudo_Action(evt);
+                go_laudos_medicos(evt);
             }
         });
 
-        btnFin.setBackground(new java.awt.Color(255, 255, 255));
-        btnFin.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnFin.setForeground(new java.awt.Color(0, 0, 0));
-        btnFin.setText("Finalizar consulta");
-        btnFin.addActionListener(new java.awt.event.ActionListener() {
+        btnFinalizar.setBackground(new java.awt.Color(255, 255, 255));
+        btnFinalizar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnFinalizar.setForeground(new java.awt.Color(0, 0, 0));
+        btnFinalizar.setText("Finalizar consulta");
+        btnFinalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFin_Action(evt);
+                go_finalizar_consulta(evt);
             }
         });
 
@@ -120,11 +120,11 @@ public class ConsultaDoPaciente extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Paciente:");
 
-        lblPac.setBackground(new java.awt.Color(255, 255, 255));
-        lblPac.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblPac.setForeground(new java.awt.Color(0, 0, 0));
-        lblPac.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblPac.setOpaque(true);
+        lblNomePaciente.setBackground(new java.awt.Color(255, 255, 255));
+        lblNomePaciente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblNomePaciente.setForeground(new java.awt.Color(0, 0, 0));
+        lblNomePaciente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblNomePaciente.setOpaque(true);
 
         javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
         panel2.setLayout(panel2Layout);
@@ -134,9 +134,9 @@ public class ConsultaDoPaciente extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panel2Layout.createSequentialGroup()
-                        .addComponent(btnPron, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnFin, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel2Layout.createSequentialGroup()
                         .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -147,7 +147,7 @@ public class ConsultaDoPaciente extends javax.swing.JFrame {
                             .addGroup(panel2Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblPac, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(lblNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         panel2Layout.setVerticalGroup(
@@ -156,15 +156,15 @@ public class ConsultaDoPaciente extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(lblPac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblNomePaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(71, 71, 71)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDados, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLaudo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(87, 87, 87)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPron, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFin, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(89, Short.MAX_VALUE))
         );
 
@@ -178,11 +178,11 @@ public class ConsultaDoPaciente extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
 
-        lblMed.setBackground(new java.awt.Color(255, 255, 255));
-        lblMed.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblMed.setForeground(new java.awt.Color(0, 0, 0));
-        lblMed.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblMed.setOpaque(true);
+        lblNomeMedico.setBackground(new java.awt.Color(255, 255, 255));
+        lblNomeMedico.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblNomeMedico.setForeground(new java.awt.Color(0, 0, 0));
+        lblNomeMedico.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblNomeMedico.setOpaque(true);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -196,7 +196,7 @@ public class ConsultaDoPaciente extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMed, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblNomeMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
         );
         jPanel1Layout.setVerticalGroup(
@@ -204,7 +204,7 @@ public class ConsultaDoPaciente extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblMed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblNomeMedico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
                 .addGap(15, 15, 15))
         );
@@ -247,29 +247,29 @@ public class ConsultaDoPaciente extends javax.swing.JFrame {
      * 
      * @param evt o evento de clique do botão
      */
-    private void btnPron_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPron_Action
+    private void go_prontuario(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_prontuario
         MenuProntuarios menuProntuarios = new MenuProntuarios(gerenciadorAdm, medico, consulta, em);
         menuProntuarios.setVisible(true); 
         this.dispose();
-    }//GEN-LAST:event_btnPron_Action
+    }//GEN-LAST:event_go_prontuario
 
     /**
      * Abre a tela de laudos médicos.
      * 
      * @param evt o evento de clique do botão
      */
-    private void btnLaudo_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaudo_Action
+    private void go_laudos_medicos(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_laudos_medicos
         MenuMedicoLaudos menuMedicoLaudos = new MenuMedicoLaudos(gerenciadorAdm, medico, consulta, em);
         menuMedicoLaudos.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnLaudo_Action
+    }//GEN-LAST:event_go_laudos_medicos
 
     /**
      * Finaliza a consulta e atualiza o estado no banco de dados.
      * 
      * @param evt o evento de clique do botão
      */
-    private void btnFin_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFin_Action
+    private void go_finalizar_consulta(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_finalizar_consulta
         int option = JOptionPane.showConfirmDialog(null, 
                                                "Deseja 'FINALIZAR' a consulta?!", 
                                                "Aviso", 
@@ -289,30 +289,30 @@ public class ConsultaDoPaciente extends javax.swing.JFrame {
             consultasDoDia.setVisible(true);
             this.dispose();
         }
-    }//GEN-LAST:event_btnFin_Action
+    }//GEN-LAST:event_go_finalizar_consulta
 
     /**
      * Abre a tela de dados médicos da consulta.
      * 
      * @param evt o evento de clique do botão
      */
-    private void btnDados_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDados_Action
+    private void go_dados_adicionais(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_dados_adicionais
         MenuDadosMedicos menuDadosMedicos = new MenuDadosMedicos(gerenciadorAdm, medico, consulta, em);
         menuDadosMedicos.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnDados_Action
+    }//GEN-LAST:event_go_dados_adicionais
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDados;
-    private javax.swing.JButton btnFin;
+    private javax.swing.JButton btnFinalizar;
     private javax.swing.JButton btnLaudo;
-    private javax.swing.JButton btnPron;
+    private javax.swing.JButton btnProntuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblMed;
-    private javax.swing.JLabel lblPac;
+    private javax.swing.JLabel lblNomeMedico;
+    private javax.swing.JLabel lblNomePaciente;
     private java.awt.Panel panel1;
     private java.awt.Panel panel2;
     // End of variables declaration//GEN-END:variables

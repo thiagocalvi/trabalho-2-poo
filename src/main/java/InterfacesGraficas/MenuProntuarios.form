@@ -87,7 +87,7 @@
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="lblMed" min="-2" pref="647" max="-2" attributes="0"/>
+                      <Component id="lblNomeMedico" min="-2" pref="647" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -98,7 +98,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="lblMed" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="lblNomeMedico" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="16" max="32767" attributes="0"/>
                   </Group>
@@ -117,7 +117,7 @@
                 <Property name="text" type="java.lang.String" value="Doutor(a):"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblMed">
+            <Component class="javax.swing.JLabel" name="lblNomeMedico">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -172,7 +172,7 @@
                                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="lblPac" min="-2" pref="644" max="-2" attributes="0"/>
+                                      <Component id="lblNomePaciente" min="-2" pref="644" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
@@ -192,7 +192,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblPac" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                          <Component id="lblNomePaciente" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -207,7 +207,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="lblPac">
+            <Component class="javax.swing.JLabel" name="lblNomePaciente">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -241,7 +241,7 @@
                 <Property name="text" type="java.lang.String" value="Adicionar prontu&#xe1;rio"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddPron_Action"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="go_adicionar_prontuario"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnVoltar">
@@ -252,7 +252,7 @@
                 <Property name="text" type="java.lang.String" value="Voltar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVoltar_Action"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="back_consultaDoPaciente"/>
               </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">

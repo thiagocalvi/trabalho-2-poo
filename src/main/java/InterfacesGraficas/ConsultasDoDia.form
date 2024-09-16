@@ -83,9 +83,9 @@
                       <Group type="102" attributes="0">
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="btnSim" min="-2" pref="93" max="-2" attributes="0"/>
+                          <Component id="btnYes" min="-2" pref="93" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnVoltar" min="-2" pref="92" max="-2" attributes="0"/>
+                          <Component id="btnBack" min="-2" pref="92" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="jScrollPane2" min="-2" pref="738" max="-2" attributes="0"/>
@@ -112,13 +112,13 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="btnVoltar" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="btnBack" min="-2" pref="32" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel6" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                              <Component id="btnSim" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                              <Component id="btnYes" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       </Group>
@@ -142,7 +142,7 @@
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="lblNome" min="-2" pref="637" max="-2" attributes="0"/>
+                      <Component id="lblNomeMedico" min="-2" pref="637" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -152,7 +152,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblNome" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="lblNomeMedico" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
                           <Component id="jLabel1" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="12" max="32767" attributes="0"/>
@@ -172,7 +172,7 @@
                 <Property name="text" type="java.lang.String" value="Doutor(a):"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblNome">
+            <Component class="javax.swing.JLabel" name="lblNomeMedico">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -213,7 +213,7 @@
             <Property name="text" type="java.lang.String" value="Iniciar a pr&#xf3;xima consulta?"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnSim">
+        <Component class="javax.swing.JButton" name="btnYes">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -227,10 +227,10 @@
             <Property name="text" type="java.lang.String" value="SIM"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSim_Action"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnYes_Action"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnVoltar">
+        <Component class="javax.swing.JButton" name="btnBack">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
@@ -238,7 +238,7 @@
             <Property name="text" type="java.lang.String" value="Voltar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVoltar_Action"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="back_menuPrincipalMedico"/>
           </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -248,7 +248,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="tbCons">
+            <Component class="javax.swing.JTable" name="tableConsultas">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>

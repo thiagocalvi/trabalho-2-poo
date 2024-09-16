@@ -32,21 +32,27 @@ public class TelaInicial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         btnMed = new javax.swing.JButton();
         btnAdm = new javax.swing.JButton();
         btnSec = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Usuários");
         setLocation(new java.awt.Point(0, 0));
-        setMinimumSize(new java.awt.Dimension(500, 400));
+        setMaximumSize(new java.awt.Dimension(600, 470));
+        setMinimumSize(new java.awt.Dimension(600, 470));
+        setPreferredSize(new java.awt.Dimension(600, 470));
         setResizable(false);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         btnMed.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnMed.setText("Médico");
         btnMed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMed_Action(evt);
+                go_usuarioMedico(evt);
             }
         });
 
@@ -55,7 +61,7 @@ public class TelaInicial extends javax.swing.JFrame {
         btnAdm.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAdm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdm_Action(evt);
+                go_usuarioAdministrador(evt);
             }
         });
 
@@ -63,32 +69,53 @@ public class TelaInicial extends javax.swing.JFrame {
         btnSec.setText("Secretária");
         btnSec.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSec_Action(evt);
+                go_usuarioSecretaria(evt);
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(83, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Usuários");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(128, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAdm, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSec, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnMed, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(72, 72, 72))
+                .addGap(123, 123, 123))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(222, 222, 222)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel1)
+                .addGap(26, 26, 26)
                 .addComponent(btnAdm, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(btnMed, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
                 .addComponent(btnSec, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -112,39 +139,42 @@ public class TelaInicial extends javax.swing.JFrame {
      * 
      * @param evt O evento de ação do botão "Médico".
      */
-    private void btnMed_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMed_Action
+    private void go_usuarioMedico(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_usuarioMedico
         LoginMedSec loginMedico = new LoginMedSec(this.gerenciadorAdm, this.em);
         loginMedico.setSecMed("Medico");
         loginMedico.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnMed_Action
+    }//GEN-LAST:event_go_usuarioMedico
 
     /**
      * Ação do botão "Administrador". Abre a tela principal do administrador, executa o pré-cadastro em massa e fecha a tela inicial.
      * 
      * @param evt O evento de ação do botão "Administrador".
      */
-    private void btnAdm_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdm_Action
+    private void go_usuarioAdministrador(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_usuarioAdministrador
         MenuPrincipalAdm menuPrincipalAdm = new MenuPrincipalAdm(gerenciadorAdm, em);
         this.cadMassa();
         menuPrincipalAdm.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnAdm_Action
+    }//GEN-LAST:event_go_usuarioAdministrador
 
     /**
      * Ação do botão "Secretária". Abre a tela de login para secretárias e fecha a tela inicial.
      * 
      * @param evt O evento de ação do botão "Secretária".
      */
-    private void btnSec_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSec_Action
+    private void go_usuarioSecretaria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_usuarioSecretaria
         LoginMedSec loginSecretaria = new LoginMedSec(this.gerenciadorAdm, this.em);
         loginSecretaria.setSecMed("Secretaria");
         loginSecretaria.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnSec_Action
+    }//GEN-LAST:event_go_usuarioSecretaria
 
-    // Declaração das variáveis da interface gráfica
+    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdm;
     private javax.swing.JButton btnMed;
     private javax.swing.JButton btnSec;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,7 @@
 
 package Gerenciador;
 
+import Modelo.Consulta;
 import javax.persistence.*;
 import Modelo.Medico;
 import Modelo.Secretaria;
@@ -106,7 +107,13 @@ public class GerenciadorAdm {
             transaction.begin();
             Secretaria secretaria = em.find(Secretaria.class, secretariaId);
             if (secretaria != null) {
-                em.remove(secretaria);
+                // Atualiza todos os médicos que têm essa secretária, definindo 'null'
+                this.em.createQuery("UPDATE Medico m SET m.secretaria = null WHERE m.secretaria = :secretaria")
+                        .setParameter("secretaria", secretaria) // 'secretaria' é a instância da secretária
+                        .executeUpdate();
+
+                // Remove a secretária após atualizar a referência nos médicos
+                this.em.remove(secretaria);
                 transaction.commit();
                 return "Secretaria removida!";
             } else {
@@ -205,12 +212,41 @@ public class GerenciadorAdm {
             transaction.begin();
             Medico medico = em.find(Medico.class, medicoId);
             if (medico != null) {
-                em.remove(medico);
-                transaction.commit();
-                return "Médico removido!";
+                // Verica se tem uma consulta pendente antes de remover o medico
+                String consultas = ("SELECT c FROM Consulta c WHERE c.consultaFinalizada = false AND c.medico = :medico");
+                
+                List<Consulta> consultasPendentes = this.em.createQuery(consultas, Consulta.class)
+                        .setParameter("medico", medico)
+                        .getResultList();
+                
+                // Se não houver consultas pendentes, remove o médico
+                if (consultasPendentes.isEmpty()){
+                    // Buscar todas as consultas associadas ao médico
+                    String consultaDoMedico = "SELECT c FROM Consulta c WHERE c.medico = :medico";
+                    List<Consulta> listConsultas = em.createQuery(consultaDoMedico, Consulta.class)
+                            .setParameter("medico", medico)
+                            .getResultList();
+
+                    // Remover todas as consultas, o que também remove os prontuários associados devido ao cascade
+                    for (Consulta consulta : listConsultas) {
+                        consulta.getProntuario().setConsulta(null);
+                        em.remove(consulta);
+                    }
+                
+                    em.remove(medico);
+                    transaction.commit();
+                    return "Médico removido!";
+                }
+                else {
+                    transaction.rollback();
+                    return "Consultas pendentes! O médico não pode ser removido.";
+                }
+
+                
             } else {
                 transaction.commit();
-                return "Médico não encontrado";
+                return "Médico não encontrado!";
+                
             }
         } catch (Exception e) {
             if (transaction.isActive()) {

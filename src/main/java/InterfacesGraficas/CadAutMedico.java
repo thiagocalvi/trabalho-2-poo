@@ -44,11 +44,11 @@ public class CadAutMedico extends javax.swing.JFrame {
      * 
      * @param Cad_Atu o texto que será exibido no botão (Cadastrar ou Atualizar)
      */
-    public void setBtnText(String Cad_Atu){
+    public void configureDisplay(String Cad_Atu){
         this.Cad_Atu = Cad_Atu;
-        BtnCadastrar.setText(Cad_Atu);
-        jLabel4.setText("Atualizar Médico");
-        setTitle("Atualizar Médico");
+        btnRegister.setText(Cad_Atu);
+        lblSubTitulo.setText("Atualizar médico");
+        setTitle("Administrador - Atualizar médico");
         setValues();
     } 
             
@@ -61,26 +61,77 @@ public class CadAutMedico extends javax.swing.JFrame {
         this.medico = medico;
     }
     
+       /**
+     * Configura a lista de secretarias no JComboBox.
+     * Adiciona todas as secretarias ao JComboBox para seleção.
+     */
+    private void setSecretarias(){
+        CBoxSecretaria.removeAllItems();
+        CBoxSecretaria.addItem("Selecione uma secretaria");
+        CBoxSecretaria.setSelectedItem("Selecione uma secretaria");
+        
+        for(Secretaria secretaria : this.allSecretarias){
+            CBoxSecretaria.addItem(secretaria.getNome());
+        }
+    }
+    
+    /**
+     * Preenche os campos da interface com os dados do médico quando a operação é de atualização.
+     * Configura os valores dos campos baseados no objeto Medico fornecido.
+     */
+    private void setValues(){
+        CBoxSecretaria.removeAllItems();
+        CBoxSecretaria.addItem("Selecione uma secretaria");
+
+        nome_medico.setText(this.medico.getNome());
+
+        especialidade_medico.setText(this.medico.getEspecialidade());
+
+        telefone_medico.setText(this.medico.getTelefone());
+
+        email_medico.setText(this.medico.getEmail());
+
+        crm_medico.setText(Integer.toString(this.medico.getCrm()));
+
+        dataNascimento_medico.setText(this.medico.getDataNascimento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+        if (this.medico.getGenero().equals("Masculino")) {
+            genero_m_medico.setSelected(true);
+        } else {
+            genero_f_medico.setSelected(true);
+        }
+
+        for (Secretaria secretaria : this.allSecretarias) {
+            CBoxSecretaria.addItem(secretaria.getNome());
+        }
+
+        if (this.medico.getSecretaria() == null) {
+            CBoxSecretaria.setSelectedItem("Selecione uma secretaria");
+        } else {
+            CBoxSecretaria.setSelectedItem(medico.getSecretaria().getNome());
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         panel1 = new java.awt.Panel();
-        jLabel4 = new javax.swing.JLabel();
+        lblSubTitulo = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        BtnCadastrar = new javax.swing.JButton();
+        CBoxSecretaria = new javax.swing.JComboBox<>();
+        btnRegister = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         genero_m_medico = new javax.swing.JRadioButton();
         genero_f_medico = new javax.swing.JRadioButton();
         especialidade_medico = new javax.swing.JTextPane();
-        voltar = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         nome_medico = new javax.swing.JTextPane();
         telefone_medico = new javax.swing.JTextPane();
         email_medico = new javax.swing.JTextPane();
@@ -88,7 +139,7 @@ public class CadAutMedico extends javax.swing.JFrame {
         dataNascimento_medico = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cadastar Médico");
+        setTitle("Administrador - Cadastrar médico");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setLocation(new java.awt.Point(0, 0));
@@ -98,12 +149,12 @@ public class CadAutMedico extends javax.swing.JFrame {
 
         panel1.setPreferredSize(new java.awt.Dimension(780, 500));
 
-        jLabel4.setBackground(new java.awt.Color(255, 204, 102));
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Cadastrar Médico");
-        jLabel4.setOpaque(true);
+        lblSubTitulo.setBackground(new java.awt.Color(255, 204, 102));
+        lblSubTitulo.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblSubTitulo.setForeground(new java.awt.Color(0, 0, 0));
+        lblSubTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSubTitulo.setText("Cadastrar médico");
+        lblSubTitulo.setOpaque(true);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
@@ -130,19 +181,19 @@ public class CadAutMedico extends javax.swing.JFrame {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Email:");
 
-        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma secretaria", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setToolTipText("");
+        CBoxSecretaria.setBackground(new java.awt.Color(255, 255, 255));
+        CBoxSecretaria.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        CBoxSecretaria.setForeground(new java.awt.Color(0, 0, 0));
+        CBoxSecretaria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma secretaria", "Item 2", "Item 3", "Item 4" }));
+        CBoxSecretaria.setToolTipText("");
 
-        BtnCadastrar.setBackground(new java.awt.Color(0, 204, 0));
-        BtnCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        BtnCadastrar.setForeground(new java.awt.Color(255, 255, 255));
-        BtnCadastrar.setText("Cadastar");
-        BtnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        btnRegister.setBackground(new java.awt.Color(0, 204, 0));
+        btnRegister.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnRegister.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegister.setText("Cadastar");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cadastarMedico(evt);
+                go_Cad_Atu_medico(evt);
             }
         });
 
@@ -168,11 +219,11 @@ public class CadAutMedico extends javax.swing.JFrame {
         especialidade_medico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         especialidade_medico.setForeground(new java.awt.Color(0, 0, 0));
 
-        voltar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        voltar.setText("Voltar");
-        voltar.addActionListener(new java.awt.event.ActionListener() {
+        btnBack.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnBack.setText("Voltar");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                voltar_Action(evt);
+                back_menuMedicosAdm(evt);
             }
         });
 
@@ -203,13 +254,13 @@ public class CadAutMedico extends javax.swing.JFrame {
             .addGroup(panel1Layout.createSequentialGroup()
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addContainerGap(112, Short.MAX_VALUE)
+                        .addContainerGap(124, Short.MAX_VALUE)
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(email_medico, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
-                            .addComponent(telefone_medico, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
-                            .addComponent(crm_medico, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)))
+                            .addComponent(email_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(telefone_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(crm_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(0, 13, Short.MAX_VALUE)
+                        .addGap(0, 30, Short.MAX_VALUE)
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,8 +271,8 @@ public class CadAutMedico extends javax.swing.JFrame {
                                     .addComponent(jLabel6))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(nome_medico, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
-                                    .addComponent(especialidade_medico, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)))
+                                    .addComponent(nome_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(especialidade_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addGap(18, 18, 18)
@@ -239,23 +290,23 @@ public class CadAutMedico extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CBoxSecretaria, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(192, 192, 192))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                        .addComponent(BtnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(324, 324, 324))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblSubTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(252, 252, 252))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                        .addComponent(voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblSubTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panel1Layout.createSequentialGroup()
@@ -291,11 +342,11 @@ public class CadAutMedico extends javax.swing.JFrame {
                     .addComponent(genero_m_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(genero_f_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(CBoxSecretaria, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(BtnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -314,23 +365,12 @@ public class CadAutMedico extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-        /**
-     * Navega de volta para a janela do menu de médicos.
-     * 
-     * @param evt o evento de clique do botão
-     */
-    private void voltarJanela(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarJanela
-        MenuMedicosAdm menuMedicoAdm = new MenuMedicosAdm(gerenciadorAdm, em);
-        menuMedicoAdm.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_voltarJanela
-
     /**
      * Cadastra ou atualiza um médico com base nas informações fornecidas nos campos da interface gráfica.
      * 
      * @param evt o evento de clique do botão
      */
-    private void cadastarMedico(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastarMedico
+    private void go_Cad_Atu_medico(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_Cad_Atu_medico
         String nome, especialidade, telefone, email, crm, dataNascimento, genero = null, nomeSecretaria;
         Secretaria secretariaObj = null;
 
@@ -347,7 +387,7 @@ public class CadAutMedico extends javax.swing.JFrame {
             genero = "Feminino";
         }
 
-        nomeSecretaria = (String) jComboBox1.getSelectedItem();
+        nomeSecretaria = (String) CBoxSecretaria.getSelectedItem();
 
         if (!("Selecione uma secretaria".equals(nomeSecretaria))) {
             // Busca a secretaria correspondente
@@ -362,12 +402,12 @@ public class CadAutMedico extends javax.swing.JFrame {
         if (this.Cad_Atu.equals("Atualizar")){
             if(secretariaObj == null){
                 int dialogResultSecNull = JOptionPane.showConfirmDialog(this,
-                    "Tem certeza que deseja deixar o médico sem secretaria?",
+                    "Tem certeza que deseja deixar o médico 'SEM' secretaria?",
                     "Confirmar Ação",
                     JOptionPane.YES_NO_OPTION);
                 if(dialogResultSecNull == JOptionPane.YES_OPTION){
                     int dialogResult = JOptionPane.showConfirmDialog(this,
-                        "Tem certeza que deseja atualizar o médico " + this.medico.getNome() + "?",
+                        "Tem certeza que deseja 'ATUALIZAR' o médico " + this.medico.getNome() + "?",
                         "Confirmar Atualização",
                         JOptionPane.YES_NO_OPTION);
 
@@ -380,7 +420,7 @@ public class CadAutMedico extends javax.swing.JFrame {
                 }
             } else {
                 int dialogResult = JOptionPane.showConfirmDialog(this,
-                    "Tem certeza que deseja atualizar o médico " + this.medico.getNome() + "?",
+                    "Tem certeza que deseja 'ATUALIZAR' o médico " + this.medico.getNome() + "?",
                     "Confirmar Atualização",
                     JOptionPane.YES_NO_OPTION);
                 if (dialogResult == JOptionPane.YES_OPTION){
@@ -393,12 +433,12 @@ public class CadAutMedico extends javax.swing.JFrame {
         } else {
             if(secretariaObj == null){
                 int dialogResultSecNull = JOptionPane.showConfirmDialog(this,
-                    "Tem certeza que deseja deixar o médico sem secretaria?",
+                    "Tem certeza que deseja deixar o médico 'SEM' secretaria?",
                     "Confirmar Ação",
                     JOptionPane.YES_NO_OPTION);
                 if(dialogResultSecNull == JOptionPane.YES_OPTION){
                     int dialogResult = JOptionPane.showConfirmDialog(this,
-                        "Tem certeza que deseja cadastrar o médico Dr. "+ nome +"?",
+                        "Tem certeza que deseja 'CADASTRAR' o médico Dr. "+ nome +"?",
                         "Confirmar Cadastro",
                         JOptionPane.YES_NO_OPTION);
 
@@ -411,7 +451,7 @@ public class CadAutMedico extends javax.swing.JFrame {
                 }
             } else {
                 int dialogResult = JOptionPane.showConfirmDialog(this,
-                    "Tem certeza que deseja cadastrar o médico Dr. "+ nome +"?",
+                    "Tem certeza que deseja 'CADASTRAR' o médico Dr. "+ nome +"?",
                     "Confirmar Cadastro",
                     JOptionPane.YES_NO_OPTION);
                 if (dialogResult == JOptionPane.YES_OPTION){
@@ -422,74 +462,24 @@ public class CadAutMedico extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_cadastarMedico
+    }//GEN-LAST:event_go_Cad_Atu_medico
 
     /**
      * Navega de volta para a janela do menu de médicos.
      * 
      * @param evt o evento de clique do botão
      */
-    private void voltar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltar_Action
+    private void back_menuMedicosAdm(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_menuMedicosAdm
         MenuMedicosAdm menuMedicoAdm = new MenuMedicosAdm(gerenciadorAdm, em);
         menuMedicoAdm.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_voltar_Action
+    }//GEN-LAST:event_back_menuMedicosAdm
 
-    /**
-     * Configura a lista de secretarias no JComboBox.
-     * Adiciona todas as secretarias ao JComboBox para seleção.
-     */
-    private void setSecretarias(){
-        jComboBox1.removeAllItems();
-        jComboBox1.addItem("Selecione uma secretaria");
-        jComboBox1.setSelectedItem("Selecione uma secretaria");
-        
-        for(Secretaria secretaria : this.allSecretarias){
-            jComboBox1.addItem(secretaria.getNome());
-        }
-    }
-    
-    /**
-     * Preenche os campos da interface com os dados do médico quando a operação é de atualização.
-     * Configura os valores dos campos baseados no objeto Medico fornecido.
-     */
-    private void setValues(){
-        if (this.Cad_Atu.equals("Atualizar")){
-            jComboBox1.removeAllItems();
-            jComboBox1.addItem("Selecione uma secretaria");
-        
-            nome_medico.setText(this.medico.getNome());
-
-            especialidade_medico.setText(this.medico.getEspecialidade());
-
-            telefone_medico.setText(this.medico.getTelefone());
-        
-            email_medico.setText(this.medico.getEmail());
-
-            crm_medico.setText( Integer.toString(this.medico.getCrm()));
-
-            dataNascimento_medico.setText(this.medico.getDataNascimento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-
-            if(this.medico.getGenero().equals("Masculino")){
-                genero_m_medico.setSelected(true);
-            } else {
-                genero_f_medico.setSelected(true);
-            }
-
-            for(Secretaria secretaria : this.allSecretarias){
-                jComboBox1.addItem(secretaria.getNome());
-            }
-
-            if(this.medico.getSecretaria() == null){
-                jComboBox1.setSelectedItem("Selecione uma secretaria");
-            } else {
-                jComboBox1.setSelectedItem(medico.getSecretaria().getNome());
-            }
-        }
-    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnCadastrar;
+    private javax.swing.JComboBox<String> CBoxSecretaria;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnRegister;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextPane crm_medico;
     private javax.swing.JTextPane dataNascimento_medico;
@@ -497,18 +487,16 @@ public class CadAutMedico extends javax.swing.JFrame {
     private javax.swing.JTextPane especialidade_medico;
     private javax.swing.JRadioButton genero_f_medico;
     private javax.swing.JRadioButton genero_m_medico;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblSubTitulo;
     private javax.swing.JTextPane nome_medico;
     private java.awt.Panel panel1;
     private javax.swing.JTextPane telefone_medico;
-    private javax.swing.JButton voltar;
     // End of variables declaration//GEN-END:variables
 }

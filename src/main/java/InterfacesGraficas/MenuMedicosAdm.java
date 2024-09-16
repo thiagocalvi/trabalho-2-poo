@@ -42,15 +42,15 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         label1 = new java.awt.Label();
-        jButton1 = new javax.swing.JButton();
-        cadastrarMedico = new java.awt.Button();
-        jTextField1 = new javax.swing.JTextField();
+        btnBack = new javax.swing.JButton();
+        btnRegisterDoctor = new java.awt.Button();
+        txtSearch = new javax.swing.JTextField();
         label2 = new java.awt.Label();
         jScrollPane2 = new javax.swing.JScrollPane();
         box_medicos = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Adm - alterações");
+        setTitle("Administrador - Gestão de médicos");
         setLocation(new java.awt.Point(0, 0));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setResizable(false);
@@ -58,21 +58,24 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
         label1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         label1.setText("Médicos");
 
-        jButton1.setText("Voltar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnBack.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnBack.setText("Voltar");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 back_menuPrincipalAdm(evt);
             }
         });
 
-        cadastrarMedico.setBackground(new java.awt.Color(153, 153, 153));
-        cadastrarMedico.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        cadastrarMedico.setLabel("Adicionar Médico");
-        cadastrarMedico.addActionListener(new java.awt.event.ActionListener() {
+        btnRegisterDoctor.setBackground(new java.awt.Color(153, 153, 153));
+        btnRegisterDoctor.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnRegisterDoctor.setLabel("Adicionar Médico");
+        btnRegisterDoctor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 goCadastrarMedico(evt);
             }
         });
+
+        txtSearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         label2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         label2.setText("Pesquisar por Nome/Especialidade:");
@@ -94,7 +97,7 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cadastrarMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRegisterDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -104,12 +107,12 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
                 .addGap(43, 43, 43)
                 .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -119,14 +122,14 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
+                    .addComponent(txtSearch)
                     .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
-                .addComponent(cadastrarMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRegisterDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -138,9 +141,7 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -189,9 +190,9 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
                 value1 = value1.substring(0, 30) + "...";
             }
             
-            JLabel value = new JLabel("<html>" + value1 + "</html>");  // Habilitar HTML para permitir quebra de linha
-            value.setPreferredSize(new Dimension(200, 20));  // Ajustar a largura dos valores
-            value.setVerticalAlignment(JLabel.TOP);  // Alinhar o texto ao topo
+            JLabel value = new JLabel("<html>" + value1 + "</html>");    // Habilitar HTML para permitir quebra de linha
+            value.setPreferredSize(new Dimension(200, 20));              // Ajustar a largura dos valores
+            value.setVerticalAlignment(JLabel.TOP);                      // Alinhar o texto ao topo
             value.setToolTipText(values[i]);
 
             gbc.gridx = 1;
@@ -269,16 +270,16 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
                 });
                 
                 updateButton.addActionListener(e -> {
-                    CadAutMedico cadastrarMedico = new CadAutMedico(gerenciadorAdm, em);
-                    cadastrarMedico.setMedico(medico);
-                    cadastrarMedico.setBtnText("Atualizar");
-                    cadastrarMedico.setVisible(true);
+                    CadAutMedico atualizarMedico = new CadAutMedico(gerenciadorAdm, em);
+                    atualizarMedico.setMedico(medico);
+                    atualizarMedico.configureDisplay("Atualizar");
+                    atualizarMedico.setVisible(true);
                     this.dispose();
                 });
                 
                 deleteButton.addActionListener(e -> {
                     int dialogResult = JOptionPane.showConfirmDialog(this, 
-                        "Tem certeza que deseja deletar o médico " + medico.getNome() + "?", 
+                        "Tem certeza que deseja 'DELETAR' o médico " + medico.getNome() + "?", 
                         "Confirmar Exclusão", 
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.WARNING_MESSAGE);
@@ -286,16 +287,17 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
                     if (dialogResult == JOptionPane.YES_OPTION){
                         String result = this.gerenciadorAdm.removerMedico(medico.getId());
                         if (result.equals("Médico removido!")) {
-                            updateSearch(); // Atualiza a lista após a exclusão
                             JOptionPane.showMessageDialog(this, 
                             result, 
                             "Sucesso", 
                             JOptionPane.INFORMATION_MESSAGE);
+                            updateSearch();                         // Atualiza a lista após a exclusão
+                            
                         } else {
-                            JOptionPane.showMessageDialog(this, 
-                            result, 
-                            "Erro", 
-                            JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(this,
+                                    result,
+                                    "Erro",
+                                    JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 });
@@ -313,6 +315,43 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
         // Revalidar e repintar para atualizar o JScrollPane
         this.box_medicos.revalidate();
         this.box_medicos.repaint();
+    }
+    
+     /**
+     * Atualiza a lista de médicos com base no texto de busca.
+     */
+    private void updateSearch() {
+        String searchText = txtSearch.getText().trim();
+        List<Medico> filteredMedicos;
+        if (searchText.isEmpty()) {
+            filteredMedicos = gerenciadorAdm.getAllMedicos();
+        } else {
+            filteredMedicos = gerenciadorAdm.buscarMedicos(searchText);
+            System.out.println(filteredMedicos);
+        }
+        renderMedicos(filteredMedicos);
+    }
+    
+    /**
+     * Configura o campo de busca para atualizar a lista de médicos quando o texto é alterado.
+     */
+    private void setupSearchField() {
+        txtSearch.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            @Override
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                updateSearch();
+            }
+
+            @Override
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                updateSearch();
+            }
+
+            @Override
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                updateSearch();
+            }
+        });
     }
     
     /**
@@ -337,51 +376,15 @@ public class MenuMedicosAdm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_goCadastrarMedico
     
-    /**
-     * Atualiza a lista de médicos com base no texto de busca.
-     */
-    private void updateSearch() {
-        String searchText = jTextField1.getText().trim();
-        List<Medico> filteredMedicos;
-        if (searchText.isEmpty()) {
-            filteredMedicos = gerenciadorAdm.getAllMedicos();
-        } else {
-            filteredMedicos = gerenciadorAdm.buscarMedicos(searchText);
-            System.out.println(filteredMedicos);
-        }
-        renderMedicos(filteredMedicos);
-    }
     
-    /**
-     * Configura o campo de busca para atualizar a lista de médicos quando o texto é alterado.
-     */
-    private void setupSearchField() {
-        jTextField1.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-            @Override
-            public void insertUpdate(javax.swing.event.DocumentEvent e) {
-                updateSearch();
-            }
-
-            @Override
-            public void removeUpdate(javax.swing.event.DocumentEvent e) {
-                updateSearch();
-            }
-
-            @Override
-            public void changedUpdate(javax.swing.event.DocumentEvent e) {
-                updateSearch();
-            }
-        });
-    }
-    
-    // Variáveis de declaração - não modificar
+    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel box_medicos;
-    private java.awt.Button cadastrarMedico;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnBack;
+    private java.awt.Button btnRegisterDoctor;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private java.awt.Label label1;
     private java.awt.Label label2;
-    // Fim da declaração de variáveis
+    private javax.swing.JTextField txtSearch;
+    // End of variables declaration//GEN-END:variables
 }

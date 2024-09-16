@@ -3,8 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package InterfacesGraficas;
-import java.awt.Image;
-import javax.swing.ImageIcon;
+
 import Gerenciador.GerenciadorAdm;
 import Modelo.Medico;
 import Modelo.Secretaria;
@@ -46,10 +45,10 @@ public class LoginMedSec extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnEntrar = new javax.swing.JButton();
+        btnEnter = new javax.swing.JButton();
         CBoxFunci = new javax.swing.JComboBox<>();
-        label1 = new java.awt.Label();
-        jButton1 = new javax.swing.JButton();
+        TituloLogin = new java.awt.Label();
+        btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login ");
@@ -60,44 +59,46 @@ public class LoginMedSec extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
         jPanel1.setPreferredSize(new java.awt.Dimension(300, 300));
 
-        btnEntrar.setText("Entrar");
-        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
+        btnEnter.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEnter.setText("Entrar");
+        btnEnter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEntrarActionPerformed(evt);
+                go_login(evt);
             }
         });
+
+        CBoxFunci.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(CBoxFunci, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(113, 113, 113)
-                        .addComponent(btnEntrar)
-                        .addGap(0, 109, Short.MAX_VALUE)))
+                .addGap(14, 14, 14)
+                .addComponent(CBoxFunci, 0, 280, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(113, 113, 113)
+                .addComponent(btnEnter)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(205, Short.MAX_VALUE)
+                .addContainerGap(201, Short.MAX_VALUE)
                 .addComponent(CBoxFunci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnEntrar)
-                .addGap(32, 32, 32))
+                .addComponent(btnEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
 
-        label1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
-        label1.setText("Login Médico");
+        TituloLogin.setAlignment(java.awt.Label.CENTER);
+        TituloLogin.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        TituloLogin.setText("Login Médico");
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setText("Voltar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnBack.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnBack.setText("Voltar");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 back_telaInicial(evt);
             }
@@ -111,24 +112,24 @@ public class LoginMedSec extends javax.swing.JFrame {
                 .addContainerGap(90, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TituloLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(115, 115, 115))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(90, 90, 90))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnBack)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TituloLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnBack)
                 .addContainerGap())
         );
 
@@ -140,8 +141,8 @@ public class LoginMedSec extends javax.swing.JFrame {
      * 
      * @param sec o tipo de usuário que pode fazer login ("Medico" ou "Secretaria")
      */
-    public void setSecMed(String sec){
-        this.login_med_sec = sec;
+    public void setSecMed(String med_sec){
+        this.login_med_sec = med_sec;
         seleciona_allMed_allSec();
     }
     
@@ -152,8 +153,9 @@ public class LoginMedSec extends javax.swing.JFrame {
         if (login_med_sec.equals("Medico")){
             setListMedicos(this.gerenciadorAdm.getAllMedicos());
         
-        } else if (login_med_sec.equals("Secretaria")){
-            label1.setText("Login Secretária");
+        } 
+        else if (login_med_sec.equals("Secretaria")){
+            TituloLogin.setText("Login Secretária");
             setListSecretarias(this.gerenciadorAdm.getAllSecretarias());
         
         }
@@ -192,7 +194,7 @@ public class LoginMedSec extends javax.swing.JFrame {
      * 
      * @param evt o evento de clique do botão
      */
-    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+    private void go_login(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_login
         
         String texto = CBoxFunci.getSelectedItem().toString();
         
@@ -214,6 +216,7 @@ public class LoginMedSec extends javax.swing.JFrame {
                 this.em.getTransaction().commit();
 
                 JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!", "Informações", JOptionPane.INFORMATION_MESSAGE);
+                
                 this.medico.setEm(em);
                 MenuPrincipalMedico consultaRelatorio = new MenuPrincipalMedico(gerenciadorAdm, medico, em);
                 consultaRelatorio.setVisible(true);
@@ -228,15 +231,17 @@ public class LoginMedSec extends javax.swing.JFrame {
                 this.em.getTransaction().commit();
                 
                 JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!", "Informações", JOptionPane.INFORMATION_MESSAGE);
-                this.secretaria.setEm(em);
+                
                 //Ação somente para fins de teste
                 this.cadMassa();
+                
+                this.secretaria.setEm(em);
                 MenuPrincipalSecretaria menuPrincipalSecretaria = new MenuPrincipalSecretaria(this.secretaria, this.gerenciadorAdm, this.em);
                 menuPrincipalSecretaria.setVisible(true);
                 this.dispose();
             }
         }
-    }//GEN-LAST:event_btnEntrarActionPerformed
+    }//GEN-LAST:event_go_login
 
     //Ação somente para fins de teste
     public void cadMassa(){
@@ -266,9 +271,9 @@ public class LoginMedSec extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> CBoxFunci;
-    private javax.swing.JButton btnEntrar;
-    private javax.swing.JButton jButton1;
+    private java.awt.Label TituloLogin;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnEnter;
     private javax.swing.JPanel jPanel1;
-    private java.awt.Label label1;
     // End of variables declaration//GEN-END:variables
 }

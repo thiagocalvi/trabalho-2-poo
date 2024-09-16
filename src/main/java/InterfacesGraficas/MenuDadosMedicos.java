@@ -7,8 +7,7 @@ import Modelo.Medico;
 import javax.persistence.EntityManager;
 import javax.swing.*;
 import java.awt.*;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
+
 
 /**
  * Tela de interface gráfica para exibição e gerenciamento de dados médicos de um paciente em uma consulta.
@@ -48,8 +47,8 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
      * Configura os rótulos com o nome do paciente e do médico.
      */
     private void setNome(){
-        lblPac.setText(" " + consulta.getPaciente().getNome());
-        lblMed.setText(" " + medico.getNome());
+        lblNomePaciente.setText(" " + consulta.getPaciente().getNome());
+        lblNomeMedico.setText(" " + medico.getNome());
     }
     
     /**
@@ -145,7 +144,7 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
         this.boxDados.removeAll();        
         
         if (dadosMedico == null) {
-            JLabel noProntuariosLabel = new JLabel("Não há Dados Médico cadastrados.");
+            JLabel noProntuariosLabel = new JLabel("Não há Dados Médicos cadastrado!.");
             this.boxDados.add(noProntuariosLabel);
         } else {    
             JPanel card_dados = new JPanel(new GridBagLayout());
@@ -181,14 +180,14 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
                 
             updateButton.addActionListener(e -> {
                 CadAutDadosMedico cadAtuDadosMedicos = new CadAutDadosMedico(gerenciadorAdm, medico, consulta, em);
-                cadAtuDadosMedicos.setAtualizar("Atualizar");
+                cadAtuDadosMedicos.configureDisplay("Atualizar");
                 cadAtuDadosMedicos.setVisible(true);
                 this.dispose();
             });
                 
             deleteButton.addActionListener(e -> {
                 int dialogResult = JOptionPane.showConfirmDialog(this, 
-                    "Tem certeza que deseja deletar os dados médico?", 
+                    "Tem certeza que deseja 'DELETAR' os dados médicos?", 
                     "Confirmar Exclusão", 
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.WARNING_MESSAGE);
@@ -200,12 +199,8 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
                         result, 
                         "Sucesso", 
                         JOptionPane.INFORMATION_MESSAGE);
-                        
-                        this.em.getTransaction().begin();
-                        consulta.getPaciente().setDadosMedicos(null);
-                        em.merge(consulta);
-                        this.em.getTransaction().commit();
                         updateSearch();                             // Atualiza o dado após a exclusão
+                        
                     } else {
                         JOptionPane.showMessageDialog(this, 
                         result, 
@@ -234,21 +229,21 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         panel1 = new java.awt.Panel();
         panel2 = new java.awt.Panel();
-        lblPac = new javax.swing.JLabel();
+        lblNomePaciente = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         btnAddDados = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         boxDados = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        lblMed = new javax.swing.JLabel();
+        lblNomeMedico = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
 
         jLabel4.setText("jLabel4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Médico - Dados médico");
+        setTitle("Médico - Dados Médicos");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMaximumSize(new java.awt.Dimension(680, 480));
@@ -258,11 +253,11 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
 
         panel2.setBackground(new java.awt.Color(204, 204, 204));
 
-        lblPac.setBackground(new java.awt.Color(255, 255, 255));
-        lblPac.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblPac.setForeground(new java.awt.Color(0, 0, 0));
-        lblPac.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblPac.setOpaque(true);
+        lblNomePaciente.setBackground(new java.awt.Color(255, 255, 255));
+        lblNomePaciente.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblNomePaciente.setForeground(new java.awt.Color(0, 0, 0));
+        lblNomePaciente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblNomePaciente.setOpaque(true);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
@@ -272,7 +267,7 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
         btnAddDados.setText("Adicionar dados");
         btnAddDados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddDados_Action(evt);
+                go_adicionar_dados(evt);
             }
         });
 
@@ -304,7 +299,7 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
                     .addGroup(panel2Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblPac, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -314,7 +309,7 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                    .addComponent(lblPac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblNomePaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAddDados, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -329,11 +324,11 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Doutor(a):");
 
-        lblMed.setBackground(new java.awt.Color(255, 255, 255));
-        lblMed.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblMed.setForeground(new java.awt.Color(0, 0, 0));
-        lblMed.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblMed.setOpaque(true);
+        lblNomeMedico.setBackground(new java.awt.Color(255, 255, 255));
+        lblNomeMedico.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblNomeMedico.setForeground(new java.awt.Color(0, 0, 0));
+        lblNomeMedico.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblNomeMedico.setOpaque(true);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -343,7 +338,7 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMed, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblNomeMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -352,7 +347,7 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                    .addComponent(lblMed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblNomeMedico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -367,7 +362,7 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltar_Action(evt);
+                back_consultaDoPaciente(evt);
             }
         });
 
@@ -415,31 +410,31 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
      * 
      * @param evt o evento de clique do botão
      */
-    private void btnAddDados_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDados_Action
+    private void go_adicionar_dados(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_adicionar_dados
         if (consulta.getPaciente().getDadosMedicos() == null){
             CadAutDadosMedico cadAtuDadosMedicos = new CadAutDadosMedico(gerenciadorAdm, medico, consulta, em);
             cadAtuDadosMedicos.setVisible(true);
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(null, "Você já 'CADASTROU' um dado médico para o paciente!"
+            JOptionPane.showMessageDialog(null, "Você já 'CADASTROU' os dados médicos para o paciente!"
                                                 + "\n Limite de 1 cadastro por paciente!", 
                                                 "Aviso", 
                                                 JOptionPane.WARNING_MESSAGE);
         }
-    }//GEN-LAST:event_btnAddDados_Action
+    }//GEN-LAST:event_go_adicionar_dados
 
     /**
      * Volta para a tela de consulta do paciente.
      * 
      * @param evt o evento de clique do botão
      */
-    private void btnVoltar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar_Action
+    private void back_consultaDoPaciente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_consultaDoPaciente
         ConsultaDoPaciente consultaDoPaciente = new ConsultaDoPaciente(gerenciadorAdm, medico, consulta, em);
         consultaDoPaciente.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnVoltar_Action
+    }//GEN-LAST:event_back_consultaDoPaciente
 
-    // Variáveis de declaração - não modificar
+    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel boxDados;
     private javax.swing.JButton btnAddDados;
     private javax.swing.JButton btnVoltar;
@@ -449,9 +444,9 @@ public class MenuDadosMedicos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblMed;
-    private javax.swing.JLabel lblPac;
+    private javax.swing.JLabel lblNomeMedico;
+    private javax.swing.JLabel lblNomePaciente;
     private java.awt.Panel panel1;
     private java.awt.Panel panel2;
-    // Fim da declaração de variáveis
+    // End of variables declaration//GEN-END:variables
 }

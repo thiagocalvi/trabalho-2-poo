@@ -8,7 +8,6 @@ import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -39,7 +38,7 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
         this.em = em;
         initComponents();
         mesAtual();
-        listarClientes();
+        exibeRelatorio();
         setLocationRelativeTo(null);
     }
 
@@ -57,34 +56,28 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
      * Lista as consultas finalizadas do mês atual para o médico especificado.
      * Preenche a tabela com as informações das consultas e atualiza o total de consultas.
      */
-    private void listarClientes(){
-        int anoReferencia = LocalDate.now().getYear();
-        int mesReferencia = LocalDate.now().getMonthValue();
+    private void exibeRelatorio(){
+        List<Consulta> listConsulta = medico.relatorioMensal();
         
-        String resultado = ("SELECT c from Consulta c WHERE c.consultaFinalizada = true " +
-                            "AND FUNCTION('YEAR', c.data) = :anoReferencia " +
-                            "AND FUNCTION('MONTH', c.data) = :mesReferencia " +
-                            "AND c.medico = :medico " +
-                            "ORDER BY c.data ASC");
-        
-        TypedQuery<Consulta> query = em.createQuery(resultado, Consulta.class);
-        query.setParameter("anoReferencia", anoReferencia);
-        query.setParameter("mesReferencia", mesReferencia);
-        query.setParameter("medico", medico);
-                        
-        List<Consulta> listConsulta = query.getResultList();
-        DefaultTableModel model = (DefaultTableModel)jtbRel.getModel(); 
+        DefaultTableModel model = (DefaultTableModel)tableRelatorio.getModel(); 
         
         model.setRowCount(0); 
         for (Consulta consulta : listConsulta){
-            Object[] linha = {consulta.getPaciente().getNome(), consulta.getTipo(), consulta.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString()};
-            model.addRow(linha);
+            if (consulta.getPaciente() == null){
+                Object[] linha = {"Paciente removido", consulta.getTipo(),
+                    consulta.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString()};
+                model.addRow(linha);            }
+            else {
+                Object[] linha = {consulta.getPaciente().getNome(), consulta.getTipo(),
+                    consulta.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString()};
+                model.addRow(linha);
+            }
         }
         
-        lblTot.setText("Total: " + listConsulta.size());
+        lblTotal.setText("Total: " + listConsulta.size());
         
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
-        jtbRel.setRowSorter(sorter);          
+        tableRelatorio.setRowSorter(sorter);          
     }
     
     @SuppressWarnings("unchecked")
@@ -95,10 +88,10 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
         panel1 = new java.awt.Panel();
         jLabel2 = new javax.swing.JLabel();
         lblMes = new javax.swing.JLabel();
-        lblTot = new javax.swing.JLabel();
-        btnVoltar = new javax.swing.JButton();
+        lblTotal = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jtbRel = new javax.swing.JTable();
+        tableRelatorio = new javax.swing.JTable();
 
         jLabel5.setBackground(new java.awt.Color(153, 153, 153));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -127,30 +120,30 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
         lblMes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblMes.setText("Mês: Atual");
 
-        lblTot.setBackground(new java.awt.Color(204, 204, 204));
-        lblTot.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblTot.setForeground(new java.awt.Color(0, 0, 0));
-        lblTot.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTot.setText("Total: XX");
-        lblTot.setToolTipText("");
-        lblTot.setOpaque(true);
+        lblTotal.setBackground(new java.awt.Color(204, 204, 204));
+        lblTotal.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblTotal.setForeground(new java.awt.Color(0, 0, 0));
+        lblTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTotal.setText("Total: XX");
+        lblTotal.setToolTipText("");
+        lblTotal.setOpaque(true);
 
-        btnVoltar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnVoltar.setText("Voltar");
-        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+        btnBack.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnBack.setText("Voltar");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltar_Action(evt);
+                back_menuPrincipalMedico(evt);
             }
         });
 
-        jtbRel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jtbRel.setForeground(new java.awt.Color(0, 0, 0));
-        jtbRel.setModel(new javax.swing.table.DefaultTableModel(
+        tableRelatorio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tableRelatorio.setForeground(new java.awt.Color(0, 0, 0));
+        tableRelatorio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Paciente", "TipoConvenio", "Data"
+                "Paciente", "Tipo da consulta", "Data"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -161,9 +154,9 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jtbRel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jtbRel.setShowGrid(true);
-        jScrollPane3.setViewportView(jtbRel);
+        tableRelatorio.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tableRelatorio.setShowGrid(true);
+        jScrollPane3.setViewportView(tableRelatorio);
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -180,9 +173,9 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
                         .addGap(0, 19, Short.MAX_VALUE)
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                                .addComponent(lblTot, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(446, 446, 446)
-                                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
@@ -196,8 +189,8 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTot)
-                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblTotal)
+                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -220,19 +213,20 @@ public class RelatorioMensalMedico extends javax.swing.JFrame {
      * 
      * @param evt O evento de ação do botão "Voltar".
      */
-    private void btnVoltar_Action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar_Action
+    private void back_menuPrincipalMedico(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_menuPrincipalMedico
         MenuPrincipalMedico menuPrincipalMedico = new MenuPrincipalMedico(gerenciadorAdm, medico, em);
         menuPrincipalMedico.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnVoltar_Action
+    }//GEN-LAST:event_back_menuPrincipalMedico
 
-    // Declaração das variáveis da interface gráfica
-    private javax.swing.JButton btnVoltar;
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jtbRel;
     private javax.swing.JLabel lblMes;
-    private javax.swing.JLabel lblTot;
+    private javax.swing.JLabel lblTotal;
     private java.awt.Panel panel1;
+    private javax.swing.JTable tableRelatorio;
+    // End of variables declaration//GEN-END:variables
 }

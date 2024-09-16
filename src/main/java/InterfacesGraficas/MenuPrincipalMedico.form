@@ -56,14 +56,14 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                  <Component id="btnCon" min="-2" pref="235" max="-2" attributes="0"/>
+                  <Component id="btnConsulta" min="-2" pref="235" max="-2" attributes="0"/>
                   <EmptySpace pref="118" max="32767" attributes="0"/>
-                  <Component id="btnRel" min="-2" pref="235" max="-2" attributes="0"/>
+                  <Component id="btnRelatorio" min="-2" pref="235" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="btnVoltar" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnOut" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
@@ -75,11 +75,11 @@
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnRel" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
-                      <Component id="btnCon" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
+                      <Component id="btnRelatorio" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
+                      <Component id="btnConsulta" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="331" max="32767" attributes="0"/>
-                  <Component id="btnVoltar" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="btnOut" min="-2" pref="31" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -100,7 +100,7 @@
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" pref="90" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblNome" min="-2" pref="507" max="-2" attributes="0"/>
+                      <Component id="lblNomeMedico" min="-2" pref="507" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -111,7 +111,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="lblNome" min="-2" pref="39" max="-2" attributes="0"/>
+                              <Component id="lblNomeMedico" min="-2" pref="39" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
                           </Group>
                           <Component id="jLabel1" max="32767" attributes="0"/>
@@ -133,7 +133,7 @@
                 <Property name="text" type="java.lang.String" value="Doutor(a):"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblNome">
+            <Component class="javax.swing.JLabel" name="lblNomeMedico">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -150,7 +150,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="btnVoltar">
+        <Component class="javax.swing.JButton" name="btnOut">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
@@ -158,10 +158,10 @@
             <Property name="text" type="java.lang.String" value="Sair da Conta"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSait_Action"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="out_login_doctor"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnRel">
+        <Component class="javax.swing.JButton" name="btnRelatorio">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="0"/>
@@ -169,10 +169,10 @@
             <Property name="text" type="java.lang.String" value="Relat&#xf3;rio/Clientes"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRel_Action"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="go_relatorio_clientes"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnCon">
+        <Component class="javax.swing.JButton" name="btnConsulta">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="0"/>
@@ -180,7 +180,7 @@
             <Property name="text" type="java.lang.String" value="Consultas marcadas"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCon_Action"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="go_consulta_marcadas"/>
           </Events>
         </Component>
       </SubComponents>
